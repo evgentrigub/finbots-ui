@@ -11,12 +11,7 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
-
-// @ts-ignore
-const appRoutes: Routes = [
-  {path: 'dashboard', component: MainDashboardComponent},
-  {path: 'settings', component: SettingsComponent},
-];
+import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -28,12 +23,16 @@ const appRoutes: Routes = [
     RegisterComponent,
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
-
-    BrowserModule, BrowserAnimationsModule, LayoutModule, RouterModule,
+    BrowserModule, 
+    BrowserAnimationsModule, 
+    LayoutModule, 
+    RouterModule,
+    routing,
 
     // MATERIAL
-    MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule
+    MatToolbarModule, MatButtonModule, MatSidenavModule, 
+    MatIconModule, MatListModule, MatGridListModule, 
+    MatCardModule, MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
