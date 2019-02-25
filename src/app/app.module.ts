@@ -9,6 +9,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
         MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './account/login/login.component';
+import { RegisterComponent } from './account/register/register.component';
 
 // @ts-ignore
 const appRoutes: Routes = [
@@ -22,6 +24,8 @@ const appRoutes: Routes = [
     NavigationBarComponent,
     MainDashboardComponent,
     SettingsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
