@@ -1,3 +1,15 @@
-<app-navigation-bar>
+<app-navigation-bar *ngIf="currentUser">
   <router-outlet></router-outlet>
 </app-navigation-bar>
+<!-- <app-login *ngIf="!currentUser"></app-login> -->
+
+<div class="jumbotron" *ngIf="!currentUser">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6 offset-sm-3">
+              <alert></alert>
+              <router-outlet></router-outlet>
+          </div>
+      </div>
+  </div>
+</div>

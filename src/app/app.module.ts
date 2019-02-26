@@ -12,6 +12,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { routing } from './app.routing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertComponent } from './account/_components/alert.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,13 @@ import { routing } from './app.routing';
     SettingsComponent,
     LoginComponent,
     RegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule, 
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule, 
     LayoutModule, 
     RouterModule,
     routing,
