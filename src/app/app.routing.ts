@@ -6,12 +6,11 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { SettingsComponent } from './settings/settings.component';
 
 const appRoutes: Routes = [
-    { path: '', component: MainDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
     {path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard]},
     {path: 'settings', component: SettingsComponent , canActivate: [AuthGuard]},
-    { path: '**', redirectTo: '' }
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: '**', redirectTo: 'dashboard' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

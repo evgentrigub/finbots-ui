@@ -13,6 +13,11 @@ import { first } from 'rxjs/operators';
 })
 export class RegisterComponent implements OnInit {
 
+  hide = true;
+  valueFirstName = '';
+  valueLastname = '';
+  valueLogin = '';
+
   registerForm: FormGroup;
   loading:boolean = false;
   submitted:boolean = false;
