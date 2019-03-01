@@ -42,6 +42,9 @@
                         <button mat-raised-button color="accent" style="width:50%; margin:10px; border-radius: 5px">Зарегистрироваться</button> 
                         <button mat-raised-button color="primary" style="width:50%; border-radius: 5px" routerLink="/login">Отмена</button> 
                     </div>
+                    <div *ngIf="loading">
+                        <mat-progress-spinner style="margin: 0 auto" color="accent" mode="indeterminate" diameter="80" strokeWidth="9"></mat-progress-spinner>
+                    </div>
                 </form>
             </div>
         </div>

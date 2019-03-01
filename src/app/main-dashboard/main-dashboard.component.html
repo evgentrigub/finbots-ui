@@ -1,20 +1,21 @@
 <div class="grid-container">
   <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile colspan="2" rowspan="1">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title}}
+            Card 1
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Удалить</button>
-            </mat-menu>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Действие 1</button>
+                <button mat-menu-item>Действие 2</button>
+              </mat-menu>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-            
+          <app-settings></app-settings>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

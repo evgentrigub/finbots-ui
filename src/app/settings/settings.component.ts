@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
        'symbol': 'NASDAQ:AAPL',
        'interval': '120',
        'timezone': 'exchange',
-       'theme': 'Dark',
+       'theme': 'Light',
        'style': '1',
        'toolbar_bg': '#f1f3f6',
        'withdateranges': true,

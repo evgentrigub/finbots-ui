@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators, MinLengthValidator } from '@angular
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 import { AlertService } from '../_services/alert.service';
-import { first, retry } from 'rxjs/operators';
+import { first, retry, timeout } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
+import { ok } from 'assert';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -25,10 +28,11 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private snackbar: MatSnackBar
   ) {
     if(this.authenticationService.currentUserValue){
-      // this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
     }
    }
 
@@ -42,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   get f() {return this.loginForm.controls;}
-  // ошибки добавитьв разметку позже
+  // TO-DO ошибки добавить в разметку позже
   getErrorLogin(){
     return this.loginForm.get('username').hasError('required') ? 'Логин не может быть пустым': '';
   }
@@ -58,16 +62,35 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-    .pipe(first()).subscribe(   
-      data => {
-        this.router.navigate([this.returnUrl]);
-      },
-      error => {
-        this.alertService.error(error);
-        this.loading = false;
-      }
-    )
+    setTimeout(() => {
+      this.authenticationService.login(this.f.username.value, this.f.password.value)
+      .pipe(first()).subscribe(   
+        data => {
+          this.loading = false;
+          this.router.navigate([this.returnUrl]);
+          this.showMessage('Вход успешно выполнен');
+        },
+        error => {
+          this.showErrorMessage(error);
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      )
+    }, 1500);
+    
+  }
+
+  forgetPassword(){
+    this.showMessage("Функция пока не доступна");
+  }
+
+  private showErrorMessage(message: HttpErrorResponse) {
+    this.snackbar.open(message.error.message, 'OK', { duration: 6000 });
+    // console.log(message);
+  }
+  private showMessage(message: any) {
+    this.snackbar.open(message, 'OK', { duration: 3000 });
+    // console.log(message);
   }
 
 }

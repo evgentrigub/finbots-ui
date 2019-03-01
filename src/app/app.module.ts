@@ -6,7 +6,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { LayoutModule } from '@angular/cdk/layout';
 import { Routes, RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
-        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -15,6 +15,7 @@ import { routing } from './app.routing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './account/_components/alert.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AlertComponent } from './account/_components/alert.component';
     SettingsComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule, 
@@ -40,7 +42,8 @@ import { AlertComponent } from './account/_components/alert.component';
     MatToolbarModule, MatButtonModule, MatSidenavModule, 
     MatIconModule, MatListModule, MatGridListModule, 
     MatCardModule, MatMenuModule, MatFormFieldModule,
-    MatInputModule, MatIconModule
+    MatInputModule, MatIconModule, MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

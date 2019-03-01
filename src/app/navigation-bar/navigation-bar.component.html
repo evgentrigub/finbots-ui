@@ -13,7 +13,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="fixed-toolbar" >
+    <mat-toolbar *ngIf='isShow' color="primary" class="fixed-toolbar" >
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -22,16 +22,19 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span *ngIf='!isShow' >FinBotProject</span>
+
       <span *ngIf='isShow'>Добро пожаловать, {{currentUser.firstName}} {{currentUser.lastName}} !</span>
-      <button mat-button *ngIf='!isShow' style="margin-left:1%">О проекте</button>
-      <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/login">Войти</button>
-      <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/register">Зарегистрироваться</button>
 
       <span style="flex:1 1 auto;"></span>
 
       <mat-icon *ngIf='isShow' class="example-icon">verified_user</mat-icon>
       <button mat-button *ngIf='isShow' (click)="logout()">Выход</button>
+    </mat-toolbar>
+    <mat-toolbar *ngIf='!isShow'>
+      <span *ngIf='!isShow' >FinBotProject</span>
+      <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/about">О проекте</button>
+      <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/login">Войти</button>
+      <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/register">Зарегистрироваться</button>
     </mat-toolbar>
     <ng-content></ng-content>
     <div class="text-center" *ngIf='!isShow'>

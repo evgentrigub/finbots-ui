@@ -5,6 +5,8 @@ import { AuthenticationService } from '../_services/authentication.service';
 import { UserService } from '../_services/user.service';
 import { AlertService } from '../_services/alert.service';
 import { first } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +30,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private snackbar: MatSnackBar
   ) {
     if (this.authenticationService.currentUserValue) { 
       this.router.navigate(['/']);
@@ -54,17 +57,30 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-    this.userService.register(this.registerForm.value)
+    setTimeout(() => {
+      this.userService.register(this.registerForm.value)
         .pipe(first())
         .subscribe(
             data => {
-                this.alertService.success('Registration successful', true);
                 this.router.navigate(['/login']);
+                this.showMessage("Регистрация успешна");
+                this.loading = false;
             },
             error => {
                 this.alertService.error(error);
                 this.loading = false;
+                this.showErrorMessage(error);
             });
+    }, 1500);
+  }
+
+  private showErrorMessage(message: HttpErrorResponse) {
+    this.snackbar.open(message.error.message, 'OK', { duration: 6000 });
+    // console.log(message);
+  }
+  private showMessage(message: any) {
+    this.snackbar.open(message, 'OK', { duration: 3000 });
+    // console.log(message);
   }
 
 }
