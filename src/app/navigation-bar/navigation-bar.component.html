@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container" >
-  <mat-sidenav *ngIf='isShow'
+  <!-- <mat-sidenav *ngIf='isShow' -->
+  <mat-sidenav
     #drawer
     class="sidenav"
     fixedInViewport="true"
@@ -13,7 +14,8 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar *ngIf='isShow' color="primary" class="fixed-toolbar" >
+    <!-- <mat-toolbar *ngIf='isShow' color="primary" class="fixed-toolbar" > -->
+    <mat-toolbar  color="primary" class="fixed-toolbar" >
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -23,19 +25,19 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <span *ngIf='isShow'>Добро пожаловать, {{currentUser.firstName}} {{currentUser.lastName}} !</span>
+      <span >Добро пожаловать!</span>
 
       <span style="flex:1 1 auto;"></span>
 
-      <mat-icon *ngIf='isShow' class="example-icon">verified_user</mat-icon>
-      <button mat-button *ngIf='isShow' (click)="logout()">Выход</button>
+      <mat-icon  class="exaple-icon">verified_user</mat-icon>
+      <button mat-button  (click)="logout()">Выход</button>
     </mat-toolbar>
-    <mat-toolbar *ngIf='!isShow'>
+    <!-- <mat-toolbar *ngIf='!isShow'>
       <span *ngIf='!isShow' >FinBotProject</span>
       <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/about">О проекте</button>
       <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/login">Войти</button>
       <button mat-button *ngIf='!isShow' style="margin-left:1%" routerLink="/register">Зарегистрироваться</button>
-    </mat-toolbar>
+    </mat-toolbar> -->
     <ng-content></ng-content>
     <div class="text-center" *ngIf='!isShow'>
         <p>
