@@ -1,34 +1,51 @@
-<mat-card>
+<div class="grid-container">
+    <mat-grid-list cols="2" rowHeight="550px">
+      <mat-grid-tile colspan="2" rowspan="1">
+        <mat-card>
+          <mat-card-content>
+              <img style="width: 500px; padding: 40px" src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg">
+              <div style="display: inline-block;">
 
-  <mat-card-content>
-        <img src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg">
-      <div style="display: inline-block;">
+                
+                <mat-form-field style="width: 250px; padding-top: 40px; padding-right: 40px">
+                  <input matInput (keyup)="takeValue($event)" placeholder="Введите название робота">
+                </mat-form-field>
+                <br>
 
-        
-        <mat-form-field style="width: 225px;">
-          <input matInput placeholder="Введите название робота">
-        </mat-form-field>
-        <br>
+                <mat-form-field style="width: 250px; padding-right: 40px">
+                    <mat-select placeholder="Выберите стратегию">
+                      <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field style="width: 250px; padding-right: 40px">
+                    <mat-select placeholder="Выберите финансовый инструмент">
+                      <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- <mat-form-field style="width: 225px">
+                  <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
+                    <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
+                  </mat-select>
+                </mat-form-field> -->
 
-        <mat-form-field style="width: 225px">
-          <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
-            <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+                <div style="width: 250px; padding-right: 40px">
+                  <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="1" max="100"></mat-slider>
+                </div>
 
-        <div style="width: 250px">
-          <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="1" max="100"></mat-slider>
-        </div>
+                <mat-radio-group>
+                    <mat-radio-button value="1">Риск</mat-radio-button>
+                    <mat-radio-button value="2">Доходность</mat-radio-button>
+                </mat-radio-group>
 
-        <mat-radio-group>
-            <mat-radio-button value="1">Риск</mat-radio-button>
-            <mat-radio-button value="2">Доходность</mat-radio-button>
-        </mat-radio-group>
+                <br>
+                <div style= "padding: 40px">
+                  <button mat-raised-button color="primary" (click) = addBot()>Добавить робота</button>
+                </div>
 
-        <br>
-        <button mat-raised-button color="primary">Добавить робота</button>
-
-      </div>
-  </mat-card-content>
-
-</mat-card>
+              </div>
+          </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
