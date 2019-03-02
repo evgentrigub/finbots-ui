@@ -39,11 +39,17 @@ export class CreateBotComponent implements OnInit {
   }
 
   addBot() {
-    console.log(this.name)
+    console.log(this.FU)
   }
   
   takeValue(event) {
     this.name = event.target.value;
+  }
+  takeStrategy(event) {
+    this.strategy = event.value;
+  }
+  takeFU(event) {
+    this.FU = event.value;
   }
 
 }

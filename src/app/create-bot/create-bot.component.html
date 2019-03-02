@@ -13,13 +13,13 @@
                 <br>
 
                 <mat-form-field style="width: 250px; padding-right: 40px">
-                    <mat-select placeholder="Выберите стратегию">
+                    <mat-select placeholder="Выберите стратегию" (selectionChange)="takeStrategy($event)">
                       <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <br>
                 <mat-form-field style="width: 250px; padding-right: 40px">
-                    <mat-select placeholder="Выберите финансовый инструмент">
+                    <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
                       <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
                     </mat-select>
                 </mat-form-field>
