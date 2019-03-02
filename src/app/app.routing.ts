@@ -6,11 +6,17 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { SettingsComponent } from './settings/settings.component';
 import { AboutComponent } from './about/about.component';
 import { CreateBotComponent } from './create-bot/create-bot.component';
+import { RatingComponent } from './rating/rating.component';
+import { BlogComponent } from './blog/blog.component';
+import { StrategiesComponent } from './strategies/strategies.component';
 
 const appRoutes: Routes = [
     {path: 'createBot', component: CreateBotComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard]},
     {path: 'settings', component: SettingsComponent , canActivate: [AuthGuard]},
+    {path: 'strategies', component: StrategiesComponent , canActivate: [AuthGuard]},
+    {path: 'rating', component: RatingComponent , canActivate: [AuthGuard]},
+    {path: 'blog', component: BlogComponent , canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'about', component: AboutComponent },
