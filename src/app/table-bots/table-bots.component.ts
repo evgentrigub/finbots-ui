@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { TradingBot } from '../trading-bot-model';
+import { TradingBot } from '../Models/trading-bot-model';
 
 
 const bots: TradingBot[] = [
