@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IndustriesService } from '../Services/industries.service';
+import { StrategyService } from '../Services/strategy.service';
+import { FinancialInstrumentsService } from '../Services/financial-instruments.service';
 
 
 @Component({
@@ -9,7 +11,13 @@ import { IndustriesService } from '../Services/industries.service';
 })
 export class CreateBotComponent implements OnInit {
 
-  industries: string[] = []
+  industries: string[] = [];
+  strategies: string[] = [];
+  financialInstruments: string[] =[];
+  name: string = '';
+  strategy: string = '';
+  FU: string = '';
+  optimisation: number = 1;
   formatLabel(value: number | null) {
     if (!value) {
       return 0;
@@ -20,10 +28,22 @@ export class CreateBotComponent implements OnInit {
     return value;
   }
 
-  constructor(private industiesService: IndustriesService) { }
+  constructor(private industiesService: IndustriesService,
+              private stratefiesService: StrategyService,
+              private financialUnstrimentService: FinancialInstrumentsService) { }
 
   ngOnInit() {
-    this.industries = this.industiesService.getIndustries()
+    this.strategies = this.stratefiesService.getStrategies();
+    this.industries = this.industiesService.getIndustries();
+    this.financialInstruments = this.financialUnstrimentService.getFinancialInstruments();
+  }
+
+  addBot() {
+    console.log(this.name)
+  }
+  
+  takeValue(event) {
+    this.name = event.target.value;
   }
 
 }

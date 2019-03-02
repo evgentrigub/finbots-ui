@@ -18,6 +18,7 @@ import { AlertComponent } from './account/_components/alert.component';
 import { AboutComponent } from './about/about.component';
 import { CreateBotComponent } from './create-bot/create-bot.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { TableBotsComponent } from './table-bots/table-bots.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatRadioModule} from '@angular/material/radio';
     RegisterComponent,
     AlertComponent,
     AboutComponent,
-    CreateBotComponent
+    CreateBotComponent,
+    TableBotsComponent
   ],
   imports: [
     BrowserModule, 
