@@ -4,5 +4,6 @@ export interface TradingBot{
     strategy:string,
     conditions: string,
     instrument: string,
-    result: string
+    result: string,
+    time: string
 }
