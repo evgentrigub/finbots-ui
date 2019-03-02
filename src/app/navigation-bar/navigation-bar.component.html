@@ -30,7 +30,11 @@
       <span style="flex:1 1 auto;"></span>
 
       <mat-icon  class="exaple-icon">verified_user</mat-icon>
-      <button mat-button  (click)="logout()">Выход</button>
+      <button mat-button [matMenuTriggerFor]="menu">{{currentUser.firstName}} {{currentUser.lastName}}</button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+          <button mat-menu-item routerLink="/settings">Настройки</button>
+          <button mat-menu-item (click)="logout()">Выход</button>
+        </mat-menu>
     </mat-toolbar>
     <mat-toolbar *ngIf='!isShow'>
       <span>FinBotProject</span>
