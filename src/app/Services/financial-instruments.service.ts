@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class FinancialInstrumentsService {
 
-  mockFinancialInstruments: string[] = ['Акции', 'Валюта', 'Криптовалюта', 'ПФИ'];
+  mockFinancialInstruments: string[] = ['Акции', 'Индексы', 'Валюта', 'Криптовалюта', 'ПФИ'];
   constructor() { }
 
   getFinancialInstruments() {

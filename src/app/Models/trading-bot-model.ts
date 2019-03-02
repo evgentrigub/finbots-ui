@@ -1,5 +1,5 @@
 export interface TradingBot{
-    id:number,
+    id: number,
     name: string,
     strategy:string,
     conditions: string,

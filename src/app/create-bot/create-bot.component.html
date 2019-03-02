@@ -3,34 +3,48 @@
       <mat-grid-tile colspan="2" rowspan="1">
         <mat-card>
           <mat-card-content>
-              <img style="width: 500px; padding: 40px" src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg">
-              <div style="display: inline-block;">
+            <div style="display: flex;">
+              <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg">
+              <div>
 
                 
-                <mat-form-field style="width: 250px; padding-top: 40px; padding-right: 40px">
+                <!-- <mat-form-field style="width: 250px; padding-top: 40px; padding-right: 40px">
                   <input matInput (keyup)="takeValue($event)" placeholder="Введите название робота">
                 </mat-form-field>
                 <br>
 
                 <mat-form-field style="width: 250px; padding-right: 40px">
-                    <mat-select placeholder="Выберите стратегию">
+                    <mat-select placeholder="Выберите стратегию" (selectionChange)="takeStrategy($event)">
                       <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
                     </mat-select>
+                </mat-form-field> -->
+                <br>
+                <mat-form-field style="width: 400px; padding-right: 40px">
+                    <input matInput placeholder="Какую сумму Вы готовы инвестировать?" type="number" (keyup)="getSumm($event)">
+                    <span matPrefix>$&nbsp;</span>
+                    <span matSuffix>.00</span>
                 </mat-form-field>
                 <br>
-                <mat-form-field style="width: 250px; padding-right: 40px">
-                    <mat-select placeholder="Выберите финансовый инструмент">
+                <mat-form-field style="width: 400px; padding-right: 40px">
+                    <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
                       <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <!-- <mat-form-field style="width: 225px">
+                <br>
+                <mat-form-field style="width: 400px; padding-right: 40px">
                   <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
                     <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
                   </mat-select>
-                </mat-form-field> -->
-
-                <div style="width: 250px; padding-right: 40px">
-                  <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="1" max="100"></mat-slider>
+                </mat-form-field>
+                <br>
+                <mat-form-field style="width: 400px; padding-right: 40px">
+                    <mat-select placeholder="Выберите горизонт инвестирования">
+                      <mat-option *ngFor="let horisont of horisonts" [value]="horisont" required >{{horisont}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                
+                <div style="padding-top: 40px;padding-bottom : 40px">
+                  <mat-slider thumbLabel style="width: 350px !important" [displayWith]="formatLabel" tickInterval="10" min="1" max="100"></mat-slider>
                 </div>
 
                 <mat-radio-group>
@@ -44,6 +58,7 @@
                 </div>
 
               </div>
+            </div>
           </mat-card-content>
       </mat-card>
     </mat-grid-tile>
