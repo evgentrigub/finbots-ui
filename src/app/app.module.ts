@@ -6,7 +6,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { LayoutModule } from '@angular/cdk/layout';
 import { Routes, RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
-        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule } from '@angular/material';
+        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule, MatTableDataSource, MatTableModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -50,7 +50,7 @@ import { TableBotsComponent } from './table-bots/table-bots.component';
     MatCardModule, MatMenuModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSnackBarModule,
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-    MatRadioModule
+    MatRadioModule, MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
