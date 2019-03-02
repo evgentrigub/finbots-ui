@@ -20,6 +20,7 @@ import { CreateBotComponent } from './create-bot/create-bot.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { TableBotsComponent } from './table-bots/table-bots.component';
 import { WidgetsComponent } from './widgets/widgets.component';
+import { StrategiesComponent } from './strategies/strategies.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { WidgetsComponent } from './widgets/widgets.component';
     AboutComponent,
     CreateBotComponent,
     TableBotsComponent,
-    WidgetsComponent
+    WidgetsComponent,
+    StrategiesComponent
   ],
   imports: [
     BrowserModule, 
