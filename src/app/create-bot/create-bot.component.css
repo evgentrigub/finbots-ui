@@ -1,0 +1,10 @@
+/* .header-image {
+    background-image: url('http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg');
+    background-size: cover;
+    width: 250px;
+    height: 250px;
+  } */
+  
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

@@ -5,10 +5,12 @@ import { AuthGuard } from './account/_guards/auth.guard';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AboutComponent } from './about/about.component';
+import { CreateBotComponent } from './create-bot/create-bot.component';
 
 const appRoutes: Routes = [
     {path: 'dashboard', component: MainDashboardComponent},
     {path: 'settings', component: SettingsComponent},
+    {path: 'createBot', component: CreateBotComponent},
     // {path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard]},
     // {path: 'settings', component: SettingsComponent , canActivate: [AuthGuard]},
     // { path: 'login', component: LoginComponent },

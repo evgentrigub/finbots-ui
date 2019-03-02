@@ -1,0 +1,34 @@
+<mat-card>
+
+  <mat-card-content>
+        <img src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg">
+      <div style="display: inline-block;">
+
+        
+        <mat-form-field style="width: 225px;">
+          <input matInput placeholder="Введите название робота">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field style="width: 225px">
+          <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
+            <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div style="width: 250px">
+          <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="1" max="100"></mat-slider>
+        </div>
+
+        <mat-radio-group>
+            <mat-radio-button value="1">Риск</mat-radio-button>
+            <mat-radio-button value="2">Доходность</mat-radio-button>
+        </mat-radio-group>
+
+        <br>
+        <button mat-raised-button color="primary">Добавить робота</button>
+
+      </div>
+  </mat-card-content>
+
+</mat-card>
