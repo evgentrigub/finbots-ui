@@ -16,7 +16,7 @@ const bots: TradingBot[] = [
 
 export class TableBotsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'strategy', 'conditions', 'instrument', 'result', 'actions', 'time'];
+  displayedColumns: string[] = ['id', 'name', 'strategy', 'conditions', 'instrument', 'result', 'time', 'actions'];
   dataSource: MatTableDataSource<TradingBot>;
 
   constructor() { 

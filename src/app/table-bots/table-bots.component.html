@@ -1,4 +1,4 @@
-  <table mat-table [dataSource]="dataSource" matSort style="width:100%">
+  <table mat-table [dataSource]="dataSource" matSort class="dashboard-card mat mat-elevation-z8">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -30,6 +30,11 @@
       <td mat-cell *matCellDef="let row"> {{row.result}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Время работы </th>
+        <td mat-cell *matCellDef="let row"> {{row.time}} </td>
+      </ng-container>
+
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Действия </th>
       <td mat-cell *matCellDef="let row"> 
@@ -40,11 +45,6 @@
           Удалить
         </button>
       </td>
-    </ng-container>
-
-    <ng-container matColumnDef="time">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Время работы </th>
-      <td mat-cell *matCellDef="let row"> {{row.time}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

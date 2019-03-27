@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IndustriesService } from '../Services/industries.service';
-import { StrategyService } from '../Services/strategy.service';
-import { FinancialInstrumentsService } from '../Services/financial-instruments.service';
-import { Horisont } from '../Models/horisont-model';
+import { CreateBotService } from './create-bot.service';
 
 
 @Component({
@@ -15,7 +12,7 @@ export class CreateBotComponent implements OnInit {
   industries: string[] = [];
   strategies: string[] = [];
   financialInstruments: string[] =[];
-  horisonts: string[]=['0-7 дней','7-30 дней','30-180 дней','180-365 дней'];
+  horisonts: string[] = ['0-7 дней','7-30 дней','30-180 дней','180-365 дней'];
   name: string = '';
   strategy: string = '';
   summa: number;
@@ -31,15 +28,14 @@ export class CreateBotComponent implements OnInit {
     return value;
   }
 
-  constructor(private industiesService: IndustriesService,
-              private stratefiesService: StrategyService,
-              private financialUnstrimentService: FinancialInstrumentsService) { }
+  constructor(
+    private service: CreateBotService
+  ) { }
 
   ngOnInit() {
-    this.strategies = this.stratefiesService.getStrategies();
-    this.industries = this.industiesService.getIndustries();
-    this.financialInstruments = this.financialUnstrimentService.getFinancialInstruments();
-    // this.horisont = Object.values(Horisont);
+    this.strategies = this.service.getStrategies();
+    this.industries = this.service.getIndustries();
+    this.financialInstruments = this.service.getFinancialInstruments();
   }
 
   addBot() {
