@@ -3,7 +3,24 @@
   <mat-grid-list cols="4" rowHeight="200px">
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card class="dashboard-card">
-        <mat-card-header>
+          <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">content_copy</i>
+                  </div>
+                  <p class="card-category">Used Space</p>
+                  <h3 class="card-title">49/50
+                      <small>GB</small>
+                  </h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                      <i class="material-icons text-danger">warning</i>
+                      <a href="#pablo">Get More Space...</a>
+                  </div>
+              </div>
+          </div>
+        <!-- <mat-card-header>
           <mat-card-title>
             Всего ботов 
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
@@ -16,7 +33,8 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
+        </mat-card-content> -->
+
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
