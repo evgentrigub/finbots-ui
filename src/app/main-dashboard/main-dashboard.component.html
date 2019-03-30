@@ -1,155 +1,145 @@
 <div class="grid-container">
   <!-- первый ряд -->
-  <mat-grid-list cols="4" rowHeight="200px">
+  <mat-grid-list cols="4" rowHeight="160px">
     <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
           <div class="card card-stats">
-              <div class="card-header card-header-warning card-header-icon">
+              <div class="card-header card-header-warning card-header-icon" style="height:73px">
                   <div class="card-icon">
                       <i class="material-icons">content_copy</i>
                   </div>
-                  <p class="card-category">Used Space</p>
-                  <h3 class="card-title">49/50
-                      <small>GB</small>
+                  <p class="card-category">Количество роботов</p>
+                  <h3 class="card-title">8/10
+                      <small>шт.</small>
                   </h3>
               </div>
               <div class="card-footer">
                   <div class="stats">
                       <i class="material-icons text-danger">warning</i>
-                      <a href="#pablo">Get More Space...</a>
+                      <a href="#pablo">Увелиичить макс. количество...</a>
                   </div>
               </div>
           </div>
-        <!-- <mat-card-header>
-          <mat-card-title>
-            Всего ботов 
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content> -->
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+          <div class="card card-stats">
+              <div class="card-header card-header-success card-header-icon" style="height:73px">
+                  <div class="card-icon">
+                      <i class="material-icons">attach_money</i>
+                  </div>
+                  <p class="card-category">Общая доходность</p>
+                  <h3 class="card-title">$10,370</h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                      <i class="material-icons">date_range</i> Последний месяц
+                  </div>
+              </div>
+          </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+        <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon" style="height:73px">
+                <div class="card-icon">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <p class="card-category">Учебные курсы</p>
+                <h3 class="card-title">13/25</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">local_offer</i> Собрано помощнком Артемий
+                </div>
+            </div>
+          </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon" style="height:73px">
+                  <div class="card-icon">
+                      <i class="material-icons">account_balance_wallet</i>
+                  </div>
+                  <p class="card-category">Расходы на подписку</p>
+                  <h3 class="card-title">$24.90</h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                      <i class="material-icons">update</i> Оплата 08.07.2021
+                  </div>
+              </div>
+          </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Общая доходность в %
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Использовано денег
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Расходы на подписку 
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
   <!-- второй ряд -->
-  <mat-grid-list cols="3" rowHeight="150px">
+
+  <mat-grid-list cols="3" rowHeight="170px">
     <mat-grid-tile colspan="1" rowspan="2">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Статистика по ботам 1 
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+          <div class="card card-chart" style="height:310px">
+            <div class="card-header card-header-success">
+                <div class="ct-chart" id="dailySalesChart"></div>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Доходность за год</h4>
+                <p class="card-category">
+                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> +55% </span> доходность выросла</p>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">update</i> обновлено 17 дней назад
+                </div>
+            </div>
+          </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="2">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Статистика по ботам 1 
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+        <div class="card card-chart" style="height:310px">
+            <div class="card-header card-header-warning">
+                <div class="ct-chart" id="websiteViewsChart"></div>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Email Subscriptions</h4>
+                <p class="card-category">Last Campaign Performance</p>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                </div>
+            </div>
+          </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="2">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Статистика по ботам 1 
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Действие 1</button>
-                <button mat-menu-item>Действие 2</button>
-              </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+        <div class="card card-chart" style="height:310px">
+            <div class="card-header card-header-danger">
+                <div class="ct-chart" id="completedTasksChart"></div>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Completed Tasks</h4>
+                <p class="card-category">Last Campaign Performance</p>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                </div>
+            </div>
+          </div>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
+
   <!-- третий ряд -->
+
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile colspan="1" rowspan="1">
         <mat-card class="dashboard-card">
