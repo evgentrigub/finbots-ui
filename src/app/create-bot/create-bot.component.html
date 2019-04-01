@@ -3,44 +3,55 @@
       <mat-grid-tile colspan="2" rowspan="1">
         <mat-card class="dashboard-card">
           <mat-card-content>
-            <div style="display: flex;">
+            <div style="display: flex">
               <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:400px">
               <div>
 
-                <mat-form-field style="width: 400px; margin-right: 40px">
-                  <input matInput (keyup)="takeValue($event)" placeholder="Введите название робота">
-                </mat-form-field>
+                <div class="inline">
+                    <mat-form-field style="width: 400px; margin-right: 40px">
+                      <input matInput (keyup)="takeValue($event)" placeholder="Введите название робота">
+                    </mat-form-field>
+                </div>
 
-                <mat-form-field style="width: 400px; margin-right: 40px">
-                    <mat-select placeholder="Выберите стратегию" (selectionChange)="takeStrategy($event)">
-                      <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
+                <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                      <mat-select placeholder="Выберите стратегию" (selectionChange)="takeStrategy($event)">
+                        <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                      <input matInput placeholder="Какую сумму Вы готовы инвестировать?" type="number" (keyup)="getSumm($event)">
+                      <span matPrefix>$&nbsp;</span>
+                      <span matSuffix>.00</span>
+                  </mat-form-field>
+                </div>
+
+                <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                      <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
+                        <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                    <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
+                      <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
                     </mat-select>
-                </mat-form-field>
-                
-                <mat-form-field style="width: 400px; margin-right: 40px">
-                    <input matInput placeholder="Какую сумму Вы готовы инвестировать?" type="number" (keyup)="getSumm($event)">
-                    <span matPrefix>$&nbsp;</span>
-                    <span matSuffix>.00</span>
-                </mat-form-field>
+                  </mat-form-field>
+                </div>
 
-                <mat-form-field style="width: 400px; margin-right: 40px">
-                    <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
-                      <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field style="width: 400px; margin-right: 40px">
-                  <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
-                    <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <mat-form-field style="width: 400px; margin-right: 40px">
-                    <mat-select placeholder="Выберите горизонт инвестирования">
-                      <mat-option *ngFor="let horisont of horisonts" [value]="horisont" required >{{horisont}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                
+                 <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                      <mat-select placeholder="Выберите горизонт инвестирования">
+                        <mat-option *ngFor="let horisont of horisonts" [value]="horisont" required >{{horisont}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </div>
                 <div>
                   <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel" tickInterval="10" min="1" max="100"></mat-slider>
                   <mat-radio-group>
