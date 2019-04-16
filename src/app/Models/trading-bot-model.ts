@@ -1,3 +1,4 @@
+
 export interface TradingBot{
     id: number,
     name: string,
@@ -5,5 +6,6 @@ export interface TradingBot{
     conditions: string,
     instrument: string,
     result: string,
-    time: string
+    time: string,
+    status: string;
 }

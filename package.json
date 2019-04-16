@@ -26,9 +26,10 @@
     "chartist": "^0.11.0",
     "core-js": "^2.6.5",
     "hammerjs": "^2.0.8",
+    "npm": "^6.9.0",
     "osmosis": "^1.1.10",
     "perfect-scrollbar": "^1.4.0",
-    "rxjs": "^6.0.0",
+    "rxjs": "6.0.0",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {

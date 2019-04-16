@@ -18,6 +18,7 @@ export class CreateBotComponent implements OnInit {
   summa: number;
   FU: string = '';
   optimisation: number = 1;
+  
   formatLabel(value: number | null) {
     if (!value) {
       return 0;

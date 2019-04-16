@@ -4,13 +4,39 @@
         <mat-card class="dashboard-card">
           <mat-card-content>
             <div style="display: flex">
-              <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:400px">
+              <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%">
               <div>
 
                 <div class="inline">
                     <mat-form-field style="width: 400px; margin-right: 40px">
                       <input matInput (keyup)="takeValue($event)" placeholder="Введите название робота">
                     </mat-form-field>
+                </div>
+
+                <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                      <input matInput placeholder="Какую сумму Вы готовы инвестировать?" type="number" (keyup)="getSumm($event)">
+                      <span matPrefix>$&nbsp;</span>
+                      <span matSuffix>.00</span>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel" 
+                  tickInterval="10" min="5" max="90" step="5"></mat-slider>
+                  <mat-radio-group>
+                      <mat-radio-button value="1" >Риск</mat-radio-button>
+                      <mat-radio-button value="2" >Доходность</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div class="inline">
+                  <mat-form-field style="width: 400px; margin-right: 40px">
+                      <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
+                        <mat-option *ngFor="let financialInstrument of financialInstruments" 
+                        [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
                 </div>
 
                 <div class="inline">
@@ -23,45 +49,22 @@
 
                 <div class="inline">
                   <mat-form-field style="width: 400px; margin-right: 40px">
-                      <input matInput placeholder="Какую сумму Вы готовы инвестировать?" type="number" (keyup)="getSumm($event)">
-                      <span matPrefix>$&nbsp;</span>
-                      <span matSuffix>.00</span>
-                  </mat-form-field>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
-                      <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
-                        <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
                     <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
                       <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
 
-                 <div class="inline">
+                <div class="inline">
                   <mat-form-field style="width: 400px; margin-right: 40px">
                       <mat-select placeholder="Выберите горизонт инвестирования">
                         <mat-option *ngFor="let horisont of horisonts" [value]="horisont" required >{{horisont}}</mat-option>
                       </mat-select>
                   </mat-form-field>
                 </div>
-                <div>
-                  <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel" tickInterval="10" min="1" max="100"></mat-slider>
-                  <mat-radio-group>
-                      <mat-radio-button value="1">Риск</mat-radio-button>
-                      <mat-radio-button value="2">Доходность</mat-radio-button>
-                  </mat-radio-group>
-                </div>
 
                 <div style= "padding: 40px">
-                  <button mat-raised-button color="primary" (click) = addBot()>Добавить робота</button>
+                  <button mat-raised-button color="primary" (click) = addBot()>Создать робота</button>
                 </div>
 
               </div>
