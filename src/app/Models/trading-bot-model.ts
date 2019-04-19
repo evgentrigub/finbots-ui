@@ -2,10 +2,10 @@
 export interface TradingBot{
     id: number,
     name: string,
+    type: string,
+    financialInstrument: string,
     strategy:string,
-    conditions: string,
-    instrument: string,
-    result: string,
-    time: string,
+    profit: string,
+    WorkedTime: string,
     status: string;
 }
