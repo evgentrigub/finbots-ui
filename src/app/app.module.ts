@@ -24,6 +24,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { StrategiesComponent } from './strategies/strategies.component';
 import { RatingComponent } from './rating/rating.component';
 import { BlogComponent } from './blog/blog.component';
+import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { BlogComponent } from './blog/blog.component';
     WidgetsComponent,
     StrategiesComponent,
     RatingComponent,
-    BlogComponent
+    BlogComponent,
+    TestForLevelRiskComponent
   ],
   imports: [
     BrowserModule, 

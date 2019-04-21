@@ -3,9 +3,11 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import { AuthenticationService } from '../account/_services/authentication.service';
 import { UserService } from '../account/_services/user.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { User } from '../account/_models/user';
 import * as Chartist from 'node_modules/chartist';
+import { UserStatsService } from '../services/user-stats.service';
+import { StatsView } from '../interfaces/StatsView';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -16,15 +18,27 @@ export class MainDashboardComponent implements OnInit {
   
   currentUser: User;
   currentUserSubscription: Subscription;
+  stats: StatsView = 
+  {
+    profit: 0.0,
+    robotQuantity: 0,
+    account: 0.0
+  };
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthenticationService,
+    private userStatService: UserStatsService,
     ) {
       this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
         this.currentUser = user;
       });
+      this.userStatService.getById(1).subscribe(stats => {
+        this.stats = stats;
+        console.log(this.stats)
+      })
   }
+
   
   ngOnInit(): void {
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */

@@ -10,6 +10,7 @@ import { RatingComponent } from './rating/rating.component';
 import { BlogComponent } from './blog/blog.component';
 import { StrategiesComponent } from './strategies/strategies.component';
 import { TableBotsComponent } from './table-bots/table-bots.component';
+import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
 
 const appRoutes: Routes = [
     {path: 'create', component: CreateBotComponent, canActivate: [AuthGuard]},
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'testForRiskLevel', component: TestForLevelRiskComponent },
     { path: '**', redirectTo: 'dashboard' }
 ];
 
