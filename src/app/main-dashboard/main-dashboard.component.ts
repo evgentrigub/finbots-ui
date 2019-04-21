@@ -8,6 +8,8 @@ import { User } from '../account/_models/user';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../services/user-stats.service';
 import { StatsView } from '../interfaces/StatsView';
+import { MatDialog } from '@angular/material';
+import { AddModeyToAccountComponent } from '../add-modey-to-account/add-modey-to-account.component';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -20,6 +22,12 @@ export class MainDashboardComponent implements OnInit {
   currentUserSubscription: Subscription;
   stats: StatsView = 
   {
+    // id: null,
+    // username: null,
+    // password: null,
+    // lastName: null,
+    // firstName: null,
+    // token: null,
     profit: 0.0,
     robotQuantity: 0,
     account: 0.0
@@ -29,14 +37,20 @@ export class MainDashboardComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthenticationService,
     private userStatService: UserStatsService,
+    public dialog: MatDialog,
     ) {
       this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
         this.currentUser = user;
       });
       this.userStatService.getById(1).subscribe(stats => {
+        //debugger;
         this.stats = stats;
         console.log(this.stats)
       })
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(AddModeyToAccountComponent);
   }
 
   

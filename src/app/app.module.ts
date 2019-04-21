@@ -8,7 +8,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
         MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, 
         MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule, 
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule } from '@angular/material';
+        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -25,6 +25,7 @@ import { StrategiesComponent } from './strategies/strategies.component';
 import { RatingComponent } from './rating/rating.component';
 import { BlogComponent } from './blog/blog.component';
 import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
+import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-
     StrategiesComponent,
     RatingComponent,
     BlogComponent,
-    TestForLevelRiskComponent
+    TestForLevelRiskComponent,
+    AddModeyToAccountComponent,
   ],
   imports: [
     BrowserModule, 
@@ -54,6 +56,7 @@ import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-
     RouterModule,
     routing,
     FormsModule,
+    MatDialogModule,
 
     // MATERIAL
     MatToolbarModule, MatButtonModule, MatSidenavModule, 
@@ -62,6 +65,9 @@ import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-
     MatInputModule, MatIconModule, MatSnackBarModule,
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
     MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule
+  ],
+  entryComponents: [
+    AddModeyToAccountComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

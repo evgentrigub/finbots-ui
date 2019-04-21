@@ -1,0 +1,12 @@
+Введите сумму для пополнения вашего кошелька
+
+      <form [formGroup] = "dataForm">
+          <mat-form-field>
+            <span matPrefix>$ &nbsp;</span>
+            <input type="tel" matInput formControlName="summa" placeholder="Введите сумму">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <button class="btn btn-default" [disabled]="dataForm.invalid" (click)="addMoney()">
+              Пополнить
+          </button>    
+      </form>

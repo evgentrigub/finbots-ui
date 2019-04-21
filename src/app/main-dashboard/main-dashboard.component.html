@@ -63,14 +63,14 @@
           <div class="card card-stats">
               <div class="card-header card-header-info card-header-icon" style="height:73px">
                   <div class="card-icon">
-                      <i class="material-icons">account_balance_wallet</i>
+                      <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
                   </div>
                   <p class="card-category">На счету</p>
                   <h3 class="card-title">${{stats.account}}</h3>
               </div>
               <div class="card-footer">
                   <div class="stats">
-                      <i class="material-icons">update</i>  Пополнить кошелек
+                      <i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i>  Пополнить кошелек
                   </div>
               </div>
           </div>

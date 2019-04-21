@@ -15,3 +15,4 @@ export class UserStatsService {
     return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`);
   }
 }
+
