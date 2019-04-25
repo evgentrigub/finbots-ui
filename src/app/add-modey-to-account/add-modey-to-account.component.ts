@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../account/_services/user.service';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { StatsView } from '../interfaces/StatsView';
+import { User } from '../account/_models/user';
 
 @Component({
   selector: 'app-add-modey-to-account',
@@ -10,10 +13,11 @@ import { UserService } from '../account/_services/user.service';
 export class AddModeyToAccountComponent implements OnInit {
 
   dataForm: FormGroup;
-  user: any;
+  editedStats: User;
 
   constructor(
     private userService: UserService,
+    @Inject(MAT_DIALOG_DATA) public data: User,
   ) {
     this.dataForm = new FormGroup({
       "summa": new FormControl('', Validators.required),
@@ -23,10 +27,11 @@ export class AddModeyToAccountComponent implements OnInit {
   ngOnInit() {
   }
 
-  addMoney(summa){
-    this.userService.getById(1).subscribe(user => {this.user = user});
-    this.user.account = this.user.account + summa;
-    this.userService.update(this.user).subscribe;
+  addMoney(summa:number){
+    let prev = this.data.account;
+    this.data.account = summa;
+    this.userService.updateAccount(this.data).subscribe();
+    this.data.account = +prev + +summa;
   }
 
 }

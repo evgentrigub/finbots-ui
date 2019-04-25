@@ -8,7 +8,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
         MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, 
         MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule, 
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule } from '@angular/material';
+        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatRadioChange } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';

@@ -3,12 +3,12 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import { AuthenticationService } from '../account/_services/authentication.service';
 import { UserService } from '../account/_services/user.service';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../account/_models/user';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../services/user-stats.service';
 import { StatsView } from '../interfaces/StatsView';
-import { MatDialog } from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { AddModeyToAccountComponent } from '../add-modey-to-account/add-modey-to-account.component';
 
 @Component({
@@ -19,15 +19,11 @@ import { AddModeyToAccountComponent } from '../add-modey-to-account/add-modey-to
 export class MainDashboardComponent implements OnInit {
   
   currentUser: User;
+  private currentStats$: BehaviorSubject<StatsView>;
+
   currentUserSubscription: Subscription;
   stats: StatsView = 
   {
-    // id: null,
-    // username: null,
-    // password: null,
-    // lastName: null,
-    // firstName: null,
-    // token: null,
     profit: 0.0,
     robotQuantity: 0,
     account: 0.0
@@ -38,23 +34,35 @@ export class MainDashboardComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private userStatService: UserStatsService,
     public dialog: MatDialog,
+    
     ) {
       this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
         this.currentUser = user;
       });
-      this.userStatService.getById(1).subscribe(stats => {
-        //debugger;
-        this.stats = stats;
-        console.log(this.stats)
-      })
+      
   }
 
   openDialog(){
-    const dialogRef = this.dialog.open(AddModeyToAccountComponent);
+    console.log(this.stats.account)
+    const dialogRef = this.dialog.open(AddModeyToAccountComponent, {
+      panelClass: 'dialog',
+      data: this.stats,
+      disableClose: true
+    });
+    dialogRef.backdropClick().subscribe(result => {
+      if (confirm("Закрыть окно?")) {
+        dialogRef.close();
+      }
+    })
   }
 
   
   ngOnInit(): void {
+    this.userStatService.getById(1).subscribe(stats => {
+      this.stats = stats;
+      console.log(this.stats)
+      //this.currentStats$.next(stats);
+    })
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
     const dataDailySalesChart: any = {
@@ -133,7 +141,8 @@ export class MainDashboardComponent implements OnInit {
     this.startAnimationForLineChart(completedTasksChart);
 
   }
-
+  
+  
   startAnimationForLineChart(chart){
     let seq: any, delays: any, durations: any;
     seq = 0;

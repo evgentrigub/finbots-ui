@@ -12,7 +12,7 @@ export class UserStatsService {
   constructor(private http: HttpClient) { }
 
   getById(id: number) : Observable<StatsView> {
-    return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`);
+    return this.http.get<StatsView>(`${environment.apiUrl}/users/${id}`);
   }
 }
 

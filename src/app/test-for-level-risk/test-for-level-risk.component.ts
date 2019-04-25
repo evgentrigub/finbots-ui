@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Questions } from '../Models/Questions';
+import { TaskService } from '../services/task.service';
+import { MatRadioChange } from '@angular/material';
+import { Answers } from '../Models/Answers';
 
 @Component({
   selector: 'app-test-for-level-risk',
@@ -9,16 +13,36 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class TestForLevelRiskComponent implements OnInit {
 
   dataFrom: FormGroup;
+  questions: Questions[];
+  rating: number = 0;
+  selection: Answers;
 
-  constructor() {
+  constructor(
+    private taskService: TaskService,
+  ) {
     this.dataFrom = new FormGroup({
-      "questionContent": new FormControl('', Validators.required),
       "answers": new FormControl('', Validators.required)
     })
    }
 
   ngOnInit() {
-
+    this.getQuestions();
   }
+
+  getQuestions(){
+    this.taskService.getTasks().subscribe(r => {
+      this.questions = r;    
+    })
+  }
+
+  radioChange(event: MatRadioChange) {
+    this.rating = this.rating + event.value.answerRate;
+  }
+
+  submit(){
+    //преобразует полученный результат в процент и отправляет его в статистику пользователя на бек
+  }
+
+
 
 }
