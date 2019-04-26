@@ -1,6 +1,6 @@
 import { Answers } from "./Answers";
 
-export class Questions {
+export class Question {
     objContent: string;
     answers: Answers[];
 }
