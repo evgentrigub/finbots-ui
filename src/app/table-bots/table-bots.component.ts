@@ -5,12 +5,12 @@ import { TradingBotsService } from '../services/trading-bots.service';
 import { Observable } from 'rxjs';
 
 
-const bots: TradingBot[] = [
-  {id: 1, name: 'Бот по акциям', strategy: 'Локомотив Сбербанк', financialInstrument: 'Акции',
-    profit: '-5%', workedTime: '2 дня', status: 'Активный', type: ''},
-  {id: 2, name: 'Торгуем криптой', strategy: 'Биткоин max', financialInstrument: 'Криптовалюта',
-  profit: '+9%', workedTime: '3 часа', status: 'Активный', type: ''}
-];
+// const bots: TradingBot[] = [
+//   {id: 1, name: 'Бот по акциям', strategy: 'Локомотив Сбербанк', financialInstrument: 'Акции',
+//     profit: '-5%', workedTime: '2 дня', status: 'Активный', type: ''},
+//   {id: 2, name: 'Торгуем криптой', strategy: 'Биткоин max', financialInstrument: 'Криптовалюта',
+//   profit: '+9%', workedTime: '3 часа', status: 'Активный', type: ''}
+// ];
 
 @Component({
   selector: 'app-table-bots',
@@ -30,11 +30,11 @@ export class TableBotsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.tradingBotsService.getUserRobpts(1).subscribe(bots => {
-    //   this.dataSource.data = bots;
-    //   console.log(this.bots)
-    // });
-    this.dataSource.data = bots;
+    this.tradingBotsService.getUserRobpts(1).subscribe(bots => {
+      this.dataSource.data = bots;
+      console.log(this.bots)
+    });
+    //this.dataSource.data = bots;
   }
 
 }
