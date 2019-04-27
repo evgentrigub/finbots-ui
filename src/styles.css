@@ -3,14 +3,12 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
 
-mat-icon.btn-primary{
+mat-icon.btn-usual{
   color: darkgray;
-  background-color: white;
 }
 
-mat-icon.btn-primary:hover{
+mat-icon.btn-usual:hover{
   color: rgb(66, 66, 211);
-  background-color: white;
 }
 
 mat-icon.btn-warn{

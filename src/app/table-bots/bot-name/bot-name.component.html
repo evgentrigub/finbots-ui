@@ -6,7 +6,7 @@
   <div (mouseover)="hover=true" (mouseleave)="hover=false" class="name">
     <span>{{original}}</span>
     <button *ngIf="hover" mat-button (click)="editMode=true" matSuffix mat-icon-button aria-label="Edit" class="edit">
-      <mat-icon class="btn-primary" matTooltip="Переименовать" matTooltipPosition="right">edit</mat-icon>
+      <mat-icon class="btn-usual" matTooltip="Переименовать" matTooltipPosition="right">edit</mat-icon>
     </button>
   </div>
 </ng-template>

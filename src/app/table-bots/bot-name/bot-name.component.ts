@@ -10,23 +10,22 @@ import { TradingBot } from 'src/app/Models/trading-bot-model';
   styleUrls: ['./bot-name.component.css'],
 })
 export class BotNameComponent {
-  // @Input()
-  // set projectId(value: string) {
-  //   this.id = value;
-  // }
 
-  @Input()
-  set bot(value: TradingBot) {
-    console.log(value)
-    this.original = value.name;
-    this.current = value.name;
+  @Input() set bot(value: TradingBot) {
+    this._bot = value;
+    this.original = this._bot.name;
+    this.current = this._bot.name;
   }
 
-  // id: string;
+  get bot() {
+    return this._bot;
+  }
+
   original: string;
   current: string;
   editMode = false;
   hover = false;
+  _bot: TradingBot;
 
   constructor(
     private readonly service: TradingBotsService,
@@ -57,42 +56,34 @@ export class BotNameComponent {
     if (this.current !== this.original && this.current && this.current.length > 2 && this.current.length <= 255) {
       return true;
     }
-
     return false;
   }
 
   save() {
-    console.log(this.bot)
     if (!this.canSave) {
       return;
     }
 
     const name = this.current;
-
     if (!name) {
       return;
     }
 
-    // this.botName = name;
-    // this.editMode = false;
-    // this.hover = false;
-    // this.changeDetectorRef.markForCheck();
-
+    this._bot.name = name;
     this.service
-      .updateRobotName(this.bot)
+      .updateRobotName(this._bot)
       .pipe(
         tap(
           _ => {
             this.showMessage('Успешно сохранено');
-            this.bot.name = name;
+            this.original = name;
             this.editMode = false;
             this.hover = false;
             this.changeDetectorRef.markForCheck();
           },
           error => this.showMessage(error)
         )
-      )
-      .subscribe();
+      ).subscribe();
   }
 
   showMessage(msg: any) {
