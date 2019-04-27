@@ -25,8 +25,8 @@ import { StrategiesComponent } from './strategies/strategies.component';
 import { RatingComponent } from './rating/rating.component';
 import { BlogComponent } from './blog/blog.component';
 import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
-import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
 import { BotNameComponent } from './table-bots/project-name/bot-name.component';
+import { AddModeyToAccountComponent } from './main-dashboard/add-modey-to-account/add-modey-to-account.component';
 
 
 @NgModule({

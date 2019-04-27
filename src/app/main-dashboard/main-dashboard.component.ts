@@ -6,7 +6,8 @@ import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../services/user-stats.service';
 import { StatsView } from '../interfaces/StatsView';
 import { MatDialog} from '@angular/material';
-import { AddModeyToAccountComponent } from '../add-modey-to-account/add-modey-to-account.component';
+import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
+
 
 @Component({
   selector: 'app-main-dashboard',
