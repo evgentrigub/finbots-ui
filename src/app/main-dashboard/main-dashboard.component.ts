@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import { AuthenticationService } from '../account/_services/authentication.service';
-import { UserService } from '../account/_services/user.service';
 import { Subscription } from 'rxjs';
 import { User } from '../account/_models/user';
 import * as Chartist from 'node_modules/chartist';
+import { UserStatsService } from '../services/user-stats.service';
+import { StatsView } from '../interfaces/StatsView';
+import { MatDialog} from '@angular/material';
+import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
+
 
 @Component({
   selector: 'app-main-dashboard',
@@ -13,52 +15,85 @@ import * as Chartist from 'node_modules/chartist';
   styleUrls: ['./main-dashboard.component.css']
 })
 export class MainDashboardComponent implements OnInit {
-  
+
   currentUser: User;
   currentUserSubscription: Subscription;
+  stats: StatsView =
+  {
+    profit: 0.0,
+    robotQuantity: 0,
+    account: 0.0
+  };
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthenticationService,
+    private userStatService: UserStatsService,
+    public dialog: MatDialog,
+
     ) {
       this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
         this.currentUser = user;
       });
+
   }
-  
+
+  openDialog() {
+    console.log(this.stats.account);
+    const dialogRef = this.dialog.open(AddModeyToAccountComponent, {
+      panelClass: 'dialog',
+      data: this.stats,
+      disableClose: true
+    });
+    dialogRef.backdropClick().subscribe(result => {
+      if (confirm('Закрыть окно?')) {
+        dialogRef.close();
+      }
+    });
+  }
+
+
   ngOnInit(): void {
-    /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+    this.userStatService.getById(1).subscribe(stats => {
+      this.stats = stats;
+    });
+    this.getFirstChart();
+    this.getSecondChart();
+    this.getThirdChart();
+  }
 
-    const dataDailySalesChart: any = {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    series: [
-        [12, 17, 7, 17, 23, 18, 38]
-    ]};
+  //TO-DO изменить название
+  getFirstChart() {
+     const dataDailySalesChart: any = {
+      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      series: [
+          [12, 17, 7, 17, 23, 18, 38]
+      ]};
 
-    const optionsDailySalesChart: any = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-            tension: 0
-        }),
-        low: 0,
-        high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-    }
+      const optionsDailySalesChart: any = {
+          lineSmooth: Chartist.Interpolation.cardinal({
+              tension: 0
+          }),
+          low: 0,
+          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+      };
 
-    var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+      const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
-    this.startAnimationForLineChart(dailySalesChart);
+      this.startAnimationForLineChart(dailySalesChart);
+  }
 
-    
-    /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+  //TO-DO изменить название
+  getSecondChart() {
 
-    var datawebsiteViewsChart = {
+    const datawebsiteViewsChart = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
       series: [
         [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
 
       ]
     };
-    var optionswebsiteViewsChart = {
+    const optionswebsiteViewsChart = {
         axisX: {
             showGrid: false
         },
@@ -66,7 +101,7 @@ export class MainDashboardComponent implements OnInit {
         high: 1000,
         chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
     };
-    var responsiveOptions: any[] = [
+    const responsiveOptions: any[] = [
       ['screen and (max-width: 640px)', {
         seriesBarDistance: 5,
         axisX: {
@@ -76,18 +111,19 @@ export class MainDashboardComponent implements OnInit {
         }
       }]
     ];
-    var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+    const websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
 
-    //start animation for the Emails Subscription Chart
     this.startAnimationForBarChart(websiteViewsChart);
+  }
 
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+  //TO-DO изменить название
+  getThirdChart() {
 
-      const dataCompletedTasksChart: any = {
-        labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-        series: [
-            [230, 750, 450, 300, 280, 240, 200, 190]
-        ]
+    const dataCompletedTasksChart: any = {
+      labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
+      series: [
+        [230, 750, 450, 300, 280, 240, 200, 190]
+      ]
     };
 
    const optionsCompletedTasksChart: any = {
@@ -97,23 +133,22 @@ export class MainDashboardComponent implements OnInit {
         low: 0,
         high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
         chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-    }
+    };
 
-    var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+    const completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
-    // start animation for the Completed Tasks Chart - Line Chart
     this.startAnimationForLineChart(completedTasksChart);
 
   }
 
-  startAnimationForLineChart(chart){
+  private startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
     seq = 0;
     delays = 80;
     durations = 500;
 
     chart.on('draw', function(data) {
-      if(data.type === 'line' || data.type === 'area') {
+      if (data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
             begin: 600,
@@ -123,7 +158,7 @@ export class MainDashboardComponent implements OnInit {
             easing: Chartist.Svg.Easing.easeOutQuint
           }
         });
-      } else if(data.type === 'point') {
+      } else if (data.type === 'point') {
             seq++;
             data.element.animate({
               opacity: {
@@ -138,15 +173,16 @@ export class MainDashboardComponent implements OnInit {
     });
 
     seq = 0;
-};
-startAnimationForBarChart(chart){
+}
+
+  private startAnimationForBarChart(chart) {
     let seq2: any, delays2: any, durations2: any;
 
     seq2 = 0;
     delays2 = 80;
     durations2 = 500;
     chart.on('draw', function(data) {
-      if(data.type === 'bar'){
+      if (data.type === 'bar') {
           seq2++;
           data.element.animate({
             opacity: {
@@ -161,5 +197,5 @@ startAnimationForBarChart(chart){
     });
 
     seq2 = 0;
-};
+}
 }

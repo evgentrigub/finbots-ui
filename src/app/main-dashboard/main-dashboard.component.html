@@ -6,17 +6,17 @@
           <div class="card card-stats">
               <div class="card-header card-header-warning card-header-icon" style="height:73px">
                   <div class="card-icon">
-                      <i class="material-icons">content_copy</i>
+                      <i class="material-icons">adb</i>
                   </div>
                   <p class="card-category">Количество роботов</p>
-                  <h3 class="card-title">8/10
+                  <h3 class="card-title">{{stats.robotsQuantity}}/10
                       <small>шт.</small>
                   </h3>
               </div>
               <div class="card-footer">
                   <div class="stats">
                       <i class="material-icons text-danger">warning</i>
-                      <a href="#pablo">Увелиичить макс. количество...</a>
+                      <a href="/create">Увелиичить макс. количество...</a>
                   </div>
               </div>
           </div>
@@ -30,7 +30,7 @@
                       <i class="material-icons">attach_money</i>
                   </div>
                   <p class="card-category">Общая доходность</p>
-                  <h3 class="card-title">$10,370</h3>
+                  <h3 class="card-title">{{stats.profit}}%</h3>
               </div>
               <div class="card-footer">
                   <div class="stats">
@@ -45,14 +45,14 @@
         <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon" style="height:73px">
                 <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
+                    <i class="material-icons">spellcheck</i>
                 </div>
-                <p class="card-category">Учебные курсы</p>
-                <h3 class="card-title">13/25</h3>
+                <p class="card-category">Инвестиционный тип</p>
+                <h3 class="card-title"></h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons">local_offer</i> Собрано помощнком Артемий
+                    <i class="material-icons">local_offer</i> Пройти тест еще раз
                 </div>
             </div>
           </div>
@@ -63,14 +63,14 @@
           <div class="card card-stats">
               <div class="card-header card-header-info card-header-icon" style="height:73px">
                   <div class="card-icon">
-                      <i class="material-icons">account_balance_wallet</i>
+                      <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
                   </div>
                   <p class="card-category">На счету</p>
-                  <h3 class="card-title">$24.90</h3>
+                  <h3 class="card-title">${{stats.account}}</h3>
               </div>
               <div class="card-footer">
                   <div class="stats">
-                      <i class="material-icons">update</i> Оплата 08.07.2021
+                      <i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i>  Пополнить кошелек
                   </div>
               </div>
           </div>
@@ -107,8 +107,8 @@
                 <div class="ct-chart" id="websiteViewsChart"></div>
             </div>
             <div class="card-body">
-                <h4 class="card-title">Email Subscriptions</h4>
-                <p class="card-category">Last Campaign Performance</p>
+                <h4 class="card-title">Аналитика по росту потрфеля</h4>
+                <p class="card-category">ваш портфель вырос</p>
             </div>
             <div class="card-footer">
                 <div class="stats">

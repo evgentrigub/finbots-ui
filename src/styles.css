@@ -3,3 +3,28 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
 
+mat-icon.btn-primary{
+  color: darkgray;
+  background-color: white;
+}
+
+mat-icon.btn-primary:hover{
+  color: rgb(66, 66, 211);
+  background-color: white;
+}
+
+mat-icon.btn-warn{
+  color: darkgray;
+}
+
+mat-icon.btn-warn:hover{
+  color: red;
+}
+
+mat-icon.btn-accent{
+  color: darkgray;
+}
+
+mat-icon.btn-accent:hover{
+  color: #FF4081;
+}

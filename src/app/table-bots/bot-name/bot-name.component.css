@@ -1,0 +1,19 @@
+div {
+  width: 40em;
+}
+
+div.name {
+  display: inline-flex;
+  width: 100%;
+  min-height: 48px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+div.name span {
+  margin-top: 10px;
+  margin-right: 0.5em;
+  word-break: break-all;
+}

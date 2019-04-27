@@ -6,9 +6,9 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { LayoutModule } from '@angular/cdk/layout';
 import { Routes, RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
-        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, 
-        MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule, 
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule } from '@angular/material';
+        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule,
+        MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
+        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -24,6 +24,9 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { StrategiesComponent } from './strategies/strategies.component';
 import { RatingComponent } from './rating/rating.component';
 import { BlogComponent } from './blog/blog.component';
+import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
+import { AddModeyToAccountComponent } from './main-dashboard/add-modey-to-account/add-modey-to-account.component';
+import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
 
 
 @NgModule({
@@ -41,25 +44,32 @@ import { BlogComponent } from './blog/blog.component';
     WidgetsComponent,
     StrategiesComponent,
     RatingComponent,
-    BlogComponent
+    BlogComponent,
+    TestForLevelRiskComponent,
+    AddModeyToAccountComponent,
+    BotNameComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule, 
-    LayoutModule, 
+    HttpClientModule,
+    LayoutModule,
     RouterModule,
     routing,
     FormsModule,
+    MatDialogModule,
 
     // MATERIAL
-    MatToolbarModule, MatButtonModule, MatSidenavModule, 
-    MatIconModule, MatListModule, MatGridListModule, 
+    MatToolbarModule, MatButtonModule, MatSidenavModule,
+    MatIconModule, MatListModule, MatGridListModule,
     MatCardModule, MatMenuModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSnackBarModule,
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
     MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule
+  ],
+  entryComponents: [
+    AddModeyToAccountComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
