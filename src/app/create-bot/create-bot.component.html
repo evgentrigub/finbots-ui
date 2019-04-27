@@ -1,7 +1,7 @@
-<div class="grid-container">
-    <mat-grid-list cols="2" rowHeight="550px">
-      <mat-grid-tile colspan="2" rowspan="1">
-        <mat-card class="dashboard-card">
+<div style="margin: 20px">
+<!--    <mat-grid-list cols="2" rowHeight="550px">-->
+<!--      <mat-grid-tile colspan="2" rowspan="1">-->
+        <mat-card class="">
           <mat-card-content>
             <div style="display: flex">
               <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%">
@@ -22,7 +22,7 @@
                 </div>
 
                 <div>
-                  <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel" 
+                  <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel"
                   tickInterval="10" min="5" max="90" step="5"></mat-slider>
                   <mat-radio-group>
                       <mat-radio-button value="1" >Риск</mat-radio-button>
@@ -33,7 +33,7 @@
                 <div class="inline">
                   <mat-form-field style="width: 400px; margin-right: 40px">
                       <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
-                        <mat-option *ngFor="let financialInstrument of financialInstruments" 
+                        <mat-option *ngFor="let financialInstrument of financialInstruments"
                         [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -71,6 +71,6 @@
             </div>
           </mat-card-content>
       </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<!--    </mat-grid-tile>-->
+<!--  </mat-grid-list>-->
 </div>

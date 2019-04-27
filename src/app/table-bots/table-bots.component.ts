@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
 
 
 // const bots: TradingBot[] = [
-//   {id:1, name:'Бот по акциям', strategy:'Локомотив Сбербанк', conditions:'Риск 15%', instrument:'Акции', result:'-5%', time:'2 дня', status:'Активный'},
-//   {id:2, name:'Торгуем криптой', strategy:'Биткоин max', conditions:'Доходность 10%', instrument:'Криптовалюта', result:'+9%', time:'3 часа', status: 'Активный'}
+//   {id:1, name:'Бот по акциям', strategy:'Локомотив Сбербанк', conditions:'Риск 15%', instrument:'Акции', result:'-5%', time:'2 дня',
+//   status:'Активный'},
+//   {id:2, name:'Торгуем криптой', strategy:'Биткоин max', conditions:'Доходность 10%', instrument:'Криптовалюта', result:'+9%',
+//   time:'3 часа', status: 'Активный'}
 // ]
 
 @Component({
@@ -30,7 +32,7 @@ export class TableBotsComponent implements OnInit {
   ngOnInit() {
     this.tradingBotsService.getUserRobpts(1).subscribe(bots => {
       this.dataSource.data = bots;
-      console.log(this.dataSource.data)
+      console.log(this.dataSource.data);
     });
   }
 
