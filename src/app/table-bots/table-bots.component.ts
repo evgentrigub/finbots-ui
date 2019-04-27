@@ -23,7 +23,6 @@ export class TableBotsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'status', 'profit', 'actions'];
   //'instrument' result
   dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource;
-  bots: Observable<TradingBot[]>;
 
   constructor(
     private tradingBotsService: TradingBotsService,
@@ -32,7 +31,6 @@ export class TableBotsComponent implements OnInit {
   ngOnInit() {
     this.tradingBotsService.getUserRobpts(1).subscribe(bots => {
       this.dataSource.data = bots;
-      console.log(this.bots)
     });
     //this.dataSource.data = bots;
   }

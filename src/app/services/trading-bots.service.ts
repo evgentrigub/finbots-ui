@@ -16,4 +16,8 @@ export class TradingBotsService {
   getUserRobpts(id: number): Observable<TradingBot[]> {
     return this.http.get<TradingBot[]>(`${environment.apiUrl}/api/robots/GetUserRobots?id=`+ id)
   }
+
+  updateRobotName(bot: TradingBot) {
+    return this.http.post(`${environment.apiUrl}/api/robots/UpdateBot`, bot)
+  }
 }
