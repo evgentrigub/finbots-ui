@@ -85,11 +85,14 @@
           <mat-icon class="btn-warn" matTooltip="Удалить проект" matTooltipPosition="right">
             delete
           </mat-icon>
+          <mat-icon class="btn-accent" matTooltip="Информация о роботе" matTooltipPosition="right" (click)="openDialog(row)">
+            reorder
+          </mat-icon>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" (click)="openDialog(row)">
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index">
       </tr>
     </table>
   </mat-card-content>

@@ -44,6 +44,7 @@ export class TestForLevelRiskComponent implements OnInit {
    * и отправляет его в статистику пользователя на бек
    */
   submit() {
+    if (this.dataFrom.valid) {console.log('fdf')}
 
   }
 
