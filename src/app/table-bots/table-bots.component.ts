@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { TradingBot } from '../Models/trading-bot-model';
 import { TradingBotsService } from '../services/trading-bots.service';
-import { Observable } from 'rxjs';
-
 
 // const bots: TradingBot[] = [
 //   {id: 1, name: 'Бот по акциям', strategy: 'Локомотив Сбербанк', financialInstrument: 'Акции',
@@ -21,7 +19,6 @@ import { Observable } from 'rxjs';
 export class TableBotsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'status', 'profit', 'actions'];
-  //'instrument' result
   dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource;
 
   constructor(
@@ -29,10 +26,9 @@ export class TableBotsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tradingBotsService.getUserRobpts(1).subscribe(bots => {
+    this.tradingBotsService.getUserRobots(1).subscribe(bots => {
       this.dataSource.data = bots;
     });
-    // this.dataSource.data = bots;
   }
 
 }

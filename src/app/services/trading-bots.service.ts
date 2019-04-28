@@ -1,24 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Observable, ObservableInput, throwError } from 'rxjs';
+import { Observable, ObservableInput, throwError, BehaviorSubject } from 'rxjs';
 import { TradingBot } from '../Models/trading-bot-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradingBotsService {
 
+  tradingBotsList$: BehaviorSubject<TradingBot[]>;
+  private loaded = false;
+
   constructor(
     private http: HttpClient
-  ) { }
-
-  getUserRobpts(id: number): Observable<TradingBot[]> {
-    return this.http.get<TradingBot[]>(`${environment.apiUrl}/api/robots/GetUserRobots?id=` + id);
+  ) {
+    this.tradingBotsList$ = new BehaviorSubject<TradingBot[]>([]);
   }
 
-  updateRobotName(bot: TradingBot): Observable<null> {
+  /**
+   * запрашивает список роботов
+   * (если список уже загружен, то вернет его
+   * если не загружен, то делает запрос на сервер)
+   */
+  getUserRobots(id: number): Observable<TradingBot[]> {
+    if (this.loaded) {
+      return this.reloadedTraidingBotsList(id).pipe(switchMap(r => this.tradingBotsList$));
+    }
+    return this.tradingBotsList$;
+  }
+
+  private reloadedTraidingBotsList(id: number) {
+    return this.http.get<TradingBot[]>(`${environment.apiUrl}/api/robots/GetUserRobots?id=` + id)
+      .pipe(catchError(this.handleError),
+        tap(response => {
+          this.tradingBotsList$.next(response);
+          this.loaded = true;
+        })
+      );
+  }
+
+  updateRobotData(bot: TradingBot): Observable<null> {
     console.log(bot);
     return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot)
     .pipe(

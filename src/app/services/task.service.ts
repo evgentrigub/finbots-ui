@@ -26,7 +26,7 @@ export class TaskService {
    */
   public getQuestionsList(): Observable<Question[]> {
     if (!this.loaded) {
-      return this.reloadQuestionList().pipe(switchMap(r => this.questionsList$))
+      return this.reloadQuestionList().pipe(switchMap(r => this.questionsList$));
     }
     return this.questionsList$;
   }

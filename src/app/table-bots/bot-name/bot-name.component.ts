@@ -71,7 +71,7 @@ export class BotNameComponent {
 
     this._bot.name = name;
     this.service
-      .updateRobotName(this._bot)
+      .updateRobotData(this._bot)
       .pipe(
         tap(
           _ => {
