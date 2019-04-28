@@ -38,7 +38,6 @@ export class MainDashboardComponent implements OnInit {
   }
 
   openDialog() {
-    console.log(this.stats.account);
     const dialogRef = this.dialog.open(AddModeyToAccountComponent, {
       panelClass: 'dialog',
       data: this.stats,

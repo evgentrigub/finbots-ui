@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { TradingBot } from '../Models/trading-bot-model';
 import { TradingBotsService } from '../services/trading-bots.service';
+import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
 
 // const bots: TradingBot[] = [
 //   {id: 1, name: 'Бот по акциям', strategy: 'Локомотив Сбербанк', financialInstrument: 'Акции',
@@ -23,11 +24,25 @@ export class TableBotsComponent implements OnInit {
 
   constructor(
     private tradingBotsService: TradingBotsService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
     this.tradingBotsService.getUserRobots(1).subscribe(bots => {
       this.dataSource.data = bots;
+    });
+  }
+
+  openDialog(row: TradingBot) {
+    const dialogRef = this.dialog.open(BotStatsDialogComponent, {
+      panelClass: 'dialog',
+      data: row,
+      disableClose: true
+    });
+    dialogRef.backdropClick().subscribe(result => {
+      if (confirm('Закрыть окно?')) {
+        dialogRef.close();
+      }
     });
   }
 

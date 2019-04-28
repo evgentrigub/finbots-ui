@@ -25,7 +25,7 @@ export class TradingBotsService {
    * если не загружен, то делает запрос на сервер)
    */
   getUserRobots(id: number): Observable<TradingBot[]> {
-    if (this.loaded) {
+    if (!this.loaded) {
       return this.reloadedTraidingBotsList(id).pipe(switchMap(r => this.tradingBotsList$));
     }
     return this.tradingBotsList$;

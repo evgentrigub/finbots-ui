@@ -27,7 +27,7 @@ import { BlogComponent } from './blog/blog.component';
 import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
 import { AddModeyToAccountComponent } from './main-dashboard/add-modey-to-account/add-modey-to-account.component';
 import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
-
+import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
     BlogComponent,
     TestForLevelRiskComponent,
     AddModeyToAccountComponent,
-    BotNameComponent
+    BotNameComponent,
+    BotStatsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,8 @@ import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
     MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule
   ],
   entryComponents: [
-    AddModeyToAccountComponent
+    AddModeyToAccountComponent,
+    BotStatsDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
