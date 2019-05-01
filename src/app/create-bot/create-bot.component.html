@@ -1,76 +1,89 @@
 <div style="margin: 20px">
-<!--    <mat-grid-list cols="2" rowHeight="550px">-->
-<!--      <mat-grid-tile colspan="2" rowspan="1">-->
-        <mat-card class="">
-          <mat-card-content>
-            <div style="display: flex">
-              <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%">
-              <div>
-
-                <div class="inline">
-                    <mat-form-field style="width: 400px; margin-right: 40px">
-                      <input matInput (keyup)="takeValue($event)" placeholder="Введите название робота">
-                    </mat-form-field>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
-                      <input matInput placeholder="Какую сумму Вы готовы инвестировать?" type="number" (keyup)="getSumm($event)">
-                      <span matPrefix>$&nbsp;</span>
-                      <span matSuffix>.00</span>
-                  </mat-form-field>
-                </div>
-
-                <div>
-                  <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel"
-                  tickInterval="10" min="5" max="90" step="5"></mat-slider>
-                  <mat-radio-group>
-                      <mat-radio-button value="1" >Риск</mat-radio-button>
-                      <mat-radio-button value="2" >Доходность</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
-                      <mat-select placeholder="Выберите финансовый инструмент" (selectionChange)="takeFU($event)">
-                        <mat-option *ngFor="let financialInstrument of financialInstruments"
-                        [value]="financialInstrument" required >{{financialInstrument}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
-                      <mat-select placeholder="Выберите стратегию" (selectionChange)="takeStrategy($event)">
-                        <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
-                    <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
-                      <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="inline">
-                  <mat-form-field style="width: 400px; margin-right: 40px">
-                      <mat-select placeholder="Выберите горизонт инвестирования">
-                        <mat-option *ngFor="let horisont of horisonts" [value]="horisont" required >{{horisont}}</mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div style= "padding: 40px">
-                  <button mat-raised-button color="primary" (click) = addBot()>Создать робота</button>
-                </div>
-
-              </div>
+  <mat-card>
+      <mat-card-content>
+        <form [formGroup]="formGroup">
+        <div formGroupName="data">
+          <!-- <img  src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%"> -->
+          <!-- <div> -->
+            <div class="inline">
+                <mat-form-field style="width: 400px; margin-right: 40px">
+                  <input #nameInput matInput formControlName="name" placeholder="Введите название робота">
+                  <mat-error *ngIf="formGroup.get('data').hasError('required', 'name')">
+                    Не указано название сценария
+                  </mat-error>
+                  <mat-error *ngIf="formGroup.get('data').hasError('minlength', 'name')">
+                    Минимальная длина: {{ formGroup.get('data').getError('minlength', 'name').requiredLength }}
+                  </mat-error>
+                  <mat-error *ngIf="formGroup.get('data').hasError('maxlength', 'name')">
+                    Максимальная длина: {{ formGroup.get('data').getError('maxlength', 'name').requiredLength }}
+                  </mat-error>
+                  <mat-hint align="start"><strong>Длина от 3 до 255 символов</strong> </mat-hint>
+                  <mat-hint align="end">{{ nameInput.value.length }} / 255</mat-hint>
+                </mat-form-field>
             </div>
-          </mat-card-content>
-      </mat-card>
-<!--    </mat-grid-tile>-->
-<!--  </mat-grid-list>-->
+
+            <div class="inline">
+              <mat-form-field style="width: 400px; margin-right: 40px">
+                  <input matInput formControlName="sum" placeholder="Какую сумму Вы готовы инвестировать?" type="number">
+                  <span matPrefix>$&nbsp;</span>
+                  <span matSuffix>.00</span>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-slider thumbLabel style="width: 400px; margin-right: 40px" [displayWith]="formatLabel"
+                tickInterval="10" min="5" max="90" step="5" formControlName="goalValue">
+              </mat-slider>
+              <mat-radio-group formControlName="goal">
+                  <mat-radio-button value="risk" >Риск</mat-radio-button>
+                  <mat-radio-button value="profit" >Доходность</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <div class="inline">
+              <mat-form-field style="width: 400px; margin-right: 40px">
+                  <mat-select placeholder="Выберите финансовый инструмент" formControlName="instrument">
+                    <mat-option *ngFor="let financialInstrument of financialInstruments"
+                    [value]="financialInstrument" >{{financialInstrument}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="inline">
+              <mat-form-field style="width: 400px; margin-right: 40px">
+                  <mat-select placeholder="Выберите стратегию" formControlName="strategy">
+                    <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </div>
+
+           
+
+            <div style= "padding: 40px">
+              <button mat-raised-button color="primary" (click)=createRobot() [disabled]="!formGroup.valid">
+                Создать робота
+              </button>
+            </div>
+
+          <!-- </div> -->
+          </div>
+      </form>
+      </mat-card-content>
+  </mat-card>
 </div>
+
+ <!-- <div class="inline">
+              <mat-form-field style="width: 400px; margin-right: 40px">
+                <mat-select placeholder="Выберите индустрию, в которой хотите торговать">
+                  <mat-option *ngFor="let industry of industries" [value]="industry" required >{{industry}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="inline">
+              <mat-form-field style="width: 400px; margin-right: 40px">
+                  <mat-select placeholder="Выберите горизонт инвестирования">
+                    <mat-option *ngFor="let horisont of horisonts" [value]="horisont" required >{{horisont}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </div> -->

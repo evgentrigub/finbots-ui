@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { Question } from '../Models/Questions';
+import { Question } from '../models/question';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { InvestorType } from '../Models/investor-type-enum';
@@ -52,7 +52,7 @@ export class TaskService {
     return throwError(msg);
   }
 
-  public determineInvestorType(balls: number) : Observable<InvestorType> {
+  public getInvestorType(balls: number): Observable<InvestorType> {
     return this.http.get<InvestorType>(`${environment.apiUrl}/api/Task/GetInvestorType/?=${balls}`);
   }
 }

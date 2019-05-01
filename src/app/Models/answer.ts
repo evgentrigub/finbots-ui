@@ -1,4 +1,4 @@
-export class Answers {
+export class Answer {
     content: string;
     answerRate: number;
 }

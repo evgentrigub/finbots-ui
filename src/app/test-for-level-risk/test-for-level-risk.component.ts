@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Question } from '../Models/Questions';
+import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { Question } from '../models/question';
 import { TaskService } from '../services/task.service';
-import { MatRadioChange } from '@angular/material';
-import { Answers } from '../Models/Answers';
+import { Answer } from '../models/answer';
 import { Observable } from 'rxjs';
 import { InvestorType } from '../Models/investor-type-enum';
 
@@ -16,7 +15,7 @@ export class TestForLevelRiskComponent implements OnInit {
 
   questionsAnswers: Question[];
   rating = 0;
-  selection: Answers;
+  selection: Answer;
   investorType$: Observable<InvestorType>;
 
   readonly formGroup: FormGroup;
@@ -67,12 +66,25 @@ export class TestForLevelRiskComponent implements OnInit {
   }
 
   /**
-   * отправляет на бек в метод преобрахования числа в enum и сохраняет в БД
+   * Считает сумму баллов теста и возвращает тип инвестора
    */
-  submit() {
-    if (this.formGroup.valid) {console.log('form is valid'); }
-    this.taskService.determineInvestorType(255).subscribe(r => {
-      console.log(r)
+  submitTest() {
+    if (!this.formGroup.valid) {
+      return;
+    }
+
+    const questions = this.formGroup.get('questions');
+    if (!questions) {
+      return;
+    }
+    let sum = 0;
+    const list = this.formGroup.get('questions').value;
+    for (const el of list) {
+      sum = +sum + +el.answer;
+    }
+
+    this.taskService.getInvestorType(sum).subscribe(r => {
+      console.log(`result`, r);
     });
   }
 }
