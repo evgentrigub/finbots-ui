@@ -55,4 +55,24 @@ export class TaskService {
   public determineInvestorType(balls: number) : Observable<InvestorType> {
     return this.http.get<InvestorType>(`${environment.apiUrl}/api/Task/GetInvestorType/?=${balls}`);
   }
+
+  public convertRiskToEnum(balls: number): InvestorType {
+      switch (balls)
+      {
+        case 5 : 
+          return InvestorType.Guaranteed;
+        case 10 :
+          return InvestorType.Conservative;
+        case 15 : 
+          return InvestorType.Moderate;
+        case 25 : 
+          return InvestorType.Growth;
+        case 30 :
+          return InvestorType.AggressiveGrowth;
+        case 40 : 
+          return InvestorType.MaximumGrowth;
+      }
+      return InvestorType.Growth
+  } 
+
 }
