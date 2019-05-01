@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { Question } from '../Models/Questions';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
+import { InvestorType } from '../Models/investor-type-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,9 @@ export class TaskService {
         msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
     }
     return throwError(msg);
-}
+  }
+
+  public determineInvestorType(balls: number) : Observable<InvestorType> {
+    return this.http.get<InvestorType>(`${environment.apiUrl}/api/Task/GetInvestorType/?=${balls}`);
+  }
 }

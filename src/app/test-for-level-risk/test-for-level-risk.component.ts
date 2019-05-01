@@ -4,6 +4,8 @@ import { Question } from '../Models/Questions';
 import { TaskService } from '../services/task.service';
 import { MatRadioChange } from '@angular/material';
 import { Answers } from '../Models/Answers';
+import { Observable } from 'rxjs';
+import { InvestorType } from '../Models/investor-type-enum';
 
 @Component({
   selector: 'app-test-for-level-risk',
@@ -15,6 +17,7 @@ export class TestForLevelRiskComponent implements OnInit {
   questionsAnswers: Question[];
   rating = 0;
   selection: Answers;
+  investorType$: Observable<InvestorType>;
 
   readonly formGroup: FormGroup;
   readonly questionsControl: FormArray;
@@ -64,11 +67,12 @@ export class TestForLevelRiskComponent implements OnInit {
   }
 
   /**
-   * преобразует полученный результат в процент
-   * и отправляет его в статистику пользователя на бек
+   * отправляет на бек в метод преобрахования числа в enum и сохраняет в БД
    */
   submit() {
     if (this.formGroup.valid) {console.log('form is valid'); }
-
+    this.taskService.determineInvestorType(255).subscribe(r => {
+      console.log(r)
+    });
   }
 }
