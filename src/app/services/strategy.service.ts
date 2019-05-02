@@ -14,8 +14,8 @@ export class StrategyService {
     private http: HttpClient
   ) { }
 
-  public getStrategies() : Observable<Strategy> {
-    return this.http.get<Strategy>(`${environment.apiUrl}/api/Strategy/GetAllStrategies/`);
+  public getStrategies() : Observable<Strategy[]> {
+    return this.http.get<Strategy[]>(`${environment.apiUrl}/api/Strategy/GetAllStrategies/`);
   }
 
 }

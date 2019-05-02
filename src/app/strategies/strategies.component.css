@@ -1,20 +1,28 @@
 .grid-container {
     margin: 20px;
   }
-  .dashboard-card {
+.dashboard-card {
     position: absolute;
     top: 15px;
     left: 15px;
     right: 15px;
     bottom: 15px;
   }
-  .more-button {
+.more-button {
     position: absolute;
     top: 5px;
     right: 10px;
-  }
+}
+
+.mat-card-title {
+  padding: 4%;
+  font-size: 18pt;
+  display: flex;
+  text-align: center
+
+}
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url('http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg');
   background-size: cover;
 }

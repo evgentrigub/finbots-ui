@@ -4,5 +4,5 @@ export class Strategy {
     name: string;
     description: string;
     strategyOSEngine: string;
-    profit: Profit[]
+    profit: Profit[];
 }
