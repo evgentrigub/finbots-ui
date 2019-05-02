@@ -4,11 +4,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { Routes, RouterModule} from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
         MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule,
         MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule } from '@angular/material';
+        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatStepperModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -67,7 +67,8 @@ import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats
     MatCardModule, MatMenuModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSnackBarModule,
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-    MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule
+    MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule,
+    MatStepperModule
   ],
   entryComponents: [
     AddModeyToAccountComponent,

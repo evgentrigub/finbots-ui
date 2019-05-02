@@ -26,3 +26,12 @@ mat-icon.btn-accent{
 mat-icon.btn-accent:hover{
   color: #FF4081;
 }
+
+.mat-radio-label-content{
+  color:black
+}
+
+.mat-stroked-button{
+  border-radius: 4px !important;
+  border-color: rgba(0,0,0,.12) !important;
+}

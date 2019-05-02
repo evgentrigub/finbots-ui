@@ -42,8 +42,8 @@ export class CreateBotComponent implements OnInit {
 
   createRobotControl(): FormGroup {
     return this.formGroup = this.formBuilder.group({
-      name: this.formBuilder.control('aaa', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]),
-      sum: this.formBuilder.control(100, [Validators.required, Validators.minLength(10), Validators.maxLength(1000000)]),
+      name: this.formBuilder.control('Робот', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]),
+      sum: this.formBuilder.control(100, [Validators.required]),
       goal: this.formBuilder.control('profit', [Validators.required]),
       goalValue: this.formBuilder.control(10, [Validators.required]),
       strategy: this.formBuilder.control('', [Validators.required]),
