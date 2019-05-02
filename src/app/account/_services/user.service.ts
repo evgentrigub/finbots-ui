@@ -29,7 +29,7 @@ export class UserService {
 
   updateAccount(user: User): Observable<User> {
     return this.http.put<User>(`${environment.apiUrl}/users/addMoney/${user.id}`, user);
-}
+  }
 
   delete(id: number) {
       return this.http.delete(`${environment.apiUrl}/users/${id}`);

@@ -5,6 +5,7 @@ import { Question } from '../models/question';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { InvestorType } from '../Models/investor-type-enum';
+import { User } from '../account/_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -52,27 +53,28 @@ export class TaskService {
     return throwError(msg);
   }
 
-  public getInvestorType(balls: number): Observable<InvestorType> {
-    return this.http.get<InvestorType>(`${environment.apiUrl}/api/Task/GetInvestorType/?=${balls}`);
+  public getInvestorType(user: User, balls: number) {
+    let obj = {user: user, balls: balls}
+    return this.http.post(`${environment.apiUrl}/api/Task/GetInvestorType`, obj);
   }
 
-  public convertRiskToEnum(balls: number): InvestorType {
+  public convertRiskToString(balls: InvestorType):  string {
       switch (balls)
       {
-        case 5 : 
-          return InvestorType.Guaranteed;
-        case 10 :
-          return InvestorType.Conservative;
-        case 15 : 
-          return InvestorType.Moderate;
-        case 25 : 
-          return InvestorType.Growth;
-        case 30 :
-          return InvestorType.AggressiveGrowth;
-        case 40 : 
-          return InvestorType.MaximumGrowth;
+        case InvestorType.Guaranteed : 
+          return "Трусишка";
+        case InvestorType.Conservative :
+          return "Консерватор";
+        case InvestorType.Moderate : 
+          return "Сбалансированный";
+        case InvestorType.Growth : 
+          return "Целеустремленный к прибыли";
+        case InvestorType.AggressiveGrowth :
+          return "Агрессивный";
+        case InvestorType.MaximumGrowth : 
+          return "Продам родную мать";
       }
-      return InvestorType.Growth
+      return "Консерватор"
   } 
 
 }

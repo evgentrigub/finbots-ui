@@ -1,5 +1,7 @@
+import { Asset } from "./asset";
+
 export class Profit {
-    assets: string;
+    asset: Asset[];
     percentage: number;
     isActive: boolean;
 }

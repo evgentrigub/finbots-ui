@@ -7,6 +7,8 @@ import { UserStatsService } from '../services/user-stats.service';
 import { StatsView } from '../interfaces/StatsView';
 import { MatDialog} from '@angular/material';
 import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
+import { InvestorType } from '../Models/investor-type-enum';
+import { TaskService } from '../services/task.service';
 
 
 @Component({
@@ -18,16 +20,19 @@ export class MainDashboardComponent implements OnInit {
 
   currentUser: User;
   currentUserSubscription: Subscription;
+  rislType: string;
   stats: StatsView =
   {
     profit: 0.0,
     robotQuantity: 0,
-    account: 0.0
+    account: 0.0,
+    riskType: InvestorType.Moderate
   };
 
   constructor(
     private authenticationService: AuthenticationService,
     private userStatService: UserStatsService,
+    private taskService: TaskService,
     public dialog: MatDialog,
 
     ) {
@@ -54,6 +59,8 @@ export class MainDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userStatService.getById(1).subscribe(stats => {
       this.stats = stats;
+      this.rislType = this.taskService.convertRiskToString(this.stats.riskType)
+      console.log(this.stats)
     });
     this.getFirstChart();
     this.getSecondChart();
