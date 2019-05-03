@@ -28,6 +28,7 @@ import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-
 import { AddModeyToAccountComponent } from './main-dashboard/add-modey-to-account/add-modey-to-account.component';
 import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
 import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats-dialog.component';
+import { StrategyDialogComponent } from './strategies/strategy-dialog/strategy-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats
     TestForLevelRiskComponent,
     AddModeyToAccountComponent,
     BotNameComponent,
-    BotStatsDialogComponent
+    BotStatsDialogComponent,
+    StrategyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats
   ],
   entryComponents: [
     AddModeyToAccountComponent,
-    BotStatsDialogComponent
+    BotStatsDialogComponent,
+    StrategyDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

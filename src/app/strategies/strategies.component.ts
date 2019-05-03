@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StrategyService } from '../services/strategy.service';
 import { Strategy } from '../Models/strategy';
+import { MatDialog } from '@angular/material';
+import { StrategyDialogComponent } from './strategy-dialog/strategy-dialog.component';
 
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
 
 @Component({
   selector: 'app-strategies',
@@ -19,7 +15,8 @@ export class StrategiesComponent implements OnInit {
   strategies: Strategy[];
 
   constructor(
-    private strategyService: StrategyService
+    private strategyService: StrategyService,
+    public dialog: MatDialog
   ) { }
 
 
@@ -29,5 +26,17 @@ export class StrategiesComponent implements OnInit {
         console.log(strategies);
       })
   }
+
+  openDialog(strategy: Strategy){
+    const dialogRef = this.dialog.open(StrategyDialogComponent, {
+      panelClass: 'dialog',
+      data: strategy
+    });
+    dialogRef.backdropClick().subscribe(result => {
+      if (confirm('Закрыть окно?')) {
+        dialogRef.close();
+      }
+    });
+  } 
 
 }

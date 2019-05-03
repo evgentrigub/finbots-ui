@@ -21,6 +21,7 @@ export class TableBotsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'status', 'profit', 'actions'];
   dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource;
+  isLoading: boolean = true;
 
   constructor(
     private tradingBotsService: TradingBotsService,
@@ -31,6 +32,7 @@ export class TableBotsComponent implements OnInit {
     this.tradingBotsService.getUserRobots(1).subscribe(bots => {
       this.dataSource.data = bots;
       console.log(bots);
+      this.isLoading = false;
     });
   }
 

@@ -41,6 +41,13 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+
+      <mat-progress-spinner *ngIf="isLoading"
+      class="example-margin"
+      color='primary'
+      mode='indeterminate'>
+      </mat-progress-spinner>
+
     <table mat-table [dataSource]="dataSource" class="dashboard-card" matSort >
 
       <ng-container matColumnDef="id">
