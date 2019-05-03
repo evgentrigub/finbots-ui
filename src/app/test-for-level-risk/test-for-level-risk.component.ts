@@ -5,7 +5,6 @@ import { TaskService } from '../services/task.service';
 import { Answer } from '../models/answer';
 import { Observable } from 'rxjs';
 import { InvestorType } from '../Models/investor-type-enum';
-import { UserService } from '../account/_services/user.service';
 import { User } from '../account/_models/user';
 import { AuthenticationService } from '../account/_services/authentication.service';
 
@@ -86,7 +85,7 @@ export class TestForLevelRiskComponent implements OnInit {
       return;
     }
     let sum = 0;
-    const list = this.formGroup.get('questions').value;
+    const list = questions.value;
     for (const el of list) {
       sum = +sum + +el.answer;
     }

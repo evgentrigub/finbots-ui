@@ -30,7 +30,7 @@ export class TableBotsComponent implements OnInit {
   ngOnInit() {
     this.tradingBotsService.getUserRobots(1).subscribe(bots => {
       this.dataSource.data = bots;
-      console.log(bots)
+      console.log(bots);
     });
   }
 

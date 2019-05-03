@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateBotService } from './create-bot.service';
-import { FormBuilder, FormGroup, Validators, MinLengthValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreatedTradingBot } from '../Models/trading-bot-model';
+import { tap } from 'rxjs/operators';
+import { MatSnackBar, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 
 
 @Component({
@@ -13,7 +16,6 @@ export class CreateBotComponent implements OnInit {
   industries: string[] = [];
   strategies: string[] = [];
   financialInstruments: string[] = [];
-  horisonts: string[] = ['0-7 дней', '7-30 дней', '30-180 дней', '180-365 дней'];
   name = '';
   strategy = '';
   summa = 0;
@@ -25,7 +27,8 @@ export class CreateBotComponent implements OnInit {
 
   constructor(
     private service: CreateBotService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private readonly snackBar: MatSnackBar,
   ) {
 
     this.newRobotControl = this.formBuilder.group({});
@@ -52,9 +55,18 @@ export class CreateBotComponent implements OnInit {
   }
 
   createRobot() {
-    console.log(this.formGroup.value);
+    const newRobot = <CreatedTradingBot>this.formGroup.value;
+    console.log(newRobot);
+    // бэк для метода пока не готов
+    // this.service.createBot(newRobot)
+    //   .pipe(
+    //     tap(_ => this.showMessage(`Заявка на создание бота ${newRobot.name} успешна отправлена`))
+    //   ).subscribe();
   }
 
+  private showMessage(msg: any) {
+    this.snackBar.open(msg, undefined, { duration: 2000 });
+  }
   private formatLabel(value: number | null) {
     if (!value) {
       return 0;
@@ -64,5 +76,4 @@ export class CreateBotComponent implements OnInit {
     }
     return value;
   }
-
 }

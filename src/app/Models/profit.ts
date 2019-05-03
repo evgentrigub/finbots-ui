@@ -1,4 +1,4 @@
-import { Asset } from "./asset";
+import { Asset } from './asset';
 
 export class Profit {
     asset: Asset[];

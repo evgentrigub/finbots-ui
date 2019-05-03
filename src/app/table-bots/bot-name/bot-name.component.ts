@@ -86,7 +86,7 @@ export class BotNameComponent {
       ).subscribe();
   }
 
-  showMessage(msg: any) {
+  private showMessage(msg: any) {
     this.snackBar.open(msg, undefined, { duration: 2000 });
   }
 }
