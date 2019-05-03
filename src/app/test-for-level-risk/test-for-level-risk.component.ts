@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Question } from '../models/question';
 import { TaskService } from '../services/task.service';
-import { Answer } from '../models/answer';
-import { Observable } from 'rxjs';
-import { InvestorType } from '../Models/investor-type-enum';
 import { User } from '../account/_models/user';
 import { AuthenticationService } from '../account/_services/authentication.service';
 
@@ -16,10 +13,8 @@ import { AuthenticationService } from '../account/_services/authentication.servi
 export class TestForLevelRiskComponent implements OnInit {
 
   questionsAnswers: Question[];
-  rating = 0;
-  selection: Answer;
+  //selection: Answer;
   currentUser: User;
-  investorType$: Observable<InvestorType>;
 
   readonly formGroup: FormGroup;
   readonly questionsControl: FormArray;
@@ -90,7 +85,7 @@ export class TestForLevelRiskComponent implements OnInit {
       sum = +sum + +el.answer;
     }
 
-    this.taskService.getInvestorType(this.currentUser, sum).subscribe(r => {
+    this.taskService.postInvestorType(this.currentUser, sum).subscribe(r => {
       console.log(`result`, r);
     });
   }

@@ -53,7 +53,7 @@ export class TaskService {
     return throwError(msg);
   }
 
-  public getInvestorType(user: User, balls: number) {
+  public postInvestorType(user: User, balls: number) {
     let obj = {user: user, balls: balls}
     return this.http.post(`${environment.apiUrl}/api/Task/GetInvestorType`, obj);
   }

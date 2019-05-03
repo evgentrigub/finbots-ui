@@ -8,11 +8,11 @@
     right: 15px;
     bottom: 15px;
   }
-.more-button {
+/* .more-button {
     position: absolute;
     top: 5px;
     right: 10px;
-}
+} */
 
 .mat-card-title {
   padding: 4%;
@@ -25,4 +25,8 @@
 .example-header-image {
   background-image: url('http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg');
   background-size: cover;
+}
+
+.button {
+  margin-bottom: 1%; 
 }
