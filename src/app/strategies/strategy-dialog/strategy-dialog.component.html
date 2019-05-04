@@ -1,2 +1,8 @@
-{{data.name}}
-{{data.description}}
+<mat-card>
+    <mat-card-header>
+      <mat-card-title> {{data.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content [innerHTML]="data.description">
+      {{data.description}}
+    </mat-card-content>
+  </mat-card>

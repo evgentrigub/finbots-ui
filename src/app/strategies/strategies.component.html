@@ -1,18 +1,28 @@
-<mat-grid-list cols="3" rowHeight="300px">
-        <mat-grid-tile *ngFor="let strategy of strategies" [colspan]="1" [rowspan]="1" >
-          <mat-card class="dashboard-card" style="padding:0; border-radius: 3px" >
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{strategy.name}}</mat-card-title>
-                    <mat-card-subtitle>на любом рынке, на любом таймфрейме</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <div *ngFor="let prof of strategy.profit">{{prof.asset}}{{prof.percentage}}</div>
-                </mat-card-content>
-                <mat-card-actions >
-                    <button mat-button>Создать робота</button>
-                    <button mat-button (click)="openDialog(strategy)">Подробнее</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
-</mat-grid-list>
+<div class="card-deck">
+        <!-- Card -->
+        <mdb-card *ngFor="let strategy of strategies" class="card mb-3" style="min-width: 18rem;">
+          <div class="view overlay waves-light" mdbWavesEffect>
+            <!-- Card img -->
+            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap"></mdb-card-img>
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Title-->
+            <mdb-card-title>
+              <h4>{{strategy.name}}</h4>
+            </mdb-card-title>
+      
+            <!--Text-->
+            <mdb-card-text>
+                    на любом рынке, на любом таймфрейме 
+            </mdb-card-text>
+      
+            <a (click)="openDialog(strategy)" mdbBtn color="primary" mdbWavesEffect>Подробнее</a>
+          </mdb-card-body>
+        </mdb-card>
+      
+        
+</div>

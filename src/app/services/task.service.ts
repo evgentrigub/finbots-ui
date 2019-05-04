@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { Question } from '../models/question';
+import { Question } from '../Models/Question';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { InvestorType } from '../Models/investor-type-enum';

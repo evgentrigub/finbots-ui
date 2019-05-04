@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Question } from '../models/question';
+import { Question } from '../Models/Question';
 import { TaskService } from '../services/task.service';
 import { User } from '../account/_models/user';
 import { AuthenticationService } from '../account/_services/authentication.service';

@@ -29,6 +29,7 @@ import { AddModeyToAccountComponent } from './main-dashboard/add-modey-to-accoun
 import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
 import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats-dialog.component';
 import { StrategyDialogComponent } from './strategies/strategy-dialog/strategy-dialog.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { StrategyDialogComponent } from './strategies/strategy-dialog/strategy-d
     MatInputModule, MatIconModule, MatSnackBarModule,
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
     MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule,
-    MatStepperModule
+    MatStepperModule,
+    MDBBootstrapModule.forRoot()
   ],
   entryComponents: [
     AddModeyToAccountComponent,

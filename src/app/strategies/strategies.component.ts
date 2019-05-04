@@ -32,11 +32,6 @@ export class StrategiesComponent implements OnInit {
       panelClass: 'dialog',
       data: strategy
     });
-    dialogRef.backdropClick().subscribe(result => {
-      if (confirm('Закрыть окно?')) {
-        dialogRef.close();
-      }
-    });
   } 
 
 }
