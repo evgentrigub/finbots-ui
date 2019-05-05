@@ -1,22 +1,12 @@
 export enum Industry {
-    /// <summary> Информационные технологии /// </summary>
-    IT = 1,
-    /// <summary>  Здравоохранение /// </summary>
-    Medicine = 2,
-    /// <summary> Машиностроение и транспорт /// </summary>
-    Transport = 3,
-    /// <summary> Недвижимость /// </summary>
-    RealEstate = 4,
-    /// <summary> Потребительские товары и услуги /// </summary>
-    Consumption = 5,
-    /// <summary> Финансовый сектор /// </summary>
-    Finance = 6,
-    /// <summary> Энергетика /// </summary>
-    Energy = 7,
-    /// <summary> Сырьевая промышленность /// </summary>
-    RawMaterial = 8,
-    /// <summary> Электроэнергетика /// </summary>
-    ElecticPower = 9,
-    /// <summary> Телеклммуникации /// </summary>
-    Telecommunication = 10
+    IT = 'Информационные технологии',
+    Medicine = 'Здравоохранение',
+    Transport = 'Машиностроение и транспорт',
+    RealEstate = 'Недвижимость',
+    Consumption = 'Потребительские товары и услуги',
+    Finance = 'Финансовый сектор',
+    Energy = 'Энергетика',
+    RawMaterial = 'Сырьевая промышленность',
+    ElecticPower = 'Электроэнергетика',
+    Telecommunication = 'Телекоммуникации'
 }

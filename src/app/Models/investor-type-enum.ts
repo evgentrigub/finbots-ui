@@ -4,5 +4,5 @@ export enum InvestorType {
     Moderate = 15,
     Growth = 20,
     AggressiveGrowth = 25,
-    MaximumGrowth = 40 
+    MaximumGrowth = 40
 }

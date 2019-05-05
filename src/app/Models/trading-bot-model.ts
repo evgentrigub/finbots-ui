@@ -11,16 +11,11 @@ export interface TradingBot {
     status: string;
 }
 
-export interface CreatedTradingBot {
-    name: string;
-    sum: number;
-    goal: Goal;
-    goalValue: number;
-    strategy: string;
-    instrument: string;
-}
-
-enum Goal {
-    profit = 0,
-    risk = 1
-}
+// export interface CreatedTradingBot {
+//     name: string;
+//     sum: number;
+//     goal: Goal;
+//     goalValue: number;
+//     strategy: string;
+//     instrument: string;
+// }

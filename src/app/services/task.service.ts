@@ -54,27 +54,26 @@ export class TaskService {
   }
 
   public postInvestorType(user: User, balls: number) {
-    let obj = {user: user, balls: balls}
+    const obj = {user: user, balls: balls };
     return this.http.post(`${environment.apiUrl}/api/Task/GetInvestorType`, obj);
   }
 
-  public convertRiskToString(balls: InvestorType):  string {
-      switch (balls)
-      {
-        case InvestorType.Guaranteed : 
-          return "Трусишка";
+  public convertRiskToString(score: InvestorType):  string {
+      switch (score) {
+        case InvestorType.Guaranteed :
+          return 'Трусишка';
         case InvestorType.Conservative :
-          return "Консерватор";
-        case InvestorType.Moderate : 
-          return "Сбалансированный";
-        case InvestorType.Growth : 
-          return "Целеустремленный к прибыли";
+          return 'Консерватор';
+        case InvestorType.Moderate :
+          return 'Сбалансированный';
+        case InvestorType.Growth :
+          return 'Целеустремленный к прибыли';
         case InvestorType.AggressiveGrowth :
-          return "Агрессивный";
-        case InvestorType.MaximumGrowth : 
-          return "Продам родную мать";
+          return 'Агрессивный';
+        case InvestorType.MaximumGrowth :
+          return 'Продам родную мать';
       }
-      return "Консерватор"
-  } 
+      return 'Консерватор';
+  }
 
 }

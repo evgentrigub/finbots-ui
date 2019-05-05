@@ -25,106 +25,116 @@
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="formGroup">
-        <ng-container formGroupName="data">
-            <mat-vertical-stepper linear="false" #stepper>
-              <!-- step 1 -->
-              <mat-step>
-                <ng-template matStepLabel>Введите название робота и сумму инвестирования</ng-template>
-                <div style="display:flex; flex-wrap: wrap">
-                  <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                    <input #nameInput matInput formControlName="name" placeholder="Введите название робота">
-                    <mat-error *ngIf="formGroup.get('data').hasError('required', 'name')">
-                      Не указано название
-                    </mat-error>
-                    <mat-error *ngIf="formGroup.get('data').hasError('minlength', 'name')">
-                      Минимальная длина: {{ formGroup.get('data').getError('minlength', 'name').requiredLength }}
-                    </mat-error>
-                    <mat-error *ngIf="formGroup.get('data').hasError('maxlength', 'name')">
-                      Максимальная длина: {{ formGroup.get('data').getError('maxlength', 'name').requiredLength }}
-                    </mat-error>
-                    <mat-hint align="start"><strong>Длина от 3 до 255 символов</strong> </mat-hint>
-                    <mat-hint align="end">{{ nameInput.value.length }} / 255</mat-hint>
-                  </mat-form-field>
-                  <mat-form-field style="width: 30em; margin-bottom: 2em">
-                      <input matInput formControlName="sum" placeholder="Какую сумму Вы готовы инвестировать?" type="number">
-                      <span matPrefix>$&nbsp;</span>
-                      <mat-error *ngIf="formGroup.get('data').hasError('required', 'sum')">
-                        Не указана сумма
-                      </mat-error>
-                      <mat-error *ngIf="formGroup.get('data').hasError('minlength', 'sum')">
-                        Минимальная сумма: $1
-                      </mat-error>
-                      <mat-error *ngIf="formGroup.get('data').hasError('maxlength', 'name')">
-                        Максимальная сумма: $100 000
-                      </mat-error>
-                      <mat-hint align="start"><strong>Сумма от $1 до $100 000</strong> </mat-hint>
-                  </mat-form-field>
-                </div>
-                <div>
-                  <button mat-stroked-button color="accent" matStepperNext>Далее</button>
-                </div>
-              </mat-step>
-              <!-- step 2 -->
-              <mat-step>
-                <ng-template matStepLabel>Заполните параметры риск/доходность</ng-template>
-                <div style="display: flex; flex-wrap: wrap; margin-top:2em">
-                  <div>
-                    <mat-radio-group formControlName="goal" style="margin-right:5em; margin-bottom:2em">
-                      <mat-radio-button color="accent" value="risk">Риск</mat-radio-button>
-                      <mat-radio-button color="primary" value="profit">Доходность</mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-                  <div>
-                    <mat-slider thumbLabel style="width: 30em;" [displayWith]="formatLabel"
-                      tickInterval="10" min="5" max="90" step="5" formControlName="goalValue">
-                    </mat-slider>
-                  </div> 
-                </div>
-                <div>
-                  <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
-                  <button mat-stroked-button color="accent" matStepperNext>Далее</button>
-                </div>
-              </mat-step>
-              <!-- step 3 -->
-              <mat-step>
-                <ng-template matStepLabel>Выберите финансовый инструмент и стратегию робота</ng-template>
-                <div style="display:flex; flex-wrap: wrap">
-                <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                  <mat-select placeholder="Выберите финансовый инструмент" formControlName="instrument">
-                    <mat-option *ngFor="let financialInstrument of financialInstruments"
-                    [value]="financialInstrument" >{{financialInstrument}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field style="width: 30em; margin-bottom: 2em">
-                  <mat-select placeholder="Выберите стратегию" formControlName="strategy">
-                    <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                </div>
-                <div>
-                  <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
-                  <button mat-stroked-button color="accent" matStepperNext>Далее</button>
-                </div>
-              </mat-step>
-              <!-- step 4 -->
-              <mat-step>
-                <ng-template matStepLabel>Форма заполнена</ng-template>
-                <img *ngIf="formGroup.valid" src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%">
-                <div style="margin-bottom: 2em">
-                  <button mat-raised-button color="accent" (click)=createRobot() [disabled]="!formGroup.valid">
-                    Создать робота
-                  </button>
-                  <mat-error *ngIf="!formGroup.valid">
-                    Кнопка неактивна. Заполните все поля.
-                  </mat-error>
-                </div>
-                <div>
-                  <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
-                  <button mat-stroked-button color="warn" (click)="stepper.reset()">Начать заново</button>
-                </div>
-              </mat-step>
-            </mat-vertical-stepper>
-        </ng-container>
+        <mat-vertical-stepper linear="false" #stepper>
+          <!-- step 1 -->
+          <mat-step>
+            <ng-template matStepLabel>Введите название робота и сумму инвестирования</ng-template>
+            <div style="display:flex; flex-wrap: wrap">
+              <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
+                <input #nameInput matInput formControlName="name" placeholder="Введите название робота">
+                <mat-error *ngIf="formGroup.hasError('required', 'name')">
+                  Не указано название
+                </mat-error>
+                <mat-error *ngIf="formGroup.hasError('minlength', 'name')">
+                  Минимальная длина: {{ formGroup.getError('minlength', 'name').requiredLength }}
+                </mat-error>
+                <mat-error *ngIf="formGroup.hasError('maxlength', 'name')">
+                  Максимальная длина: {{ formGroup.getError('maxlength', 'name').requiredLength }}
+                </mat-error>
+                <mat-hint align="start"><strong>Длина от 5 до 255 символов</strong> </mat-hint>
+                <mat-hint align="end">{{ nameInput.value.length }} / 255</mat-hint>
+              </mat-form-field>
+              <mat-form-field style="width: 30em; margin-bottom: 2em">
+                <input matInput formControlName="sum" placeholder="Какую сумму Вы готовы инвестировать?" type="number">
+                <span matPrefix>$&nbsp;</span>
+                <mat-error *ngIf="formGroup.hasError('required', 'sum')">
+                  Не указана сумма
+                </mat-error>
+                <mat-hint align="start">
+                  <strong>Рекомендуемая сумма риска от капитала на сделку не более 3%</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-stroked-button color="accent" matStepperNext>Далее</button>
+            </div>
+          </mat-step>
+          <!-- step 2 -->
+          <mat-step>
+            <ng-template matStepLabel>Заполните параметры риск/доходность</ng-template>
+            <div style="display: flex; flex-wrap: wrap; margin-top:2em; height: 3em">
+              <div>
+                <!-- <mat-radio-group formControlName="goal" style="margin-right:5em; margin-bottom:2em">
+                  <mat-radio-button color="accent" value="risk">Риск</mat-radio-button>
+                  <mat-radio-button color="primary" value="profit">Доходность</mat-radio-button>
+                </mat-radio-group> -->
+                <mat-radio-group style="margin-right:5em" [formControl]="defaultProfitRisk">
+                  <mat-radio-button color="primary" value="true">Рекомендованный по риск-профилю</mat-radio-button>
+                  <mat-radio-button color="accent" value="false">Вручную</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div *ngIf="!isDefaultProfitRisk">
+                <mat-slider thumbLabel style="width: 30em;" [displayWith]="formatLabel"
+                  tickInterval="10" min="5" max="90" step="5" formControlName="esValue">
+                </mat-slider>
+              </div> 
+            </div>
+            <div>
+              <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
+              <button mat-stroked-button color="accent" matStepperNext>Далее</button>
+            </div>
+          </mat-step>
+          <!-- step 3 -->
+          <mat-step>
+            <ng-template matStepLabel>Выберите финансовый инструмент и стратегию робота</ng-template>
+            <div style="display:flex; flex-wrap: wrap">
+              <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
+                <mat-select placeholder="Финансовый инструмент" formControlName="instrument">
+                  <mat-option *ngFor="let financialInstrument of financialInstruments"
+                  [value]="financialInstrument" >{{financialInstrument}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
+                <mat-select placeholder="Индустрия" formControlName="industry">
+                  <mat-option *ngFor="let industry of industries"
+                  [value]="industry" >{{industry}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
+                <mat-select placeholder="Актив" formControlName="asset">
+                  <mat-option *ngFor="let asset of assets"
+                  [value]="asset" >{{asset}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="width: 30em; margin-bottom: 2em">
+                <mat-select placeholder="Cтратегия" formControlName="strategy">
+                  <mat-option *ngFor="let strategy of strategies" [value]="strategy" required >{{strategy.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
+              <button mat-stroked-button color="accent" matStepperNext>Далее</button>
+            </div>
+          </mat-step>
+          <!-- step 4 -->
+          <mat-step>
+            <ng-template matStepLabel>Форма заполнена</ng-template>
+            <img *ngIf="formGroup.valid" src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%">
+            <div style="margin-bottom: 2em">
+              <button mat-raised-button color="accent" (click)=createRobot() [disabled]="!formGroup.valid">
+                Создать робота
+              </button>
+              <mat-error *ngIf="!formGroup.valid">
+                Кнопка неактивна. Заполните все поля.
+              </mat-error>
+            </div>
+            <div>
+              <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
+              <button mat-stroked-button color="warn" (click)="stepper.reset()">Начать заново</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
       </form>
     </mat-card-content>
   </mat-card>

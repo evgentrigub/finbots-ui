@@ -24,7 +24,7 @@ export class StrategiesComponent implements OnInit {
     this.strategyService.getStrategies().subscribe(strategies => {
         this.strategies = strategies;
         console.log(strategies);
-      })
+      });
   }
 
   openDialog(strategy: Strategy){

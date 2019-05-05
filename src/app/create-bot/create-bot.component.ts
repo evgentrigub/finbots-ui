@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateBotService } from './create-bot.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CreatedTradingBot } from '../Models/trading-bot-model';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
-import { MatSnackBar, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { AuthenticationService } from '../account/_services/authentication.service';
+import { User } from '../account/_models/user';
+import { Strategy } from '../models/strategy';
 
 
 @Component({
@@ -13,14 +15,22 @@ import { MatSnackBar, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 })
 export class CreateBotComponent implements OnInit {
 
+  get isDefaultProfitRisk(): boolean {
+    return this.defaultProfitRisk.value === 'true';
+  }
+
+  currentUser: User;
   industries: string[] = [];
-  strategies: string[] = [];
+  strategies: Strategy[] = [];
   financialInstruments: string[] = [];
+  assets: string[] = [];
   name = '';
   strategy = '';
   summa = 0;
   FU = '';
   optimisation = 1;
+
+  private defaultProfitRisk: FormControl = new FormControl('true');
 
   private formGroup: FormGroup;
   private newRobotControl: FormGroup;
@@ -29,39 +39,51 @@ export class CreateBotComponent implements OnInit {
     private service: CreateBotService,
     private formBuilder: FormBuilder,
     private readonly snackBar: MatSnackBar,
+    private authenticationService: AuthenticationService,
   ) {
+    this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
 
-    this.newRobotControl = this.formBuilder.group({});
+    // this.newRobotControl = this.formBuilder.group({});
     this.formGroup = this.formBuilder.group({
-      data: this.newRobotControl = this.createRobotControl(),
+      name: this.formBuilder.control('Робот', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]),
+      sum: this.formBuilder.control(100, [Validators.required]),
+      esValue: this.formBuilder.control(10, [Validators.required]),
+      strategy: this.formBuilder.control('', [Validators.required]),
+      instrument: this.formBuilder.control('', [Validators.required]),
+      industry: this.formBuilder.control('', [Validators.required]),
+      asset: this.formBuilder.control('', [Validators.required])
     });
   }
 
   ngOnInit() {
-    this.strategies = this.service.getStrategies();
-    this.industries = this.service.getIndustries();
     this.financialInstruments = this.service.getFinancialInstruments();
+    this.industries = this.service.getIndustries();
+    this.service.getStrategies().subscribe(r => this.strategies = r);
+    this.assets = this.service.getAssets();
+
   }
 
-  createRobotControl(): FormGroup {
-    return this.formGroup = this.formBuilder.group({
-      name: this.formBuilder.control('Робот', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]),
-      sum: this.formBuilder.control(100, [Validators.required]),
-      goal: this.formBuilder.control('profit', [Validators.required]),
-      goalValue: this.formBuilder.control(10, [Validators.required]),
-      strategy: this.formBuilder.control('', [Validators.required]),
-      instrument: this.formBuilder.control('', [Validators.required]),
-    });
-  }
+  // createRobotControl(): FormGroup {
+  //   return this.formGroup = this.formBuilder.group({
+  //     name: this.formBuilder.control('Робот', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]),
+  //     sum: this.formBuilder.control(100, [Validators.required]),
+  //     esValue: this.formBuilder.control(10, [Validators.required]),
+  //     strategy: this.formBuilder.control('', [Validators.required]),
+  //     instrument: this.formBuilder.control('', [Validators.required]),
+  //     industry: this.formBuilder.control('', [Validators.required]),
+  //     asset: this.formBuilder.control('', [Validators.required])
+  //   });
+  // }
 
   createRobot() {
-    const newRobot = <CreatedTradingBot>this.formGroup.value;
-    console.log(newRobot);
-    // бэк для метода пока не готов
-    // this.service.createBot(newRobot)
-    //   .pipe(
-    //     tap(_ => this.showMessage(`Заявка на создание бота ${newRobot.name} успешна отправлена`))
-    //   ).subscribe();
+    const newRobot = this.formGroup.value;
+    console.log(newRobot, this.currentUser.id);
+    this.service.createBot(newRobot, this.currentUser.id)
+      .pipe(
+        tap(_ => this.showMessage(`Заявка на создание бота ${newRobot.name} успешна отправлена`))
+      ).subscribe();
   }
 
   private showMessage(msg: any) {

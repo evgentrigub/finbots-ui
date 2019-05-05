@@ -8,7 +8,7 @@ import { RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
         MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule,
         MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatStepperModule } from '@angular/material';
+        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatStepperModule, MatSlideToggleModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -71,7 +71,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatInputModule, MatIconModule, MatSnackBarModule,
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
     MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule,
-    MatStepperModule,
+    MatStepperModule, MatSlideToggleModule,
     MDBBootstrapModule.forRoot()
   ],
   entryComponents: [

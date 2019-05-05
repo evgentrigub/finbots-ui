@@ -1,4 +1,4 @@
-import { Profit } from "./profit";
+import { Profit } from './profit';
 
 export class Strategy {
     name: string;

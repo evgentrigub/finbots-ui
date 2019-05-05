@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { CreatedTradingBot } from '../Models/trading-bot-model';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Industry } from '../Models/industry-enum';
+import { Strategy } from '../models/strategy';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,16 @@ import { catchError, tap } from 'rxjs/operators';
 export class CreateBotService {
 
   mockFinancialInstruments: string[] = ['Акции', 'Индексы', 'Валюта', 'Криптовалюта', 'ПФИ'];
-  mockIndusties: string[] = ['IT-отрасль', 'Строительство', 'Транспорт', 'Связь', 'Общепит'];
+  mockAssets: string[] = ['Apple', 'Amazon', 'Facebook', 'Microsoft', 'Google'];
   mockStrategies: string[] = ['MMT', 'Arbitrage', 'Williams'];
 
   constructor(
     private http: HttpClient
   ) {}
 
-  // бэк пока не готов
-  createBot(createdBot: CreatedTradingBot): Observable<null> {
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/CreateBot`, createdBot)
+  createBot(createdBot: any, userId: number): Observable<null> {
+    const obj = {bot: createdBot, id: userId};
+    return this.http.post<any>(`${environment.apiUrl}/api/robots/CreateBot`, obj)
     .pipe(catchError(this.handleError),
       tap( _ => {})
     );
@@ -31,11 +32,15 @@ export class CreateBotService {
   }
 
   getIndustries() {
-    return this.mockIndusties;
+    return Object.values(Industry);
   }
 
-  getStrategies() {
-    return this.mockStrategies;
+  getAssets() {
+    return this.mockAssets;
+  }
+
+  public getStrategies(): Observable<Strategy[]> {
+    return this.http.get<Strategy[]>(`${environment.apiUrl}/api/Strategy/GetAllStrategies/`);
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -47,7 +52,7 @@ export class CreateBotService {
       msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
     }
 
-    console.error('ScenarioService::handleError() ' + msg);
+    console.error('CreateBotService::handleError() ' + msg);
 
     return throwError(msg);
   }

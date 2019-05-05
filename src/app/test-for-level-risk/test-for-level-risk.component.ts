@@ -13,7 +13,6 @@ import { AuthenticationService } from '../account/_services/authentication.servi
 export class TestForLevelRiskComponent implements OnInit {
 
   questionsAnswers: Question[];
-  //selection: Answer;
   currentUser: User;
 
   readonly formGroup: FormGroup;
