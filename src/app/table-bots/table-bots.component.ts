@@ -21,7 +21,7 @@ export class TableBotsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'status', 'profit', 'actions'];
   dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource;
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor(
     private tradingBotsService: TradingBotsService,

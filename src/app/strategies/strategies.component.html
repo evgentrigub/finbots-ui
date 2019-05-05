@@ -1,28 +1,24 @@
-<div class="card-deck">
-        <!-- Card -->
-        <mdb-card *ngFor="let strategy of strategies" class="card mb-3" style="min-width: 18rem;">
-          <div class="view overlay waves-light" mdbWavesEffect>
-            <!-- Card img -->
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap"></mdb-card-img>
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <!--Card content-->
-          <mdb-card-body>
-            <!--Title-->
-            <mdb-card-title>
-              <h4>{{strategy.name}}</h4>
-            </mdb-card-title>
-      
-            <!--Text-->
-            <mdb-card-text>
-                    на любом рынке, на любом таймфрейме 
-            </mdb-card-text>
-      
-            <a (click)="openDialog(strategy)" mdbBtn color="primary" mdbWavesEffect>Подробнее</a>
-          </mdb-card-body>
-        </mdb-card>
-      
-        
+<div style="margin-left:1em; margin-right:1em; display: flex; justify-content:space-around" class="card-deck">
+  <!-- Card -->
+  <mdb-card *ngFor="let strategy of strategies" class="card mb-3" style="min-width: 20em; max-width: 20em">
+    <div class="view overlay waves-light" mdbWavesEffect>
+      <!-- Card img -->
+      <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap"></mdb-card-img>
+      <a>
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+    <!--Card content-->
+    <mdb-card-body>
+      <!--Title-->
+      <mdb-card-title>
+        <h4>{{strategy.name}}</h4>
+      </mdb-card-title>
+      <!--Text-->
+      <mdb-card-text>
+        на любом рынке, на любом таймфрейме 
+      </mdb-card-text>
+      <a (click)="openDialog(strategy)" mdbBtn color="primary" mdbWavesEffect>Подробнее</a>
+    </mdb-card-body>
+  </mdb-card>
 </div>
