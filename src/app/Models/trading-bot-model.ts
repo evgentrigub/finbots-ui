@@ -1,4 +1,4 @@
-import { Profit } from './profit';
+import { Profit } from './Profit';
 
 export interface TradingBot {
     id: number;

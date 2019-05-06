@@ -8,7 +8,7 @@ import { RouterModule} from '@angular/router';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
         MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule,
         MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatStepperModule, MatSlideToggleModule } from '@angular/material';
+        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatStepperModule, MatSlideToggleModule, MatTabsModule } from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -30,6 +30,9 @@ import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
 import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats-dialog.component';
 import { StrategyDialogComponent } from './strategies/strategy-dialog/strategy-dialog.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { UserRatingComponent } from './rating/user-rating/user-rating.component';
+import { StrategiesRatingComponent } from './rating/strategies-rating/strategies-rating.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AddModeyToAccountComponent,
     BotNameComponent,
     BotStatsDialogComponent,
-    StrategyDialogComponent
+    StrategyDialogComponent,
+    UserRatingComponent,
+    StrategiesRatingComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
     MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule,
     MatStepperModule, MatSlideToggleModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(), MatTabsModule
   ],
   entryComponents: [
     AddModeyToAccountComponent,

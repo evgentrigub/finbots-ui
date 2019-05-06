@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog } from '@angular/material';
-import { TradingBot } from '../Models/trading-bot-model';
+import { TradingBot } from '../models/trading-bot-model';
 import { TradingBotsService } from '../services/trading-bots.service';
 import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
 

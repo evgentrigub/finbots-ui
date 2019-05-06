@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { TradingBot } from 'src/app/Models/trading-bot-model';
+import { TradingBot } from 'src/app/models/trading-bot-model';
 
 @Component({
   selector: 'app-bot-stats-dialog',

@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Industry } from '../Models/industry-enum';
+import { Industry } from '../models/industry-enum';
 import { Strategy } from '../models/strategy';
 
 @Injectable({

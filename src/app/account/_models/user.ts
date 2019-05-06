@@ -1,4 +1,4 @@
-﻿import { InvestorType } from "src/app/Models/investor-type-enum";
+﻿import { InvestorType } from "src/app/models/investor-type-enum";
 
 export class User {
     id: number;

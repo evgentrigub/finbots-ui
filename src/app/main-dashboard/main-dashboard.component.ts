@@ -7,7 +7,7 @@ import { UserStatsService } from '../services/user-stats.service';
 import { StatsView } from '../interfaces/StatsView';
 import { MatDialog} from '@angular/material';
 import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
-import { InvestorType } from '../Models/investor-type-enum';
+import { InvestorType } from '../models/investor-type-enum';
 import { TaskService } from '../services/task.service';
 
 

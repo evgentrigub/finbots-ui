@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { Question } from '../Models/Question';
 import { TaskService } from '../services/task.service';
 import { User } from '../account/_models/user';
 import { AuthenticationService } from '../account/_services/authentication.service';
+import { Question } from '../models/Questions';
 
 @Component({
   selector: 'app-test-for-level-risk',

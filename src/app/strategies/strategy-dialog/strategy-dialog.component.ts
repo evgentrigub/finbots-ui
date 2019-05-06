@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Strategy } from 'src/app/Models/strategy';
+import { Strategy } from 'src/app/models/strategy';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({

@@ -1,6 +1,6 @@
 import { DecimalPipe } from "@angular/common";
 import { User } from "../account/_models/user";
-import { InvestorType } from "../Models/investor-type-enum";
+import { InvestorType } from "../models/investor-type-enum";
 
 
 export interface StatsView {

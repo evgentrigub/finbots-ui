@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StrategyService } from '../services/strategy.service';
-import { Strategy } from '../Models/strategy';
+import { Strategy } from '../models/strategy';
 import { MatDialog } from '@angular/material';
 import { StrategyDialogComponent } from './strategy-dialog/strategy-dialog.component';
 

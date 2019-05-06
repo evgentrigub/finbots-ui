@@ -2,7 +2,7 @@ import { tap } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { TradingBotsService } from 'src/app/services/trading-bots.service';
-import { TradingBot } from 'src/app/Models/trading-bot-model';
+import { TradingBot } from 'src/app/models/trading-bot-model';
 
 @Component({
   selector: 'app-bot-name',

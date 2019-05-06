@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ObservableInput, throwError, BehaviorSubject } from 'rxjs';
-import { TradingBot } from '../Models/trading-bot-model';
+import { TradingBot } from '../models/trading-bot-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
