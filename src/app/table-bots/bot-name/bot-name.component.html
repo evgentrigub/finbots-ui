@@ -11,7 +11,7 @@
   </div>
 </ng-template>
 <ng-template #edit>
-  <mat-form-field style="width:50%">
+  <mat-form-field style="width:90%">
     <input type="text" matInput class="name" (keydown.enter)="save()" (keydown.esc)="undo()" (blur)="toView()" [(ngModel)]="current"
       placeholder="Название проекта" required minlength="3" maxlength="255">
     <button mat-button *ngIf="canUndo" (click)="undo()" matSuffix mat-icon-button aria-label="Undo" class="undo">
