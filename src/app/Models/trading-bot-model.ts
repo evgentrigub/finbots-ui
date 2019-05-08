@@ -9,6 +9,7 @@ export interface TradingBot {
     profit: Profit;
     workedTime: string;
     status: string;
+    isActive: boolean
 }
 
 // export interface CreatedTradingBot {

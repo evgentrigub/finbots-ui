@@ -36,6 +36,11 @@ export class TableBotsComponent implements OnInit {
     });
   }
 
+  stopBot(bot: TradingBot) {
+    bot.isActive = !bot.isActive;
+    this.tradingBotsService.updateRobotData(bot).subscribe();
+  }
+
   openDialog(row: TradingBot) {
     const dialogRef = this.dialog.open(BotStatsDialogComponent, {
       panelClass: 'dialog',

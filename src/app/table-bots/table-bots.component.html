@@ -57,7 +57,7 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Название </th>
-        <td mat-cell *matCellDef="let row">
+        <td mat-cell *matCellDef="let row" style="width:15em">
           <app-bot-name [bot]="row"></app-bot-name>
         </td>
       </ng-container>
@@ -74,7 +74,7 @@
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Состояние </th>
-        <td mat-cell *matCellDef="let row"> 
+        <td mat-cell *matCellDef="let row"> {{row.isActive}}
         </td>
       </ng-container>
 
@@ -86,11 +86,11 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Действия </th>
         <td mat-cell *matCellDef="let row">
-          <mat-icon class="btn-usual" style="margin-right:1em" matTooltip="Остановить торговлю"
+          <mat-icon (click)="stopBot(row)" class="btn-usual" style="margin-right:1em" matTooltip="Остановить торговлю"
             matTooltipPosition="left">
             pause_circle_filled
           </mat-icon> 
-          <mat-icon class="btn-warn" style="margin-right:1em" matTooltip="Удалить проект" >
+          <mat-icon class="btn-warn" style="margin-right:1em" matTooltip="Удалить робота" >
             delete
           </mat-icon>
           <mat-icon class="btn-accent" matTooltip="Информация о роботе" matTooltipPosition="right" (click)="openDialog(row)">
