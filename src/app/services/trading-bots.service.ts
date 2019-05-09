@@ -42,8 +42,14 @@ export class TradingBotsService {
   }
 
   updateRobotData(bot: TradingBot): Observable<null> {
-    console.log(bot);
     return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot)
+    .pipe(
+      catchError(this.handleError),
+      tap( _ => {}));
+  }
+
+  deleteRobotData(bot: TradingBot): Observable<null> {
+    return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot)
     .pipe(
       catchError(this.handleError),
       tap( _ => {}));

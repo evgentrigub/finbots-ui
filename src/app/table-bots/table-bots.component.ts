@@ -4,12 +4,6 @@ import { TradingBot } from '../models/trading-bot-model';
 import { TradingBotsService } from '../services/trading-bots.service';
 import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
 
-// const bots: TradingBot[] = [
-//   {id: 1, name: 'Бот по акциям', strategy: 'Локомотив Сбербанк', financialInstrument: 'Акции',
-//     profit: '-5%', workedTime: '2 дня', status: 'Активный', type: ''},
-//   {id: 2, name: 'Торгуем криптой', strategy: 'Биткоин max', financialInstrument: 'Криптовалюта',
-//   profit: '+9%', workedTime: '3 часа', status: 'Активный', type: ''}
-// ];
 
 @Component({
   selector: 'app-table-bots',
@@ -29,6 +23,10 @@ export class TableBotsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getRobots();
+  }
+
+  getRobots(){
     this.tradingBotsService.getUserRobots(1).subscribe(bots => {
       this.dataSource.data = bots;
       console.log(bots);
@@ -37,8 +35,15 @@ export class TableBotsComponent implements OnInit {
   }
 
   stopBot(bot: TradingBot) {
-    bot.isActive = !bot.isActive;
+    var activity = !(bot.isActive)
+    bot.isActive = activity;
+    console.log(activity)
     this.tradingBotsService.updateRobotData(bot).subscribe();
+  }
+
+  delete(bot: TradingBot) {
+    this.tradingBotsService.deleteRobotData(bot).subscribe();
+    this.getRobots();
   }
 
   openDialog(row: TradingBot) {

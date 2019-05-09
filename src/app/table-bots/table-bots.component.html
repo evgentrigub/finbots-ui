@@ -88,7 +88,7 @@
             matTooltipPosition="left">
             play_circle_filled
           </mat-icon> 
-          <mat-icon class="btn-warn" style="margin-right:1em" matTooltip="Удалить робота" >
+          <mat-icon (click)="delete(row)" class="btn-warn" style="margin-right:1em" matTooltip="Удалить робота" >
             delete
           </mat-icon>
           <mat-icon class="btn-accent" matTooltip="Информация о роботе" matTooltipPosition="right" (click)="openDialog(row)">
