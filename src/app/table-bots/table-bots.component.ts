@@ -19,7 +19,7 @@ import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.com
 
 export class TableBotsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'status', 'profit', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'profit', 'actions'];
   dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource;
   isLoading = true;
 
@@ -44,6 +44,7 @@ export class TableBotsComponent implements OnInit {
   openDialog(row: TradingBot) {
     const dialogRef = this.dialog.open(BotStatsDialogComponent, {
       panelClass: 'dialog',
+      width: '500px',
       data: row,
       disableClose: true
     });

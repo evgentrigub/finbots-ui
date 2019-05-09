@@ -30,7 +30,9 @@ export class StrategiesComponent implements OnInit {
   openDialog(strategy: Strategy){
     const dialogRef = this.dialog.open(StrategyDialogComponent, {
       panelClass: 'dialog',
-      data: strategy
+      data: strategy,
+      width: '800px',
+      height: '800px'
     });
   } 
 
