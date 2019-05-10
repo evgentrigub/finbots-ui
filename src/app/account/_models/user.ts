@@ -1,4 +1,4 @@
-﻿import { InvestorType } from "src/app/models/investor-type-enum";
+﻿import { InvestorType } from 'src/app/models/investor-type-enum';
 
 export class User {
     id: number;
@@ -8,5 +8,5 @@ export class User {
     lastName: string;
     token: string;
     account: number;
-    riskType: InvestorType
+    riskType: InvestorType;
 }

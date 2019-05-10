@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { TradingBot } from '../models/trading-bot-model';
 import { TradingBotsService } from '../services/trading-bots.service';
 import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class TableBotsComponent implements OnInit {
   isLoading = true;
 
   constructor(
-    private tradingBotsService: TradingBotsService,
+    private readonly tradingBotsService: TradingBotsService,
+    private readonly snackBar: MatSnackBar,
     public dialog: MatDialog,
   ) { }
 
@@ -26,19 +28,24 @@ export class TableBotsComponent implements OnInit {
     this.getRobots();
   }
 
-  getRobots(){
+  getRobots() {
     this.tradingBotsService.getUserRobots(1).subscribe(bots => {
       this.dataSource.data = bots;
-      console.log(bots);
       this.isLoading = false;
     });
   }
 
   stopBot(bot: TradingBot) {
-    var activity = !(bot.isActive)
-    bot.isActive = activity;
-    console.log(activity)
-    this.tradingBotsService.updateRobotData(bot).subscribe();
+    bot.isActive = !bot.isActive;
+    this.tradingBotsService.updateRobotData(bot)
+    .pipe(
+      tap(_ => {
+        if (bot.isActive === false) {
+          this.showMessage('Отправлен запрос на остановку бота');
+        } else {this.showMessage('Отправлен запрос на запуск бота'); }
+      },
+      err => this.showMessage(err))
+    ).subscribe();
   }
 
   delete(bot: TradingBot) {
@@ -58,6 +65,10 @@ export class TableBotsComponent implements OnInit {
         dialogRef.close();
       }
     });
+  }
+
+  private showMessage(msg: any) {
+    this.snackBar.open(msg, undefined, { duration: 2000 });
   }
 
 }

@@ -32,11 +32,11 @@ export class CreateBotService {
   }
 
   getIndustries() {
-    return Object.values(Industry);
+    return Object.values(Industry).filter(val => typeof val === 'string') as string[];
   }
 
-  getAssets() {
-    return this.mockAssets;
+  getAssetsByIndustry(industry: Industry) {
+    return this.http.get(`${environment.apiUrl}/api/assets/GetAssetsByIndustry?=${industry}`);
   }
 
   public getStrategies(): Observable<Strategy[]> {

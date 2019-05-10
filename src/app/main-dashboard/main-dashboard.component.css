@@ -15,3 +15,11 @@
   top: 5px;
   right: 10px;
 }
+
+.mat-grid-tile{
+  overflow: visible
+}
+
+mat-card{
+  box-shadow: none !important;
+}

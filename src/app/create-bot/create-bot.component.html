@@ -95,7 +95,7 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Индустрия" formControlName="industry">
+                <mat-select placeholder="Индустрия" formControlName="industry" (selectionChange)="getAssets($event)">
                   <mat-option *ngFor="let industry of industries"
                   [value]="industry" >{{industry}}</mat-option>
                 </mat-select>
