@@ -64,10 +64,6 @@
             <ng-template matStepLabel>Заполните параметры риск/доходность</ng-template>
             <div style="display: flex; flex-wrap: wrap; margin-top:2em; height: 3em">
               <div>
-                <!-- <mat-radio-group formControlName="goal" style="margin-right:5em; margin-bottom:2em">
-                  <mat-radio-button color="accent" value="risk">Риск</mat-radio-button>
-                  <mat-radio-button color="primary" value="profit">Доходность</mat-radio-button>
-                </mat-radio-group> -->
                 <mat-radio-group style="margin-right:5em" [formControl]="defaultProfitRisk">
                   <mat-radio-button color="primary" value="true">Рекомендованный по риск-профилю</mat-radio-button>
                   <mat-radio-button color="accent" value="false">Вручную</mat-radio-button>
@@ -95,13 +91,14 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Индустрия" formControlName="industry" (selectionChange)="getAssets($event)">
+                <mat-select placeholder="Индустрия" formControlName="industry" (selectionChange)="selectionChangeIndustry($event)" [disabled]="!isStockSelected">
                   <mat-option *ngFor="let industry of industries"
                   [value]="industry" >{{industry}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Актив" formControlName="asset">
+                <mat-select placeholder="Актив" formControlName="asset" [disabled]="!isIndustrySelected && !isCurrencySelected">
+                  {{isCurrencySelected}}
                   <mat-option *ngFor="let asset of assets"
                   [value]="asset" >{{asset}}</mat-option>
                 </mat-select>

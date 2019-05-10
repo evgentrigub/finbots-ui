@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { CreateBotService } from './create-bot.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { CreatedTradingBot } from '../Models/trading-bot-model';
 import { EventEmitter } from 'events';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Industry } from '../Models/industry-enum';
+import { FinancialInstrument } from '../models/financial-instrument';
 
 
 @Component({
@@ -17,10 +18,24 @@ import { Industry } from '../Models/industry-enum';
   templateUrl: './create-bot.component.html',
   styleUrls: ['./create-bot.component.css']
 })
-export class CreateBotComponent implements OnInit {
+export class CreateBotComponent implements OnInit, DoCheck {
 
   get isDefaultProfitRisk(): boolean {
     return this.defaultProfitRisk.value === 'true';
+  }
+
+  get isStockSelected(): boolean {
+    return this.instrumentControl.value === FinancialInstrument[3];
+  }
+
+  get isCurrencySelected(): boolean {
+    const a = this.instrumentControl.value === FinancialInstrument[1] || this.instrumentControl.value === FinancialInstrument[2];
+    console.log(a);
+    return a;
+  }
+
+  get isIndustrySelected(): boolean {
+    return this.industryControl.value;
   }
 
   currentUser: User;
@@ -35,8 +50,10 @@ export class CreateBotComponent implements OnInit {
   optimisation = 1;
 
   private formGroup: FormGroup;
-  private newRobotControl: FormGroup;
+  private industryControl: FormControl = new FormControl();
+  private instrumentControl: FormControl = new FormControl();
   private defaultProfitRisk: FormControl = new FormControl('true');
+
 
   constructor(
     private service: CreateBotService,
@@ -47,8 +64,9 @@ export class CreateBotComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
+    this.industryControl = this.formBuilder.control({value: '', disabled: true}, [Validators.required]);
+    this.instrumentControl = this.formBuilder.control('', [Validators.required]);
 
-    // this.newRobotControl = this.formBuilder.group({});
     this.formGroup = this.createRobotControl();
   }
 
@@ -58,22 +76,27 @@ export class CreateBotComponent implements OnInit {
     this.service.getStrategies().subscribe(r => this.strategies = r);
   }
 
+  ngDoCheck(): void {
+    // if (this.instrumentControl.value === 'Stock') {
+    // }
+  }
+
   createRobotControl(): FormGroup {
     return this.formGroup = this.formBuilder.group({
       name: this.formBuilder.control('Робот', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]),
       sum: this.formBuilder.control(100, [Validators.required]),
       esValue: this.formBuilder.control(10, [Validators.required]),
       strategy: this.formBuilder.control('', [Validators.required]),
-      instrument: this.formBuilder.control('', [Validators.required]),
-      industry: this.formBuilder.control('', [Validators.required]),
+      instrument: this.instrumentControl,
+      industry: this.industryControl,
       asset: this.formBuilder.control('', [Validators.required])
     });
   }
 
-  getAssets(event: MatSelectChange) {
+  selectionChangeIndustry(event: MatSelectChange) {
     const value = event.value;
     const num  = this.industries.indexOf(value) + 1;
-    console.log(num);
+    // console.log(num);
   }
 
   createRobot() {

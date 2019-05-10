@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Industry } from '../models/industry-enum';
 import { Strategy } from '../models/strategy';
+import { FinancialInstrument } from '../models/financial-instrument';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateBotService {
 
-  mockFinancialInstruments: string[] = ['Акции', 'Индексы', 'Валюта', 'Криптовалюта', 'ПФИ'];
-  mockAssets: string[] = ['Apple', 'Amazon', 'Facebook', 'Microsoft', 'Google'];
+  // mockFinancialInstruments: string[] = ['Акции', 'Индексы', 'Валюта', 'Криптовалюта', 'ПФИ'];
+  // mockAssets: string[] = ['Apple', 'Amazon', 'Facebook', 'Microsoft', 'Google'];
   mockStrategies: string[] = ['MMT', 'Arbitrage', 'Williams'];
 
   constructor(
@@ -28,15 +29,18 @@ export class CreateBotService {
   }
 
   getFinancialInstruments() {
-    return this.mockFinancialInstruments;
+    return Object.values(FinancialInstrument).filter(val => typeof val === 'string') as string[];
   }
 
   getIndustries() {
     return Object.values(Industry).filter(val => typeof val === 'string') as string[];
   }
 
-  getAssetsByIndustry(industry: Industry) {
-    return this.http.get(`${environment.apiUrl}/api/assets/GetAssetsByIndustry?=${industry}`);
+  getAssets(financialInstrument: FinancialInstrument, industry: Industry) {
+    let params = new HttpParams();
+    params = params.append('fi', financialInstrument.toString());
+    params = params.append('ind', industry.toString());
+    return this.http.get(`${environment.apiUrl}/api/assets/GetAssetsByFinancialInstrumentAndIndustry`, { params: params});
   }
 
   public getStrategies(): Observable<Strategy[]> {
