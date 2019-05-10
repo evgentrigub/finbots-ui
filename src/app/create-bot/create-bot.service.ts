@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Industry } from '../models/industry-enum';
 import { Strategy } from '../models/strategy';
+import { FinancialInstrument } from '../models/financial-instrument-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,6 @@ export class CreateBotService {
 
   mockFinancialInstruments: string[] = ['Акции', 'Индексы', 'Валюта', 'Криптовалюта', 'ПФИ'];
   mockAssets: string[] = ['Apple', 'Amazon', 'Facebook', 'Microsoft', 'Google'];
-  mockStrategies: string[] = ['MMT', 'Arbitrage', 'Williams'];
 
   constructor(
     private http: HttpClient
@@ -28,7 +28,7 @@ export class CreateBotService {
   }
 
   getFinancialInstruments() {
-    return this.mockFinancialInstruments;
+    return Object.values(FinancialInstrument);
   }
 
   getIndustries() {

@@ -50,6 +50,7 @@ export class TableBotsComponent implements OnInit {
     const dialogRef = this.dialog.open(BotStatsDialogComponent, {
       panelClass: 'dialog',
       width: '500px',
+      height: '500px',
       data: row,
       disableClose: true
     });
