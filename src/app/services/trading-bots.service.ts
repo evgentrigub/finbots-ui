@@ -5,6 +5,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { Asset } from '../models/Asset';
+import { FinancialInstrument } from '../models/financial-instrument-enum';
+import { industry } from '../Models/industry-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +58,47 @@ export class TradingBotsService {
       tap( _ => {}));
   }
 
-  getDescription(bot_id: string): Observable<Asset> {
+  public getDescription(bot_id: string): Observable<Asset> {
     return this.http.get<Asset>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=`+ bot_id)
+  }
+
+  public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {
+      switch (financialInstrument) {
+        case 1 :
+          return "Форекс";
+        case 2 :
+          return "Рынок акций";
+        case 3: 
+          return "Криптовалюта"  
+      }
+      return ;
+  }
+
+  public convertingIndustryToString(industry: industry) : string {
+    switch (industry) {
+      case 1 :
+        return "Информационные технологии";
+      case 2 :
+        return "Здравоохранение";
+      case 3: 
+        return "Машиностроение и транспорт";
+      case 4:
+        return "Недвижимость";
+      case 5:
+        return "Потребительские товары и услуги";
+      case 6:
+        return "Финансовы сектор";
+      case 7:
+        return "Энергетика";
+      case 8:
+        return "Серьевая промыщленность";
+      case 9:
+        return "Электоэнергетика";
+      case 10:
+        return "Телекоммуникации";  
+      
+    }
+    return ;
   }
 
   private handleError(error: HttpErrorResponse) {

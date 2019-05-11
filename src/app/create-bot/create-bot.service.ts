@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Industry } from '../models/industry-enum';
+import { industry } from '../models/industry-enum';
 import { Strategy } from '../models/strategy';
 import { FinancialInstrument } from '../models/financial-instrument-enum';
 
@@ -32,7 +32,7 @@ export class CreateBotService {
   }
 
   getIndustries() {
-    return Object.values(Industry);
+    return Object.values(industry);
   }
 
   getAssets() {

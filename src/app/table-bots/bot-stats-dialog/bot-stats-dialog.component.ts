@@ -12,6 +12,8 @@ import { Asset } from 'src/app/models/Asset';
 export class BotStatsDialogComponent implements OnInit {
 
   asset: Asset;
+  industry: string;
+  financialInstrument: string;
 
   constructor(
     public dialogRef: MatDialogRef<BotStatsDialogComponent>,
@@ -27,6 +29,8 @@ export class BotStatsDialogComponent implements OnInit {
   getDescription(bot_id: string){
     this.tradingBotsService.getDescription(bot_id).subscribe(r => {
       this.asset = r;
+      this.industry = this.tradingBotsService.convertingIndustryToString(r.industry);
+      this.financialInstrument = this.tradingBotsService.convertingFinancialInstrumentToString(r.financialInstrument);
     })
   }
 

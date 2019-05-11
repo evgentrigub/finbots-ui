@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { AuthenticationService } from '../account/_services/authentication.service';
 import { User } from '../account/_models/user';
 import { Strategy } from '../models/strategy';
+import { TradingBotsService } from '../services/trading-bots.service';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class CreateBotComponent implements OnInit {
 
   constructor(
     private service: CreateBotService,
+    private tradingBotService: TradingBotsService,
     private formBuilder: FormBuilder,
     private readonly snackBar: MatSnackBar,
     private authenticationService: AuthenticationService,
@@ -59,7 +61,9 @@ export class CreateBotComponent implements OnInit {
 
   ngOnInit() {
     this.financialInstruments = this.service.getFinancialInstruments();
-    this.industries = this.service.getIndustries();
+    this.service.getIndustries().forEach(industry => {
+      this.industries.push(this.tradingBotService.convertingIndustryToString(industry));
+    });
     this.service.getStrategies().subscribe(r => this.strategies = r);
     this.assets = this.service.getAssets();
 
