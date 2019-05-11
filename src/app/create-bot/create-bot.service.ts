@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Industry } from '../models/industry-enum';
 import { Strategy } from '../models/strategy';
-import { FinancialInstrument } from '../models/financial-instrument';
+import { FinancialInstrument } from '../models/financial-instrument-enum';
 
 @Injectable({
   providedIn: 'root'

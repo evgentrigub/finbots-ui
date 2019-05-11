@@ -4,6 +4,7 @@ import { TradingBot } from '../models/trading-bot-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
+import { Asset } from '../models/Asset';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,10 @@ export class TradingBotsService {
     .pipe(
       catchError(this.handleError),
       tap( _ => {}));
+  }
+
+  getDescription(bot_id: string): Observable<Asset> {
+    return this.http.get<Asset>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=`+ bot_id)
   }
 
   private handleError(error: HttpErrorResponse) {

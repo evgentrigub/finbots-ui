@@ -1,10 +1,9 @@
 import { Profit } from './Profit';
 
 export interface TradingBot {
-    id: number;
+    id: string;
     name: string;
     type: string;
-    financialInstrument: string;
     strategy: string;
     profit: Profit;
     workedTime: string;

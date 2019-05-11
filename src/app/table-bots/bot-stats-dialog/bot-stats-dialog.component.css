@@ -1,3 +1,11 @@
 .mat-card{
     display: contents;
 }
+
+.mat-card-header {
+    text-align: center;
+}
+
+strong {
+    color: blue;
+}
