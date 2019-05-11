@@ -156,7 +156,7 @@
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="dashboard-card-content">
-            <app-widgets [numberCard] = 1></app-widgets>
+            <app-widgets [index]="'NASDAQ'" [ticker] = "'AAPL'"></app-widgets>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
@@ -175,7 +175,7 @@
               </mat-card-title>
             </mat-card-header>
             <mat-card-content class="dashboard-card-content">
-              <app-widgets [numberCard] = 2></app-widgets>
+              <app-widgets [index]="'NASDAQ'" [ticker] = "'MSFT'"></app-widgets>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>

@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { Asset } from '../models/Asset';
 import { FinancialInstrument } from '../models/financial-instrument-enum';
-import { industry } from '../Models/industry-enum';
+import { industry } from '../models/industry-enum';
 
 @Injectable({
   providedIn: 'root'

@@ -8,9 +8,6 @@ import { User } from '../account/_models/user';
 import { Strategy } from '../models/strategy';
 import { TradingBotsService } from '../services/trading-bots.service';
 import { CreatedTradingBot } from '../Models/trading-bot-model';
-import { EventEmitter } from 'events';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Industry } from '../Models/industry-enum';
 import { FinancialInstrument } from '../models/financial-instrument-enum';
 
 

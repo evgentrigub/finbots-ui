@@ -9,3 +9,15 @@
 strong {
     color: blue;
 }
+
+.dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .mat-grid-tile{
+    overflow: visible
+  }
