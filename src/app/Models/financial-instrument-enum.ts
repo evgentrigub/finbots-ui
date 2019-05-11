@@ -1,6 +1,5 @@
-export enum FinancialInstrument
-{
+export enum FinancialInstrument {
     Forex = 1,
-    Stock = 2,
-    Crypto = 3
+    Crypto = 2,
+    Stock = 3
 }

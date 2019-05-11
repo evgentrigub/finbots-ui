@@ -8,14 +8,16 @@ export interface TradingBot {
     profit: Profit;
     workedTime: string;
     status: string;
-    isActive: boolean
+    isActive: boolean;
 }
 
-// export interface CreatedTradingBot {
-//     name: string;
-//     sum: number;
-//     goal: Goal;
-//     goalValue: number;
-//     strategy: string;
-//     instrument: string;
-// }
+export interface CreatedTradingBot {
+    name: string;
+    sum: number;
+    esValue: number;
+    goalValue: number;
+    strategy: string;
+    instrument: string;
+    industry: string;
+    asset: string;
+}

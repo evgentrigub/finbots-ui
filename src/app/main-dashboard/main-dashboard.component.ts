@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { User } from '../account/_models/user';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../services/user-stats.service';
-import { StatsView } from '../interfaces/StatsView';
+import { StatsView } from '../models/StatsView';
 import { MatDialog} from '@angular/material';
 import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
 import { InvestorType } from '../models/investor-type-enum';
@@ -59,8 +59,8 @@ export class MainDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userStatService.getById(1).subscribe(stats => {
       this.stats = stats;
-      this.rislType = this.taskService.convertRiskToString(this.stats.riskType)
-      console.log(this.stats)
+      this.rislType = this.taskService.convertRiskToString(this.stats.riskType);
+      console.log(this.stats);
     });
     this.getFirstChart();
     this.getSecondChart();

@@ -4,6 +4,9 @@ import { TaskService } from '../services/task.service';
 import { User } from '../account/_models/user';
 import { AuthenticationService } from '../account/_services/authentication.service';
 import { Question } from '../models/Questions';
+import { tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test-for-level-risk',
@@ -19,9 +22,11 @@ export class TestForLevelRiskComponent implements OnInit {
   readonly questionsControl: FormArray;
 
   constructor(
-    private taskService: TaskService,
-    private authenticationService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private readonly taskService: TaskService,
+    private readonly authenticationService: AuthenticationService,
+    private readonly formBuilder: FormBuilder,
+    private readonly snackBar: MatSnackBar,
+    private readonly router: Router
   ) {
     this.questionsControl = this.formBuilder.array([]);
     this.formGroup = this.formBuilder.group({
@@ -84,8 +89,16 @@ export class TestForLevelRiskComponent implements OnInit {
       sum = +sum + +el.answer;
     }
 
-    this.taskService.postInvestorType(this.currentUser, sum).subscribe(r => {
-      console.log(`result`, r);
-    });
+    this.taskService.postInvestorType(this.currentUser, sum)
+    .pipe(tap(_ => {
+      this.showMessage('Риск-профиль изменен');
+      this.router.navigateByUrl('/dashboard');
+    },
+      err => this.showMessage(err))
+    ).subscribe();
+  }
+
+  private showMessage(msg: any) {
+    this.snackBar.open(msg, undefined, { duration: 2000 });
   }
 }
