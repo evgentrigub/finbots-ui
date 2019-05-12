@@ -9,6 +9,8 @@ import { Strategy } from '../models/strategy';
 import { TradingBotsService } from '../services/trading-bots.service';
 import { CreatedTradingBot } from '../Models/trading-bot-model';
 import { FinancialInstrument } from '../models/financial-instrument-enum';
+import { Industry } from '../Models/industry-enum';
+import { Asset } from '../Models/asset';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { FinancialInstrument } from '../models/financial-instrument-enum';
   templateUrl: './create-bot.component.html',
   styleUrls: ['./create-bot.component.css']
 })
-export class CreateBotComponent implements OnInit, DoCheck {
+export class CreateBotComponent implements OnInit {
 
   get isDefaultProfitRisk(): boolean {
     return this.defaultProfitRisk.value === 'true';
@@ -27,9 +29,8 @@ export class CreateBotComponent implements OnInit, DoCheck {
   }
 
   get isCurrencySelected(): boolean {
-    const a = this.instrumentControl.value === FinancialInstrument[1] || this.instrumentControl.value === FinancialInstrument[2];
-    console.log(a);
-    return a;
+    return this.instrumentControl.value === FinancialInstrument[1] ||
+      this.instrumentControl.value === FinancialInstrument[2];
   }
 
   get isIndustrySelected(): boolean {
@@ -40,7 +41,7 @@ export class CreateBotComponent implements OnInit, DoCheck {
   strategies: Strategy[] = [];
   financialInstruments: string[] = [];
   industries: string[] = [];
-  assets: string[] = [];
+  assets: Asset[] = [];
   name = '';
   strategy = '';
   summa = 0;
@@ -71,15 +72,13 @@ export class CreateBotComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.financialInstruments = this.service.getFinancialInstruments();
-    this.service.getIndustries().forEach(industry => {
-      this.industries.push(this.tradingBotService.convertingIndustryToString(industry));
-    });
+    this.industries = this.service.getIndustries();
     this.service.getStrategies().subscribe(r => this.strategies = r);
-  }
 
-  ngDoCheck(): void {
-    // if (this.instrumentControl.value === 'Stock') {
-    // }
+    // this.service.getIndustries()
+    // .forEach(industry => {
+    //   this.industries.push(this.tradingBotService.convertingIndustryToString(industry));
+    // });
   }
 
   createRobotControl(): FormGroup {
@@ -98,6 +97,29 @@ export class CreateBotComponent implements OnInit, DoCheck {
     const value = event.value;
     const num  = this.industries.indexOf(value) + 1;
     // console.log(num);
+    this.service.getAssets(FinancialInstrument.Stock, num).subscribe( res => {
+      this.assets = res;
+    });
+  }
+
+  selectionChangeInstrument(event: MatSelectChange) {
+    const value = event.value;
+
+    switch (this.instrumentControl.value) {
+      case FinancialInstrument[1]:
+        this.service.getAssets(FinancialInstrument.Forex, 0).subscribe( res => {
+          this.assets = res;
+        });
+        break;
+
+      case FinancialInstrument[2]:
+        this.service.getAssets(FinancialInstrument.Crypto, 0).subscribe( res => {
+          this.assets = res;
+        });
+        break;
+    }
+
+
   }
 
   createRobot() {

@@ -85,7 +85,7 @@
             <ng-template matStepLabel>Выберите финансовый инструмент и стратегию робота</ng-template>
             <div style="display:flex; flex-wrap: wrap">
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Финансовый инструмент" formControlName="instrument">
+                <mat-select placeholder="Финансовый инструмент" formControlName="instrument" (selectionChange)="selectionChangeInstrument($event)">
                   <mat-option *ngFor="let financialInstrument of financialInstruments"
                   [value]="financialInstrument" >{{financialInstrument}}</mat-option>
                 </mat-select>
@@ -98,9 +98,8 @@
               </mat-form-field>
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
                 <mat-select placeholder="Актив" formControlName="asset" [disabled]="!isIndustrySelected && !isCurrencySelected">
-                  {{isCurrencySelected}}
                   <mat-option *ngFor="let asset of assets"
-                  [value]="asset" >{{asset}}</mat-option>
+                  [value]="asset" >{{asset.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="width: 30em; margin-bottom: 2em">

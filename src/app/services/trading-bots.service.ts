@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { Asset } from '../models/Asset';
 import { FinancialInstrument } from '../models/financial-instrument-enum';
-import { industry } from '../models/industry-enum';
+import { Industry } from '../models/industry-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -59,44 +59,44 @@ export class TradingBotsService {
   }
 
   public getDescription(bot_id: string): Observable<Asset> {
-    return this.http.get<Asset>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=`+ bot_id)
+    return this.http.get<Asset>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=` + bot_id);
   }
 
   public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {
       switch (financialInstrument) {
         case 1 :
-          return "Форекс";
+          return 'Форекс';
         case 2 :
-          return "Рынок акций";
-        case 3: 
-          return "Криптовалюта"  
+          return 'Рынок акций';
+        case 3:
+          return 'Криптовалюта';
       }
       return ;
   }
 
-  public convertingIndustryToString(industry: industry) : string {
+  public convertingIndustryToString(industry: Industry): string {
     switch (industry) {
       case 1 :
-        return "Информационные технологии";
+        return 'Информационные технологии';
       case 2 :
-        return "Здравоохранение";
-      case 3: 
-        return "Машиностроение и транспорт";
+        return 'Здравоохранение';
+      case 3:
+        return 'Машиностроение и транспорт';
       case 4:
-        return "Недвижимость";
+        return 'Недвижимость';
       case 5:
-        return "Потребительские товары и услуги";
+        return 'Потребительские товары и услуги';
       case 6:
-        return "Финансовы сектор";
+        return 'Финансовы сектор';
       case 7:
-        return "Энергетика";
+        return 'Энергетика';
       case 8:
-        return "Серьевая промыщленность";
+        return 'Серьевая промыщленность';
       case 9:
-        return "Электоэнергетика";
+        return 'Электоэнергетика';
       case 10:
-        return "Телекоммуникации";  
-      
+        return 'Телекоммуникации';
+
     }
     return ;
   }

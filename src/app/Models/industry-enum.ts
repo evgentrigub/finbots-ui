@@ -11,7 +11,7 @@
 //     Telecommunication = 'Телекоммуникации'
 // }
 
-export enum industry {
+export enum Industry {
     IT = 1,
     Medicine = 2,
     Transport = 3,
