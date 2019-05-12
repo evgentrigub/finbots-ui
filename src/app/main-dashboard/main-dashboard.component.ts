@@ -21,6 +21,7 @@ export class MainDashboardComponent implements OnInit {
   currentUser: User;
   currentUserSubscription: Subscription;
   rislType: string;
+  loading: boolean = true;
   stats: StatsView =
   {
     profit: 0.0,
@@ -60,6 +61,7 @@ export class MainDashboardComponent implements OnInit {
     this.userStatService.getById(1).subscribe(stats => {
       this.stats = stats;
       this.rislType = this.taskService.convertRiskToString(this.stats.riskType);
+      this.loading = false;
       console.log(this.stats);
     });
     this.getFirstChart();

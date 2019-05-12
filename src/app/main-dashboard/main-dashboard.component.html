@@ -9,6 +9,7 @@
                       <i class="material-icons">adb</i>
                   </div>
                   <p class="card-category">Количество роботов</p>
+                  <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
                   <h5 class="card-title">{{stats.robotsQuantity}}/10
                       <small>шт.</small>
                   </h5>
@@ -30,6 +31,7 @@
                       <i class="material-icons">attach_money</i>
                   </div>
                   <p class="card-category">Общая доходность</p>
+                  <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
                   <h5 class="card-title">{{stats.profit}}%</h5>
               </div>
               <div class="card-footer">
@@ -48,6 +50,7 @@
                     <i class="material-icons">spellcheck</i>
                 </div>
                 <p class="card-category">Риск-профиль</p>
+                <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
                 <h5 class="card-title">{{rislType}}</h5>
             </div>
             <div class="card-footer">
@@ -66,6 +69,7 @@
                       <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
                   </div>
                   <p class="card-category">На счету</p>
+                  <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
                   <h5 class="card-title">${{stats.account}}</h5>
               </div>
               <div class="card-footer">
