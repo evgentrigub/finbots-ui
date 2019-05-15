@@ -13,13 +13,7 @@ import { Asset } from '../Models/asset';
 })
 export class CreateBotService {
 
-  // mockFinancialInstruments: string[] = ['Акции', 'Индексы', 'Валюта', 'Криптовалюта', 'ПФИ'];
-  // mockAssets: string[] = ['Apple', 'Amazon', 'Facebook', 'Microsoft', 'Google'];
-  mockStrategies: string[] = ['MMT', 'Arbitrage', 'Williams'];
-
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   createBot(createdBot: any, userId: number): Observable<null> {
     const obj = {bot: createdBot, id: userId};

@@ -20,10 +20,9 @@ export class MainDashboardComponent implements OnInit {
 
   currentUser: User;
   currentUserSubscription: Subscription;
-  rislType: string;
-  loading: boolean = true;
-  stats: StatsView =
-  {
+  riskType: string;
+  loading = true;
+  stats: StatsView = {
     profit: 0.0,
     robotQuantity: 0,
     account: 0.0,
@@ -35,12 +34,10 @@ export class MainDashboardComponent implements OnInit {
     private userStatService: UserStatsService,
     private taskService: TaskService,
     public dialog: MatDialog,
-
-    ) {
-      this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-        this.currentUser = user;
-      });
-
+  ) {
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   openDialog() {
@@ -56,21 +53,18 @@ export class MainDashboardComponent implements OnInit {
     });
   }
 
-
   ngOnInit(): void {
-    this.userStatService.getById(1).subscribe(stats => {
+    this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
       this.stats = stats;
-      this.rislType = this.taskService.convertRiskToString(this.stats.riskType);
+      this.riskType = this.taskService.convertRiskToString(this.stats.riskType);
       this.loading = false;
-      console.log(this.stats);
     });
-    this.getFirstChart();
-    this.getSecondChart();
-    this.getThirdChart();
+    this.createFirstChart();
+    this.createSecondChart();
+    this.createThirdChart();
   }
 
-  //TO-DO изменить название
-  getFirstChart() {
+  createFirstChart() {
      const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       series: [
@@ -91,8 +85,7 @@ export class MainDashboardComponent implements OnInit {
       this.startAnimationForLineChart(dailySalesChart);
   }
 
-  //TO-DO изменить название
-  getSecondChart() {
+  createSecondChart() {
 
     const datawebsiteViewsChart = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
@@ -124,8 +117,7 @@ export class MainDashboardComponent implements OnInit {
     this.startAnimationForBarChart(websiteViewsChart);
   }
 
-  //TO-DO изменить название
-  getThirdChart() {
+  createThirdChart() {
 
     const dataCompletedTasksChart: any = {
       labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],

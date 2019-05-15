@@ -43,16 +43,6 @@ export class TaskService {
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let msg: string;
-    if (error.error instanceof ErrorEvent) {
-        msg = 'Произошла ошибка:' + error.error.message;
-    } else {
-        msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
-    }
-    return throwError(msg);
-  }
-
   public postInvestorType(user: User, balls: number) {
     const obj = {user: user, balls: balls };
     return this.http.post(`${environment.apiUrl}/api/Task/GetInvestorType`, obj);
@@ -74,6 +64,16 @@ export class TaskService {
           return 'Продам родную мать';
       }
       return 'Консерватор';
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let msg: string;
+    if (error.error instanceof ErrorEvent) {
+        msg = 'Произошла ошибка:' + error.error.message;
+    } else {
+        msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
+    }
+    return throwError(msg);
   }
 
 }

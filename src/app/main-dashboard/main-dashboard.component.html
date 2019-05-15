@@ -51,11 +51,11 @@
                 </div>
                 <p class="card-category">Риск-профиль</p>
                 <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
-                <h5 class="card-title">{{rislType}}</h5>
+                <h5 class="card-title">{{riskType}}</h5>
             </div>
             <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">local_offer</i> Пройти тест еще раз
+                <div class="stats" routerLink="/testForRiskLevel" style="cursor:pointer">
+                  <i class="material-icons" >local_offer</i> Пройти тест еще раз 
                 </div>
             </div>
           </div>
