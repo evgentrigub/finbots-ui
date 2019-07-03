@@ -26,10 +26,10 @@ export class UserStatsService {
    */
   getStatsById(id: number): Observable<StatsView> {
     // return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`)
-    if (!this.loaded) {
+    // if (!this.loaded) {
       return this.reloadedStats(id).pipe(switchMap(r => this.stats$));
-    }
-    return this.stats$;
+    // }
+    // return this.stats$;
   }
 
   private reloadedStats(id: number): Observable<StatsView> {

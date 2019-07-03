@@ -11,10 +11,14 @@
             На первом шаге введите название и сумму инвестиций
           </li>
           <li style="margin-top: 1em">
-            На втором выберите цель инвестирования (риск или доходность) и предел риска.
+            На втором, выберите параметры доходности робота<br>
+            согласно вашему риск-профилю или вручную.
           </li>
           <li style="margin-top: 1em">
-            На третьем - тип финансового инструмента и стратегию к нему.
+            На третьем - выберите инструмент для торговли.<br>
+            Вы можете выбрать акции, валюту или криптовалюту. <br>
+            При выборе акций, надо выбрать еще индустрию. <br>
+            (информационные технологии, финансы, медицина, ндвижимость и т.д.)  
           </li>
           <li style="margin-top: 1em">
             Если все поля заполнены, то подвердите создания робота. <br>
@@ -28,7 +32,7 @@
         <mat-vertical-stepper linear="false" #stepper>
           <!-- step 1 -->
           <mat-step>
-            <ng-template matStepLabel>Введите название робота и сумму инвестирования</ng-template>
+            <ng-template matStepLabel>Название робота и сумма инвестирования</ng-template>
             <div style="display:flex; flex-wrap: wrap">
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
                 <input #nameInput matInput formControlName="name" placeholder="Введите название робота">
@@ -61,7 +65,7 @@
           </mat-step>
           <!-- step 2 -->
           <mat-step>
-            <ng-template matStepLabel>Заполните параметры риск/доходность</ng-template>
+            <ng-template matStepLabel>Параметры доходности</ng-template>
             <div style="display: flex; flex-wrap: wrap; margin-top:2em; height: 3em">
               <div>
                 <mat-radio-group style="margin-right:5em" [formControl]="defaultProfitRisk">
@@ -82,7 +86,7 @@
           </mat-step>
           <!-- step 3 -->
           <mat-step>
-            <ng-template matStepLabel>Выберите финансовый инструмент и стратегию робота</ng-template>
+            <ng-template matStepLabel>Финансовый инструмент и стратегия робота</ng-template>
             <div style="display:flex; flex-wrap: wrap">
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
                 <mat-select placeholder="Финансовый инструмент" formControlName="instrument" (selectionChange)="selectionChangeInstrument($event)">

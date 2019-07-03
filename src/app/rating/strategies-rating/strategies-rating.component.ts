@@ -25,7 +25,6 @@ export class StrategiesRatingComponent implements OnInit {
   getStrategies(){
     this.strategyService.getStrategies().subscribe(r => {
       this.dataSource.data = r;
-      console.log(r);
       this.isLoading =  false;
     })
   }

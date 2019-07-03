@@ -22,7 +22,6 @@ export class UserRatingComponent implements OnInit {
   ngOnInit() {
     this.userService.getAll().subscribe(users => {
       this.dataSource.data = users;
-      console.log(users)
       this.isLoading = false;
     })
   }

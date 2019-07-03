@@ -23,7 +23,6 @@ export class StrategiesComponent implements OnInit {
   ngOnInit() {
     this.strategyService.getStrategies().subscribe(strategies => {
         this.strategies = strategies;
-        console.log(strategies);
       });
   }
 

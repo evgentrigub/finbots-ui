@@ -96,7 +96,6 @@ export class CreateBotComponent implements OnInit {
   selectionChangeIndustry(event: MatSelectChange) {
     const value = event.value;
     const num  = this.industries.indexOf(value) + 1;
-    // console.log(num);
     this.service.getAssets(FinancialInstrument.Stock, num).subscribe( res => {
       this.assets = res;
     });
@@ -124,11 +123,11 @@ export class CreateBotComponent implements OnInit {
 
   createRobot() {
     const newRobot = <CreatedTradingBot>this.formGroup.value;
-    console.log(newRobot, this.currentUser.id);
-    this.service.createBot(newRobot, this.currentUser.id)
-      .pipe(
-        tap(_ => this.showMessage(`Заявка на создание бота ${newRobot.name} успешна отправлена`))
-      ).subscribe();
+    this.showMessage(`Заявка на создание бота ${newRobot.name} успешна отправлена`)
+    // this.service.createBot(newRobot, this.currentUser.id)
+    //   .pipe(
+    //     tap(_ => this.showMessage(`Заявка на создание бота ${newRobot.name} успешна отправлена`))
+    //   ).subscribe();
   }
 
   private showMessage(msg: any) {

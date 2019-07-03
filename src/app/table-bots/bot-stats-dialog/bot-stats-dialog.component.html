@@ -3,9 +3,9 @@
     <mat-card-title> <h2>Статистика по торговому роботу <strong> "{{data.name}}" </strong></h2></mat-card-title>
   </mat-card-header>
   <mat-card-content *ngIf="asset" class="dashboard-card-content">
-    <p>Финансовый инструмент {{financialInstrument}}</p>
+    <p>Финансовый инструмент Акции</p>
     <p>Бумага {{asset.name}}</p>
     <p>Индустрия {{industry}}</p>
-    <app-widgets [index]="'MOEX'" [ticker] = "'LKOH'"></app-widgets>
+    <app-widgets [index]="'NASDAQ'" [ticker] = "'APPLE'"></app-widgets>
   </mat-card-content>
 </mat-card>

@@ -43,7 +43,7 @@ export class MainDashboardComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(AddModeyToAccountComponent, {
       panelClass: 'dialog',
-      data: this.stats,
+      data: this.currentUser,
       disableClose: true
     });
     dialogRef.backdropClick().subscribe(result => {
@@ -51,18 +51,24 @@ export class MainDashboardComponent implements OnInit {
         dialogRef.close();
       }
     });
+    dialogRef.afterClosed().subscribe(r => this.getStats());
   }
 
   ngOnInit(): void {
+    this.getStats();
+    this.createFirstChart();
+    this.createSecondChart();
+    this.createThirdChart();
+  }
+
+  getStats() {
     this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
       this.stats = stats;
       this.riskType = this.taskService.convertRiskToString(this.stats.riskType);
       this.loading = false;
     });
-    this.createFirstChart();
-    this.createSecondChart();
-    this.createThirdChart();
   }
+
 
   createFirstChart() {
      const dataDailySalesChart: any = {
