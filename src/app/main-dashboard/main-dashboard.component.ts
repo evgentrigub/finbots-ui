@@ -5,7 +5,7 @@ import { User } from '../account/_models/user';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../services/user-stats.service';
 import { StatsView } from '../models/StatsView';
-import { MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
 import { InvestorType } from '../models/investor-type-enum';
 import { TaskService } from '../services/task.service';
@@ -71,24 +71,25 @@ export class MainDashboardComponent implements OnInit {
 
 
   createFirstChart() {
-     const dataDailySalesChart: any = {
+    const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       series: [
-          [12, 17, 7, 17, 23, 18, 38]
-      ]};
+        [12, 17, 7, 17, 23, 18, 38]
+      ]
+    };
 
-      const optionsDailySalesChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-      };
+    const optionsDailySalesChart: any = {
+      lineSmooth: Chartist.Interpolation.cardinal({
+        tension: 0
+      }),
+      low: 0,
+      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+    };
 
-      const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+    const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
-      this.startAnimationForLineChart(dailySalesChart);
+    this.startAnimationForLineChart(dailySalesChart);
   }
 
   createSecondChart() {
@@ -101,12 +102,12 @@ export class MainDashboardComponent implements OnInit {
       ]
     };
     const optionswebsiteViewsChart = {
-        axisX: {
-            showGrid: false
-        },
-        low: 0,
-        high: 1000,
-        chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
+      axisX: {
+        showGrid: false
+      },
+      low: 0,
+      high: 1000,
+      chartPadding: { top: 0, right: 5, bottom: 0, left: 0 }
     };
     const responsiveOptions: any[] = [
       ['screen and (max-width: 640px)', {
@@ -132,13 +133,13 @@ export class MainDashboardComponent implements OnInit {
       ]
     };
 
-   const optionsCompletedTasksChart: any = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-            tension: 0
-        }),
-        low: 0,
-        high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
+    const optionsCompletedTasksChart: any = {
+      lineSmooth: Chartist.Interpolation.cardinal({
+        tension: 0
+      }),
+      low: 0,
+      high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 }
     };
 
     const completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
@@ -153,7 +154,7 @@ export class MainDashboardComponent implements OnInit {
     delays = 80;
     durations = 500;
 
-    chart.on('draw', function(data) {
+    chart.on('draw', function (data) {
       if (data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
@@ -165,21 +166,21 @@ export class MainDashboardComponent implements OnInit {
           }
         });
       } else if (data.type === 'point') {
-            seq++;
-            data.element.animate({
-              opacity: {
-                begin: seq * delays,
-                dur: durations,
-                from: 0,
-                to: 1,
-                easing: 'ease'
-              }
-            });
-        }
+        seq++;
+        data.element.animate({
+          opacity: {
+            begin: seq * delays,
+            dur: durations,
+            from: 0,
+            to: 1,
+            easing: 'ease'
+          }
+        });
+      }
     });
 
     seq = 0;
-}
+  }
 
   private startAnimationForBarChart(chart) {
     let seq2: any, delays2: any, durations2: any;
@@ -187,21 +188,21 @@ export class MainDashboardComponent implements OnInit {
     seq2 = 0;
     delays2 = 80;
     durations2 = 500;
-    chart.on('draw', function(data) {
+    chart.on('draw', function (data) {
       if (data.type === 'bar') {
-          seq2++;
-          data.element.animate({
-            opacity: {
-              begin: seq2 * delays2,
-              dur: durations2,
-              from: 0,
-              to: 1,
-              easing: 'ease'
-            }
-          });
+        seq2++;
+        data.element.animate({
+          opacity: {
+            begin: seq2 * delays2,
+            dur: durations2,
+            from: 0,
+            to: 1,
+            easing: 'ease'
+          }
+        });
       }
     });
 
     seq2 = 0;
-}
+  }
 }
