@@ -5,11 +5,9 @@ declare const TradingView: any;
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.css'],
 })
-
 export class SettingsComponent implements OnInit, AfterViewInit {
-
   ngAfterViewInit() {
     // const tradingView =  new TradingView.widget({
     //    'container_id': 'technical-analysis',
@@ -25,17 +23,15 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     //    'allow_symbol_change': true,
     //    'save_image': false,
     //    'hideideas': true,
-    //    'studies': [ 
+    //    'studies': [
     //    'MASimple@tv-basicstudies' ],
     //    'show_popup_button': true,
     //    'popup_width': '1000',
     //    'popup_height': '650'
     //  });
-   }
-
-  constructor() { }
-
-  ngOnInit() {
   }
 
+  constructor() {}
+
+  ngOnInit() {}
 }

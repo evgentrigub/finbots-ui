@@ -7,17 +7,14 @@ import { InvestorType } from '../models/investor-type-enum';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserStatsService {
-
   stats$: BehaviorSubject<StatsView>;
   private loaded = false;
 
-  constructor(
-    private http: HttpClient
-    ) {
-    this.stats$ = new BehaviorSubject<StatsView>({profit: 0, account: 0, robotQuantity: 0, riskType: InvestorType.Guaranteed});
+  constructor(private http: HttpClient) {
+    this.stats$ = new BehaviorSubject<StatsView>({ profit: 0, account: 0, robotQuantity: 0, riskType: InvestorType.Guaranteed });
   }
 
   /**
@@ -27,14 +24,14 @@ export class UserStatsService {
   getStatsById(id: number): Observable<StatsView> {
     // return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`)
     // if (!this.loaded) {
-      return this.reloadedStats(id).pipe(switchMap(r => this.stats$));
+    return this.reloadedStats(id).pipe(switchMap(r => this.stats$));
     // }
     // return this.stats$;
   }
 
   private reloadedStats(id: number): Observable<StatsView> {
-    return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`)
-      .pipe(catchError(this.handleError),
+    return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`).pipe(
+      catchError(this.handleError),
       tap(response => {
         this.stats$.next(response);
         this.loaded = true;
@@ -45,11 +42,10 @@ export class UserStatsService {
   private handleError(error: HttpErrorResponse) {
     let msg: string;
     if (error.error instanceof ErrorEvent) {
-        msg = 'Произошла ошибка:' + error.error.message;
+      msg = 'Произошла ошибка:' + error.error.message;
     } else {
-        msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
+      msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
     }
     return throwError(msg);
   }
 }
-

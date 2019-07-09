@@ -5,24 +5,17 @@ import { TradingBotsService } from '../services/trading-bots.service';
 import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
 import { tap } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-table-bots',
   templateUrl: './table-bots.component.html',
-  styleUrls: ['./table-bots.component.css']
+  styleUrls: ['./table-bots.component.css'],
 })
-
 export class TableBotsComponent implements OnInit {
-
   displayedColumns: string[] = ['id', 'name', 'strategy', 'timeframe', 'profit', 'actions'];
-  dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource;
+  dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource();
   isLoading = true;
 
-  constructor(
-    private readonly tradingBotsService: TradingBotsService,
-    private readonly snackBar: MatSnackBar,
-    public dialog: MatDialog,
-  ) { }
+  constructor(private readonly tradingBotsService: TradingBotsService, private readonly snackBar: MatSnackBar, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getRobots();
@@ -37,15 +30,21 @@ export class TableBotsComponent implements OnInit {
 
   stopBot(bot: TradingBot) {
     bot.isActive = !bot.isActive;
-    this.tradingBotsService.updateRobotData(bot)
-    .pipe(
-      tap(_ => {
-        if (bot.isActive === false) {
-          this.showMessage('Отправлен запрос на остановку бота');
-        } else {this.showMessage('Отправлен запрос на запуск бота'); }
-      },
-      err => this.showMessage(err))
-    ).subscribe();
+    this.tradingBotsService
+      .updateRobotData(bot)
+      .pipe(
+        tap(
+          _ => {
+            if (bot.isActive === false) {
+              this.showMessage('Отправлен запрос на остановку бота');
+            } else {
+              this.showMessage('Отправлен запрос на запуск бота');
+            }
+          },
+          err => this.showMessage(err)
+        )
+      )
+      .subscribe();
   }
 
   delete(bot: TradingBot) {
@@ -59,7 +58,7 @@ export class TableBotsComponent implements OnInit {
       width: '500px',
       height: '500px',
       data: row,
-      disableClose: true
+      disableClose: true,
     });
     dialogRef.backdropClick().subscribe(result => {
       if (confirm('Закрыть окно?')) {
@@ -71,5 +70,4 @@ export class TableBotsComponent implements OnInit {
   private showMessage(msg: any) {
     this.snackBar.open(msg, undefined, { duration: 2000 });
   }
-
 }

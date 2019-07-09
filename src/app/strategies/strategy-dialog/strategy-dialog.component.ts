@@ -5,15 +5,10 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-strategy-dialog',
   templateUrl: './strategy-dialog.component.html',
-  styleUrls: ['./strategy-dialog.component.css']
+  styleUrls: ['./strategy-dialog.component.css'],
 })
 export class StrategyDialogComponent implements OnInit {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Strategy) {}
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Strategy
-  ) { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

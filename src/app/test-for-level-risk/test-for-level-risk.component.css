@@ -1,9 +1,9 @@
-.radio-group{
+.radio-group {
   display: flex;
   flex-direction: column;
   margin: 15px 0;
 }
 
-li{
-  margin-top:1em;
+li {
+  margin-top: 1em;
 }

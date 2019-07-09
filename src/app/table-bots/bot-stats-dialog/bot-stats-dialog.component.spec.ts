@@ -8,9 +8,8 @@ describe('BotStatsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BotStatsDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [BotStatsDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

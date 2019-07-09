@@ -3,81 +3,102 @@
   <mat-grid-list cols="4" rowHeight="160px">
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
-          <div class="card card-stats">
-              <div class="card-header card-header-warning card-header-icon" style="height:73px">
-                  <div class="card-icon">
-                      <i class="material-icons">adb</i>
-                  </div>
-                  <p class="card-category">Количество роботов</p>
-                  <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
-                  <h5 class="card-title">{{stats.robotsQuantity}}/10
-                      <small>шт.</small>
-                  </h5>
-              </div>
-              <div class="card-footer">
-                  <div class="stats">
-                      <i class="material-icons text-danger">warning</i>
-                      <a href="/create">Создать нового робота</a>
-                  </div>
-              </div>
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon" style="height:73px">
+            <div class="card-icon">
+              <i class="material-icons">adb</i>
+            </div>
+            <p class="card-category">Количество роботов</p>
+            <mat-progress-spinner
+              *ngIf="loading"
+              style="margin: 0 auto"
+              mode="indeterminate"
+              diameter="30"
+              strokeWidth="3"
+            ></mat-progress-spinner>
+            <h5 class="card-title">
+              {{ stats.robotsQuantity }}/10
+              <small>шт.</small>
+            </h5>
           </div>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
-          <div class="card card-stats">
-              <div class="card-header card-header-success card-header-icon" style="height:73px">
-                  <div class="card-icon">
-                      <i class="material-icons">attach_money</i>
-                  </div>
-                  <p class="card-category">Общая доходность</p>
-                  <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
-                  <h5 class="card-title">{{stats.profit}}%</h5>
-              </div>
-              <div class="card-footer">
-                  <div class="stats">
-                      <i class="material-icons">date_range</i> Последний месяц
-                  </div>
-              </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-danger">warning</i>
+              <a href="/create">Создать нового робота</a>
+            </div>
           </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
         <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon" style="height:73px">
-                <div class="card-icon">
-                    <i class="material-icons">spellcheck</i>
-                </div>
-                <p class="card-category">Риск-профиль</p>
-                <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
-                <h5 class="card-title">{{riskType}}</h5>
+          <div class="card-header card-header-success card-header-icon" style="height:73px">
+            <div class="card-icon">
+              <i class="material-icons">attach_money</i>
             </div>
-            <div class="card-footer">
-                <div class="stats" routerLink="/testForRiskLevel" style="cursor:pointer">
-                  <i class="material-icons" >local_offer</i> Пройти тест еще раз 
-                </div>
-            </div>
+            <p class="card-category">Общая доходность</p>
+            <mat-progress-spinner
+              *ngIf="loading"
+              style="margin: 0 auto"
+              mode="indeterminate"
+              diameter="30"
+              strokeWidth="3"
+            ></mat-progress-spinner>
+            <h5 class="card-title">{{ stats.profit }}%</h5>
           </div>
+          <div class="card-footer">
+            <div class="stats"><i class="material-icons">date_range</i> Последний месяц</div>
+          </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
-          <div class="card card-stats">
-              <div class="card-header card-header-info card-header-icon" style="height:73px">
-                  <div class="card-icon">
-                      <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
-                  </div>
-                  <p class="card-category">На счету</p>
-                  <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30" strokeWidth="3"></mat-progress-spinner>
-                  <h5 class="card-title">${{stats.account}}</h5>
-              </div>
-              <div class="card-footer">
-                  <div class="stats">
-                      <i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i>  Пополнить кошелек
-                  </div>
-              </div>
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon" style="height:73px">
+            <div class="card-icon">
+              <i class="material-icons">spellcheck</i>
+            </div>
+            <p class="card-category">Риск-профиль</p>
+            <mat-progress-spinner
+              *ngIf="loading"
+              style="margin: 0 auto"
+              mode="indeterminate"
+              diameter="30"
+              strokeWidth="3"
+            ></mat-progress-spinner>
+            <h5 class="card-title">{{ riskType }}</h5>
           </div>
+          <div class="card-footer">
+            <div class="stats" routerLink="/testForRiskLevel" style="cursor:pointer">
+              <i class="material-icons">local_offer</i> Пройти тест еще раз
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
+        <div class="card card-stats">
+          <div class="card-header card-header-info card-header-icon" style="height:73px">
+            <div class="card-icon">
+              <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
+            </div>
+            <p class="card-category">На счету</p>
+            <mat-progress-spinner
+              *ngIf="loading"
+              style="margin: 0 auto"
+              mode="indeterminate"
+              diameter="30"
+              strokeWidth="3"
+            ></mat-progress-spinner>
+            <h5 class="card-title">${{ stats.account }}</h5>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i> Пополнить кошелек</div>
+          </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
@@ -87,57 +108,52 @@
   <mat-grid-list cols="3" rowHeight="170px">
     <mat-grid-tile colspan="1" rowspan="2">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
-          <div class="card card-chart" style="height:310px">
-            <div class="card-header card-header-success">
-                <div class="ct-chart" id="dailySalesChart"></div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Доходность за год</h5>
-                <p class="card-category">
-                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> +55% </span> доходность выросла</p>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">update</i> обновлено 17 дней назад
-                </div>
-            </div>
+        <div class="card card-chart" style="height:310px">
+          <div class="card-header card-header-success">
+            <div class="ct-chart" id="dailySalesChart"></div>
           </div>
+          <div class="card-body">
+            <h5 class="card-title">Доходность за год</h5>
+            <p class="card-category">
+              <span class="text-success"><i class="fa fa-long-arrow-up"></i> +55% </span> доходность выросла
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><i class="material-icons">update</i> обновлено 17 дней назад</div>
+          </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="2">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
         <div class="card card-chart" style="height:310px">
-            <div class="card-header card-header-warning">
-                <div class="ct-chart" id="websiteViewsChart"></div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Аналитика по росту потрфеля</h5>
-                <p class="card-category">ваш портфель вырос</p>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                </div>
-            </div>
+          <div class="card-header card-header-warning">
+            <div class="ct-chart" id="websiteViewsChart"></div>
           </div>
+          <div class="card-body">
+            <h5 class="card-title">Аналитика по росту потрфеля</h5>
+            <p class="card-category">ваш портфель вырос</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><i class="material-icons">access_time</i> campaign sent 2 days ago</div>
+          </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="2">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
         <div class="card card-chart" style="height:310px">
-            <div class="card-header card-header-danger">
-                <div class="ct-chart" id="completedTasksChart"></div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Выполненные курсы</h5>
-                <p class="card-category">За месяц ~3 курса</p>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">update</i> обновлено 17 дней назад
-                </div>
-            </div>
+          <div class="card-header card-header-danger">
+            <div class="ct-chart" id="completedTasksChart"></div>
           </div>
+          <div class="card-body">
+            <h5 class="card-title">Выполненные курсы</h5>
+            <p class="card-category">За месяц ~3 курса</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats"><i class="material-icons">update</i> обновлено 17 дней назад</div>
+          </div>
+        </div>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
@@ -146,42 +162,42 @@
 
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile colspan="1" rowspan="1">
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              Статистика по ботам
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                  <button mat-menu-item>Действие 1</button>
-                  <button mat-menu-item>Действие 2</button>
-                </mat-menu>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <app-widgets [index]="'NASDAQ'" [ticker] = "'AAPL'"></app-widgets>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <mat-card class="dashboard-card">
-            <mat-card-header>
-              <mat-card-title>
-                ТОП график рост
-                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item>Действие 1</button>
-                    <button mat-menu-item>Действие 2</button>
-                  </mat-menu>
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-              <app-widgets [index]="'NASDAQ'" [ticker] = "'MSFT'"></app-widgets>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Статистика по ботам
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Действие 1</button>
+              <button mat-menu-item>Действие 2</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <app-widgets [index]="'NASDAQ'" [ticker]="'AAPL'"></app-widgets>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            ТОП график рост
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Действие 1</button>
+              <button mat-menu-item>Действие 2</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <app-widgets [index]="'NASDAQ'" [ticker]="'MSFT'"></app-widgets>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
   </mat-grid-list>
 </div>

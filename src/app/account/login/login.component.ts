@@ -11,16 +11,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  
   hide = true;
   value = '';
-  
-  loginForm:FormGroup;
-  loading: boolean = false;
-  submitted: boolean = false;
+
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
   returnUrl: string;
 
   constructor(
@@ -31,40 +30,44 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService,
     private snackbar: MatSnackBar
   ) {
-    if(this.authenticationService.currentUserValue){
+    if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/dashboard']);
     }
-   }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
-    })
+      password: ['', Validators.required],
+    });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
   }
 
-  get f() {return this.loginForm.controls;}
-  // TO-DO ошибки добавить в разметку позже
-  getErrorLogin(){
-    return this.loginForm.get('username').hasError('required') ? 'Логин не может быть пустым': '';
+  get f() {
+    return this.loginForm.controls;
   }
-  getErrorPassword(){
-    return this.loginForm.get('password').hasError('required') ? 'Пароль не может быть пустым': '';
+  // TO-DO ошибки добавить в разметку позже
+  getErrorLogin() {
+    return this.loginForm.get('username').hasError('required') ? 'Логин не может быть пустым' : '';
+  }
+  getErrorPassword() {
+    return this.loginForm.get('password').hasError('required') ? 'Пароль не может быть пустым' : '';
   }
 
   onSubmit() {
     this.submitted = true;
 
-    if(this.loginForm.invalid){
+    if (this.loginForm.invalid) {
       return;
     }
 
     this.loading = true;
     // setTimeout(() => {
-      this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first()).subscribe(   
+    this.authenticationService
+      .login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
         data => {
           this.loading = false;
           this.router.navigate([this.returnUrl]);
@@ -75,13 +78,12 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         }
-      )
+      );
     // }, 1500);
-    
   }
 
-  forgetPassword(){
-    this.showMessage("Функция пока не доступна");
+  forgetPassword() {
+    this.showMessage('Функция пока не доступна');
   }
 
   private showErrorMessage(message: HttpErrorResponse) {
@@ -92,5 +94,4 @@ export class LoginComponent implements OnInit {
     this.snackbar.open(message, 'OK', { duration: 3000 });
     // console.log(message);
   }
-
 }

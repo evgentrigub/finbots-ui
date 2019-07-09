@@ -1,19 +1,30 @@
 <div>
-  <ng-container *ngIf="editMode then edit else view"></ng-container>
+  <ng-container *ngIf="editMode; then edit; else view"></ng-container>
 </div>
 
 <ng-template #view>
-  <div (mouseover)="hover=true" (mouseleave)="hover=false" class="name">
-    <span>{{original}}</span>
-    <button *ngIf="hover" mat-button (click)="editMode=true" matSuffix mat-icon-button aria-label="Edit" class="edit">
+  <div (mouseover)="hover = true" (mouseleave)="hover = false" class="name">
+    <span>{{ original }}</span>
+    <button *ngIf="hover" mat-button (click)="editMode = true" matSuffix mat-icon-button aria-label="Edit" class="edit">
       <mat-icon class="btn-usual" matTooltip="Переименовать" matTooltipPosition="right">edit</mat-icon>
     </button>
   </div>
 </ng-template>
 <ng-template #edit>
   <mat-form-field style="width:90%">
-    <input type="text" matInput class="name" (keydown.enter)="save()" (keydown.esc)="undo()" (blur)="toView()" [(ngModel)]="current"
-      placeholder="Название проекта" required minlength="3" maxlength="255">
+    <input
+      type="text"
+      matInput
+      class="name"
+      (keydown.enter)="save()"
+      (keydown.esc)="undo()"
+      (blur)="toView()"
+      [(ngModel)]="current"
+      placeholder="Название проекта"
+      required
+      minlength="3"
+      maxlength="255"
+    />
     <button mat-button *ngIf="canUndo" (click)="undo()" matSuffix mat-icon-button aria-label="Undo" class="undo">
       <mat-icon class="btn-undo" matTooltip="Отменить изменения" matTooltipPosition="right">undo</mat-icon>
     </button>

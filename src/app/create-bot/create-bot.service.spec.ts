@@ -5,7 +5,7 @@ import { CreateBotService } from './create-bot.service';
 describe('CreateBotService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CreateBotService]
+      providers: [CreateBotService],
     });
   });
 

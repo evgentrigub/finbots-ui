@@ -11,7 +11,7 @@
   top: 0;
 }
 
-.fixed-toolbar{
+.fixed-toolbar {
   position: fixed;
   z-index: 2;
 }

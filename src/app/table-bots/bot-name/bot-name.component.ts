@@ -10,7 +10,6 @@ import { TradingBot } from 'src/app/models/trading-bot-model';
   styleUrls: ['./bot-name.component.css'],
 })
 export class BotNameComponent {
-
   @Input() set bot(value: TradingBot) {
     this._bot = value;
     this.original = this._bot.name;
@@ -30,7 +29,8 @@ export class BotNameComponent {
   constructor(
     private readonly service: TradingBotsService,
     private readonly snackBar: MatSnackBar,
-    private readonly changeDetectorRef: ChangeDetectorRef) {}
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   get canUndo(): boolean {
     return this.current !== this.original;
@@ -83,7 +83,8 @@ export class BotNameComponent {
           },
           error => this.showMessage(error)
         )
-      ).subscribe();
+      )
+      .subscribe();
   }
 
   private showMessage(msg: any) {

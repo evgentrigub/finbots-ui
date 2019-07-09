@@ -8,16 +8,13 @@ import { User } from '../account/_models/user';
 import { Question } from '../models/Questions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
-
   questionsList$: BehaviorSubject<Question[]>;
   private loaded = false;
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     this.questionsList$ = new BehaviorSubject<Question[]>([]);
   }
 
@@ -34,46 +31,45 @@ export class TaskService {
   }
 
   private reloadQuestionList(): Observable<Question[]> {
-    return this.http.get<Question[]>(`${environment.apiUrl}/api/Task/GetQuestions`)
-      .pipe(catchError(this.handleError),
-        tap(response => {
-          this.questionsList$.next(response);
-          this.loaded = true;
-        })
-      );
+    return this.http.get<Question[]>(`${environment.apiUrl}/api/Task/GetQuestions`).pipe(
+      catchError(this.handleError),
+      tap(response => {
+        this.questionsList$.next(response);
+        this.loaded = true;
+      })
+    );
   }
 
   public postInvestorType(user: User, balls: number) {
-    const obj = {user: user, balls: balls };
+    const obj = { user: user, balls: balls };
     return this.http.post(`${environment.apiUrl}/api/Task/GetInvestorType`, obj);
   }
 
-  public convertRiskToString(score: InvestorType):  string {
-      switch (score) {
-        case InvestorType.Guaranteed :
-          return 'Трусишка';
-        case InvestorType.Conservative :
-          return 'Консерватор';
-        case InvestorType.Moderate :
-          return 'Сбалансированный';
-        case InvestorType.Growth :
-          return 'Целеустремленный к прибыли';
-        case InvestorType.AggressiveGrowth :
-          return 'Агрессивный';
-        case InvestorType.MaximumGrowth :
-          return 'Продам родную мать';
-      }
-      return 'Консерватор';
+  public convertRiskToString(score: InvestorType): string {
+    switch (score) {
+      case InvestorType.Guaranteed:
+        return 'Трусишка';
+      case InvestorType.Conservative:
+        return 'Консерватор';
+      case InvestorType.Moderate:
+        return 'Сбалансированный';
+      case InvestorType.Growth:
+        return 'Целеустремленный к прибыли';
+      case InvestorType.AggressiveGrowth:
+        return 'Агрессивный';
+      case InvestorType.MaximumGrowth:
+        return 'Продам родную мать';
+    }
+    return 'Консерватор';
   }
 
   private handleError(error: HttpErrorResponse) {
     let msg: string;
     if (error.error instanceof ErrorEvent) {
-        msg = 'Произошла ошибка:' + error.error.message;
+      msg = 'Произошла ошибка:' + error.error.message;
     } else {
-        msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
+      msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
     }
     return throwError(msg);
   }
-
 }

@@ -7,46 +7,47 @@
       <mat-card-subtitle style="font-size:16px; color: black">
         Определите к какой группе инвесторов вы принадлежите.
         <ul>
-            <li>
-                Как инвестор Вы уникальны. Ваши финансовые цели, существующая в данный момент финансовая ситуация, опыт инвестирования и <br>
-                Ваше отношение к риску — все поможет определить тот набор стратегий, который подибрается именно для Вас. <br>
-                Вы должны быть честны сами с собой в определении своих целей и оценке текущей финансовой ситуации. <br>
-                Только после определения этих факторов можно развивать в правильном направлении план Ваших пенсионных накоплений. <br>
-            </li>
-            <li>
-                Вопросы были продуманы так, чтобы помочь Вам понять Ваши цели в инвестировании и Ваше собственное отношение к инвестициям. <br>
-                Эти данные можно использовать, чтобы утвердиться в своих решениях по инвестированию или выбрать инвестиционную стратегию, отвечающую Вашим нуждам. <br>
-                Отвечая на вопросы, помните, что здесь ошибок в ответах быть не может. Однако, помните, что Вы должны быть абсолютно искренни, <br>
-                в противном случае результаты просто не отразят Вашего действительного отношения к инвестированию. <br>
-            </li>
-            <li>
-              Пожалуйста, обязательно ответьте на каждый вопрос. <br>
-              Каждый Ваш выбор сопровождается для наглядности появлением соответствующего количества баллов в окне, расположенном справа («Количество баллов»). <br>
-              После заполнения формы нажмите «Подсчитать баллы». Вы увидите общее количество баллов, которое соответствует вашему риск-профилю.
-            </li>
-          </ul>
+          <li>
+            Как инвестор Вы уникальны. Ваши финансовые цели, существующая в данный момент финансовая ситуация, опыт инвестирования и <br />
+            Ваше отношение к риску — все поможет определить тот набор стратегий, который подибрается именно для Вас. <br />
+            Вы должны быть честны сами с собой в определении своих целей и оценке текущей финансовой ситуации. <br />
+            Только после определения этих факторов можно развивать в правильном направлении план Ваших пенсионных накоплений. <br />
+          </li>
+          <li>
+            Вопросы были продуманы так, чтобы помочь Вам понять Ваши цели в инвестировании и Ваше собственное отношение к инвестициям.
+            <br />
+            Эти данные можно использовать, чтобы утвердиться в своих решениях по инвестированию или выбрать инвестиционную стратегию,
+            отвечающую Вашим нуждам. <br />
+            Отвечая на вопросы, помните, что здесь ошибок в ответах быть не может. Однако, помните, что Вы должны быть абсолютно искренни,
+            <br />
+            в противном случае результаты просто не отразят Вашего действительного отношения к инвестированию. <br />
+          </li>
+          <li>
+            Пожалуйста, обязательно ответьте на каждый вопрос. <br />
+            Каждый Ваш выбор сопровождается для наглядности появлением соответствующего количества баллов в окне, расположенном справа
+            («Количество баллов»). <br />
+            После заполнения формы нажмите «Подсчитать баллы». Вы увидите общее количество баллов, которое соответствует вашему
+            риск-профилю.
+          </li>
+        </ul>
       </mat-card-subtitle>
     </mat-card-header>
     <form [formGroup]="formGroup">
-    <mat-card-content formArrayName="questions">
-      <mat-card *ngFor="let el of formGroup.get('questions').controls; let i = index;" [formGroupName]="i" style="margin-bottom:20px">
-        <mat-card-title style="font-size:18px">
-        №{{i+1}}  {{el.get('question').value}}
-        </mat-card-title>
-        <mat-card-content>
-          <mat-radio-group formControlName="answer" class="radio-group">
-            <mat-radio-button style="margin:5px" *ngFor="let answer of el.get('answers').value" [value]="answer.answerRate" >
-              <div style="display: flex; color:black; ">
-                <div style="color:blue; margin-right: 1em">
-                    ({{answer.answerRate}})
+      <mat-card-content formArrayName="questions">
+        <mat-card *ngFor="let el of formGroup.get('questions').controls; let i = index" [formGroupName]="i" style="margin-bottom:20px">
+          <mat-card-title style="font-size:18px"> №{{ i + 1 }} {{ el.get('question').value }} </mat-card-title>
+          <mat-card-content>
+            <mat-radio-group formControlName="answer" class="radio-group">
+              <mat-radio-button style="margin:5px" *ngFor="let answer of el.get('answers').value" [value]="answer.answerRate">
+                <div style="display: flex; color:black; ">
+                  <div style="color:blue; margin-right: 1em">({{ answer.answerRate }})</div>
+                  {{ answer.content }}
                 </div>
-                {{answer.content}}
-              </div>
-            </mat-radio-button>
-          </mat-radio-group>
-        </mat-card-content>
-      </mat-card>
-    </mat-card-content>
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
     </form>
     <mat-card-actions>
       <button mat-button color="primary" (click)="submitTest()" [disabled]="!formGroup.valid">Подсчитать баллы</button>

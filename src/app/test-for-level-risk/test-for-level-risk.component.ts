@@ -11,10 +11,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-test-for-level-risk',
   templateUrl: './test-for-level-risk.component.html',
-  styleUrls: ['./test-for-level-risk.component.css']
+  styleUrls: ['./test-for-level-risk.component.css'],
 })
 export class TestForLevelRiskComponent implements OnInit {
-
   questionsAnswers: Question[];
   currentUser: User;
 
@@ -30,12 +29,12 @@ export class TestForLevelRiskComponent implements OnInit {
   ) {
     this.questionsControl = this.formBuilder.array([]);
     this.formGroup = this.formBuilder.group({
-      questions: this.questionsControl
+      questions: this.questionsControl,
     });
     this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
-   }
+  }
 
   ngOnInit() {
     this.getQuestions();
@@ -43,7 +42,6 @@ export class TestForLevelRiskComponent implements OnInit {
 
   getQuestions() {
     this.taskService.getQuestionsList().subscribe((results: Question[]) => {
-
       while (this.questionsControl.length !== 0) {
         this.questionsControl.removeAt(0);
       }
@@ -56,10 +54,10 @@ export class TestForLevelRiskComponent implements OnInit {
       this.questionsAnswers = results;
 
       results
-      .map(res => this.createFormGroupQuestion(res))
-      .forEach(el => {
-        this.questionsControl.push(el);
-      });
+        .map(res => this.createFormGroupQuestion(res))
+        .forEach(el => {
+          this.questionsControl.push(el);
+        });
     });
   }
 
@@ -67,7 +65,7 @@ export class TestForLevelRiskComponent implements OnInit {
     return this.formBuilder.group({
       question: this.formBuilder.control(question.objContent),
       answers: this.formBuilder.control(question.answers),
-      answer: this.formBuilder.control('', [Validators.required])
+      answer: this.formBuilder.control('', [Validators.required]),
     });
   }
 
@@ -89,13 +87,18 @@ export class TestForLevelRiskComponent implements OnInit {
       sum = +sum + +el.answer;
     }
 
-    this.taskService.postInvestorType(this.currentUser, sum)
-    .pipe(tap(_ => {
-      this.showMessage('Риск-профиль изменен');
-      this.router.navigateByUrl('/dashboard');
-    },
-      err => this.showMessage(err))
-    ).subscribe();
+    this.taskService
+      .postInvestorType(this.currentUser, sum)
+      .pipe(
+        tap(
+          _ => {
+            this.showMessage('Риск-профиль изменен');
+            this.router.navigateByUrl('/dashboard');
+          },
+          err => this.showMessage(err)
+        )
+      )
+      .subscribe();
   }
 
   private showMessage(msg: any) {

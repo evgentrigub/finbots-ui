@@ -11,19 +11,17 @@ import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-
   hide = true;
   valueFirstName = '';
   valueLastname = '';
   valueLogin = '';
 
   registerForm: FormGroup;
-  loading:boolean = false;
-  submitted:boolean = false;
-
+  loading = false;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,9 +31,9 @@ export class RegisterComponent implements OnInit {
     private alertService: AlertService,
     private snackbar: MatSnackBar
   ) {
-    if (this.authenticationService.currentUserValue) { 
+    if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
-  }
+    }
   }
 
   ngOnInit() {
@@ -43,13 +41,15 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
-  get f() { return this.registerForm.controls; }
+  get f() {
+    return this.registerForm.controls;
+  }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
@@ -58,19 +58,21 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     setTimeout(() => {
-      this.userService.register(this.registerForm.value)
+      this.userService
+        .register(this.registerForm.value)
         .pipe(first())
         .subscribe(
-            data => {
-                this.router.navigate(['/login']);
-                this.showMessage("Регистрация успешна");
-                this.loading = false;
-            },
-            error => {
-                this.alertService.error(error);
-                this.loading = false;
-                this.showErrorMessage(error);
-            });
+          data => {
+            this.router.navigate(['/login']);
+            this.showMessage('Регистрация успешна');
+            this.loading = false;
+          },
+          error => {
+            this.alertService.error(error);
+            this.loading = false;
+            this.showErrorMessage(error);
+          }
+        );
     }, 1500);
   }
 
@@ -82,5 +84,4 @@ export class RegisterComponent implements OnInit {
     this.snackbar.open(message, 'OK', { duration: 3000 });
     // console.log(message);
   }
-
 }

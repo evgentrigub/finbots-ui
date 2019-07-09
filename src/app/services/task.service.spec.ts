@@ -5,7 +5,7 @@ import { TaskService } from './task.service';
 describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TaskService]
+      providers: [TaskService],
     });
   });
 

@@ -13,18 +13,18 @@ import { TableBotsComponent } from './table-bots/table-bots.component';
 import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
 
 const appRoutes: Routes = [
-    {path: 'create', component: CreateBotComponent, canActivate: [AuthGuard]},
-    {path: 'table', component: TableBotsComponent, canActivate: [AuthGuard]},
-    {path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard]},
-    {path: 'settings', component: SettingsComponent , canActivate: [AuthGuard]},
-    {path: 'strategies', component: StrategiesComponent , canActivate: [AuthGuard]},
-    {path: 'rating', component: RatingComponent , canActivate: [AuthGuard]},
-    {path: 'blog', component: BlogComponent , canActivate: [AuthGuard]},
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'testForRiskLevel', component: TestForLevelRiskComponent },
-    { path: '**', redirectTo: 'dashboard' }
+  { path: 'create', component: CreateBotComponent, canActivate: [AuthGuard] },
+  { path: 'table', component: TableBotsComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'strategies', component: StrategiesComponent, canActivate: [AuthGuard] },
+  { path: 'rating', component: RatingComponent, canActivate: [AuthGuard] },
+  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'testForRiskLevel', component: TestForLevelRiskComponent },
+  { path: '**', redirectTo: 'dashboard' },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

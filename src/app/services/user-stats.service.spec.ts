@@ -5,7 +5,7 @@ import { UserStatsService } from './user-stats.service';
 describe('UserStatsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserStatsService]
+      providers: [UserStatsService],
     });
   });
 

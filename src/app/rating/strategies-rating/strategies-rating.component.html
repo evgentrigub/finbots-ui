@@ -1,42 +1,33 @@
 <div style="margin:20px">
   <mat-card>
-    <mat-card-header >
+    <mat-card-header>
       <mat-card-title style="font-size:24px">
         Аналитика по лучшим стратегиям
       </mat-card-title>
-      <mat-card-subtitle style="font-size:16px">
-      </mat-card-subtitle>
+      <mat-card-subtitle style="font-size:16px"> </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-  
-        <mat-progress-spinner *ngIf="isLoading"
-        class="example-margin"
-        color='primary'
-        mode='indeterminate'>
-        </mat-progress-spinner>
-  
-      <table mat-table [dataSource]="dataSource" class="dashboard-card" matSort >
-  
+      <mat-progress-spinner *ngIf="isLoading" class="example-margin" color="primary" mode="indeterminate"> </mat-progress-spinner>
+
+      <table mat-table [dataSource]="dataSource" class="dashboard-card" matSort>
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> № </th>
-          <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>№</th>
+          <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Название  </th>
-          <td mat-cell *matCellDef="let row">{{row.name}}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
         </ng-container>
-  
+
         <!-- <ng-container matColumnDef="profit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Доходность </th>
           <td mat-cell *matCellDef="let row"> {{row.profit}} </td>
         </ng-container> -->
-  
-  
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index">
-        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
       </table>
     </mat-card-content>
   </mat-card>
-  </div>
+</div>

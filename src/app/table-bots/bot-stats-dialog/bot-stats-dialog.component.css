@@ -1,23 +1,23 @@
-.mat-card{
-    display: contents;
+.mat-card {
+  display: contents;
 }
 
 .mat-card-header {
-    text-align: center;
+  text-align: center;
 }
 
 strong {
-    color: blue;
+  color: blue;
 }
 
 .dashboard-card {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-  }
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
 
-  .mat-grid-tile{
-    overflow: visible
-  }
+.mat-grid-tile {
+  overflow: visible;
+}

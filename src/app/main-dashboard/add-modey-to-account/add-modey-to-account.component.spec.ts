@@ -8,9 +8,8 @@ describe('AddModeyToAccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddModeyToAccountComponent ]
-    })
-    .compileComponents();
+      declarations: [AddModeyToAccountComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('StrategiesRatingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StrategiesRatingComponent ]
-    })
-    .compileComponents();
+      declarations: [StrategiesRatingComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

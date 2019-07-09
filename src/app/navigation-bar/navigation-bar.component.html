@@ -1,18 +1,20 @@
-<mat-sidenav-container class="sidenav-container" >
+<mat-sidenav-container class="sidenav-container">
   <!-- <mat-sidenav  -->
-  <mat-sidenav *ngIf='isShow'
+  <mat-sidenav
+    *ngIf="isShow"
     #drawer
     class="sidenav"
     fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    [opened]="!(isHandset$ | async)"
+  >
     <mat-toolbar color="primary">Меню</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard">Главная панель</a>
       <a mat-list-item routerLink="/table">Все роботы</a>
       <a mat-list-item routerLink="/create">Создать робота</a>
-      <br>
+      <br />
       <a mat-list-item routerLink="/testForRiskLevel">Тест на риск-профиль</a>
       <a mat-list-item routerLink="/strategies">Маркет стратегий</a>
       <a mat-list-item routerLink="/rating">Рейтинг участников</a>
@@ -20,44 +22,38 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar *ngIf='isShow' color="primary" class="fixed-toolbar" >
-    <!-- <mat-toolbar  color="primary" class="fixed-toolbar" > -->
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+    <mat-toolbar *ngIf="isShow" color="primary" class="fixed-toolbar">
+      <!-- <mat-toolbar  color="primary" class="fixed-toolbar" > -->
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <span >Добро пожаловать!</span>
+      <span>Добро пожаловать!</span>
 
       <span style="flex:1 1 auto;"></span>
 
       <mat-icon matBadge="10" matBadgeColor="warn">notifications</mat-icon>
       <mat-icon style="margin-left:1%" matTooltip="Пользователь верифицирован">verified_user</mat-icon>
-      <button mat-button style="margin-left:1%" [matMenuTriggerFor]="menu">{{currentUser.firstName}} {{currentUser.lastName}}</button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
-          <button mat-menu-item routerLink="/settings">Настройки</button>
-          <button mat-menu-item (click)="logout()">Выход</button>
-        </mat-menu>
+      <button mat-button style="margin-left:1%" [matMenuTriggerFor]="menu">{{ currentUser.firstName }} {{ currentUser.lastName }}</button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item routerLink="/settings">Настройки</button>
+        <button mat-menu-item (click)="logout()">Выход</button>
+      </mat-menu>
     </mat-toolbar>
-    <mat-toolbar *ngIf='!isShow'>
+    <mat-toolbar *ngIf="!isShow">
       <span>FinBotProject</span>
       <button mat-button style="margin-left:1%" routerLink="/about">О проекте</button>
       <button mat-button style="margin-left:1%" routerLink="/login">Войти</button>
       <button mat-button style="margin-left:1%" routerLink="/register">Регистрация</button>
     </mat-toolbar>
     <ng-content></ng-content>
-    <div class="text-center" *ngIf='!isShow'>
-        <p>
-            Graduate Work "FinBotProject v0.1"
-        </p>
-        <p>
-          By Eugene Trigubov && Tatjana Ilina
-        </p>
+    <div class="text-center" *ngIf="!isShow">
+      <p>
+        Graduate Work "FinBotProject v0.1"
+      </p>
+      <p>
+        By Eugene Trigubov && Tatjana Ilina
+      </p>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-

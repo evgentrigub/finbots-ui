@@ -8,9 +8,8 @@ describe('TestForLevelRiskComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestForLevelRiskComponent ]
-    })
-    .compileComponents();
+      declarations: [TestForLevelRiskComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,14 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { RouterModule} from '@angular/router';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
-        MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule,
-        MatSnackBarModule, MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-        MatTableModule, MatTooltipModule, MatRadioModule, MatBadgeModule, MatDialogModule, MatStepperModule, MatSlideToggleModule, MatTabsModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatTableModule,
+  MatTooltipModule,
+  MatRadioModule,
+  MatBadgeModule,
+  MatDialogModule,
+  MatStepperModule,
+  MatSlideToggleModule,
+  MatTabsModule,
+} from '@angular/material';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './account/login/login.component';
@@ -33,7 +53,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { UserRatingComponent } from './rating/user-rating/user-rating.component';
 import { StrategiesRatingComponent } from './rating/strategies-rating/strategies-rating.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +75,7 @@ import { StrategiesRatingComponent } from './rating/strategies-rating/strategies
     BotStatsDialogComponent,
     StrategyDialogComponent,
     UserRatingComponent,
-    StrategiesRatingComponent
+    StrategiesRatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,21 +89,32 @@ import { StrategiesRatingComponent } from './rating/strategies-rating/strategies
     MatDialogModule,
 
     // MATERIAL
-    MatToolbarModule, MatButtonModule, MatSidenavModule,
-    MatIconModule, MatListModule, MatGridListModule,
-    MatCardModule, MatMenuModule, MatFormFieldModule,
-    MatInputModule, MatIconModule, MatSnackBarModule,
-    MatProgressSpinnerModule, MatSelectModule, MatSliderModule,
-    MatRadioModule, MatTableModule, MatTooltipModule, MatBadgeModule,
-    MatStepperModule, MatSlideToggleModule,
-    MDBBootstrapModule.forRoot(), MatTabsModule
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatRadioModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatBadgeModule,
+    MatStepperModule,
+    MatSlideToggleModule,
+    MDBBootstrapModule.forRoot(),
+    MatTabsModule,
   ],
-  entryComponents: [
-    AddModeyToAccountComponent,
-    BotStatsDialogComponent,
-    StrategyDialogComponent
-  ],
+  entryComponents: [AddModeyToAccountComponent, BotStatsDialogComponent, StrategyDialogComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -16,10 +16,10 @@
   right: 10px;
 }
 
-.mat-grid-tile{
-  overflow: visible
+.mat-grid-tile {
+  overflow: visible;
 }
 
-mat-card{
+mat-card {
   box-shadow: none !important;
 }

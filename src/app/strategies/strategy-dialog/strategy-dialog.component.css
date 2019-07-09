@@ -1,9 +1,9 @@
 .mat-card {
-    display: contents;
+  display: contents;
 }
 
 .mat-card-title {
   font-size: 18pt;
   display: flex;
-  text-align: center
+  text-align: center;
 }

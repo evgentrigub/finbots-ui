@@ -9,17 +9,16 @@ import { FinancialInstrument } from '../models/financial-instrument-enum';
 import { Asset } from '../Models/asset';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CreateBotService {
-
   constructor(private http: HttpClient) {}
 
   createBot(createdBot: any, userId: number): Observable<null> {
-    const obj = {bot: createdBot, id: userId};
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/CreateBot`, obj)
-    .pipe(catchError(this.handleError),
-      tap( _ => {})
+    const obj = { bot: createdBot, id: userId };
+    return this.http.post<any>(`${environment.apiUrl}/api/robots/CreateBot`, obj).pipe(
+      catchError(this.handleError),
+      tap(_ => {})
     );
   }
 
@@ -36,7 +35,7 @@ export class CreateBotService {
     let params = new HttpParams();
     params = params.append('fi', financialInstrument.toString());
     params = params.append('ind', industry.toString());
-    return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params});
+    return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params });
   }
 
   public getStrategies(): Observable<Strategy[]> {

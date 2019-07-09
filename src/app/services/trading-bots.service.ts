@@ -9,16 +9,13 @@ import { FinancialInstrument } from '../models/financial-instrument-enum';
 import { Industry } from '../models/industry-enum';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TradingBotsService {
-
   tradingBotsList$: BehaviorSubject<TradingBot[]>;
   private loaded = false;
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     this.tradingBotsList$ = new BehaviorSubject<TradingBot[]>([]);
   }
 
@@ -35,27 +32,27 @@ export class TradingBotsService {
   }
 
   private reloadedTraidingBotsList(id: number) {
-    return this.http.get<TradingBot[]>(`${environment.apiUrl}/api/robots/GetUserRobots?id=` + id)
-      .pipe(catchError(this.handleError),
-        tap(response => {
-          this.tradingBotsList$.next(response);
-          this.loaded = true;
-        })
-      );
+    return this.http.get<TradingBot[]>(`${environment.apiUrl}/api/robots/GetUserRobots?id=` + id).pipe(
+      catchError(this.handleError),
+      tap(response => {
+        this.tradingBotsList$.next(response);
+        this.loaded = true;
+      })
+    );
   }
 
   updateRobotData(bot: TradingBot): Observable<null> {
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot)
-    .pipe(
+    return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot).pipe(
       catchError(this.handleError),
-      tap( _ => {}));
+      tap(_ => {})
+    );
   }
 
   deleteRobotData(bot: TradingBot): Observable<null> {
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot)
-    .pipe(
+    return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot).pipe(
       catchError(this.handleError),
-      tap( _ => {}));
+      tap(_ => {})
+    );
   }
 
   public getDescription(bot_id: string): Observable<Asset> {
@@ -63,22 +60,22 @@ export class TradingBotsService {
   }
 
   public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {
-      switch (financialInstrument) {
-        case 1 :
-          return 'Форекс';
-        case 2 :
-          return 'Рынок акций';
-        case 3:
-          return 'Криптовалюта';
-      }
-      return ;
+    switch (financialInstrument) {
+      case 1:
+        return 'Форекс';
+      case 2:
+        return 'Рынок акций';
+      case 3:
+        return 'Криптовалюта';
+    }
+    return;
   }
 
   public convertingIndustryToString(industry: Industry): string {
     switch (industry) {
-      case 1 :
+      case 1:
         return 'Информационные технологии';
-      case 2 :
+      case 2:
         return 'Здравоохранение';
       case 3:
         return 'Машиностроение и транспорт';
@@ -96,9 +93,8 @@ export class TradingBotsService {
         return 'Электоэнергетика';
       case 10:
         return 'Телекоммуникации';
-
     }
-    return ;
+    return;
   }
 
   private handleError(error: HttpErrorResponse) {
