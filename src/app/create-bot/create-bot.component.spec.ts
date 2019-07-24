@@ -3,7 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateBotComponent } from './create-bot.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule, MatFormFieldModule, MatStepperModule, MatRadioModule, MatSelectModule, MatGridListModule, MatSliderModule, MatSnackBarModule, MatInputModule } from '@angular/material';
+import {
+  MatCardModule,
+  MatFormFieldModule,
+  MatStepperModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatGridListModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatInputModule,
+} from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('CreateBotComponent', () => {
@@ -26,8 +36,8 @@ describe('CreateBotComponent', () => {
         MatGridListModule,
         MatSliderModule,
         MatSnackBarModule,
-        MatInputModule
-      ]
+        MatInputModule,
+      ],
     }).compileComponents();
   }));
 

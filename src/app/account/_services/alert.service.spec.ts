@@ -7,7 +7,7 @@ describe('AlertService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AlertService],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule],
     });
   });
 

@@ -10,9 +10,9 @@ import { BotNameComponent } from './bot-name.component';
 
 describe('ProjectNameComponent', () => {
   // let service: ProjectsService;
-  let component: BotNameComponent;
-  let fixture: ComponentFixture<BotNameComponent>;
-  let editProjectSpy: jasmine.Spy;
+  // let component: BotNameComponent;
+  // let fixture: ComponentFixture<BotNameComponent>;
+  // let editProjectSpy: jasmine.Spy;
 
   // beforeEach(async(() =>
   //   TestBed.configureTestingModule({

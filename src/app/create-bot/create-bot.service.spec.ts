@@ -7,7 +7,7 @@ describe('CreateBotService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [CreateBotService],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
     });
   });
 

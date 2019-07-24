@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StrategiesComponent } from './strategies.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material';
 
 describe('StrategiesComponent', () => {
   let component: StrategiesComponent;
@@ -9,6 +12,7 @@ describe('StrategiesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [StrategiesComponent],
+      imports: [MDBBootstrapModule, HttpClientModule, MatDialogModule],
     }).compileComponents();
   }));
 

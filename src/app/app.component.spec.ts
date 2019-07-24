@@ -10,10 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        NavigationBarComponent
-      ],
+      declarations: [AppComponent, NavigationBarComponent],
       imports: [
         BrowserAnimationsModule,
         BrowserModule,
@@ -24,8 +21,8 @@ describe('AppComponent', () => {
         MatListModule,
         MatMenuModule,
         RouterTestingModule,
-        HttpClientModule
-      ]
+        HttpClientModule,
+      ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {

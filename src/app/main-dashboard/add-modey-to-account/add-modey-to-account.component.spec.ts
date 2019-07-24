@@ -2,7 +2,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddModeyToAccountComponent } from './add-modey-to-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material';
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatDialogRef,
+  MatDialogModule,
+  MAT_DIALOG_DATA,
+} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,11 +29,9 @@ describe('AddModeyToAccountComponent', () => {
         MatInputModule,
         MatIconModule,
         HttpClientModule,
-        MatDialogModule
+        MatDialogModule,
       ],
-      providers: [
-        { provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }
-      ]
+      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }],
     }).compileComponents();
   }));
 

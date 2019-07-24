@@ -21,7 +21,7 @@ describe('NavigationBarComponent', () => {
         MatListModule,
         MatMenuModule,
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
       ],
     }).compileComponents();
 
