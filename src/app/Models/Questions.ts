@@ -1,4 +1,4 @@
-import { Answer } from './Answers';
+import { Answer } from './answers';
 
 export class Question {
   objContent: string;

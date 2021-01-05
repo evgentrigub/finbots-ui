@@ -23,7 +23,10 @@ describe('StrategyDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [StrategyDialogComponent],
       imports: [BrowserAnimationsModule, HttpClientModule, MatDialogModule, MatCardModule],
-      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents();
   }));
 

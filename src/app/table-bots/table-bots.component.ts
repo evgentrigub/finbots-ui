@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { TradingBot } from '../models/trading-bot-model';
 import { TradingBotsService } from '../services/trading-bots.service';
 import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
 import { tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-table-bots',

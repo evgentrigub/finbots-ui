@@ -31,7 +31,10 @@ describe('AddModeyToAccountComponent', () => {
         HttpClientModule,
         MatDialogModule,
       ],
-      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents();
   }));
 

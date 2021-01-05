@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, MinLengthValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../_services/authentication.service';
-import { AlertService } from '../_services/alert.service';
-import { first, retry, timeout } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
-import { ok } from 'assert';
+import { AuthenticationService } from '../services/authentication.service';
+import { AlertService } from '../services/alert.service';
+import { first } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit {
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
+        () => {
           this.loading = false;
           this.router.navigate([this.returnUrl]);
           this.showMessage('Вход успешно выполнен');

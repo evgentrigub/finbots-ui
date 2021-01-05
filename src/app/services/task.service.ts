@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
-import { InvestorType } from '../models/investor-type-enum';
-import { User } from '../account/_models/user';
-import { Question } from '../models/Questions';
+import { User } from '../account/models/user';
+import { Question } from '../models/questions';
+import { InvestorTypeCharacter } from '../models/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -45,19 +45,19 @@ export class TaskService {
     return this.http.post(`${environment.apiUrl}/api/Task/GetInvestorType`, obj);
   }
 
-  public convertRiskToString(score: InvestorType): string {
+  public convertRiskToString(score: InvestorTypeCharacter): string {
     switch (score) {
-      case InvestorType.Guaranteed:
+      case InvestorTypeCharacter.Guaranteed:
         return 'Трусишка';
-      case InvestorType.Conservative:
+      case InvestorTypeCharacter.Conservative:
         return 'Консерватор';
-      case InvestorType.Moderate:
+      case InvestorTypeCharacter.Moderate:
         return 'Сбалансированный';
-      case InvestorType.Growth:
+      case InvestorTypeCharacter.Growth:
         return 'Целеустремленный к прибыли';
-      case InvestorType.AggressiveGrowth:
+      case InvestorTypeCharacter.AggressiveGrowth:
         return 'Агрессивный';
-      case InvestorType.MaximumGrowth:
+      case InvestorTypeCharacter.MaximumGrowth:
         return 'Продам родную мать';
     }
     return 'Консерватор';

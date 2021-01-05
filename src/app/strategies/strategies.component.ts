@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StrategyService } from '../services/strategy.service';
 import { Strategy } from '../models/strategy';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { StrategyDialogComponent } from './strategy-dialog/strategy-dialog.component';
 
 @Component({

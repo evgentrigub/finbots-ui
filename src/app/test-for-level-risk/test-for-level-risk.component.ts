@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { TaskService } from '../services/task.service';
-import { User } from '../account/_models/user';
-import { AuthenticationService } from '../account/_services/authentication.service';
-import { Question } from '../models/Questions';
+import { User } from '../account/models/user';
+import { AuthenticationService } from '../account/services/authentication.service';
+import { Question } from '../models/questions';
 import { tap } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-test-for-level-risk',
@@ -19,6 +19,10 @@ export class TestForLevelRiskComponent implements OnInit {
 
   readonly formGroup: FormGroup;
   readonly questionsControl: FormArray;
+
+  getQuestionsControls() {
+    return (this.formGroup.get('questions') as FormArray).controls;
+  }
 
   constructor(
     private readonly taskService: TaskService,

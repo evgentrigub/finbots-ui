@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Observable, Subscribable, Subscription } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../account/_services/authentication.service';
-import { User } from '../account/_models/user';
+import { AuthenticationService } from '../account/services/authentication.service';
+import { User } from '../account/models/user';
 
 @Component({
   selector: 'app-navigation-bar',

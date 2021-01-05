@@ -1,5 +1,4 @@
-import { FinancialInstrument } from './financial-instrument-enum';
-import { Industry } from './industry-enum';
+import { FinancialInstrument, Industry } from './enums';
 
 export class Asset {
   name: string;

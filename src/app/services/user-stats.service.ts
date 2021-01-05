@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { StatsView } from '../models/StatsView';
-import { InvestorType } from '../models/investor-type-enum';
+import { StatsView } from '../models/statsView';
 import { catchError, tap, switchMap } from 'rxjs/operators';
+import { InvestorTypeCharacter } from '../models/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class UserStatsService {
   private loaded = false;
 
   constructor(private http: HttpClient) {
-    this.stats$ = new BehaviorSubject<StatsView>({ profit: 0, account: 0, robotQuantity: 0, riskType: InvestorType.Guaranteed });
+    this.stats$ = new BehaviorSubject<StatsView>({ profit: 0, account: 0, robotQuantity: 0, riskType: InvestorTypeCharacter.Guaranteed });
   }
 
   /**

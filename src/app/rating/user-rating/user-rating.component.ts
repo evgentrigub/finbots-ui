@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
-import { User } from 'src/app/account/_models/user';
-import { UserService } from 'src/app/account/_services/user.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { User } from 'src/app/account/models/user';
+import { UserService } from 'src/app/account/services/user.service';
 
 @Component({
   selector: 'app-user-rating',

@@ -14,7 +14,10 @@ describe('BotStatsDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [BotStatsDialogComponent, WidgetsComponent],
       imports: [BrowserAnimationsModule, HttpClientModule, MatDialogModule, MatCardModule],
-      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: {} }],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents();
   }));
 

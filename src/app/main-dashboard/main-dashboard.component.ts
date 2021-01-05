@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../account/_services/authentication.service';
+import { AuthenticationService } from '../account/services/authentication.service';
 import { Subscription } from 'rxjs';
-import { User } from '../account/_models/user';
+import { User } from '../account/models/user';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../services/user-stats.service';
-import { StatsView } from '../models/StatsView';
-import { MatDialog } from '@angular/material';
+import { StatsView } from '../models/statsView';
+import { MatDialog } from '@angular/material/dialog';
 import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
-import { InvestorType } from '../models/investor-type-enum';
 import { TaskService } from '../services/task.service';
+import { InvestorTypeCharacter } from '../models/enums';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -24,7 +24,7 @@ export class MainDashboardComponent implements OnInit {
     profit: 0.0,
     robotQuantity: 0,
     account: 0.0,
-    riskType: InvestorType.Moderate,
+    riskType: InvestorTypeCharacter.Moderate,
   };
 
   constructor(
