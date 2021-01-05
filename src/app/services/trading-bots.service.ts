@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, ObservableInput, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { TradingBot } from '../models/trading-bot-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
-import { Asset } from '../models/Asset';
-import { FinancialInstrument } from '../models/financial-instrument-enum';
-import { Industry } from '../models/industry-enum';
+import { Asset } from '../models/asset';
+import { FinancialInstrument, Industry } from '../models/enums';
 
 @Injectable({
   providedIn: 'root',

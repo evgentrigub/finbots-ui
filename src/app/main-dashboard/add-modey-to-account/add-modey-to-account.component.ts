@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../account/_services/user.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { User } from '../../account/_models/user';
+import { UserService } from '../../account/services/user.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { User } from '../../account/models/user';
 
 @Component({
   selector: 'app-add-modey-to-account',

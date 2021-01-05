@@ -1,8 +1,8 @@
-import { InvestorType } from './investor-type-enum';
+import { InvestorTypeCharacter } from './enums';
 
 export interface StatsView {
   profit: number;
   account: number;
   robotQuantity: number;
-  riskType: InvestorType;
+  riskType: InvestorTypeCharacter;
 }

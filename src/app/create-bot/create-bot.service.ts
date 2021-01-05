@@ -3,10 +3,9 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Industry } from '../models/industry-enum';
 import { Strategy } from '../models/strategy';
-import { FinancialInstrument } from '../models/financial-instrument-enum';
-import { Asset } from '../Models/asset';
+import { Asset } from '../models/asset';
+import { FinancialInstrument, Industry } from '../models/enums';
 
 @Injectable({
   providedIn: 'root',

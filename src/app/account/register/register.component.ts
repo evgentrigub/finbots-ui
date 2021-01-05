@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../_services/authentication.service';
-import { UserService } from '../_services/user.service';
-import { AlertService } from '../_services/alert.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { UserService } from '../services/user.service';
+import { AlertService } from '../services/alert.service';
 import { first } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material';
 export class RegisterComponent implements OnInit {
   hide = true;
   valueFirstName = '';
-  valueLastname = '';
+  valueLastName = '';
   valueLogin = '';
 
   registerForm: FormGroup;

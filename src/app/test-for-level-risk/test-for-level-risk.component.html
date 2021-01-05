@@ -34,7 +34,7 @@
     </mat-card-header>
     <form [formGroup]="formGroup">
       <mat-card-content formArrayName="questions">
-        <mat-card *ngFor="let el of formGroup.get('questions').controls; let i = index" [formGroupName]="i" style="margin-bottom:20px">
+        <mat-card *ngFor="let el of getQuestionsControls; let i = index" [formGroupName]="i" style="margin-bottom:20px">
           <mat-card-title style="font-size:18px"> №{{ i + 1 }} {{ el.get('question').value }} </mat-card-title>
           <mat-card-content>
             <mat-radio-group formControlName="answer" class="radio-group">
