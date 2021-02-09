@@ -12,7 +12,6 @@ import { RegisterComponent } from './account/register/register.component';
 import { routing } from './app.routing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertComponent } from './account/components/alert.component';
 import { AboutComponent } from './about/about.component';
 import { CreateBotComponent } from './create-bot/create-bot.component';
 import { TableBotsComponent } from './table-bots/table-bots.component';
@@ -59,7 +58,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     SettingsComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent,
     AboutComponent,
     CreateBotComponent,
     TableBotsComponent,
@@ -115,4 +113,4 @@ import { MatDialogModule } from '@angular/material/dialog';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

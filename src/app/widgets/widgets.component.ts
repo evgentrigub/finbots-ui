@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 
 declare const TradingView: any;
 
@@ -11,7 +11,7 @@ export class WidgetsComponent implements AfterViewInit {
   @Input() index: string;
   @Input() ticker: string;
 
-  constructor() {}
+  constructor() { }
 
   ngAfterViewInit(): void {
     const tradingView = new TradingView.widget({
