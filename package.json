@@ -11,7 +11,6 @@
     "format:fix": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc.json --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
     "format:all": "prettier --config ./.prettierrc.json --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
-    "heroku-postbuild": "ng build --prod",
     "postinstall": "ng build --prod",
     "logs": "heroku logs --app=finbots-success --tail"
   },
@@ -60,7 +59,8 @@
     "prettier": "^1.18.2",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0"
+    "tslint": "~6.1.0",
+    "typescript": "~4.0.2"
   },
   "engines": {
     "node": "12.19.0",
