@@ -1,12 +1,28 @@
 ﻿import { InvestorTypeCharacter } from 'src/app/models/enums';
+import { Bot } from 'src/app/models/trading-bot-model';
 
 export class User {
-  id: number;
-  username: string;
+  _id: string;
+  email: string;
   password: string;
-  firstName: string;
-  lastName: string;
-  token: string;
+
   account: number;
+  token: string;
   riskType: InvestorTypeCharacter;
+
+  // passwordResetToken: string;
+  // passwordResetExpires: Date;
+
+  // facebook: string;
+  // tokens: AuthToken[];
+
+  profile: {
+    bitrhDate: Date;
+    name: string;
+    gender: string;
+    location: string;
+    username: string;
+  };
+
+  bots: Bot[]
 }
