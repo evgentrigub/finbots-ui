@@ -5,13 +5,13 @@
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
-    "heroku-postbuild": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format:fix": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc.json --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
-    "format:all": "prettier --config ./.prettierrc.json --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\""
+    "format:all": "prettier --config ./.prettierrc.json --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
