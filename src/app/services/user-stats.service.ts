@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { Observable, BehaviorSubject, throwError, of } from 'rxjs';
 import { StatsView } from '../models/statsView';
-import { catchError, tap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { InvestorTypeCharacter } from '../models/enums';
 
 @Injectable({

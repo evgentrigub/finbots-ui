@@ -1,5 +1,5 @@
-﻿import { InvestorTypeCharacter } from 'src/app/models/enums';
-import { Bot } from 'src/app/models/trading-bot-model';
+﻿import { InvestorTypeCharacter } from '../../models/enums';
+import { Bot } from '../../models/trading-bot-model';
 
 export class User {
   _id: string;

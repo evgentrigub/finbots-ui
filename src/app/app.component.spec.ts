@@ -3,10 +3,14 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule, MatMenuModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({

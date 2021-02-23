@@ -4,8 +4,10 @@ import { TestForLevelRiskComponent } from './test-for-level-risk.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatCardModule, MatRadioModule, MatSnackBarModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('TestForLevelRiskComponent', () => {
   let component: TestForLevelRiskComponent;

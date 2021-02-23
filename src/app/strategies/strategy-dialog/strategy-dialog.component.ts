@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Strategy } from 'src/app/models/strategy';
+import { Strategy } from '../../models/strategy';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./strategy-dialog.component.css'],
 })
 export class StrategyDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Strategy) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Strategy) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

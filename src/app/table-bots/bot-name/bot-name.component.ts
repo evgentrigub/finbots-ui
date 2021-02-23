@@ -1,7 +1,7 @@
 import { tap } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { TradingBotsService } from 'src/app/services/trading-bots.service';
-import { TradingBot } from 'src/app/models/trading-bot-model';
+import { TradingBotsService } from '../../services/trading-bots.service';
+import { TradingBot } from '../../models/trading-bot-model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -30,7 +30,7 @@ export class BotNameComponent {
     private readonly service: TradingBotsService,
     private readonly snackBar: MatSnackBar,
     private readonly changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) { }
 
   get canUndo(): boolean {
     return this.current !== this.original;

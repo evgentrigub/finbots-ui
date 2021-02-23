@@ -4,17 +4,15 @@ import { TableBotsComponent } from './table-bots.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {
-  MatTableModule,
-  MatProgressSpinnerModule,
-  MatCardModule,
-  MatIconModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatSnackBarModule,
-  MatDialogModule,
-} from '@angular/material';
 import { BotNameComponent } from './bot-name/bot-name.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 
 describe('TableBotsComponent', () => {
   let component: TableBotsComponent;

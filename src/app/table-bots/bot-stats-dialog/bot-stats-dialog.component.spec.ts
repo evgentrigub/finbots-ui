@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BotStatsDialogComponent } from './bot-stats-dialog.component';
-import { WidgetsComponent } from 'src/app/widgets/widgets.component';
+import { WidgetsComponent } from '../../widgets/widgets.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule, MatCardModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('BotStatsDialogComponent', () => {
   let component: BotStatsDialogComponent;

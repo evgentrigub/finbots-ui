@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Strategy } from 'src/app/models/strategy';
-import { StrategyService } from 'src/app/services/strategy.service';
+import { Strategy } from '../../models/strategy';
+import { StrategyService } from '../../services/strategy.service';
 
 @Component({
   selector: 'app-strategies-rating',
@@ -13,7 +13,7 @@ export class StrategiesRatingComponent implements OnInit {
   dataSource: MatTableDataSource<Strategy> = new MatTableDataSource();
   isLoading = true;
 
-  constructor(private strategyService: StrategyService) {}
+  constructor(private strategyService: StrategyService) { }
 
   ngOnInit() {
     this.getStrategies();
