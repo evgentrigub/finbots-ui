@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { Observable, BehaviorSubject, throwError, of } from 'rxjs';
 import { StatsView } from '../models/statsView';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { InvestorTypeCharacter } from '../models/enums';
@@ -30,13 +30,14 @@ export class UserStatsService {
   }
 
   private reloadedStats(id: number): Observable<StatsView> {
-    return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`).pipe(
-      catchError(this.handleError),
-      tap(response => {
-        this.stats$.next(response);
-        this.loaded = true;
-      })
-    );
+    return of({ profit: 0, account: 0, robotQuantity: 0, riskType: InvestorTypeCharacter.Guaranteed })
+    // return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`).pipe(
+    //   catchError(this.handleError),
+    //   tap(response => {
+    //     this.stats$.next(response);
+    //     this.loaded = true;
+    //   })
+    // );
   }
 
   private handleError(error: HttpErrorResponse) {

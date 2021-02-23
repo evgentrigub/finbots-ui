@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll() {
     return this.http.get<User[]>(`${environment.apiUrl}/users`);
@@ -23,11 +23,11 @@ export class UserService {
   }
 
   update(user: User) {
-    return this.http.put(`${environment.apiUrl}/users/${user.id}`, user);
+    return this.http.put(`${environment.apiUrl}/users/${user._id}`, user);
   }
 
   updateAccount(user: User): Observable<User> {
-    return this.http.put<User>(`${environment.apiUrl}/users/addMoney/${user.id}`, user);
+    return this.http.put<User>(`${environment.apiUrl}/users/addMoney/${user._id}`, user);
   }
 
   delete(id: number) {

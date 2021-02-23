@@ -60,7 +60,8 @@ export class MainDashboardComponent implements OnInit {
   }
 
   getStats() {
-    this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
+    // this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
+    this.userStatService.getStatsById(0).subscribe(stats => {
       this.stats = stats;
       this.riskType = this.taskService.convertRiskToString(this.stats.riskType);
       this.loading = false;
@@ -106,7 +107,7 @@ export class MainDashboardComponent implements OnInit {
         {
           seriesBarDistance: 5,
           axisX: {
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
               return value[0];
             },
           },
@@ -144,7 +145,7 @@ export class MainDashboardComponent implements OnInit {
     delays = 80;
     durations = 500;
 
-    chart.on('draw', function(data) {
+    chart.on('draw', function (data) {
       if (data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
@@ -182,7 +183,7 @@ export class MainDashboardComponent implements OnInit {
     seq2 = 0;
     delays2 = 80;
     durations2 = 500;
-    chart.on('draw', function(data) {
+    chart.on('draw', function (data) {
       if (data.type === 'bar') {
         seq2++;
         data.element.animate({

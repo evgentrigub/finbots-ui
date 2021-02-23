@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
-import { AlertService } from '../services/alert.service';
 import { first } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -28,7 +27,6 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private alertService: AlertService,
     private snackbar: MatSnackBar
   ) {
     if (this.authenticationService.currentUserValue) {
@@ -68,7 +66,7 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
           },
           error => {
-            this.alertService.error(error);
+            // this.alertService.error(error);
             this.loading = false;
             this.showErrorMessage(error);
           }

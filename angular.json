@@ -29,18 +29,19 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./node_modules/chartist/dist/chartist.css",
+              "src/assets/scss/material-dashboard.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chartist/dist/chartist.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "chartist"
+            ]
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

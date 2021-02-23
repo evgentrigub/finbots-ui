@@ -43,14 +43,14 @@ export class TradingBotsService {
   updateRobotData(bot: TradingBot): Observable<null> {
     return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot).pipe(
       catchError(this.handleError),
-      tap(_ => {})
+      tap(_ => { })
     );
   }
 
   deleteRobotData(bot: TradingBot): Observable<null> {
     return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot).pipe(
       catchError(this.handleError),
-      tap(_ => {})
+      tap(_ => { })
     );
   }
 
@@ -105,7 +105,7 @@ export class TradingBotsService {
       msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
     }
 
-    console.error('ScenarioService::handleError() ' + msg);
+    console.error('TradingBotsService::handleError() ' + msg);
 
     return throwError(msg);
   }

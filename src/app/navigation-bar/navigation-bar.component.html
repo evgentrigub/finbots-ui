@@ -1,14 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- <mat-sidenav  -->
-  <mat-sidenav
-    *ngIf="isShow"
-    #drawer
-    class="sidenav"
-    fixedInViewport="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)"
-  >
+  <mat-sidenav *ngIf="isShow" #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Меню</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard">Главная панель</a>
@@ -24,7 +18,8 @@
   <mat-sidenav-content>
     <mat-toolbar *ngIf="isShow" color="primary" class="fixed-toolbar">
       <!-- <mat-toolbar  color="primary" class="fixed-toolbar" > -->
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -33,8 +28,9 @@
       <span style="flex:1 1 auto;"></span>
 
       <mat-icon matBadge="10" matBadgeColor="warn">notifications</mat-icon>
-      <mat-icon style="margin-left:1%" matTooltip="Пользователь верифицирован">verified_user</mat-icon>
-      <button mat-button style="margin-left:1%" [matMenuTriggerFor]="menu">{{ currentUser.firstName }} {{ currentUser.lastName }}</button>
+      <mat-icon style="margin-left:1%">verified_user</mat-icon>
+      <button mat-button style="margin-left:1%" [matMenuTriggerFor]="menu">{{ currentUser.firstName }} {{
+        currentUser.lastName }}</button>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <button mat-menu-item routerLink="/settings">Настройки</button>
         <button mat-menu-item (click)="logout()">Выход</button>
