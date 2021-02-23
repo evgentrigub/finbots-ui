@@ -11,15 +11,17 @@
     "format:fix": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc.json --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
     "format:all": "prettier --config ./.prettierrc.json --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
-    "postinstall": "ng build --prod",
+    "heroku-postbuild": "ng build --prod",
     "logs": "heroku logs --app=finbots-success --tail"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.5",
     "@angular/cdk": "^11.0.3",
+    "@angular/cli": "~11.0.5",
     "@angular/common": "~11.0.5",
     "@angular/compiler": "~11.0.5",
+    "@angular/compiler-cli": "~11.0.5",
     "@angular/core": "~11.0.5",
     "@angular/forms": "~11.0.5",
     "@angular/material": "^11.0.3",
@@ -42,8 +44,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.5",
-    "@angular/cli": "~11.0.5",
-    "@angular/compiler-cli": "~11.0.5",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -59,8 +59,7 @@
     "prettier": "^1.18.2",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "tslint": "~6.1.0"
   },
   "engines": {
     "node": "12.19.0",
