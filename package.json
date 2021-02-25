@@ -4,14 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format:fix": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc.json --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
     "format:all": "prettier --config ./.prettierrc.json --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
-    "heroku-postbuild": "ng build --prod",
     "logs": "heroku logs --app=finbots-success --tail"
   },
   "private": true,
