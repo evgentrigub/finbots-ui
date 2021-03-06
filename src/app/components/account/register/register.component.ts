@@ -14,13 +14,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
   hide = true;
-  valueFirstName = '';
-  valueLastName = '';
-  valueLogin = '';
-
-  registerForm: FormGroup;
   loading = false;
   submitted = false;
+
+  form: FormGroup;
+  valueEmail = '';
+
+  get controls() {
+    return this.form.controls;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,29 +37,22 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
+    this.form = this.formBuilder.group({
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
-  get f() {
-    return this.registerForm.controls;
-  }
-
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
 
     this.loading = true;
     setTimeout(() => {
       this.userService
-        .register(this.registerForm.value)
+        .register(this.form.value)
         .pipe(first())
         .subscribe(
           data => {
@@ -66,20 +61,17 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
           },
           error => {
-            // this.alertService.error(error);
             this.loading = false;
             this.showErrorMessage(error);
           }
         );
-    }, 1500);
+    }, 1000);
   }
 
   private showErrorMessage(message: HttpErrorResponse) {
     this.snackbar.open(message.error.message, 'OK', { duration: 6000 });
-    // console.log(message);
   }
   private showMessage(message: any) {
     this.snackbar.open(message, 'OK', { duration: 3000 });
-    // console.log(message);
   }
 }

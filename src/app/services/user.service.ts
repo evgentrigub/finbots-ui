@@ -10,27 +10,23 @@ import { User } from '../models/user';
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<User[]>(`${environment.apiUrl}/users`);
-  }
-
   getById(id: number) {
-    return this.http.get(`${environment.apiUrl}/users/${id}`);
+    return this.http.get(`${environment.apiUrl}/account/${id}`);
   }
 
   register(user: User) {
-    return this.http.post(`${environment.apiUrl}/users/register`, user);
+    return this.http.post(`${environment.apiUrl}/account/signup`, user);
   }
 
   update(user: User) {
-    return this.http.put(`${environment.apiUrl}/users/${user._id}`, user);
+    return this.http.put(`${environment.apiUrl}/account/${user._id}`, user);
   }
 
   updateAccount(user: User): Observable<User> {
-    return this.http.put<User>(`${environment.apiUrl}/users/addMoney/${user._id}`, user);
+    return this.http.put<User>(`${environment.apiUrl}/account/addMoney/${user._id}`, user);
   }
 
   delete(id: number) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`);
+    return this.http.delete(`${environment.apiUrl}/account/${id}`);
   }
 }
