@@ -1,32 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
-import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
-import { SettingsComponent } from './settings/settings.component';
-import { LoginComponent } from './account/login/login.component';
-import { RegisterComponent } from './account/register/register.component';
-import { routing } from './app.routing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AboutComponent } from './about/about.component';
-import { CreateBotComponent } from './create-bot/create-bot.component';
-import { TableBotsComponent } from './table-bots/table-bots.component';
-import { WidgetsComponent } from './widgets/widgets.component';
-import { StrategiesComponent } from './strategies/strategies.component';
-import { RatingComponent } from './rating/rating.component';
-import { BlogComponent } from './blog/blog.component';
-import { TestForLevelRiskComponent } from './test-for-level-risk/test-for-level-risk.component';
-import { AddModeyToAccountComponent } from './main-dashboard/add-modey-to-account/add-modey-to-account.component';
-import { BotNameComponent } from './table-bots/bot-name/bot-name.component';
-import { BotStatsDialogComponent } from './table-bots/bot-stats-dialog/bot-stats-dialog.component';
-import { StrategyDialogComponent } from './strategies/strategy-dialog/strategy-dialog.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { UserRatingComponent } from './rating/user-rating/user-rating.component';
-import { StrategiesRatingComponent } from './rating/strategies-rating/strategies-rating.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -49,6 +28,21 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { WidgetsComponent } from './components/main-dashboard/widgets/widgets.component';
+import { LoginComponent } from './components/account/login/login.component';
+import { RegisterComponent } from './components/account/register/register.component';
+import { BotNameComponent } from './components/table-bots/bot-name/bot-name.component';
+import { BotStatsDialogComponent } from './components/table-bots/bot-stats-dialog/bot-stats-dialog.component';
+import { TableBotsComponent } from './components/table-bots/table-bots.component';
+import { TestForLevelRiskComponent } from './components/test-for-level-risk/test-for-level-risk.component';
+import { AppComponent } from './app.component';
+import { routing } from './app.routing';
+import { AboutComponent } from './components/account/about/about.component';
+import { SettingsComponent } from './components/account/settings/settings.component';
+import { CreateBotComponent } from './components/create-bot/create-bot.component';
+import { AddModeyToAccountComponent } from './components/main-dashboard/add-modey-to-account/add-modey-to-account.component';
+import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
@@ -62,16 +56,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     CreateBotComponent,
     TableBotsComponent,
     WidgetsComponent,
-    StrategiesComponent,
-    RatingComponent,
-    BlogComponent,
     TestForLevelRiskComponent,
     AddModeyToAccountComponent,
     BotNameComponent,
     BotStatsDialogComponent,
-    StrategyDialogComponent,
-    UserRatingComponent,
-    StrategiesRatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +97,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     MDBBootstrapModule.forRoot(),
   ],
-  entryComponents: [AddModeyToAccountComponent, BotStatsDialogComponent, StrategyDialogComponent],
+  entryComponents: [AddModeyToAccountComponent, BotStatsDialogComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
