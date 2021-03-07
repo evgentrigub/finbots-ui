@@ -7,17 +7,13 @@
           <div class="form-group">
             <mat-form-field appearance="outline" style="width:100%">
               <mat-label>E-mail</mat-label>
-              <input matInput [(ngModel)]="valueEmail" formControlName="email"
+              <input matInput formControlName="email"
                 [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
-              <button mat-button *ngIf="valueEmail" matSuffix mat-icon-button aria-label="Clear"
-                (click)="valueEmail = ''">
-                <mat-icon>close</mat-icon>
-              </button>
             </mat-form-field>
           </div>
           <div class="form-group">
             <mat-form-field appearance="outline" style="width:100%">
-              <mat-label>Введите пароль</mat-label>
+              <mat-label>Пароль</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
                 [ngClass]="{ 'is-invalid': submitted && controls.password.errors }" />
               <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>

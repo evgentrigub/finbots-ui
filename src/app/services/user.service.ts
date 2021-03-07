@@ -18,13 +18,13 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/account/signup`, user);
   }
 
-  update(user: User) {
-    return this.http.put(`${environment.apiUrl}/account/${user._id}`, user);
-  }
+  // update(user: User) {
+  //   return this.http.put(`${environment.apiUrl}/account/${user._id}`, user);
+  // }
 
-  updateAccount(user: User): Observable<User> {
-    return this.http.put<User>(`${environment.apiUrl}/account/addMoney/${user._id}`, user);
-  }
+  // updateAccount(user: User): Observable<User> {
+  //   return this.http.put<User>(`${environment.apiUrl}/account/addMoney/${user._id}`, user);
+  // }
 
   delete(id: number) {
     return this.http.delete(`${environment.apiUrl}/account/${id}`);

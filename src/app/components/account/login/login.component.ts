@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  // value = '';
+  valueEmail = '';
 
   loginForm: FormGroup;
   loading = false;
@@ -34,19 +34,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      login: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
   }
 
-  get authForm() {
+  get controls() {
     return this.loginForm.controls;
   }
   // TO-DO ошибки добавить в разметку позже
   getErrorLogin() {
-    return this.loginForm.get('login').hasError('required') ? 'Логин не может быть пустым' : '';
+    return this.loginForm.get('email').hasError('required') ? 'Email не может быть пустым' : '';
   }
   getErrorPassword() {
     return this.loginForm.get('password').hasError('required') ? 'Пароль не может быть пустым' : '';
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     // setTimeout(() => {
     this.authenticationService
-      .login(this.authForm.login.value, this.authForm.password.value)
+      .login(this.loginForm.value)
       .pipe(first())
       .subscribe(
         () => {

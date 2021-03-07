@@ -26,10 +26,10 @@ export class AddModeyToAccountComponent implements OnInit {
   ngOnInit() { }
 
   addMoney(summa: number) {
-    const prev = this.data.account;
-    this.data.account = summa;
-    this.userService.updateAccount(this.data).subscribe();
-    this.data.account = +prev + +summa;
+    // const prev = this.data.account;
+    // this.data.account = summa;
+    // this.userService.updateAccount(this.data).subscribe();
+    // this.data.account = +prev + +summa;
     this.dialogRef.close();
   }
 }

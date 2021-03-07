@@ -6,22 +6,17 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <mat-form-field appearance="outline" style="width:100%">
-              <mat-label>Введите логин</mat-label>
-              <input matInput formControlName="login"
-                [ngClass]="{ 'is-invalid': submitted && authForm.login.errors }" />
-              <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button> -->
-              <!-- <mat-error *ngIf="login.invalid">{{getErrorLogin()}}</mat-error> -->
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
             </mat-form-field>
           </div>
           <div class="form-group">
             <mat-form-field appearance="outline" style="width:100%">
-              <mat-label>Введите пароль</mat-label>
+              <mat-label>Пароль</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
-                [ngClass]="{ 'is-invalid': submitted && authForm.password.errors }" />
+                [ngClass]="{ 'is-invalid': submitted && controls.password.errors }" />
               <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-              <!-- <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error> -->
             </mat-form-field>
           </div>
           <div *ngIf="!loading" style="text-align:center" class="form-group">

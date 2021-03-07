@@ -25,8 +25,7 @@
 
       <mat-icon matBadge="10" matBadgeColor="warn">notifications</mat-icon>
       <mat-icon style="margin-left:1%">verified_user</mat-icon>
-      <button mat-button style="margin-left:1%" [matMenuTriggerFor]="menu">{{ currentUser.firstName }} {{
-        currentUser.lastName }}</button>
+      <button mat-button style="margin-left:1%" [matMenuTriggerFor]="menu">{{ currentUser.email }}</button>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <button mat-menu-item routerLink="/settings">Настройки</button>
         <button mat-menu-item (click)="logout()">Выход</button>
