@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { Bot } from '../models/trading-bot-model';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { Asset } from '../models/asset';
-import { FinancialInstrument, Industry } from '../models/enums';
+import { FinancialInstrument } from '../models/enums';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -67,41 +67,38 @@ export class TradingBotsService {
 
   public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {
     switch (financialInstrument) {
-      case 1:
+      case FinancialInstrument.Forex:
         return 'Форекс';
-      case 2:
+      case FinancialInstrument.Stock:
         return 'Рынок акций';
-      case 3:
-        return 'Криптовалюта';
     }
-    return;
   }
 
-  public convertingIndustryToString(industry: Industry): string {
-    switch (industry) {
-      case 1:
-        return 'Информационные технологии';
-      case 2:
-        return 'Здравоохранение';
-      case 3:
-        return 'Машиностроение и транспорт';
-      case 4:
-        return 'Недвижимость';
-      case 5:
-        return 'Потребительские товары и услуги';
-      case 6:
-        return 'Финансовы сектор';
-      case 7:
-        return 'Энергетика';
-      case 8:
-        return 'Серьевая промыщленность';
-      case 9:
-        return 'Электоэнергетика';
-      case 10:
-        return 'Телекоммуникации';
-    }
-    return;
-  }
+  // public convertingIndustryToString(industry: Industry): string {
+  //   switch (industry) {
+  //     case 1:
+  //       return 'Информационные технологии';
+  //     case 2:
+  //       return 'Здравоохранение';
+  //     case 3:
+  //       return 'Машиностроение и транспорт';
+  //     case 4:
+  //       return 'Недвижимость';
+  //     case 5:
+  //       return 'Потребительские товары и услуги';
+  //     case 6:
+  //       return 'Финансовы сектор';
+  //     case 7:
+  //       return 'Энергетика';
+  //     case 8:
+  //       return 'Серьевая промыщленность';
+  //     case 9:
+  //       return 'Электоэнергетика';
+  //     case 10:
+  //       return 'Телекоммуникации';
+  //   }
+  //   return;
+  // }
 
   private handleError(error: HttpErrorResponse) {
     let msg: string;

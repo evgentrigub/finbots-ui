@@ -27,8 +27,8 @@ export class BotStatsDialogComponent implements OnInit {
   getDescription(bot_id: string) {
     this.tradingBotsService.getDescription(bot_id).subscribe(r => {
       this.asset = r;
-      this.industry = this.tradingBotsService.convertingIndustryToString(r.industry);
-      this.financialInstrument = this.tradingBotsService.convertingFinancialInstrumentToString(r.financialInstrument);
+      // this.industry = this.tradingBotsService.convertingIndustryToString(r.industry);
+      // this.financialInstrument = this.tradingBotsService.convertingFinancialInstrumentToString(r.financialInstrument);
     });
   }
 }

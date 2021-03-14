@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Strategy } from '../../models/strategy';
 import { Asset } from '../../models/asset';
-import { FinancialInstrument, Industry } from '../../models/enums';
+import { FinancialInstrument } from '../../models/enums';
+import { BotDto } from 'src/app/models/trading-bot-model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,9 @@ import { FinancialInstrument, Industry } from '../../models/enums';
 export class CreateBotService {
   constructor(private http: HttpClient) { }
 
-  createBot(createdBot: any, userId: number): Observable<null> {
-    const obj = { bot: createdBot, id: userId };
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/CreateBot`, obj).pipe(
+  createBot(bot: BotDto): Observable<null> {
+    return this.http.post<any>(`${environment.apiUrl}/api/bots/create`, bot).pipe(
       catchError(this.handleError),
-      tap(_ => { })
     );
   }
 
@@ -25,21 +24,51 @@ export class CreateBotService {
     return Object.values(FinancialInstrument).filter(val => typeof val === 'string') as string[];
   }
 
-  getIndustries() {
-    // return Object.values(Industry);
-    return Object.values(Industry).filter(val => typeof val === 'string') as string[];
+  public getSecurities(instument: FinancialInstrument): Asset[] {
+    // todo формировать список на бэкенде
+    return [
+      {
+        name: 'Apple',
+        ticker: 'AAPL'
+      },
+      {
+        name: 'AMD',
+        ticker: 'AMD'
+      },
+      {
+        name: 'Activision',
+        ticker: 'ATVI'
+      },
+      {
+        name: 'VEON',
+        ticker: 'VEON'
+      },
+    ]
   }
 
-  getAssets(financialInstrument: number, industry: number): Observable<Asset[]> {
-    let params = new HttpParams();
-    params = params.append('fi', financialInstrument.toString());
-    params = params.append('ind', industry.toString());
-    return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params });
+  public getStrategies(): Strategy[] {
+    return [
+      {
+        name: 'TradingView',
+        description: 'Берет данные по техническому анализу с TradingView'
+      },
+      {
+        name: 'Raddar',
+        description: 'Берет данные по техническому анализу с Raddar.io'
+      }
+    ]
   }
 
-  public getStrategies(): Observable<Strategy[]> {
-    return this.http.get<Strategy[]>(`${environment.apiUrl}/api/Strategy/GetAllStrategies/`);
-  }
+  // getIndustries() {
+  //   return Object.values(Industry).filter(val => typeof val === 'string') as string[];
+  // }
+
+  // getAssets(financialInstrument: number, industry: number): Observable<Asset[]> {
+  //   let params = new HttpParams();
+  //   params = params.append('fi', financialInstrument.toString());
+  //   params = params.append('ind', industry.toString());
+  //   return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params });
+  // }
 
   private handleError(error: HttpErrorResponse) {
     let msg: string;

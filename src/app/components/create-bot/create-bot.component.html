@@ -5,10 +5,10 @@
         Создать робота
       </mat-card-title>
       <mat-card-subtitle style="font-size:16px; color: black">
-        На этой странице вы можете создать нового робота за 4 шага.
+        На этой странице вы создаёте нового робота.
         <ul>
           <li style="margin-top: 1em">
-            На первом шаге введите название и сумму инвестиций
+            На текущий момент из "Финансовых инструментов" доступны только акции.
           </li>
           <li style="margin-top: 1em">
             На втором, выберите параметры доходности робота<br />
@@ -31,7 +31,7 @@
       <form [formGroup]="formGroup">
         <mat-vertical-stepper linear="false" #stepper>
           <!-- step 1 -->
-          <mat-step>
+          <!-- <mat-step>
             <ng-template matStepLabel>Название робота и сумма инвестирования</ng-template>
             <div style="display:flex; flex-wrap: wrap">
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
@@ -49,7 +49,8 @@
                 <mat-hint align="end">{{ nameInput.value.length }} / 255</mat-hint>
               </mat-form-field>
               <mat-form-field style="width: 30em; margin-bottom: 2em">
-                <input matInput formControlName="sum" placeholder="Какую сумму Вы готовы инвестировать?" type="number" />
+                <input matInput formControlName="sum" placeholder="Какую сумму Вы готовы инвестировать?"
+                  type="number" />
                 <span matPrefix>$&nbsp;</span>
                 <mat-error *ngIf="formGroup.hasError('required', 'sum')">
                   Не указана сумма
@@ -62,9 +63,9 @@
             <div>
               <button mat-stroked-button color="accent" matStepperNext>Далее</button>
             </div>
-          </mat-step>
+          </mat-step> -->
           <!-- step 2 -->
-          <mat-step>
+          <!-- <mat-step>
             <ng-template matStepLabel>Параметры доходности</ng-template>
             <div style="display: flex; flex-wrap: wrap; margin-top:2em; height: 3em">
               <div>
@@ -91,41 +92,30 @@
               <button mat-stroked-button color="primary" style="margin-right:2em" matStepperPrevious>Назад</button>
               <button mat-stroked-button color="accent" matStepperNext>Далее</button>
             </div>
-          </mat-step>
+          </mat-step> -->
           <!-- step 3 -->
           <mat-step>
-            <ng-template matStepLabel>Финансовый инструмент и стратегия робота</ng-template>
+            <ng-template matStepLabel>Финансовый инструмент и стратегия бота</ng-template>
             <div style="display:flex; flex-wrap: wrap">
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select
-                  placeholder="Финансовый инструмент"
-                  formControlName="instrument"
-                  (selectionChange)="selectionChangeInstrument($event)"
-                >
-                  <mat-option *ngFor="let financialInstrument of financialInstruments" [value]="financialInstrument">{{
-                    financialInstrument
-                  }}</mat-option>
+                <mat-select placeholder="Финансовый инструмент" formControlName="instrument">
+                  <mat-option *ngFor="let financialInstrument of financialInstruments"
+                    [disabled]="financialInstrument === 'Forex'" [value]="financialInstrument">
+                    {{ financialInstrument }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select
-                  placeholder="Индустрия"
-                  formControlName="industry"
-                  (selectionChange)="selectionChangeIndustry($event)"
-                  [disabled]="!isStockSelected"
-                >
-                  <mat-option *ngFor="let industry of industries" [value]="industry">{{ industry }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Актив" formControlName="asset" [disabled]="!isIndustrySelected && !isCurrencySelected">
-                  <mat-option *ngFor="let asset of assets" [value]="asset">{{ asset.name }}</mat-option>
+                <mat-select placeholder="Актив" formControlName="asset">
+                  <mat-option *ngFor="let asset of assets" [value]="asset.ticker">{{ asset.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="width: 30em; margin-bottom: 2em">
                 <mat-select placeholder="Cтратегия" formControlName="strategy">
-                  <mat-option *ngFor="let strategy of strategies" [value]="strategy" required>{{ strategy.name }}</mat-option>
+                  <mat-option *ngFor="let strategy of strategies" [disabled]="strategy.name === 'Raddar'"
+                    [value]="strategy">{{ strategy.name }}
+                  </mat-option>
                 </mat-select>
+                <mat-hint></mat-hint>
               </mat-form-field>
             </div>
             <div>
@@ -136,9 +126,8 @@
           <!-- step 4 -->
           <mat-step>
             <ng-template matStepLabel>Форма заполнена</ng-template>
-            <img *ngIf="formGroup.valid" src="http://avenuesoft.ru/site/files/f_pbx_41/robot_ip_pbx.jpg" style="height:100%" />
             <div style="margin-bottom: 2em">
-              <button mat-raised-button color="accent" (click)="createRobot()" [disabled]="!formGroup.valid">
+              <button mat-raised-button color="accent" (click)="submitBot()" [disabled]="!formGroup.valid">
                 Создать робота
               </button>
               <mat-error *ngIf="!formGroup.valid">

@@ -1,5 +1,3 @@
-import { Profit } from './Profit';
-
 // todo добавить поля из Bot
 // export interface Bot {
 //   id: string;
@@ -45,4 +43,9 @@ export interface IOperation {
   isLong: Boolean;
   fee: number;
   bot: Bot
+}
+
+export interface BotDto {
+  ticker: string;
+  strategy: string;
 }
