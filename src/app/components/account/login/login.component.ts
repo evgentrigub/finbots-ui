@@ -72,7 +72,6 @@ export class LoginComponent implements OnInit {
         },
         (error: HttpErrorResponse) => {
           this.showErrorMessage(error);
-          // this.alertService.error(error);
           this.loading = false;
         }
       );

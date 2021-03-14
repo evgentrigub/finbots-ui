@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from '../../account/models/user';
-import { UserService } from '../../account/services/user.service';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-rating',
@@ -16,9 +16,9 @@ export class UserRatingComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getAll().subscribe(users => {
-      this.dataSource.data = users;
-      this.isLoading = false;
-    });
+    // this.userService.getAll().subscribe(users => {
+    //   this.dataSource.data = users;
+    //   this.isLoading = false;
+    // });
   }
 }

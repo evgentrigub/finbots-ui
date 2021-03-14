@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, UserDto } from '../models/user';
 
 @Injectable({
@@ -21,19 +21,33 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  public get headers(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': 'Bearer ' + this.currentUserValue.token
+    })
+  }
+
   login(user: UserDto) {
     return this.http
-      .post<string>(`${environment.apiUrl}/account/login`, { email: user.email, password: user.password })
+      .post<string>(`${environment.apiUrl}/users/login`, { email: user.email, password: user.password })
       .pipe(
-        map(((res: any) => {
-          console.log("🚀 ~ file: authentication.service.ts ~ line 34 ~ AuthenticationService ~ map ~ res", res)
-
-          const currentUser = { email: user.email, token: res.token };
+        map(token => {
+          const currentUser = { email: user.email, token };
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          console.log("🚀 ~ file: authentication.service.ts ~ line 33 ~ AuthenticationService ~ map ~ currentUser", currentUser)
           this.currentUserSubject.next(currentUser);
           return user;
-        })));
+        }));
+  }
+
+  register(user: UserDto) {
+    return this.http.post<string>(`${environment.apiUrl}/users/signup`, user)
+      .pipe(
+        map(token => {
+          const currentUser = { email: user.email, token };
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          this.currentUserSubject.next(currentUser);
+          return user;
+        }));
   }
 
   logout() {

@@ -35,13 +35,9 @@ export class TradingBotsService {
   }
 
   private reloadedTraidingBotsList() {
-    const headers: HttpHeaders = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.authenticationService.currentUserValue.token
-    })
-
     return this.http.get<Bot[]>(
       `${environment.apiUrl}/bots`,
-      { headers }
+      { headers: this.authenticationService.headers }
     ).pipe(
       catchError(this.handleError),
       tap(response => {

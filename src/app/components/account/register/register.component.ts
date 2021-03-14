@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService,
     private snackbar: MatSnackBar
   ) {
     if (this.authenticationService.currentUserValue) {
@@ -50,22 +49,19 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-    setTimeout(() => {
-      this.userService
-        .register(this.form.value)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.router.navigate(['/login']);
-            this.showMessage('Регистрация успешна');
-            this.loading = false;
-          },
-          error => {
-            this.loading = false;
-            this.showErrorMessage(error);
-          }
-        );
-    }, 1000);
+    // setTimeout(() => {
+    this.authenticationService
+      .register(this.form.value)
+      .pipe(first())
+      .subscribe(_ => {
+        this.router.navigate(['dashboard']);
+        this.showMessage('Регистрация успешна');
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+        this.showErrorMessage(error);
+      });
+    // }, 1000);
   }
 
   private showErrorMessage(message: HttpErrorResponse) {

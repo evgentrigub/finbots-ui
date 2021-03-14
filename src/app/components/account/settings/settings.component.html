@@ -18,8 +18,8 @@
 
     <mat-grid-tile>
       <mat-form-field appearance="outline" style="width:90%">
-        <mat-label>Отчество</mat-label>
-        <input matInput formControlName="patronymic" />
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
       </mat-form-field>
     </mat-grid-tile>
 
@@ -61,8 +61,11 @@
         <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </mat-form-field>
     </mat-grid-tile>
-
-
   </mat-grid-list>
 
+  <div>
+    <button mat-raised-button color="accent" type="submit" [disabled]="!profileForm.valid">
+      Обновить
+    </button>
+  </div>
 </form>
