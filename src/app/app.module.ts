@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -41,6 +42,7 @@ import { CreateBotComponent } from './components/create-bot/create-bot.component
 import { AddModeyToAccountComponent } from './components/main-dashboard/add-modey-to-account/add-modey-to-account.component';
 import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -92,9 +94,14 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
     MatTabsModule,
     MatDialogModule,
     MDBBootstrapModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   entryComponents: [AddModeyToAccountComponent, BotStatsDialogComponent],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
