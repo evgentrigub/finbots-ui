@@ -31,10 +31,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { WidgetsComponent } from './components/main-dashboard/widgets/widgets.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
-import { BotNameComponent } from './components/table-bots/bot-name/bot-name.component';
 import { BotStatsDialogComponent } from './components/table-bots/bot-stats-dialog/bot-stats-dialog.component';
 import { TableBotsComponent } from './components/table-bots/table-bots.component';
-import { TestForLevelRiskComponent } from './components/test-for-level-risk/test-for-level-risk.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AboutComponent } from './components/account/about/about.component';
@@ -56,9 +54,7 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
     CreateBotComponent,
     TableBotsComponent,
     WidgetsComponent,
-    TestForLevelRiskComponent,
     AddModeyToAccountComponent,
-    BotNameComponent,
     BotStatsDialogComponent,
   ],
   imports: [

@@ -24,11 +24,7 @@ export class NavigationBarComponent implements OnDestroy {
     private authenticationService: AuthenticationService
   ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-      if (user) {
-        this.isShow = true;
-      } else {
-        this.isShow = false;
-      }
+      this.isShow = !!user
       this.currentUser = user;
     });
   }

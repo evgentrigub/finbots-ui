@@ -2,9 +2,9 @@
 import { Bot } from "src/app/models/trading-bot-model";
 
 export class User {
-  email: string;
-
   token: string;
+
+  email?: string;
   riskType?: InvestorTypeCharacter;
 
   // profile: {

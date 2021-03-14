@@ -7,19 +7,16 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { TableBotsComponent } from './components/table-bots/table-bots.component';
-import { TestForLevelRiskComponent } from './components/test-for-level-risk/test-for-level-risk.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard] },
   { path: 'table', component: TableBotsComponent, canActivate: [AuthGuard] },
   { path: 'create', component: CreateBotComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'risk', component: TestForLevelRiskComponent, canActivate: [AuthGuard] },
   // { path: 'create', component: CreateBotComponent },
   // { path: 'table', component: TableBotsComponent },
   // { path: 'dashboard', component: MainDashboardComponent },
   // { path: 'settings', component: SettingsComponent },
-  // { path: 'risk', component: TestForLevelRiskComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },

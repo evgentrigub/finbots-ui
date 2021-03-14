@@ -41,7 +41,8 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <mat-progress-spinner *ngIf="isLoading" class="example-margin" color="primary" mode="indeterminate"> </mat-progress-spinner>
+      <mat-progress-spinner *ngIf="isLoading" class="example-margin" color="primary" mode="indeterminate">
+      </mat-progress-spinner>
 
       <table mat-table [dataSource]="dataSource" class="dashboard-card" matSort>
         <ng-container matColumnDef="id">
@@ -49,16 +50,20 @@
           <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="name">
+        <!-- <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
           <td mat-cell *matCellDef="let row" style="width:15em">
             <app-bot-name [bot]="row"></app-bot-name>
           </td>
+        </ng-container> -->
+        <ng-container matColumnDef="ticker">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Стратегия</th>
+          <td mat-cell *matCellDef="let row">{{ row.ticker }}</td>
         </ng-container>
 
         <ng-container matColumnDef="strategy">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Стратегия</th>
-          <td mat-cell *matCellDef="let row">{{ row.strategy.name }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.strategy }}</td>
         </ng-container>
 
         <ng-container matColumnDef="timeframe">
@@ -74,30 +79,19 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Действия</th>
           <td mat-cell *matCellDef="let row">
-            <mat-icon
-              *ngIf="row.isActive"
-              (click)="stopBot(row)"
-              class="btn-usual"
-              style="margin-right:1em"
-              matTooltip="Остановить торговлю"
-              matTooltipPosition="left"
-            >
+            <mat-icon *ngIf="row.isActive" (click)="stopBot(row)" class="btn-usual" style="margin-right:1em"
+              matTooltip="Остановить торговлю" matTooltipPosition="left">
               pause_circle_filled
             </mat-icon>
-            <mat-icon
-              *ngIf="!row.isActive"
-              (click)="stopBot(row)"
-              class="btn-usual"
-              style="margin-right:1em"
-              matTooltip="Возобновить торговлю"
-              matTooltipPosition="left"
-            >
+            <mat-icon *ngIf="!row.isActive" (click)="stopBot(row)" class="btn-usual" style="margin-right:1em"
+              matTooltip="Возобновить торговлю" matTooltipPosition="left">
               play_circle_filled
             </mat-icon>
             <mat-icon (click)="delete(row)" class="btn-warn" style="margin-right:1em" matTooltip="Удалить робота">
               delete
             </mat-icon>
-            <mat-icon class="btn-accent" matTooltip="Информация о роботе" matTooltipPosition="right" (click)="openDialog(row)">
+            <mat-icon class="btn-accent" matTooltip="Информация о роботе" matTooltipPosition="right"
+              (click)="openDialog(row)">
               reorder
             </mat-icon>
           </td>

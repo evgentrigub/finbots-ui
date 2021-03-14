@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { TradingBot } from '../models/trading-bot-model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Bot } from '../models/trading-bot-model';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { Asset } from '../models/asset';
 import { FinancialInstrument, Industry } from '../models/enums';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TradingBotsService {
-  tradingBotsList$: BehaviorSubject<TradingBot[]>;
+  tradingBotsList$: BehaviorSubject<Bot[]>;
   private loaded = false;
 
-  constructor(private http: HttpClient) {
-    this.tradingBotsList$ = new BehaviorSubject<TradingBot[]>([]);
+  constructor(
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
+  ) {
+    this.tradingBotsList$ = new BehaviorSubject<Bot[]>([]);
   }
 
   /**
@@ -23,15 +27,22 @@ export class TradingBotsService {
    * (если список уже загружен, то вернет его
    * если не загружен, то делает запрос на сервер)
    */
-  getUserRobots(id: number): Observable<TradingBot[]> {
+  getUserRobots(): Observable<Bot[]> {
     if (!this.loaded) {
-      return this.reloadedTraidingBotsList(id).pipe(switchMap(r => this.tradingBotsList$));
+      return this.reloadedTraidingBotsList().pipe(switchMap(r => this.tradingBotsList$));
     }
     return this.tradingBotsList$;
   }
 
-  private reloadedTraidingBotsList(id: number) {
-    return this.http.get<TradingBot[]>(`${environment.apiUrl}/api/robots/GetUserRobots?id=` + id).pipe(
+  private reloadedTraidingBotsList() {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.authenticationService.currentUserValue.token
+    })
+
+    return this.http.get<Bot[]>(
+      `${environment.apiUrl}/bots`,
+      { headers }
+    ).pipe(
       catchError(this.handleError),
       tap(response => {
         this.tradingBotsList$.next(response);
@@ -40,14 +51,14 @@ export class TradingBotsService {
     );
   }
 
-  updateRobotData(bot: TradingBot): Observable<null> {
+  updateRobotData(bot: Bot): Observable<null> {
     return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot).pipe(
       catchError(this.handleError),
       tap(_ => { })
     );
   }
 
-  deleteRobotData(bot: TradingBot): Observable<null> {
+  deleteRobotData(bot: Bot): Observable<null> {
     return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot).pipe(
       catchError(this.handleError),
       tap(_ => { })

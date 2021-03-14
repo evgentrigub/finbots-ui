@@ -25,12 +25,13 @@ export class AuthenticationService {
     return this.http
       .post<string>(`${environment.apiUrl}/account/login`, { email: user.email, password: user.password })
       .pipe(
-        map((token => {
-          if (token) {
-            const currentUser = { email: user.email, token };
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            this.currentUserSubject.next(currentUser);
-          }
+        map(((res: any) => {
+          console.log("🚀 ~ file: authentication.service.ts ~ line 34 ~ AuthenticationService ~ map ~ res", res)
+
+          const currentUser = { email: user.email, token: res.token };
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          console.log("🚀 ~ file: authentication.service.ts ~ line 33 ~ AuthenticationService ~ map ~ currentUser", currentUser)
+          this.currentUserSubject.next(currentUser);
           return user;
         })));
   }

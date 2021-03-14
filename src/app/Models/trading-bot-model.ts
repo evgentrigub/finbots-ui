@@ -1,16 +1,16 @@
 import { Profit } from './Profit';
 
 // todo добавить поля из Bot
-export interface TradingBot {
-  id: string;
-  name: string;
-  type: string;
-  strategy: string;
-  profit: Profit;
-  workedTime: string;
-  status: string;
-  isActive: boolean;
-}
+// export interface Bot {
+//   id: string;
+//   name: string;
+//   type: string;
+//   strategy: string;
+//   profit: Profit;
+//   workedTime: string;
+//   status: string;
+//   isActive: boolean;
+// }
 
 export interface CreatedTradingBot {
   name: string;
@@ -24,12 +24,17 @@ export interface CreatedTradingBot {
 }
 
 export interface Bot {
+  id: string;
+  ticker: string;
   createdDate: number;
   isActive: boolean;
-  ticker: string;
   broker: string;
   brokerFee: number;
-  operations: IOperation[];
+  operations?: IOperation[];
+
+  strategy: string;
+  workedTime: string
+  profit: string;
 }
 
 export interface IOperation {
