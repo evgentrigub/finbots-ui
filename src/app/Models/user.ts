@@ -1,5 +1,5 @@
 ﻿import { InvestorTypeCharacter } from "src/app/models/enums";
-import { Bot } from "src/app/models/trading-bot-model";
+import { TradingBot } from "src/app/models/trading-bot-model";
 
 export class User {
   token: string;
@@ -7,7 +7,7 @@ export class User {
   email?: string;
   profile?: UserProfile
   riskType?: InvestorTypeCharacter;
-  bots?: Bot[]
+  bots?: TradingBot[]
 }
 
 export interface UserProfile {

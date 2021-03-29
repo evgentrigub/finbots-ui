@@ -4,7 +4,7 @@ import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { Bot } from 'src/app/models/trading-bot-model';
+import { TradingBot } from 'src/app/models/trading-bot-model';
 import { TradingBotsService } from 'src/app/services/trading-bots.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { TradingBotsService } from 'src/app/services/trading-bots.service';
 })
 export class TableBotsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'ticker', 'strategy', 'timeframe', 'profit', 'actions'];
-  dataSource: MatTableDataSource<Bot> = new MatTableDataSource();
+  dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource();
   isLoading = true;
 
   constructor(private readonly tradingBotsService: TradingBotsService, private readonly snackBar: MatSnackBar, public dialog: MatDialog) { }
@@ -31,7 +31,7 @@ export class TableBotsComponent implements OnInit {
     });
   }
 
-  stopBot(bot: Bot) {
+  stopBot(bot: TradingBot) {
     bot.isActive = !bot.isActive;
     this.tradingBotsService
       .updateRobotData(bot)
@@ -47,12 +47,12 @@ export class TableBotsComponent implements OnInit {
       .subscribe();
   }
 
-  delete(bot: Bot) {
+  delete(bot: TradingBot) {
     this.tradingBotsService.deleteRobotData(bot).subscribe();
     this.getRobots();
   }
 
-  openDialog(row: Bot) {
+  openDialog(row: TradingBot) {
     const dialogRef = this.dialog.open(BotStatsDialogComponent, {
       panelClass: 'dialog',
       width: '500px',

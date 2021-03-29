@@ -1,16 +1,4 @@
-// todo добавить поля из Bot
-// export interface Bot {
-//   id: string;
-//   name: string;
-//   type: string;
-//   strategy: string;
-//   profit: Profit;
-//   workedTime: string;
-//   status: string;
-//   isActive: boolean;
-// }
-
-export interface CreatedTradingBot {
+export interface TradingBotViewModel {
   name: string;
   sum: number;
   esValue: number;
@@ -21,7 +9,7 @@ export interface CreatedTradingBot {
   asset: string;
 }
 
-export interface Bot {
+export interface TradingBot {
   id: string;
   ticker: string;
   createdDate: number;
@@ -42,7 +30,7 @@ export interface IOperation {
   isSuccess: Boolean;
   isLong: Boolean;
   fee: number;
-  bot: Bot
+  bot: TradingBot
 }
 
 export interface BotDto {

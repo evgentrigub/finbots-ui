@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Asset } from 'src/app/models/asset';
-import { Bot } from 'src/app/models/trading-bot-model';
+import { TradingBot } from 'src/app/models/trading-bot-model';
 import { TradingBotsService } from 'src/app/services/trading-bots.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class BotStatsDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<BotStatsDialogComponent>,
     private tradingBotsService: TradingBotsService,
-    @Inject(MAT_DIALOG_DATA) public data: Bot
+    @Inject(MAT_DIALOG_DATA) public data: TradingBot
   ) { }
 
   ngOnInit() {

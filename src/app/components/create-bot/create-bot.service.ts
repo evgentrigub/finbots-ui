@@ -14,8 +14,8 @@ import { BotDto } from 'src/app/models/trading-bot-model';
 export class CreateBotService {
   constructor(private http: HttpClient) { }
 
-  createBot(bot: BotDto): Observable<null> {
-    return this.http.post<any>(`${environment.apiUrl}/api/bots/create`, bot).pipe(
+  createBot(bot: BotDto): Observable<string> {
+    return this.http.post<string>(`${environment.apiUrl}/api/bots/create`, bot).pipe(
       catchError(this.handleError),
     );
   }

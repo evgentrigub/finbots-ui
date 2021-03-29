@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { Bot } from '../models/trading-bot-model';
+import { TradingBot } from '../models/trading-bot-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
@@ -12,14 +12,14 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root',
 })
 export class TradingBotsService {
-  tradingBotsList$: BehaviorSubject<Bot[]>;
+  tradingBotsList$: BehaviorSubject<TradingBot[]>;
   private loaded = false;
 
   constructor(
     private http: HttpClient,
     private authenticationService: AuthenticationService
   ) {
-    this.tradingBotsList$ = new BehaviorSubject<Bot[]>([]);
+    this.tradingBotsList$ = new BehaviorSubject<TradingBot[]>([]);
   }
 
   /**
@@ -27,7 +27,7 @@ export class TradingBotsService {
    * (если список уже загружен, то вернет его
    * если не загружен, то делает запрос на сервер)
    */
-  getUserRobots(): Observable<Bot[]> {
+  getUserRobots(): Observable<TradingBot[]> {
     if (!this.loaded) {
       return this.reloadedTraidingBotsList().pipe(switchMap(r => this.tradingBotsList$));
     }
@@ -35,7 +35,7 @@ export class TradingBotsService {
   }
 
   private reloadedTraidingBotsList() {
-    return this.http.get<Bot[]>(
+    return this.http.get<TradingBot[]>(
       `${environment.apiUrl}/bots`,
       { headers: this.authenticationService.headers }
     ).pipe(
@@ -47,14 +47,14 @@ export class TradingBotsService {
     );
   }
 
-  updateRobotData(bot: Bot): Observable<null> {
+  updateRobotData(bot: TradingBot): Observable<null> {
     return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot).pipe(
       catchError(this.handleError),
       tap(_ => { })
     );
   }
 
-  deleteRobotData(bot: Bot): Observable<null> {
+  deleteRobotData(bot: TradingBot): Observable<null> {
     return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot).pipe(
       catchError(this.handleError),
       tap(_ => { })
