@@ -4,7 +4,7 @@ import { TradingBot } from '../models/trading-bot-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
-import { Asset } from '../models/asset';
+import { Ticker } from '../models/asset';
 import { FinancialInstrument } from '../models/enums';
 import { AuthenticationService } from './authentication.service';
 
@@ -61,8 +61,8 @@ export class TradingBotsService {
     );
   }
 
-  public getDescription(bot_id: string): Observable<Asset> {
-    return this.http.get<Asset>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=` + bot_id);
+  public getDescription(bot_id: string): Observable<Ticker> {
+    return this.http.get<Ticker>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=` + bot_id);
   }
 
   public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {

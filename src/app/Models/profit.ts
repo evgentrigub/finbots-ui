@@ -1,6 +1,6 @@
-import { Asset } from './asset';
+import { Ticker } from './asset';
 export class Profit {
-  asset: Asset[];
+  asset: Ticker[];
   percentage: number;
   isActive: boolean;
 }

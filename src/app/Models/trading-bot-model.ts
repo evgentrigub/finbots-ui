@@ -1,3 +1,14 @@
+import { StrategyList } from "./strategy";
+
+/**
+ * Модель для создания бота
+ */
+export interface BotDto {
+  ticker: string;
+  strategy: StrategyList;
+}
+
+
 export interface TradingBotViewModel {
   name: string;
   sum: number;
@@ -31,9 +42,4 @@ export interface IOperation {
   isLong: Boolean;
   fee: number;
   bot: TradingBot
-}
-
-export interface BotDto {
-  ticker: string;
-  strategy: string;
 }

@@ -105,14 +105,14 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Актив" formControlName="asset">
-                  <mat-option *ngFor="let asset of assets" [value]="asset.ticker">{{ asset.name }}</mat-option>
+                <mat-select placeholder="Актив" formControlName="ticker">
+                  <mat-option *ngFor="let ticker of tickers" [value]="ticker.value">{{ ticker.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="width: 30em; margin-bottom: 2em">
                 <mat-select placeholder="Cтратегия" formControlName="strategy">
                   <mat-option *ngFor="let strategy of strategies" [disabled]="strategy.name === 'Raddar'"
-                    [value]="strategy">{{ strategy.name }}
+                    [value]="strategy.name">{{ strategy.name }}
                   </mat-option>
                 </mat-select>
                 <mat-hint></mat-hint>

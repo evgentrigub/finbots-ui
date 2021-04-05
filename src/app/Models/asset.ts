@@ -1,4 +1,4 @@
-export class Asset {
+export class Ticker {
   name: string;
-  ticker: string;
+  value: string;
 }

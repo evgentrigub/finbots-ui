@@ -2,20 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { Strategy } from '../../models/strategy';
-import { Asset } from '../../models/asset';
+import { catchError } from 'rxjs/operators';
+import { Ticker } from '../../models/asset';
 import { FinancialInstrument } from '../../models/enums';
 import { BotDto } from 'src/app/models/trading-bot-model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { StrategyList, StrategyViewModel } from 'src/app/models/strategy';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CreateBotService {
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
+  ) { }
 
   createBot(bot: BotDto): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/api/bots/create`, bot).pipe(
+    return this.http.post<string>(`${environment.apiUrl}/bot/create`, bot, { headers: this.authenticationService.headers }).pipe(
       catchError(this.handleError),
     );
   }
@@ -24,37 +28,39 @@ export class CreateBotService {
     return Object.values(FinancialInstrument).filter(val => typeof val === 'string') as string[];
   }
 
-  public getSecurities(instument: FinancialInstrument): Asset[] {
+  public getSecurities(instument: FinancialInstrument): Ticker[] {
     // todo формировать список на бэкенде
     return [
       {
         name: 'Apple',
-        ticker: 'AAPL'
+        value: 'AAPL'
       },
       {
         name: 'AMD',
-        ticker: 'AMD'
+        value: 'AMD'
       },
       {
         name: 'Activision',
-        ticker: 'ATVI'
+        value: 'ATVI'
       },
       {
         name: 'VEON',
-        ticker: 'VEON'
+        value: 'VEON'
       },
     ]
   }
 
-  public getStrategies(): Strategy[] {
+  public getStrategies(): StrategyViewModel[] {
     return [
       {
-        name: 'TradingView',
-        description: 'Берет данные по техническому анализу с TradingView'
+        name: StrategyList.simpleTV,
+        description: 'Берет данные по техническому анализу с TradingView',
+        disabled: false
       },
       {
-        name: 'Raddar',
-        description: 'Берет данные по техническому анализу с Raddar.io'
+        name: StrategyList.simpleRaddar,
+        description: 'Берет данные по техническому анализу с Raddar.io',
+        disabled: true
       }
     ]
   }
@@ -71,9 +77,10 @@ export class CreateBotService {
   // }
 
   private handleError(error: HttpErrorResponse) {
+    console.log("🚀 ~ file: create-bot.service.ts ~ line 78 ~ CreateBotService ~ handleError ~ error", error)
     let msg: string;
 
-    if (error.error instanceof ErrorEvent) {
+    if (error.error) {
       msg = 'Произошла ошибка:' + error.error.message;
     } else {
       msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;

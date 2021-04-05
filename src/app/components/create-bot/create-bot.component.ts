@@ -3,12 +3,12 @@ import { CreateBotService } from './create-bot.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user';
-import { Strategy } from '../../models/strategy';
-import { Asset } from '../../models/asset';
+import { Ticker } from '../../models/asset';
 import { FinancialInstrument } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
 import { tap } from 'rxjs/operators';
 import { BotDto } from 'src/app/models/trading-bot-model';
+import { StrategyViewModel } from 'src/app/models/strategy';
 
 @Component({
   selector: 'app-create-bot',
@@ -18,11 +18,11 @@ import { BotDto } from 'src/app/models/trading-bot-model';
 export class CreateBotComponent implements OnInit {
   currentUser: User;
   financialInstruments: string[] = [];
-  assets: Asset[] = [];
-  strategies: Strategy[] = [];
+  tickers: Ticker[] = [];
+  strategies: StrategyViewModel[] = [];
 
   formGroup: FormGroup;
-  strategyControl: FormControl = new FormControl('true');
+  strategyControl: FormControl = new FormControl();
   instrumentControl: FormControl = new FormControl();
 
   constructor(
@@ -33,7 +33,7 @@ export class CreateBotComponent implements OnInit {
   ) {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
     this.financialInstruments = this.service.getFinancialInstruments();
-    this.assets = this.service.getSecurities(FinancialInstrument.Stock);
+    this.tickers = this.service.getSecurities(FinancialInstrument.Stock);
     this.strategies = this.service.getStrategies()
 
     this.instrumentControl = this.formBuilder.control(FinancialInstrument.Stock, [Validators.required]);
@@ -45,18 +45,24 @@ export class CreateBotComponent implements OnInit {
   }
 
   submitBot() {
-    const newRobot = this.formGroup.value as BotDto;
+    const value = this.formGroup.value;
+    console.log("🚀 ~ file: create-bot.component.ts ~ line 49 ~ CreateBotComponent ~ submitBot ~ value", value)
+    const newRobot = <BotDto>{
+      ticker: value.ticker,
+      strategy: value.strategy.name
+    }
     this.service.createBot(newRobot)
-      .pipe(
-        tap(_ => this.showMessage(`Заявка на создание бота ${newRobot.ticker} успешна отправлена`))
-      ).subscribe();
+      .subscribe(
+        _ => this.showMessage(`Заявка на создание бота ${newRobot.ticker} успешна отправлена`),
+        err => this.showMessage(err)
+      );
   }
 
   private createBotFormGroup(): FormGroup {
     return this.formBuilder.group({
       strategy: this.strategyControl,
       instrument: this.instrumentControl,
-      asset: ['', [Validators.required]],
+      ticker: ['', [Validators.required]],
     });
   }
 
