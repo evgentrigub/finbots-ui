@@ -37,7 +37,7 @@ export class CreateBotComponent implements OnInit {
     this.strategies = this.service.getStrategies()
 
     this.instrumentControl = this.formBuilder.control(FinancialInstrument.Stock, [Validators.required]);
-    this.strategyControl = this.formBuilder.control(this.strategies[0])
+    this.strategyControl = this.formBuilder.control(this.strategies[0].name)
     this.formGroup = this.createBotFormGroup();
   }
 
@@ -46,10 +46,9 @@ export class CreateBotComponent implements OnInit {
 
   submitBot() {
     const value = this.formGroup.value;
-    console.log("🚀 ~ file: create-bot.component.ts ~ line 49 ~ CreateBotComponent ~ submitBot ~ value", value)
     const newRobot = <BotDto>{
       ticker: value.ticker,
-      strategy: value.strategy.name
+      strategy: value.strategy
     }
     this.service.createBot(newRobot)
       .subscribe(

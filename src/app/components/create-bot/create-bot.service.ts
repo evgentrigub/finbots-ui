@@ -32,8 +32,8 @@ export class CreateBotService {
     // todo формировать список на бэкенде
     return [
       {
-        name: 'Apple',
-        value: 'AAPL'
+        name: 'Pfizer',
+        value: 'PFE'
       },
       {
         name: 'AMD',
