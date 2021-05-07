@@ -2,17 +2,15 @@
   "name": "finbots-front",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --prod",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format:fix": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc.json --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
     "format:all": "prettier --config ./.prettierrc.json --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
-    "logs": "heroku logs --app=finbots-success --tail",
-    "postinstall": "npm run build && npm run start"
+    "logs": "heroku logs --app=finbots-success --tail"
   },
   "private": true,
   "dependencies": {
