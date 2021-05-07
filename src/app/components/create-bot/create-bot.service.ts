@@ -19,7 +19,7 @@ export class CreateBotService {
   ) { }
 
   createBot(bot: BotDto): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/bot/create`, bot, { headers: this.authenticationService.headers }).pipe(
+    return this.http.post<string>(`${environment.apiUrl}/bot/create`, bot).pipe(
       catchError(this.handleError),
     );
   }
@@ -32,8 +32,8 @@ export class CreateBotService {
     // todo формировать список на бэкенде
     return [
       {
-        name: 'Pfizer',
-        value: 'PFE'
+        name: 'FORD',
+        value: 'F'
       },
       {
         name: 'AMD',

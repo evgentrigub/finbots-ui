@@ -6,7 +6,6 @@ import { User } from '../../models/user';
 import { Ticker } from '../../models/asset';
 import { FinancialInstrument } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
-import { tap } from 'rxjs/operators';
 import { BotDto } from 'src/app/models/trading-bot-model';
 import { StrategyViewModel } from 'src/app/models/strategy';
 
@@ -31,7 +30,7 @@ export class CreateBotComponent implements OnInit {
     private readonly snackBar: MatSnackBar,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
+    this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
     this.financialInstruments = this.service.getFinancialInstruments();
     this.tickers = this.service.getSecurities(FinancialInstrument.Stock);
     this.strategies = this.service.getStrategies()

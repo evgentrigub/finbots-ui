@@ -35,10 +35,7 @@ export class TradingBotsService {
   }
 
   private reloadedTraidingBotsList() {
-    return this.http.get<TradingBot[]>(
-      `${environment.apiUrl}/bots`,
-      { headers: this.authenticationService.headers }
-    ).pipe(
+    return this.http.get<TradingBot[]>(`${environment.apiUrl}/bots`,).pipe(
       catchError(this.handleError),
       tap(response => {
         this.tradingBotsList$.next(response);

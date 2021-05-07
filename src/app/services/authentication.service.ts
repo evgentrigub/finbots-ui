@@ -10,11 +10,11 @@ import { User, UserDto } from '../models/user';
 })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  public $currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.$currentUser = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): User {
@@ -23,7 +23,7 @@ export class AuthenticationService {
 
   public get headers(): HttpHeaders {
     return new HttpHeaders({
-      'Authorization': 'Bearer ' + this.currentUserValue.token
+      'Authorization': `Bearer ${this.currentUserValue && this.currentUserValue.token ? this.currentUserValue.token : ''}`
     })
   }
 

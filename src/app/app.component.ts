@@ -13,7 +13,7 @@ export class AppComponent {
   isCurrentUser = false;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
-    this.authenticationService.currentUser.subscribe(user => {
+    this.authenticationService.$currentUser.subscribe(user => {
       this.currentUser = user;
       if (user) {
         this.isCurrentUser = true;

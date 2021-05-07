@@ -33,7 +33,7 @@ export class MainDashboardComponent implements OnInit {
     private taskService: TaskService,
     public dialog: MatDialog
   ) {
-    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+    this.currentUserSubscription = this.authenticationService.$currentUser.subscribe(user => {
       this.currentUser = user;
     });
   }

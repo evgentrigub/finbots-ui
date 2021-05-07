@@ -15,12 +15,11 @@ export class UserService {
   ) { }
 
   get(): Observable<UserProfileDto> {
-    return this.http.get<UserProfileDto>(`${environment.apiUrl}/users/profile`, { headers: this.authenticationService.headers });
+    return this.http.get<UserProfileDto>(`${environment.apiUrl}/users/profile`);
   }
 
   update(profile: UserProfile) {
-    return this.http.put(`${environment.apiUrl}/users/profile`, profile,
-      { headers: this.authenticationService.headers });
+    return this.http.put(`${environment.apiUrl}/users/profile`, profile);
   }
 
   delete(id: number) {
