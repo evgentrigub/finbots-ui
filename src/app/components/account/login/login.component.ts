@@ -12,13 +12,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  hide = true;
-  valueEmail = '';
+  private returnUrl: string = '';
 
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
+  public hide = true;
+  public loading = false;
+  public loginForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,34 +31,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
-
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
+    this.loginForm = this.getLoginForm();
   }
 
-  get controls() {
-    return this.loginForm.controls;
-  }
-  // TO-DO ошибки добавить в разметку позже
-  getErrorLogin() {
-    return this.loginForm.get('email').hasError('required') ? 'Email не может быть пустым' : '';
-  }
-  getErrorPassword() {
-    return this.loginForm.get('password').hasError('required') ? 'Пароль не может быть пустым' : '';
-  }
-
-  onSubmit() {
-    this.submitted = true;
-
+  public onSubmit(): void {
     if (this.loginForm.invalid) {
       return;
     }
 
     this.loading = true;
-    // setTimeout(() => {
     this.authenticationService
       .login(this.loginForm.value)
       .pipe(first())
@@ -75,15 +55,27 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
-    // }, 1500);
   }
 
-  forgetPassword() {
+  public get canLogin() {
+    return this.loginForm.valid;
+  }
+
+  public onForgetPassword(): void {
     this.showMessage('Функция пока не доступна');
   }
 
-  private showErrorMessage(httpError: HttpErrorResponse) {
-    console.log("🚀 ~ file: login.component.ts ~ line 90 ~ LoginComponent ~ showErrorMessage ~ message.error", httpError)
+  /**
+   * todo: add password length validators
+   */
+  private getLoginForm(): FormGroup {
+    return this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+  }
+
+  private showErrorMessage(httpError: HttpErrorResponse): void {
     if (httpError.error.array && httpError.error.array.length) {
       const arr = httpError.error.array as Array<any>;
       arr.forEach(el => {
@@ -93,8 +85,8 @@ export class LoginComponent implements OnInit {
       this.snackbar.open(httpError.error.msg, 'OK', { duration: 6000 });
     }
   }
-  private showMessage(message: any) {
+
+  private showMessage(message: string): void {
     this.snackbar.open(message, 'OK', { duration: 3000 });
-    // console.log(message);
   }
 }
