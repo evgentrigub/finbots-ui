@@ -3,7 +3,7 @@ import { MainDashboardComponent } from './components/main-dashboard/main-dashboa
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { AboutComponent } from './components/account/about/about.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './helpers/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { TableBotsComponent } from './components/table-bots/table-bots.component';

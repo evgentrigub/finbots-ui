@@ -4,7 +4,7 @@ import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { TradingBot } from 'src/app/models/trading-bot-model';
+import { TradingBot } from 'src/app/models/trading-bot.model';
 import { TradingBotsService } from 'src/app/services/trading-bots.service';
 
 @Component({

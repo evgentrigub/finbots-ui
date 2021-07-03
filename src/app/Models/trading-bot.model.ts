@@ -1,4 +1,4 @@
-import { StrategyList } from "./strategy";
+import { StrategyList } from "./strategy.model";
 
 /**
  * Модель для создания бота

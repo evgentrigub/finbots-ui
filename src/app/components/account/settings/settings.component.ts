@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { first } from 'rxjs/operators';
-import { UserProfileDto } from 'src/app/models/user';
+import { UserProfileDto } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

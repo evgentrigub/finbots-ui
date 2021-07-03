@@ -3,11 +3,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Ticker } from '../../models/asset';
 import { FinancialInstrument } from '../../models/enums';
-import { BotDto } from 'src/app/models/trading-bot-model';
+import { BotDto } from 'src/app/models/trading-bot.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { StrategyList, StrategyViewModel } from 'src/app/models/strategy';
+import { StrategyList, StrategyViewModel } from 'src/app/models/strategy.model';
+import { SelectData } from 'src/app/models/statistics.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class CreateBotService {
     return Object.values(FinancialInstrument).filter(val => typeof val === 'string') as string[];
   }
 
-  public getSecurities(instument: FinancialInstrument): Ticker[] {
+  public getSecurities(instument: FinancialInstrument): SelectData<string>[] {
     // todo формировать список на бэкенде
     return [
       {
