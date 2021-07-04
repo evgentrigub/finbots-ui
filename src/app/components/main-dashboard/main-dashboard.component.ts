@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from '../../models/user';
+import { User } from '../../models/user.model';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../../services/user-stats.service';
-import { StatsView } from '../../models/statsView';
 import { MatDialog } from '@angular/material/dialog';
 import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
 import { TaskService } from '../../services/task.service';
 import { InvestorTypeCharacter } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
+import { StatsView } from '../../models/statistics.model';
 
 @Component({
   selector: 'app-main-dashboard',

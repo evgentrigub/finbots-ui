@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserDto } from '../models/user';
+import { User, UserDto } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,31 +27,26 @@ export class AuthenticationService {
     })
   }
 
-  login(user: UserDto) {
-    return this.http
-      .post<string>(`${environment.apiUrl}/users/login`, { email: user.email, password: user.password })
-      .pipe(
-        map(token => {
-          const currentUser = { email: user.email, token };
-          localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          this.currentUserSubject.next(currentUser);
-          return user;
-        }));
+  public login(user: UserDto): Observable<UserDto> {
+    return this.http.post<string>(`${environment.apiUrl}/users/login`, { email: user.email, password: user.password })
+      .pipe(map(token => {
+        const currentUser = { email: user.email, token };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        this.currentUserSubject.next(currentUser);
+        return user;
+      }));
   }
 
-  register(user: UserDto) {
-    return this.http.post<string>(`${environment.apiUrl}/users/signup`, user)
-      .pipe(
-        map(token => {
-          const currentUser = { email: user.email, token };
-          localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          this.currentUserSubject.next(currentUser);
-          return user;
-        }));
+  public register(user: UserDto): Observable<UserDto> {
+    return this.http.post<string>(`${environment.apiUrl}/users/signup`, user).pipe(map(token => {
+      const currentUser = { email: user.email, token };
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      this.currentUserSubject.next(currentUser);
+      return user;
+    }));
   }
 
-  logout() {
-    // remove user from local storage to log user out
+  public logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

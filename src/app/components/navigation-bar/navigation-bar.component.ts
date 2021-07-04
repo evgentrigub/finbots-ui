@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
+import { User } from '../../models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({

@@ -1,0 +1,63 @@
+.login {
+  height: 93%;
+  background-image: url('../../../../assets/img/background_1.jpg'); 
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+
+    &__card {
+      width: 20rem;
+      border-radius: 1rem;
+      padding: 1.5rem;
+
+      &__form {
+        display: flex; 
+        flex-direction: column;
+
+        &__login {
+
+          &__container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+
+            &__spinner {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              z-index: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            button {
+              width: 50%;
+            }
+          }
+
+          &-action {
+            width: 100%;
+            margin-bottom: 1rem;
+          }
+
+          &-tooltip {
+            color: red !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .my-tooltip {
+  color: white !important;
+}

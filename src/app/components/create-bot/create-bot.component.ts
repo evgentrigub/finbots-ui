@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CreateBotService } from './create-bot.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../../models/user';
-import { Ticker } from '../../models/asset';
+import { User } from '../../models/user.model';
 import { FinancialInstrument } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
-import { BotDto } from 'src/app/models/trading-bot-model';
-import { StrategyViewModel } from 'src/app/models/strategy';
+import { BotDto } from '../../models/trading-bot.model';
+import { StrategyViewModel } from '../../models/strategy.model';
+import { SelectData } from '../../models/statistics.model';
 
 @Component({
   selector: 'app-create-bot',
@@ -17,7 +17,7 @@ import { StrategyViewModel } from 'src/app/models/strategy';
 export class CreateBotComponent implements OnInit {
   currentUser: User;
   financialInstruments: string[] = [];
-  tickers: Ticker[] = [];
+  tickers: SelectData<string>[] = [];
   strategies: StrategyViewModel[] = [];
 
   formGroup: FormGroup;

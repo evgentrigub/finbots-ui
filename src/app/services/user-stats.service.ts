@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError, of } from 'rxjs';
-import { StatsView } from '../models/statsView';
 import { switchMap } from 'rxjs/operators';
 import { InvestorTypeCharacter } from '../models/enums';
+import { StatsView } from '../models/statistics.model';
 
 @Injectable({
   providedIn: 'root',
