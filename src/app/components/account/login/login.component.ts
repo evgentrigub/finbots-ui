@@ -28,11 +28,15 @@ export class LoginComponent implements OnInit {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/dashboard']);
     }
+    this.loginForm = this.getLoginForm();
+  }
+
+  public get canLogin(): boolean {
+    return this.loginForm.valid;
   }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
-    this.loginForm = this.getLoginForm();
   }
 
   public onSubmit(): void {
@@ -44,21 +48,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService
       .login(this.loginForm.value)
       .pipe(first())
-      .subscribe(
-        () => {
-          this.loading = false;
-          this.router.navigate([this.returnUrl]);
-          this.showMessage('Вход успешно выполнен');
-        },
-        (error: HttpErrorResponse) => {
-          this.showErrorMessage(error);
-          this.loading = false;
-        }
-      );
-  }
-
-  public get canLogin() {
-    return this.loginForm.valid;
+      .subscribe(_ => {
+        this.loading = false;
+        this.router.navigate([this.returnUrl]);
+        this.showMessage('Вход успешно выполнен');
+      }, (error: HttpErrorResponse) => {
+        this.showErrorMessage(error);
+        this.loading = false;
+      });
   }
 
   public onForgetPassword(): void {
