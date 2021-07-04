@@ -1,28 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
-  hide = true;
-  loading = false;
-  submitted = false;
-
-  form: FormGroup;
-  valueEmail = '';
-
-  get controls() {
-    return this.form.controls;
-  }
+export class RegisterComponent {
+  public hide = true;
+  public loading = false;
+  public signupform: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,41 +25,43 @@ export class RegisterComponent implements OnInit {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
+    this.signupform = this.getSignupForm();
   }
 
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+  public get canSignup(): boolean {
+    return this.signupform.valid;
   }
 
-  onSubmit() {
-    this.submitted = true;
-    if (this.form.invalid) {
+  public onSubmit(): void {
+    if (this.signupform.invalid) {
       return;
     }
 
     this.loading = true;
-    // setTimeout(() => {
     this.authenticationService
-      .register(this.form.value)
+      .register(this.signupform.value)
       .pipe(first())
       .subscribe(_ => {
         this.router.navigate(['dashboard']);
         this.showMessage('Регистрация успешна');
         this.loading = false;
-      }, error => {
+      }, (error: HttpErrorResponse) => {
         this.loading = false;
         this.showErrorMessage(error);
       });
-    // }, 1000);
   }
 
-  private showErrorMessage(message: HttpErrorResponse) {
+  private getSignupForm(): FormGroup {
+    return this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+  }
+
+  private showErrorMessage(message: HttpErrorResponse): void {
     this.snackbar.open(message.error.message, 'OK', { duration: 6000 });
   }
-  private showMessage(message: any) {
+  private showMessage(message: string): void {
     this.snackbar.open(message, 'OK', { duration: 3000 });
   }
 }
