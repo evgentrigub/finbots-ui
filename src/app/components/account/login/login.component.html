@@ -29,7 +29,7 @@
           <div *ngIf="loading" class="login__container__card__form__login__container__spinner">
             <mat-spinner diameter="24"></mat-spinner>
           </div>
-          <button mat-raised-button color="accent" [disabled]="loading || canLogin" type="submit">Продолжить</button>
+          <button mat-raised-button color="accent" [disabled]="loading || !canLogin" type="submit">Продолжить</button>
         </div>
         <div matTooltip="Cкоро будет доступно" matTooltipPosition="after" matTooltipHideDelay="100"
           matTooltipClass="my-tooltip">

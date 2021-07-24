@@ -1,71 +1,57 @@
-<h1>Настройки пользователя</h1>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <mat-grid-list cols="2" rowHeight="100px">
+<div class="settings-container">
+  <h1 class="settings-container__header">Настройки пользователя</h1>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="settings-container__form">
 
-    <mat-grid-tile>
-      <mat-form-field appearance="outline" style="width:90%">
-        <mat-label>Фамилия</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-    </mat-grid-tile>
+    <mat-form-field appearance="outline" class="settings-container__form__field">
+      <mat-label>Фамилия</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="outline" style="width:90%">
-        <mat-label>Имя</mat-label>
-        <input matInput formControlName="lastName" />
-      </mat-form-field>
-    </mat-grid-tile>
+    <mat-form-field appearance="outline" class="settings-container__form__field">
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="outline" style="width:90%">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" />
-      </mat-form-field>
-    </mat-grid-tile>
+    <mat-form-field appearance="outline" class="settings-container__form__field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="outline" appearance="outline" style="width:90%">
-        <input matInput [matDatepicker]="datepicker" formControlName="bitrhDate">
-        <mat-label>Дата рождения</mat-label>
-        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-        <mat-datepicker #datepicker>
-          <mat-datepicker-actions>
-            <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-          </mat-datepicker-actions>
-        </mat-datepicker>
-      </mat-form-field>
-    </mat-grid-tile>
+    <mat-form-field appearance="outline" class="settings-container__form__field">
+      <input matInput [matDatepicker]="datepicker" formControlName="bitrhDate">
+      <mat-label>Дата рождения</mat-label>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="outline" style="width:90%">
-        <mat-label>Город</mat-label>
-        <input matInput formControlName="location" />
-      </mat-form-field>
-    </mat-grid-tile>
+    <div class="settings-container__form__field__radio">
+      <label id="radio-group">Ваш пол</label>
+      <mat-radio-group aria-labelledby="radio-group" formControlName="gender">
+        <mat-radio-button style="margin: 0 10px;" value="0">Ж</mat-radio-button>
+        <mat-radio-button style="margin: 0 10px;" value="1">М</mat-radio-button>
+      </mat-radio-group>
+    </div>
 
-    <mat-grid-tile>
-      <section class="example-section">
-        <mat-radio-group formControlName="gender">
-          <mat-radio-button style="margin: 0 10px;" value="0">Ж</mat-radio-button>
-          <mat-radio-button style="margin: 0 10px;" value="1">М</mat-radio-button>
-        </mat-radio-group>
-      </section>
-    </mat-grid-tile>
+    <mat-form-field appearance="outline" class="settings-container__form__field">
+      <mat-label>Город</mat-label>
+      <input matInput formControlName="location" />
+    </mat-form-field>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="outline" style="width:90%">
-        <mat-label>Токен от Тинькофф инвестиций</mat-label>
-        <input matInput [type]="hide ? 'tinkoffToken' : 'text'" formControlName="tinkoffToken"
-          [ngClass]="{ 'is-invalid': submitted && controls.tinkoffToken.errors }" />
-        <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-      </mat-form-field>
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-form-field appearance="outline" class="settings-container__form__field">
+      <mat-label>Токен от Тинькофф инвестиций</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="tinkoffToken" />
+      <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </mat-form-field>
 
-  <div>
-    <button mat-raised-button color="accent" type="submit" [disabled]="!profileForm.valid">
-      Обновить
-    </button>
-  </div>
-</form>
+    <div>
+      <button mat-raised-button color="accent" type="submit" [disabled]="!canSave">
+        Обновить
+      </button>
+    </div>
+  </form>
+</div>

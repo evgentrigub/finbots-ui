@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -47,14 +46,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService
       .login(this.loginForm.value)
-      .pipe(first())
       .subscribe(_ => {
-        this.loading = false;
         this.router.navigate([this.returnUrl]);
+        this.loading = false;
         this.showMessage('Вход успешно выполнен');
       }, (error: HttpErrorResponse) => {
-        this.showErrorMessage(error);
         this.loading = false;
+        this.showErrorMessage(error);
       });
   }
 
