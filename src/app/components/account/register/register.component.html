@@ -29,7 +29,11 @@
           <div *ngIf="loading" class="signup__container__card__form__signup__container__spinner">
             <mat-spinner diameter="24"></mat-spinner>
           </div>
-          <button mat-raised-button color="accent" [disabled]="loading || canSignup" type="submit">Регистрация</button>
+          <div matTooltip="Регистрация доступна пока только по приглашению" matTooltipPosition="after"
+            matTooltipHideDelay="100" matTooltipClass="my-tooltip">
+            <button mat-raised-button color="accent" [disabled]="loading || !canSignup"
+              type="submit">Регистрация</button>
+          </div>
         </div>
         <button mat-button color="primary" class="signup__container__card__form__button-action"
           [routerLink]="['/login']" routerLinkActive="router-link-active">

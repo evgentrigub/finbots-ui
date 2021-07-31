@@ -38,10 +38,6 @@
               align-items: center;
               justify-content: center;
             }
-
-            button {
-              width: 50%;
-            }
           }
 
           &-action {
@@ -56,4 +52,8 @@
       }
     }
   }
+}
+
+::ng-deep .my-tooltip {
+  color: white !important;
 }
