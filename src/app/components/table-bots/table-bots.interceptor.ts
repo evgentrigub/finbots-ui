@@ -18,9 +18,25 @@ export class TableBotsInterceptor implements HttpInterceptor {
       const response = new HttpResponse({
         body: this.getBody(),
       });
-
       return of(response).pipe(delay(1000));
     }
+
+    if (req.method === 'POST' && req.url.includes('api/robots/UpdateBot')) {
+      const response = new HttpResponse({
+        body: this.getBody(),
+      });
+      return of(response).pipe(delay(1000));
+    }
+
+    if (req.method === 'POST' && req.url.includes('api/robots/DeleteBot')) {
+      this.service.mockBotsArray = this.service.mockBotsArray.filter(b => b.id !== req.body.id)
+
+      const response = new HttpResponse({
+        body: this.getBody(),
+      });
+      return of(response).pipe(delay(1000));
+    }
+
     return next.handle(req);
   }
 
