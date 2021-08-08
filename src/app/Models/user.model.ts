@@ -3,11 +3,12 @@ import { TradingBot } from "src/app/models/trading-bot.model";
 
 export class User {
   token: string;
-  tinkoffToken?: string;
   email?: string;
   profile?: UserProfile
   riskType?: InvestorTypeCharacter;
   bots?: TradingBot[]
+
+  tinkoffToken?: string;
 }
 
 export interface UserProfile {
@@ -30,5 +31,7 @@ export interface UserProfileDto {
   bitrhDate: Date;
   gender: string;
   location: string;
-  tinkoffToken: string;
+
+  tinkoffToken?: string;
+  isTinkoffToken: boolean;
 };

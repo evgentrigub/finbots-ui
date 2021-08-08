@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { take, takeUntil, tap } from 'rxjs/operators';
 import { UserProfileDto } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,11 +20,15 @@ interface BrokerPayload {
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
+  private destroyed$ = new Subject<void>();
 
   public hide = true;
   public loading = false;
+
   public profileForm: FormGroup;
+  public tinkoffTokenControl: FormControl;
+  public isTinkoffTokenControl: FormControl;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,6 +40,8 @@ export class SettingsComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
     }
+    this.tinkoffTokenControl = this.formBuilder.control(null);
+    this.isTinkoffTokenControl = this.formBuilder.control(null);
     this.profileForm = this.getProfileForm();
   }
 
@@ -42,25 +49,26 @@ export class SettingsComponent implements OnInit {
     return this.profileForm.valid && this.profileForm.touched;
   }
 
-  public get isBrokerToken(): boolean {
-    return this.profileForm.get('tinkoffToken').value;
+  public broker: BrokerPayload = {
+    controlName: 'isTinkoffToken',
+    text: 'Тинькофф Инвестиции',
+    isBrokerToken: false,
   }
 
-  public brokers: BrokerPayload[] = [
-    {
-      controlName: 'tinkoffToken',
-      text: 'Тинькофф Инвестиции',
-      isBrokerToken: true,
-    },
-    {
-      controlName: 'bcsToken',
-      text: 'БКС Брокер',
-      isBrokerToken: true,
-    }
-  ]
-
   ngOnInit() {
-    this.userService.get().subscribe(res => this.profileForm.patchValue(res))
+    this.getUserProfile().subscribe()
+    this.getTinkoffControlChanges().subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
+  public onRemoveToken(item: BrokerPayload): void {
+    item.isBrokerToken = false;
+    this.isTinkoffTokenControl.patchValue(false);
+    this.profileForm.markAsTouched();
   }
 
   public onSubmit(): void {
@@ -69,15 +77,19 @@ export class SettingsComponent implements OnInit {
     }
 
     this.loading = true;
+
     const profile = this.profileForm.value as UserProfileDto;
     this.profileForm.disable();
     this.userService.update(profile)
-      .pipe(first())
+      .pipe(takeUntil(this.destroyed$))
       .subscribe(_ => {
         this.loading = false;
         this.showMessage("Успешно сохранено");
         this.profileForm.enable();
         this.profileForm.markAsUntouched();
+
+        this.broker.isBrokerToken = !!this.tinkoffTokenControl.value
+
       }, (error: HttpErrorResponse) => {
         this.profileForm.enable();
         this.loading = false;
@@ -85,16 +97,34 @@ export class SettingsComponent implements OnInit {
       });
   }
 
+  private getUserProfile(): Observable<UserProfileDto> {
+    return this.userService.get().pipe(
+      takeUntil(this.destroyed$),
+      tap(profile => {
+        this.profileForm.patchValue(profile)
+        this.broker.isBrokerToken = !!profile.isTinkoffToken
+      })
+    )
+  }
+
+  private getTinkoffControlChanges(): Observable<any> {
+    return this.tinkoffTokenControl.valueChanges.pipe(
+      takeUntil(this.destroyed$),
+      tap(value => this.isTinkoffTokenControl.setValue(!!value))
+    )
+  }
+
   private getProfileForm(): FormGroup {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      tinkoffToken: [null],
-      bcsToken: [null],
       name: [null],
       lastName: [null],
       bitrhDate: [null],
       location: [null],
       gender: [null],
+
+      tinkoffToken: this.tinkoffTokenControl,
+      isTinkoffToken: this.isTinkoffTokenControl,
     });
   }
 

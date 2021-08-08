@@ -47,6 +47,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { TableBotsInterceptor } from './components/table-bots/table-bots.interceptor';
 import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
+import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { CreateBotInterceptor } from './components/create-bot/create.bot.interce
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TableBotsInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

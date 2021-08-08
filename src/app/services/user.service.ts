@@ -2,16 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserProfile, UserProfileDto } from '../models/user.model';
-import { AuthenticationService } from './authentication.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+
+  public mockUserProfile: UserProfileDto = {
+    email: 'demo@finbots.sucess',
+    name: 'Илон',
+    lastName: 'Маск',
+    bitrhDate: new Date('1971-06-28T00:00:00.000Z'),
+    gender: '1',
+    location: 'Калифорния',
+
+    tinkoffToken: '',
+    isTinkoffToken: true,
+  }
+
   constructor(
     private http: HttpClient,
-    private authenticationService: AuthenticationService
   ) { }
 
   get(): Observable<UserProfileDto> {

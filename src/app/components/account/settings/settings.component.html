@@ -3,8 +3,8 @@
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="settings-container__form">
 
     <mat-form-field appearance="outline" class="settings-container__form__field">
-      <mat-label>Фамилия</mat-label>
-      <input matInput formControlName="name" />
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="settings-container__form__field">
@@ -13,8 +13,8 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="settings-container__form__field">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" />
+      <mat-label>Фамилия</mat-label>
+      <input matInput formControlName="name" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="settings-container__form__field">
@@ -30,7 +30,7 @@
     </mat-form-field>
 
     <div class="settings-container__form__field__radio">
-      <label id="radio-group">Ваш пол</label>
+      <label id="radio-group">Пол</label>
       <mat-radio-group aria-labelledby="radio-group" formControlName="gender">
         <mat-radio-button style="margin: 0 10px;" value="0">Ж</mat-radio-button>
         <mat-radio-button style="margin: 0 10px;" value="1">М</mat-radio-button>
@@ -43,16 +43,16 @@
     </mat-form-field>
 
     <h1>Токены для брокеров</h1>
-    <mat-list *ngFor="let item of brokers">
-      <mat-list-item *ngIf="item.isBrokerToken">
-        <p mat-line>{{item.text}}</p>
-        <button mat-raised-button color="warn">
+    <mat-list>
+      <mat-list-item *ngIf="broker.isBrokerToken">
+        <p mat-line>{{broker.text}}</p>
+        <button mat-raised-button color="warn" (click)="onRemoveToken(broker)">
           Удалить
         </button>
       </mat-list-item>
-      <mat-form-field *ngIf="!item.isBrokerToken" appearance="outline" class="settings-container__form__field">
-        <mat-label>Токен для {{item.text}}</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" [formControlName]="item.controlName" />
+      <mat-form-field *ngIf="!broker.isBrokerToken" appearance="outline">
+        <mat-label>Токен для {{broker.text}}</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="tinkoffToken" />
         <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </mat-form-field>
       <mat-divider></mat-divider>
