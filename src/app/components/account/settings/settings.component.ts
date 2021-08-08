@@ -24,7 +24,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<void>();
 
   public hide = true;
-  public loading = false;
+  public loading = true;
 
   public profileForm: FormGroup;
   public tinkoffTokenControl: FormControl;
@@ -75,7 +75,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     if (this.profileForm.invalid) {
       return;
     }
-
     this.loading = true;
 
     const profile = this.profileForm.value as UserProfileDto;
@@ -98,9 +97,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   private getUserProfile(): Observable<UserProfileDto> {
+    this.loading = true;
     return this.userService.get().pipe(
       takeUntil(this.destroyed$),
       tap(profile => {
+        this.loading = false;
         this.profileForm.patchValue(profile)
         this.broker.isBrokerToken = !!profile.isTinkoffToken
       })

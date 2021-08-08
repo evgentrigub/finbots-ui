@@ -74,6 +74,7 @@ import { SettingsInterceptor } from './components/account/settings/settings.inte
     FormsModule,
     routing,
 
+    MDBBootstrapModule.forRoot(),
     // MATERIAL
     MatToolbarModule,
     MatButtonModule,
@@ -98,9 +99,8 @@ import { SettingsInterceptor } from './components/account/settings/settings.inte
     MatSlideToggleModule,
     MatTabsModule,
     MatDialogModule,
-    MDBBootstrapModule.forRoot(),
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   entryComponents: [AddModeyToAccountComponent, BotStatsDialogComponent],
   providers: [

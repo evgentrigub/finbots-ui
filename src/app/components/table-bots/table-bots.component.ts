@@ -25,7 +25,6 @@ export class TableBotsComponent implements OnInit {
 
   getRobots() {
     this.tradingBotsService.getUserRobots().subscribe(bots => {
-      console.log("🚀 ~ file: table-bots.component.ts ~ line 28 ~ TableBotsComponent ~ this.tradingBotsService.getUserRobots ~ bots", bots)
       this.dataSource.data = bots;
       this.isLoading = false;
     });
