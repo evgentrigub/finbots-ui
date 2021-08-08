@@ -62,7 +62,7 @@ export class CreateBotComponent implements OnInit {
       brokerFee: 0.03,
       strategy: value.strategy,
       workedTime: "",
-      profit: "1.2",
+      profit: "10",
     }
     this.botService.mockBotsArray.push(tr);
     this.service.createBot(newRobot)

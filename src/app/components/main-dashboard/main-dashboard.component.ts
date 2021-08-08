@@ -9,6 +9,7 @@ import { TaskService } from '../../services/task.service';
 import { InvestorTypeCharacter } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
 import { StatsView } from '../../models/statistics.model';
+import { TradingBotsService } from 'src/app/services/trading-bots.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -31,7 +32,8 @@ export class MainDashboardComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private userStatService: UserStatsService,
     private taskService: TaskService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private service: TradingBotsService
   ) {
     this.currentUserSubscription = this.authenticationService.$currentUser.subscribe(user => {
       this.currentUser = user;
@@ -70,16 +72,16 @@ export class MainDashboardComponent implements OnInit {
 
   createFirstChart() {
     const dataDailySalesChart: any = {
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-      series: [[12, 17, 7, 17, 23, 18, 38]],
+      labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+      series: [[12, 17, 7, 17, 23, 18, 10, 5, -3, 6, 8, ]],
     };
 
     const optionsDailySalesChart: any = {
       lineSmooth: Chartist.Interpolation.cardinal({
         tension: 0,
       }),
-      low: 0,
-      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      low: -10,
+      high: 30, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
     };
 
@@ -91,7 +93,7 @@ export class MainDashboardComponent implements OnInit {
   createSecondChart() {
     const datawebsiteViewsChart = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-      series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]],
+      series: [[100, 140, 137, 180, 553, 453, 326, 434, 568, 610, 756, 895]],
     };
     const optionswebsiteViewsChart = {
       axisX: {
@@ -121,22 +123,35 @@ export class MainDashboardComponent implements OnInit {
 
   createThirdChart() {
     const dataCompletedTasksChart: any = {
-      labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-      series: [[230, 750, 450, 300, 280, 240, 200, 190]],
+      labels: this.service.mockBotsArray.map(c => c.ticker),
+      series: [[100, 140]],
     };
 
-    const optionsCompletedTasksChart: any = {
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0,
-      }),
+    const optionswebsiteViewsChart = {
+      axisX: {
+        showGrid: false,
+      },
       low: 0,
-      high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+      high: 1000,
+      chartPadding: { top: 0, right: 5, bottom: 0, left: 0 },
     };
+    const responsiveOptions: any[] = [
+      [
+        'screen and (max-width: 640px)',
+        {
+          seriesBarDistance: 5,
+          axisX: {
+            labelInterpolationFnc: function (value) {
+              return value[0];
+            },
+          },
+        },
+      ],
+    ];
+    const websiteViewsChart = new Chartist.Bar('#completedTasksChart', dataCompletedTasksChart, optionswebsiteViewsChart, responsiveOptions);
 
-    const completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
-    this.startAnimationForLineChart(completedTasksChart);
+    this.startAnimationForLineChart(websiteViewsChart);
   }
 
   private startAnimationForLineChart(chart) {
