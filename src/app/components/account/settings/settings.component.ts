@@ -8,6 +8,12 @@ import { UserProfileDto } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 
+interface BrokerPayload {
+  controlName: string;
+  text: string;
+  isBrokerToken: boolean;
+}
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -35,6 +41,23 @@ export class SettingsComponent implements OnInit {
   public get canSave(): boolean {
     return this.profileForm.valid && this.profileForm.touched;
   }
+
+  public get isBrokerToken(): boolean {
+    return this.profileForm.get('tinkoffToken').value;
+  }
+
+  public brokers: BrokerPayload[] = [
+    {
+      controlName: 'tinkoffToken',
+      text: 'Тинькофф Инвестиции',
+      isBrokerToken: true,
+    },
+    {
+      controlName: 'bcsToken',
+      text: 'БКС Брокер',
+      isBrokerToken: true,
+    }
+  ]
 
   ngOnInit() {
     this.userService.get().subscribe(res => this.profileForm.patchValue(res))
@@ -66,6 +89,7 @@ export class SettingsComponent implements OnInit {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       tinkoffToken: [null],
+      bcsToken: [null],
       name: [null],
       lastName: [null],
       bitrhDate: [null],
