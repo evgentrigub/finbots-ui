@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { InvestorTypeCharacter } from '../models/enums';
 import { StatsView } from '../models/statistics.model';
+import { TradingBotsService } from './trading-bots.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,10 @@ export class UserStatsService {
   stats$: BehaviorSubject<StatsView>;
   private loaded = false;
 
-  constructor(private http: HttpClient) {
-    this.stats$ = new BehaviorSubject<StatsView>({ profit: 0, account: 0, robotQuantity: 0, riskType: InvestorTypeCharacter.Guaranteed });
-  }
+  constructor(
+    private http: HttpClient,
+    private readonly tradingBotsService: TradingBotsService,
+  ) { }
 
   /**
    * запрашивает статистику по пользователю и кеширует её
@@ -22,21 +23,13 @@ export class UserStatsService {
    */
   getStatsById(id: number): Observable<StatsView> {
     // return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`)
-    // if (!this.loaded) {
-    return this.reloadedStats(id).pipe(switchMap(r => this.stats$));
-    // }
-    // return this.stats$;
-  }
-
-  private reloadedStats(id: number): Observable<StatsView> {
-    return of({ profit: 0, account: 0, robotQuantity: 0, riskType: InvestorTypeCharacter.Guaranteed })
-    // return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`).pipe(
-    //   catchError(this.handleError),
-    //   tap(response => {
-    //     this.stats$.next(response);
-    //     this.loaded = true;
-    //   })
-    // );
+    return of(
+      {
+        profit: Math.round(this.tradingBotsService.mockBotsArray.reduce((a, b) => a + +b.profit, 0) / this.tradingBotsService.mockBotsArray.length * 100) / 100,
+        account: 6700,
+        robotQuantity: this.tradingBotsService.mockBotsArray.length,
+        riskType: InvestorTypeCharacter.Guaranteed
+      });
   }
 
   private handleError(error: HttpErrorResponse) {
