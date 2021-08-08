@@ -6,7 +6,7 @@ import { StrategyService } from '../../services/strategy.service';
 @Component({
   selector: 'app-strategies-rating',
   templateUrl: './strategies-rating.component.html',
-  styleUrls: ['./strategies-rating.component.css'],
+  styleUrls: ['./strategies-rating.component.scss'],
 })
 export class StrategiesRatingComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name'];

@@ -8,19 +8,38 @@ import { FinancialInstrument } from '../models/enums';
 import { AuthenticationService } from './authentication.service';
 import { Ticker } from '../models/tickers.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class TradingBotsService {
-  tradingBotsList$: BehaviorSubject<TradingBot[]>;
-  private loaded = false;
-
   constructor(
     private http: HttpClient,
     private authenticationService: AuthenticationService
   ) {
-    this.tradingBotsList$ = new BehaviorSubject<TradingBot[]>([]);
   }
+
+  public mockBotsArray: TradingBot[] = [
+    {
+      id: "1",
+      ticker: "AAPL",
+      createdDate: 1,
+      isActive: true,
+      broker: "Tinkoff",
+      brokerFee: 0.03,
+      strategy: "simpleTV",
+      workedTime: "",
+      profit: "1.2",
+    },
+    {
+      id: "2",
+      ticker: "AMD",
+      createdDate: 1,
+      isActive: true,
+      broker: "Tinkoff",
+      brokerFee: 0.03,
+      strategy: "simpleTV",
+      workedTime: "",
+      profit: "1.2",
+    }
+  ]
 
   /**
    * запрашивает список роботов
@@ -28,19 +47,8 @@ export class TradingBotsService {
    * если не загружен, то делает запрос на сервер)
    */
   getUserRobots(): Observable<TradingBot[]> {
-    if (!this.loaded) {
-      return this.reloadedTraidingBotsList().pipe(switchMap(r => this.tradingBotsList$));
-    }
-    return this.tradingBotsList$;
-  }
-
-  private reloadedTraidingBotsList() {
     return this.http.get<TradingBot[]>(`${environment.apiUrl}/bots`,).pipe(
       catchError(this.handleError),
-      tap(response => {
-        this.tradingBotsList$.next(response);
-        this.loaded = true;
-      })
     );
   }
 

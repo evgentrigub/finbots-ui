@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateBotService } from './create-bot.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
@@ -8,12 +7,14 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { BotDto, TradingBot } from '../../models/trading-bot.model';
 import { StrategyViewModel } from '../../models/strategy.model';
 import { SelectData } from '../../models/statistics.model';
-import { BotInterceptor } from '../table-bots/bot.interceptor';
+import { CreateBotService } from '../../services/create-bot.service';
+import { TradingBotsService } from 'src/app/services/trading-bots.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-bot',
   templateUrl: './create-bot.component.html',
-  styleUrls: ['./create-bot.component.css'],
+  styleUrls: ['./create-bot.component.scss'],
 })
 export class CreateBotComponent implements OnInit {
   currentUser: User;
@@ -26,11 +27,12 @@ export class CreateBotComponent implements OnInit {
   instrumentControl: FormControl = new FormControl();
 
   constructor(
-    private service: CreateBotService,
-    private formBuilder: FormBuilder,
     private readonly snackBar: MatSnackBar,
+    private formBuilder: FormBuilder,
+    private service: CreateBotService,
     private authenticationService: AuthenticationService,
-    private botInterceptor: BotInterceptor,
+    private botService: TradingBotsService,
+    private router: Router
   ) {
     this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
     this.financialInstruments = this.service.getFinancialInstruments();
@@ -62,10 +64,12 @@ export class CreateBotComponent implements OnInit {
       workedTime: "",
       profit: "1.2",
     }
-    this.botInterceptor.botsArray.push(tr);
+    this.botService.mockBotsArray.push(tr);
     this.service.createBot(newRobot)
-      .subscribe(
-        _ => this.showMessage(`Заявка на создание бота ${newRobot.ticker} успешна отправлена`),
+      .subscribe(() => {
+        this.router.navigate(['/table'])
+        this.showMessage(`Заявка на создание бота ${newRobot.ticker} успешна отправлена`)
+      },
         err => this.showMessage(err)
       );
   }

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { FinancialInstrument } from '../../models/enums';
-import { BotDto } from 'src/app/models/trading-bot.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { StrategyList, StrategyViewModel } from 'src/app/models/strategy.model';
-import { SelectData } from 'src/app/models/statistics.model';
+import { FinancialInstrument } from '../models/enums';
+import { SelectData } from '../models/statistics.model';
+import { StrategyViewModel, StrategyList } from '../models/strategy.model';
+import { BotDto } from '../models/trading-bot.model';
+import { environment } from '../../environments/environment';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',

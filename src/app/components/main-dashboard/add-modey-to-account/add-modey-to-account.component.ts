@@ -7,7 +7,7 @@ import { User } from '../../../models/user.model';
 @Component({
   selector: 'app-add-modey-to-account',
   templateUrl: './add-modey-to-account.component.html',
-  styleUrls: ['./add-modey-to-account.component.css'],
+  styleUrls: ['./add-modey-to-account.component.scss'],
 })
 export class AddModeyToAccountComponent implements OnInit {
   dataForm: FormGroup;

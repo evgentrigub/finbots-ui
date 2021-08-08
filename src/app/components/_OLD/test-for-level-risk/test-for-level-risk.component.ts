@@ -11,7 +11,7 @@
 // @Component({
 //   selector: 'app-test-for-level-risk',
 //   templateUrl: './test-for-level-risk.component.html',
-//   styleUrls: ['./test-for-level-risk.component.css'],
+//   styleUrls: ['./test-for-level-risk.component.scss'],
 // })
 // export class TestForLevelRiskComponent implements OnInit {
 //   questionsAnswers: Question[];

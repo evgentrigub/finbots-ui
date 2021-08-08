@@ -10,7 +10,7 @@ import { TradingBotsService } from 'src/app/services/trading-bots.service';
 @Component({
   selector: 'app-table-bots',
   templateUrl: './table-bots.component.html',
-  styleUrls: ['./table-bots.component.css'],
+  styleUrls: ['./table-bots.component.scss'],
 })
 export class TableBotsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'ticker', 'strategy', 'timeframe', 'profit', 'actions'];

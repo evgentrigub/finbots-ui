@@ -3,16 +3,18 @@ import { Injectable } from "@angular/core";
 import { of } from "rxjs";
 import { Observable } from "rxjs/internal/Observable";
 import { delay } from "rxjs/operators";
+import { TradingBot } from "../../models/trading-bot.model";
+import { TradingBotsService } from "../../services/trading-bots.service";
 
 /**
- * POST /bot/create
+ * GET /bot/create
  */
 @Injectable()
-export class CreateBotInterceptor implements HttpInterceptor {
-  constructor() { }
+export class TableBotsInterceptor implements HttpInterceptor {
+  constructor(private service: TradingBotsService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.method === 'POST' && req.url.includes('/bot/create')) {
+    if (req.method === 'GET' && req.url.includes('/bots')) {
       const response = new HttpResponse({
         body: this.getBody(),
       });
@@ -22,7 +24,8 @@ export class CreateBotInterceptor implements HttpInterceptor {
     return next.handle(req);
   }
 
-  private getBody(): string {
-    return 'success';
+  private getBody(): TradingBot[] {
+    return this.service.mockBotsArray;
   }
+
 }

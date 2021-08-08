@@ -9,7 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.css'],
+  styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent implements OnDestroy {
   isShow = true;

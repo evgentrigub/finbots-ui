@@ -7,12 +7,12 @@ import { StrategyDialogComponent } from './strategy-dialog/strategy-dialog.compo
 @Component({
   selector: 'app-strategies',
   templateUrl: './strategies.component.html',
-  styleUrls: ['./strategies.component.css'],
+  styleUrls: ['./strategies.component.scss'],
 })
 export class StrategiesComponent implements OnInit {
   strategies: Strategy[];
 
-  constructor(private strategyService: StrategyService, public dialog: MatDialog) {}
+  constructor(private strategyService: StrategyService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.strategyService.getStrategies().subscribe(strategies => {

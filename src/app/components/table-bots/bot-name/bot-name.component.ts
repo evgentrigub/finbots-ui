@@ -7,7 +7,7 @@
 // @Component({
 //   selector: 'app-bot-name',
 //   templateUrl: './bot-name.component.html',
-//   styleUrls: ['./bot-name.component.css'],
+//   styleUrls: ['./bot-name.component.scss'],
 // })
 // export class BotNameComponent {
 //   @Input() set bot(value: Bot) {

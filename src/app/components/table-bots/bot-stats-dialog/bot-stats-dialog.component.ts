@@ -7,7 +7,7 @@ import { TradingBotsService } from '../../../services/trading-bots.service';
 @Component({
   selector: 'app-bot-stats-dialog',
   templateUrl: './bot-stats-dialog.component.html',
-  styleUrls: ['./bot-stats-dialog.component.css'],
+  styleUrls: ['./bot-stats-dialog.component.scss'],
 })
 export class BotStatsDialogComponent implements OnInit {
   asset: Ticker;
