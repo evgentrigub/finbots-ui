@@ -5,9 +5,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
 import { FinancialInstrument } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
-import { BotDto } from '../../models/trading-bot.model';
+import { BotDto, TradingBot } from '../../models/trading-bot.model';
 import { StrategyViewModel } from '../../models/strategy.model';
 import { SelectData } from '../../models/statistics.model';
+import { BotInterceptor } from '../table-bots/bot.interceptor';
 
 @Component({
   selector: 'app-create-bot',
@@ -28,7 +29,8 @@ export class CreateBotComponent implements OnInit {
     private service: CreateBotService,
     private formBuilder: FormBuilder,
     private readonly snackBar: MatSnackBar,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private botInterceptor: BotInterceptor,
   ) {
     this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
     this.financialInstruments = this.service.getFinancialInstruments();
@@ -48,7 +50,19 @@ export class CreateBotComponent implements OnInit {
     const newRobot = <BotDto>{
       ticker: value.ticker,
       strategy: value.strategy
+    };
+    let tr: TradingBot = {
+      id: "3",
+      ticker: newRobot.ticker,
+      createdDate: 1,
+      isActive: true,
+      broker: "Tinkoff",
+      brokerFee: 0.03,
+      strategy: value.strategy,
+      workedTime: "",
+      profit: "1.2",
     }
+    this.botInterceptor.botsArray.push(tr);
     this.service.createBot(newRobot)
       .subscribe(
         _ => this.showMessage(`Заявка на создание бота ${newRobot.ticker} успешна отправлена`),

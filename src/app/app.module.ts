@@ -45,6 +45,8 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { MatNativeDateModule } from '@angular/material/core';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { BotInterceptor } from './components/table-bots/bot.interceptor';
+import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     MatDatepickerModule,
     MatNativeDateModule,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: BotInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
