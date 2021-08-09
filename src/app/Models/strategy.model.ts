@@ -16,7 +16,8 @@ export enum StrategyList {
  * пока у payload один тип;
  */
 export interface StrategyViewModel {
-  name: StrategyList;
+  value: StrategyList;
+  name: string;
   description: string;
   disabled: boolean;
 }

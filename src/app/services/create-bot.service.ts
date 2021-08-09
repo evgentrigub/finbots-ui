@@ -18,18 +18,18 @@ export class CreateBotService {
     private authenticationService: AuthenticationService
   ) { }
 
-  createBot(bot: BotDto): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/bot/create`, bot).pipe(
-      catchError(this.handleError),
-    );
+  public createBot(bot: BotDto): Observable<string> {
+    return this.http.post<string>(`${environment.apiUrl}/bot/create`, bot)
+      .pipe(catchError(this.handleError));
   }
 
-  getFinancialInstruments() {
-    return Object.values(FinancialInstrument).filter(val => typeof val === 'string') as string[];
+  public getFinancialInstruments(): string[] {
+    return Object.values(FinancialInstrument).filter(val => typeof val === 'string');
   }
 
-  public getSecurities(instument: FinancialInstrument): SelectData<string>[] {
+  public getAssets(instrument: FinancialInstrument): SelectData<string>[] {
     // todo формировать список на бэкенде
+    // пока всегда возвращает акции
     return [
       {
         name: 'FORD',
@@ -53,31 +53,21 @@ export class CreateBotService {
   public getStrategies(): StrategyViewModel[] {
     return [
       {
-        name: StrategyList.simpleTV,
+        value: StrategyList.simpleTV,
+        name: 'Сигналы из Trading View',
         description: 'Берет данные по техническому анализу с TradingView',
         disabled: false
       },
       {
-        name: StrategyList.simpleRaddar,
+        value: StrategyList.simpleRaddar,
+        name: 'Сигналы из Raddar.io',
         description: 'Берет данные по техническому анализу с Raddar.io',
         disabled: true
       }
     ]
   }
 
-  // getIndustries() {
-  //   return Object.values(Industry).filter(val => typeof val === 'string') as string[];
-  // }
-
-  // getAssets(financialInstrument: number, industry: number): Observable<Asset[]> {
-  //   let params = new HttpParams();
-  //   params = params.append('fi', financialInstrument.toString());
-  //   params = params.append('ind', industry.toString());
-  //   return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params });
-  // }
-
-  private handleError(error: HttpErrorResponse) {
-    console.log("🚀 ~ file: create-bot.service.ts ~ line 78 ~ CreateBotService ~ handleError ~ error", error)
+  private handleError(error: HttpErrorResponse): Observable<any> {
     let msg: string;
 
     if (error.error) {
@@ -91,3 +81,15 @@ export class CreateBotService {
     return throwError(msg);
   }
 }
+
+
+  // getIndustries() {
+  //   return Object.values(Industry).filter(val => typeof val === 'string') as string[];
+  // }
+
+  // getAssets(financialInstrument: number, industry: number): Observable<Asset[]> {
+  //   let params = new HttpParams();
+  //   params = params.append('fi', financialInstrument.toString());
+  //   params = params.append('ind', industry.toString());
+  //   return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params });
+  // }

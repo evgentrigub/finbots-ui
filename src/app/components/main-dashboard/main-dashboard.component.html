@@ -8,14 +8,9 @@
             <div class="card-icon">
               <i class="material-icons">adb</i>
             </div>
-            <p class="card-category">Количество роботов</p>
-            <mat-progress-spinner
-              *ngIf="loading"
-              style="margin: 0 auto"
-              mode="indeterminate"
-              diameter="30"
-              strokeWidth="3"
-            ></mat-progress-spinner>
+            <p class="card-category">Количество ботов</p>
+            <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
+              strokeWidth="3"></mat-progress-spinner>
             <h5 class="card-title">
               {{ stats.robotQuantity }}/10
               <small>шт.</small>
@@ -24,7 +19,7 @@
           <div class="card-footer">
             <div class="stats">
               <i class="material-icons text-danger">warning</i>
-              <a href="/create">Создать нового робота</a>
+              <a href="/create">Создать нового бота</a>
             </div>
           </div>
         </div>
@@ -38,13 +33,8 @@
               <i class="material-icons">attach_money</i>
             </div>
             <p class="card-category">Общая доходность</p>
-            <mat-progress-spinner
-              *ngIf="loading"
-              style="margin: 0 auto"
-              mode="indeterminate"
-              diameter="30"
-              strokeWidth="3"
-            ></mat-progress-spinner>
+            <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
+              strokeWidth="3"></mat-progress-spinner>
             <h5 class="card-title">{{ stats.profit }}%</h5>
           </div>
           <div class="card-footer">
@@ -61,13 +51,8 @@
               <i class="material-icons">spellcheck</i>
             </div>
             <p class="card-category">Риск-профиль</p>
-            <mat-progress-spinner
-              *ngIf="loading"
-              style="margin: 0 auto"
-              mode="indeterminate"
-              diameter="30"
-              strokeWidth="3"
-            ></mat-progress-spinner>
+            <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
+              strokeWidth="3"></mat-progress-spinner>
             <h5 class="card-title">{{ riskType }}</h5>
           </div>
           <div class="card-footer">
@@ -86,17 +71,13 @@
               <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
             </div>
             <p class="card-category">На счету</p>
-            <mat-progress-spinner
-              *ngIf="loading"
-              style="margin: 0 auto"
-              mode="indeterminate"
-              diameter="30"
-              strokeWidth="3"
-            ></mat-progress-spinner>
+            <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
+              strokeWidth="3"></mat-progress-spinner>
             <h5 class="card-title">${{ stats.account }}</h5>
           </div>
           <div class="card-footer">
-            <div class="stats"><i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i> Пополнить кошелек</div>
+            <div class="stats"><i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i>
+              Пополнить кошелек</div>
           </div>
         </div>
       </mat-card>
@@ -147,7 +128,7 @@
             <div class="ct-chart" id="completedTasksChart"></div>
           </div>
           <div class="card-body">
-            <h5 class="card-title">Аналитика по роботам</h5>
+            <h5 class="card-title">Аналитика по ботам</h5>
             <p class="card-category">За месяц </p>
           </div>
           <div class="card-footer">

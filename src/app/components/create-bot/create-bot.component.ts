@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
 import { FinancialInstrument } from '../../models/enums';
@@ -8,8 +9,7 @@ import { BotDto, TradingBot } from '../../models/trading-bot.model';
 import { StrategyViewModel } from '../../models/strategy.model';
 import { SelectData } from '../../models/statistics.model';
 import { CreateBotService } from '../../services/create-bot.service';
-import { TradingBotsService } from 'src/app/services/trading-bots.service';
-import { Router } from '@angular/router';
+import { TradingBotsService } from '../../services/trading-bots.service';
 
 @Component({
   selector: 'app-create-bot',
@@ -17,68 +17,84 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-bot.component.scss'],
 })
 export class CreateBotComponent implements OnInit {
-  currentUser: User;
-  financialInstruments: string[] = [];
-  tickers: SelectData<string>[] = [];
-  strategies: StrategyViewModel[] = [];
 
-  formGroup: FormGroup;
-  strategyControl: FormControl = new FormControl();
-  instrumentControl: FormControl = new FormControl();
+  public loading = false;
+
+  public firstForm: FormGroup;
+  public secondForm: FormGroup;
+  public strategyControl: FormControl = new FormControl();
+  public instrumentControl: FormControl = new FormControl();
+
+  public currentUser: User;
+  public financialInstruments: string[] = [];
+  public tickers: SelectData<string>[] = [];
+  public strategies: StrategyViewModel[] = [];
+
 
   constructor(
     private readonly snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    private service: CreateBotService,
+    private router: Router,
+    private botService: CreateBotService,
     private authenticationService: AuthenticationService,
-    private botService: TradingBotsService,
-    private router: Router
+    private tradingService: TradingBotsService,
   ) {
     this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
-    this.financialInstruments = this.service.getFinancialInstruments();
-    this.tickers = this.service.getSecurities(FinancialInstrument.Stock);
-    this.strategies = this.service.getStrategies()
+    this.financialInstruments = this.botService.getFinancialInstruments();
+    this.tickers = this.botService.getAssets(FinancialInstrument.Stock);
+    this.strategies = this.botService.getStrategies()
 
     this.instrumentControl = this.formBuilder.control(FinancialInstrument.Stock, [Validators.required]);
-    this.strategyControl = this.formBuilder.control(this.strategies[0].name)
-    this.formGroup = this.createBotFormGroup();
+    this.strategyControl = this.formBuilder.control(null, [Validators.required])
+    this.firstForm = this.getFirstFormGroup();
+    this.secondForm = this.getSecondFormGroup();
   }
 
   ngOnInit() {
   }
 
   submitBot() {
-    const value = this.formGroup.value;
-    const newRobot = <BotDto>{
-      ticker: value.ticker,
-      strategy: value.strategy
+    const firstStep = this.firstForm.value;
+    const secondStep = this.secondForm.value;
+    const newbot = <BotDto>{
+      ticker: firstStep.ticker,
+      strategy: secondStep.strategy
     };
-    let tr: TradingBot = {
-      id: "3",
-      ticker: newRobot.ticker,
+
+    const mockBot: TradingBot = {
+      id: (this.tradingService.mockBotsArray.length + 1).toString(),
+      ticker: newbot.ticker,
       createdDate: 1,
       isActive: true,
       broker: "Tinkoff",
       brokerFee: 0.03,
-      strategy: value.strategy,
+      strategy: secondStep.strategy,
       workedTime: "",
       profit: "10",
     }
-    this.botService.mockBotsArray.push(tr);
-    this.service.createBot(newRobot)
+    this.tradingService.mockBotsArray.push(mockBot);
+
+    this.loading = true;
+    this.botService.createBot(newbot)
       .subscribe(() => {
-        this.router.navigate(['/table'])
-        this.showMessage(`Заявка на создание бота ${newRobot.ticker} успешна отправлена`)
+        this.router.navigate(['/table']);
+        this.showMessage(`Заявка на создание бота ${newbot.ticker} успешна отправлена`);
       },
-        err => this.showMessage(err)
+        err => this.showMessage(err),
+        () => this.loading = false
       );
   }
 
-  private createBotFormGroup(): FormGroup {
+  private getFirstFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      instrument: this.instrumentControl,
+      ticker: [null, [Validators.required]],
+    });
+  }
+
+  private getSecondFormGroup(): FormGroup {
     return this.formBuilder.group({
       strategy: this.strategyControl,
-      instrument: this.instrumentControl,
-      ticker: ['', [Validators.required]],
     });
   }
 

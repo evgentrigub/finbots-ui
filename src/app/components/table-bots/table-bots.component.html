@@ -2,13 +2,13 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title style="font-size:24px">
-        Торговые роботы
+        Торговые боты
       </mat-card-title>
       <mat-card-subtitle style="font-size:16px">
         <div style="color:black">
           <div>
-            В этой таблице находятся все Ваши торговые роботы с краткой статистикой. <br />
-            Добавить нового робота можно в пункте "Создать робота" в левой вкладке навигации. <br />
+            В этой таблице находятся все Ваши торговые боты с краткой статистикой. <br />
+            Добавить нового бота можно в пункте "Создать бота" в левой вкладке навигации. <br />
             <br />
             В таблице доступны следующие действия:
           </div>
@@ -21,7 +21,7 @@
             </li>
             <li>
               <div style="display: inline-flex; margin-top: 1em; margin-right: 1em;">
-                <div>приостановить торговлю робота</div>
+                <div>приостановить торговлю бота</div>
                 <mat-icon class="btn-usual" style="margin-left: 1em">pause_circle_filled</mat-icon>
               </div>
               <div style="display: inline-flex;">
@@ -31,7 +31,7 @@
             </li>
             <li>
               <div style="display: inline-flex; margin-top: 1em">
-                <div>удалить робота</div>
+                <div>удалить бота</div>
                 <mat-icon class="btn-warn" style="margin-left: 1em">delete</mat-icon>
               </div>
             </li>
@@ -87,10 +87,10 @@
               matTooltip="Возобновить торговлю" matTooltipPosition="left">
               play_circle_filled
             </mat-icon>
-            <mat-icon (click)="delete(row)" class="btn-warn" style="margin-right:1em" matTooltip="Удалить робота">
+            <mat-icon (click)="delete(row)" class="btn-warn" style="margin-right:1em" matTooltip="Удалить бота">
               delete
             </mat-icon>
-            <mat-icon class="btn-accent" matTooltip="Информация о роботе" matTooltipPosition="right"
+            <mat-icon class="btn-accent" matTooltip="Информация о боте" matTooltipPosition="right"
               (click)="openDialog(row)">
               reorder
             </mat-icon>
