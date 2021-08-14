@@ -48,6 +48,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { TableBotsInterceptor } from './components/table-bots/table-bots.interceptor';
 import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
 import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
+import { DashboardInterceptor } from './components/main-dashboard/main-dashboard.interceptor';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { SettingsInterceptor } from './components/account/settings/settings.inte
     { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TableBotsInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

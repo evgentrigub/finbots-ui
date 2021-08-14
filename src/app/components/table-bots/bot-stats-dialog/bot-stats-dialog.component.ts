@@ -21,7 +21,7 @@ export class BotStatsDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getDescription(this.data.id);
+    //this.getDescription(this.data.id);
   }
 
   getDescription(bot_id: string) {

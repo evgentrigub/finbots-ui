@@ -73,7 +73,7 @@ export class MainDashboardComponent implements OnInit {
   createFirstChart() {
     const dataDailySalesChart: any = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-      series: [[12, 17, 7, 17, 23, 18, 10, 5, -3, 6, 8, ]],
+      series: [[12, 17, 7, 17, 23, 18, 10, 5, -3, 6, 8,]],
     };
 
     const optionsDailySalesChart: any = {

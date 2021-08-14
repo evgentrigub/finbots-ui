@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, throwError, of } from 'rxjs';
 import { InvestorTypeCharacter } from '../models/enums';
 import { StatsView } from '../models/statistics.model';
 import { TradingBotsService } from './trading-bots.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class UserStatsService {
 
   constructor(
     private http: HttpClient,
-    private readonly tradingBotsService: TradingBotsService,
+
   ) { }
 
   /**
@@ -22,14 +23,7 @@ export class UserStatsService {
    * @param id пользователя
    */
   getStatsById(id: number): Observable<StatsView> {
-    // return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`)
-    return of(
-      {
-        profit: Math.round(this.tradingBotsService.mockBotsArray.reduce((a, b) => a + +b.profit, 0) / this.tradingBotsService.mockBotsArray.length * 100) / 100,
-        account: 6700,
-        robotQuantity: this.tradingBotsService.mockBotsArray.length,
-        riskType: InvestorTypeCharacter.Guaranteed
-      });
+    return this.http.get<StatsView>(`${environment.apiUrl}/users/stat/${id}`)
   }
 
   private handleError(error: HttpErrorResponse) {
