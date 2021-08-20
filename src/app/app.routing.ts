@@ -7,10 +7,12 @@ import { AuthGuard } from './helpers/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { TableBotsComponent } from './components/table-bots/table-bots.component';
+import { OperationsComponent } from './components/operations/operations.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard] },
   { path: 'table', component: TableBotsComponent, canActivate: [AuthGuard] },
+  { path: 'operations', component: OperationsComponent },
   { path: 'create', component: CreateBotComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   // { path: 'create', component: CreateBotComponent },

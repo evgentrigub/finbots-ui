@@ -49,6 +49,7 @@ import { TableBotsInterceptor } from './components/table-bots/table-bots.interce
 import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
 import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
 import { DashboardInterceptor } from './components/main-dashboard/main-dashboard.interceptor';
+import { OperationsComponent } from './components/operations/operations.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DashboardInterceptor } from './components/main-dashboard/main-dashboard
     WidgetsComponent,
     AddModeyToAccountComponent,
     BotStatsDialogComponent,
+    OperationsComponent,
   ],
   imports: [
     BrowserModule,
