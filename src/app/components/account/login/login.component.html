@@ -2,7 +2,7 @@
   <div class="login__container">
     <mat-card class="login__container__card">
       <h1>Войти в панель</h1>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login__container__card__form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit(false)" class="login__container__card__form">
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
@@ -46,6 +46,9 @@
         <button mat-button color="primary" class="login__container__card__form__button-action"
           (click)="onForgetPassword()">
           Забыли пароль?
+        </button>
+        <button mat-button color="accent" class="login__container__card__form__button-action" (click)="onSubmit(true)">
+          Войти в демо-режим
         </button>
       </form>
     </mat-card>

@@ -29,6 +29,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { WidgetsComponent } from './components/main-dashboard/widgets/widgets.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
@@ -104,6 +105,7 @@ import { LoginInterceptor } from './components/account/login/login.interceptor';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatExpansionModule
   ],
   entryComponents: [BotStatsDialogComponent, DemoModeDialog],
   providers: [

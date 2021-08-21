@@ -38,7 +38,14 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
   }
 
-  public onSubmit(): void {
+  public onSubmit(isDemo: boolean): void {
+    if (isDemo) {
+      this.loginForm.setValue({
+        email: 'demo@finbots.success',
+        password: 'password'
+      })
+    }
+
     if (this.loginForm.invalid) {
       return;
     }
