@@ -1,40 +1,70 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, take, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.scss'],
 })
-export class NavigationBarComponent implements OnDestroy {
-  isShow = true;
-  currentUser: User;
-  currentUserSubscription: Subscription;
+export class NavigationBarComponent implements OnInit, OnDestroy {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+  private destroyed$ = new Subject<void>();
+
+  public isShow = true;
+  public isDemoToggle = true
+
+  public currentUser: User;
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
-    this.currentUserSubscription = this.authenticationService.$currentUser.subscribe(user => {
+    private authenticationService: AuthenticationService,
+    public dialog: MatDialog
+  ) { }
+
+  ngOnInit(): void {
+    this.authenticationService.$currentUser.pipe(takeUntil(this.destroyed$)).subscribe(user => {
       this.isShow = !!user
       this.currentUser = user;
     });
   }
 
   ngOnDestroy(): void {
-    this.currentUserSubscription.unsubscribe();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
-  logout() {
+  public onDemoToggle(): void {
+    const dialogRef = this.dialog.open(DemoModeDialog, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.isDemoToggle = true);
+  }
+
+  public onLogout(): void {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
+}
+
+@Component({
+  selector: 'demo-dialog',
+  templateUrl: './demo-dialog.component.html',
+})
+export class DemoModeDialog {
+
+  constructor(public dialogRef: MatDialogRef<DemoModeDialog>) { }
+
+  onOkClick(): void {
+    this.dialogRef.close();
+  }
+
 }

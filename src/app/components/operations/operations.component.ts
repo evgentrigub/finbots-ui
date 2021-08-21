@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Operation } from 'src/app/Models/operation.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { Operation } from '../../models/operation.model';
 
 @Component({
   selector: 'app-operations',

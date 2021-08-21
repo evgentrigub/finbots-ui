@@ -5,9 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil, tap } from 'rxjs/operators';
-import { UserProfileDto } from 'src/app/models/user.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserProfileDto } from '../../../models/user.model';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { UserService } from '../../../services/user.service';
 
 interface BrokerPayload {
   controlName: string;

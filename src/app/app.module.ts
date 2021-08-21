@@ -39,9 +39,8 @@ import { routing } from './app.routing';
 import { AboutComponent } from './components/account/about/about.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
-import { AddModeyToAccountComponent } from './components/main-dashboard/add-modey-to-account/add-modey-to-account.component';
 import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
-import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { DemoModeDialog, NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
@@ -50,6 +49,7 @@ import { CreateBotInterceptor } from './components/create-bot/create.bot.interce
 import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
 import { DashboardInterceptor } from './components/main-dashboard/main-dashboard.interceptor';
 import { OperationsComponent } from './components/operations/operations.component';
+import { LoginInterceptor } from './components/account/login/login.interceptor';
 
 @NgModule({
   declarations: [
@@ -63,9 +63,9 @@ import { OperationsComponent } from './components/operations/operations.componen
     CreateBotComponent,
     TableBotsComponent,
     WidgetsComponent,
-    AddModeyToAccountComponent,
     BotStatsDialogComponent,
     OperationsComponent,
+    DemoModeDialog
   ],
   imports: [
     BrowserModule,
@@ -105,7 +105,7 @@ import { OperationsComponent } from './components/operations/operations.componen
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  entryComponents: [AddModeyToAccountComponent, BotStatsDialogComponent],
+  entryComponents: [BotStatsDialogComponent, DemoModeDialog],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
@@ -115,6 +115,7 @@ import { OperationsComponent } from './components/operations/operations.componen
     { provide: HTTP_INTERCEPTORS, useClass: TableBotsInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

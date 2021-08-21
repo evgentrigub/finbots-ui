@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   public mockUserProfile: UserProfileDto = {
-    email: 'demo@finbots.sucess',
+    email: 'demo@finbots.success',
     name: 'Илон',
     lastName: 'Маск',
     bitrhDate: new Date('1971-06-28T00:00:00.000Z'),

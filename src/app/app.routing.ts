@@ -11,14 +11,10 @@ import { OperationsComponent } from './components/operations/operations.componen
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'table', component: TableBotsComponent, canActivate: [AuthGuard] },
+  { path: 'bots', component: TableBotsComponent, canActivate: [AuthGuard] },
   { path: 'operations', component: OperationsComponent },
   { path: 'create', component: CreateBotComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  // { path: 'create', component: CreateBotComponent },
-  // { path: 'table', component: TableBotsComponent },
-  // { path: 'dashboard', component: MainDashboardComponent },
-  // { path: 'settings', component: SettingsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },

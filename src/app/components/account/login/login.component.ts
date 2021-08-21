@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
       .subscribe(_ => {
         this.router.navigate([this.returnUrl]);
         this.loading = false;
-        this.showMessage('Вход успешно выполнен');
       }, (error: HttpErrorResponse) => {
         this.loading = false;
         this.showErrorMessage(error);

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import * as Chartist from 'node_modules/chartist';
 import { UserStatsService } from '../../services/user-stats.service';
-import { MatDialog } from '@angular/material/dialog';
-import { AddModeyToAccountComponent } from './add-modey-to-account/add-modey-to-account.component';
 import { TaskService } from '../../services/task.service';
 import { InvestorTypeCharacter } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
 import { StatsView } from '../../models/statistics.model';
-import { TradingBotsService } from 'src/app/services/trading-bots.service';
+import { TradingBotsService } from '../../services/trading-bots.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -32,7 +31,6 @@ export class MainDashboardComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private userStatService: UserStatsService,
     private taskService: TaskService,
-    public dialog: MatDialog,
     private service: TradingBotsService
   ) {
     this.currentUserSubscription = this.authenticationService.$currentUser.subscribe(user => {
@@ -40,37 +38,24 @@ export class MainDashboardComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AddModeyToAccountComponent, {
-      panelClass: 'dialog',
-      data: this.currentUser,
-      disableClose: true,
-    });
-    dialogRef.backdropClick().subscribe(result => {
-      if (confirm('Закрыть окно?')) {
-        dialogRef.close();
-      }
-    });
-    dialogRef.afterClosed().subscribe(r => this.getStats());
-  }
-
   ngOnInit(): void {
-    this.getStats();
+    this.setStats();
     this.createFirstChart();
     this.createSecondChart();
     this.createThirdChart();
   }
 
-  getStats() {
+  public setStats(): void {
+    // todo 
     // this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
-    this.userStatService.getStatsById(0).subscribe(stats => {
+    this.userStatService.getStatsById(0).pipe(take(1)).subscribe(stats => {
       this.stats = stats;
       this.riskType = this.taskService.convertRiskToString(this.stats.riskType);
       this.loading = false;
     });
   }
 
-  createFirstChart() {
+  public createFirstChart(): void {
     const dataDailySalesChart: any = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
       series: [[12, 17, 7, 17, 23, 18, 10, 5, -3, 6, 8,]],
@@ -81,7 +66,7 @@ export class MainDashboardComponent implements OnInit {
         tension: 0,
       }),
       low: -10,
-      high: 30, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      high: 30,
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
     };
 
@@ -90,7 +75,7 @@ export class MainDashboardComponent implements OnInit {
     this.startAnimationForLineChart(dailySalesChart);
   }
 
-  createSecondChart() {
+  public createSecondChart(): void {
     const datawebsiteViewsChart = {
       labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
       series: [[100, 140, 137, 180, 553, 453, 326, 434, 568, 610, 756, 895]],
@@ -121,7 +106,7 @@ export class MainDashboardComponent implements OnInit {
     this.startAnimationForBarChart(websiteViewsChart);
   }
 
-  createThirdChart() {
+  public createThirdChart(): void {
     const dataCompletedTasksChart: any = {
       labels: this.service.mockBotsArray.map(c => c.ticker),
       series: [[100, 140]],
@@ -154,7 +139,7 @@ export class MainDashboardComponent implements OnInit {
     this.startAnimationForLineChart(websiteViewsChart);
   }
 
-  private startAnimationForLineChart(chart) {
+  private startAnimationForLineChart(chart: any): void {
     let seq: any, delays: any, durations: any;
     seq = 0;
     delays = 80;
@@ -192,7 +177,7 @@ export class MainDashboardComponent implements OnInit {
     seq = 0;
   }
 
-  private startAnimationForBarChart(chart) {
+  private startAnimationForBarChart(chart: any): void {
     let seq2: any, delays2: any, durations2: any;
 
     seq2 = 0;

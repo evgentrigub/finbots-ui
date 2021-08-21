@@ -1,5 +1,9 @@
 import { InvestorTypeCharacter } from './enums';
-import { Answer } from './answers';
+
+export interface Answer {
+  content: string;
+  answerRate: number;
+}
 
 export interface StatsView {
   profit: number;

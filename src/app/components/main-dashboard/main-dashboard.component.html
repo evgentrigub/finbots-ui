@@ -1,6 +1,6 @@
 <div class="grid-container">
   <!-- первый ряд -->
-  <mat-grid-list cols="4" rowHeight="160px">
+  <mat-grid-list cols="3" rowHeight="160px">
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
         <div class="card card-stats">
@@ -12,14 +12,13 @@
             <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
               strokeWidth="3"></mat-progress-spinner>
             <h5 class="card-title">
-              {{ stats.robotQuantity }}/10
+              {{ stats.robotQuantity }}/5
               <small>шт.</small>
             </h5>
           </div>
           <div class="card-footer">
             <div class="stats">
-              <i class="material-icons text-danger">warning</i>
-              <a href="/create">Создать нового бота</a>
+              <a href="/create">Создать нового бота</a>&nbsp;(макс. количество 5)
             </div>
           </div>
         </div>
@@ -38,27 +37,7 @@
             <h5 class="card-title">{{ stats.profit }}%</h5>
           </div>
           <div class="card-footer">
-            <div class="stats"><i class="material-icons">date_range</i> Последний месяц</div>
-          </div>
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card" style="padding:0; border-radius: 3px">
-        <div class="card card-stats">
-          <div class="card-header card-header-danger card-header-icon" style="height:73px">
-            <div class="card-icon">
-              <i class="material-icons">spellcheck</i>
-            </div>
-            <p class="card-category">Риск-профиль</p>
-            <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
-              strokeWidth="3"></mat-progress-spinner>
-            <h5 class="card-title">{{ riskType }}</h5>
-          </div>
-          <div class="card-footer">
-            <div class="stats" routerLink="/testForRiskLevel" style="cursor:pointer">
-              <i class="material-icons">local_offer</i> Пройти тест еще раз
-            </div>
+            <div class="stats"><i class="material-icons">date_range</i> за последний месяц</div>
           </div>
         </div>
       </mat-card>
@@ -68,7 +47,7 @@
         <div class="card card-stats">
           <div class="card-header card-header-info card-header-icon" style="height:73px">
             <div class="card-icon">
-              <i class="material-icons" (click)="openDialog()" style="cursor: pointer">account_balance_wallet</i>
+              <i class="material-icons">account_balance_wallet</i>
             </div>
             <p class="card-category">На счету</p>
             <mat-progress-spinner *ngIf="loading" style="margin: 0 auto" mode="indeterminate" diameter="30"
@@ -76,8 +55,8 @@
             <h5 class="card-title">${{ stats.account }}</h5>
           </div>
           <div class="card-footer">
-            <div class="stats"><i class="material-icons" style="cursor: pointer" (click)="openDialog()">update</i>
-              Пополнить кошелек</div>
+            <div class="stats"><i class="material-icons">update</i>
+              обновлено 1 минуту назад</div>
           </div>
         </div>
       </mat-card>
@@ -128,7 +107,7 @@
             <div class="ct-chart" id="completedTasksChart"></div>
           </div>
           <div class="card-body">
-            <h5 class="card-title">Аналитика по ботам</h5>
+            <h5 class="card-title">Аналитика заработка по ботам</h5>
             <p class="card-category">За месяц </p>
           </div>
           <div class="card-footer">
@@ -146,12 +125,12 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            Статистика по ботам
+            График акций AAPL
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>Действие 1</button>
+              <a mat-menu-item>Перейти на TradingView</a>
               <button mat-menu-item>Действие 2</button>
             </mat-menu>
           </mat-card-title>
@@ -165,7 +144,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            ТОП график рост
+            График акций MSFT
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>

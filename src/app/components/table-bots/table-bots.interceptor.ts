@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { of } from "rxjs";
 import { Observable } from "rxjs/internal/Observable";
 import { delay } from "rxjs/operators";
-import { HttpUtils } from "src/app/services/http-utils.service";
+import { HttpUtils } from "../../services/http-utils.service";
 import { TradingBot } from "../../models/trading-bot.model";
 import { TradingBotsService } from "../../services/trading-bots.service";
 
