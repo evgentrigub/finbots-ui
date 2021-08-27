@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
 import { WidgetsComponent } from './components/main-dashboard/widgets/widgets.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
@@ -42,7 +44,6 @@ import { SettingsComponent } from './components/account/settings/settings.compon
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
 import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
 import { DemoModeDialog, NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
-import { MatNativeDateModule } from '@angular/material/core';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { TableBotsInterceptor } from './components/table-bots/table-bots.interceptor';
@@ -105,7 +106,8 @@ import { LoginInterceptor } from './components/account/login/login.interceptor';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDividerModule
   ],
   entryComponents: [BotStatsDialogComponent, DemoModeDialog],
   providers: [
