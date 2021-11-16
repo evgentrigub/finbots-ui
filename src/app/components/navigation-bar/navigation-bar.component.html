@@ -4,10 +4,7 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Меню</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard">Панель</a>
-      <a mat-list-item routerLink="/operations">Все операции</a>
-      <a mat-list-item routerLink="/bots">Все боты</a>
-      <a mat-list-item routerLink="/create">Создать бота</a>
+      <a *ngFor="let el of menuItems" mat-list-item [routerLink]="el.url">{{el.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

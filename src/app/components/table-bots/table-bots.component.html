@@ -1,45 +1,53 @@
 <div style="margin:20px">
-  <mat-card>
+  <mat-card style="margin-bottom: 20px; width: fit-content;">
     <mat-card-header>
       <mat-card-title style="font-size:24px">
         Торговые боты
       </mat-card-title>
-      <mat-card-subtitle style="font-size:16px">
-        <div style="color:black">
-          <div>
-            В этой таблице находятся все Ваши торговые боты с краткой статистикой. <br />
-            Добавить нового бота можно в пункте "Создать бота" в левой вкладке навигации. <br />
-            <br />
-            В таблице доступны следующие действия:
-          </div>
-          <ul>
-            <li>
-              <div style="display: inline-flex; margin-top: 1em;">
-                по клику на работа вы откроете подробное описание и статиcтику
-                <mat-icon class="btn-accent" style="margin-left: 1em">reorder</mat-icon>
-              </div>
-            </li>
-            <li>
-              <div style="display: inline-flex; margin-top: 1em; margin-right: 1em;">
-                <div>приостановить торговлю бота</div>
-                <mat-icon class="btn-usual" style="margin-left: 1em">pause_circle_filled</mat-icon>
-              </div>
-              <div style="display: inline-flex;">
-                <div>и вернуть обратно в торговлю</div>
-                <mat-icon class="btn-usual" style="margin-left: 1em">play_circle_filled</mat-icon>
-              </div>
-            </li>
-            <li>
-              <div style="display: inline-flex; margin-top: 1em">
-                <div>удалить бота</div>
-                <mat-icon class="btn-warn" style="margin-left: 1em">delete</mat-icon>
-              </div>
-            </li>
-          </ul>
-          <br />
-        </div>
-      </mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content style="font-size:16px; margin: 16px 0px 0px 16px">
+      <div style="color:black">
+        <div>
+          В таблице находятся Ваши торговые боты с краткой статистикой.
+          <br />
+          Результаты каждой операции находятся в <a [routerLink]="['/operations']"
+            routerLinkActive="router-link-active">панели</a>.
+          <br />
+          Вы можете создать <a [routerLink]="['/create']" routerLinkActive="router-link-active">
+            нового бота</a>.
+          <br /> <br />
+          В таблице доступны следующие действия:
+        </div>
+        <ul>
+          <li>
+            <div style="display: inline-flex; margin-top: 1rem;">
+              по клику на работа вы откроете подробное описание и статиcтику
+              <mat-icon class="btn-accent" style="margin-left: 1rem">reorder</mat-icon>
+            </div>
+          </li>
+          <li>
+            <div style="display: inline-flex; margin: 1rem 1rem 0rem 0rem">
+              <div>приостановить торговлю бота</div>
+              <mat-icon class="btn-usual" style="margin-left: 1rem">pause_circle_filled</mat-icon>
+            </div>
+            <div style="display: inline-flex;">
+              <div>и вернуть обратно в торговлю</div>
+              <mat-icon class="btn-usual" style="margin-left: 1rem">play_circle_filled</mat-icon>
+            </div>
+          </li>
+          <li>
+            <div style="display: inline-flex; margin-top: 1rem">
+              <div>удалить бота</div>
+              <mat-icon class="btn-warn" style="margin-left: 1rem">delete</mat-icon>
+            </div>
+          </li>
+        </ul>
+        <br />
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
     <mat-card-content>
       <mat-progress-spinner *ngIf="isLoading" class="example-margin" color="primary" mode="indeterminate">
       </mat-progress-spinner>
@@ -50,12 +58,6 @@
           <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
-          <td mat-cell *matCellDef="let row" style="width:15em">
-            <app-bot-name [bot]="row"></app-bot-name>
-          </td>
-        </ng-container> -->
         <ng-container matColumnDef="ticker">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Стратегия</th>
           <td mat-cell *matCellDef="let row">{{ row.ticker }}</td>
@@ -79,15 +81,15 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Действия</th>
           <td mat-cell *matCellDef="let row">
-            <mat-icon *ngIf="row.isActive" (click)="stopBot(row)" class="btn-usual" style="margin-right:1em"
+            <mat-icon *ngIf="row.isActive" (click)="stopBot(row)" class="btn-usual" style="margin-right:1rem"
               matTooltip="Остановить торговлю" matTooltipPosition="left">
               pause_circle_filled
             </mat-icon>
-            <mat-icon *ngIf="!row.isActive" (click)="stopBot(row)" class="btn-usual" style="margin-right:1em"
+            <mat-icon *ngIf="!row.isActive" (click)="stopBot(row)" class="btn-usual" style="margin-right:1rem"
               matTooltip="Возобновить торговлю" matTooltipPosition="left">
               play_circle_filled
             </mat-icon>
-            <mat-icon (click)="delete(row)" class="btn-warn" style="margin-right:1em" matTooltip="Удалить бота">
+            <mat-icon (click)="delete(row)" class="btn-warn" style="margin-right:1rem" matTooltip="Удалить бота">
               delete
             </mat-icon>
             <mat-icon class="btn-accent" matTooltip="Информация о боте" matTooltipPosition="right"

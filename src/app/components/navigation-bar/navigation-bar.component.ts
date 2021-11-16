@@ -22,6 +22,12 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   public currentUser: User;
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
+  public menuItems = [
+    { url: '/operations', name: 'Панель' },
+    { url: '/bots', name: 'Торговые боты' },
+    { url: '/create', name: 'Создать бота' }
+  ]
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,

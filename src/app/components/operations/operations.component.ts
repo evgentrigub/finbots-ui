@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Operation } from '../../models/operation.model';
+import { Operation, OperationStatus } from '../../models/operation.model';
 
 @Component({
   selector: 'app-operations',
@@ -9,7 +9,7 @@ import { Operation } from '../../models/operation.model';
 })
 export class OperationsComponent implements OnInit {
 
-  displayedColumns: string[] = ['createdDate', 'price', 'operationType', 'status', 'isSuccess'];
+  displayedColumns: string[] = ['id', 'ticker', 'createdDate', 'price', 'operationType', 'status'];
   dataSource: MatTableDataSource<Operation> = new MatTableDataSource();
   isLoading = false;
 
@@ -28,24 +28,39 @@ export class OperationsComponent implements OnInit {
 
   public mockOperations: Operation[] = [
     {
+      botId: 1,
+      ticker: 'F',
       createdDate: new Date("2020-05-13T12:33:37.000Z"),
-      price: 14.4,
+      price: 15.4,
       operationType: "buy",
-      status: 'done',
+      status: OperationStatus.progress,
       isSuccess: true,
     },
     {
+      botId: 2,
+      ticker: 'PFE',
       createdDate: new Date("2020-05-13T12:33:37.000Z"),
-      price: 11.11,
+      price: 16.11,
       operationType: "sell",
-      status: 'done',
+      status: OperationStatus.done,
       isSuccess: true,
     },
     {
+      botId: 1,
+      ticker: 'F',
       createdDate: new Date("2020-05-13T12:33:37.000Z"),
-      price: 240.5,
+      price: 12.11,
+      operationType: "sell",
+      status: OperationStatus.decline,
+      isSuccess: true,
+    },
+    {
+      botId: 2,
+      ticker: 'PFE',
+      createdDate: new Date("2020-05-13T12:33:37.000Z"),
+      price: 0.35,
       operationType: "comission",
-      status: 'decline',
+      status: OperationStatus.done,
       isSuccess: false,
     },
   ]
