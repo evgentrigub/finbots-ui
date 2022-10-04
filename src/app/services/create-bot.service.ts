@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { FinancialInstrument } from '../models/enums';
 import { SelectData } from '../models/statistics.model';
 import { StrategyViewModel, StrategyList } from '../models/strategy.model';
 import { BotDto } from '../models/trading-bot.model';
@@ -23,13 +22,11 @@ export class CreateBotService {
       .pipe(catchError(this.handleError));
   }
 
-  public getFinancialInstruments(): string[] {
-    return Object.values(FinancialInstrument).filter(val => typeof val === 'string');
-  }
+  // public getFinancialInstruments(): string[] {
+  //   return Object.values(FinancialInstrument).filter(val => typeof val === 'string');
+  // }
 
-  public getAssets(instrument: FinancialInstrument): SelectData<string>[] {
-    // todo формировать список на бэкенде
-    // пока всегда возвращает акции
+  public getAssets(): SelectData<string>[] {
     return [
       {
         name: 'FORD',
@@ -54,14 +51,14 @@ export class CreateBotService {
     return [
       {
         value: StrategyList.simpleTV,
-        name: 'Сигналы из Trading View',
-        description: 'Берет данные по техническому анализу с TradingView',
+        name: 'TradingView Signals',
+        description: 'Get date from TradingView tech analysis ',
         disabled: false
       },
       {
         value: StrategyList.simpleRaddar,
-        name: 'Сигналы из Raddar.io',
-        description: 'Берет данные по техническому анализу с Raddar.io',
+        name: 'Raddar.io Signals',
+        description: 'Get date from Raddar.io tech analysis',
         disabled: true
       }
     ]
@@ -71,9 +68,9 @@ export class CreateBotService {
     let msg: string;
 
     if (error.error) {
-      msg = 'Произошла ошибка:' + error.error.message;
+      msg = 'Error:' + error.error.message;
     } else {
-      msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
+      msg = `Error: ${error.error}. Status: ${error.status}`;
     }
 
     console.error('CreateBotService::handleError() ' + msg);
@@ -81,15 +78,3 @@ export class CreateBotService {
     return throwError(msg);
   }
 }
-
-
-  // getIndustries() {
-  //   return Object.values(Industry).filter(val => typeof val === 'string') as string[];
-  // }
-
-  // getAssets(financialInstrument: number, industry: number): Observable<Asset[]> {
-  //   let params = new HttpParams();
-  //   params = params.append('fi', financialInstrument.toString());
-  //   params = params.append('ind', industry.toString());
-  //   return this.http.get<Asset[]>(`${environment.apiUrl}/api/robots/GetAssetsByFinancialInstrumentAndIndustry`, { params: params });
-  // }

@@ -20,11 +20,11 @@ export class TableBotsComponent implements OnInit {
   constructor(private readonly tradingBotsService: TradingBotsService, private readonly snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getRobots();
+    this.getBots();
   }
 
-  getRobots() {
-    this.tradingBotsService.getUserRobots().subscribe(bots => {
+  getBots() {
+    this.tradingBotsService.getUserBots().subscribe(bots => {
       this.dataSource.data = bots;
       this.isLoading = false;
     });
@@ -33,13 +33,13 @@ export class TableBotsComponent implements OnInit {
   stopBot(bot: TradingBot) {
     bot.isActive = !bot.isActive;
     this.tradingBotsService
-      .updateRobotData(bot)
+      .updateBotData(bot)
       .pipe(
         tap(
           _ => {
             (bot.isActive === false)
-              ? this.showMessage('Отправлен запрос на остановку бота')
-              : this.showMessage('Отправлен запрос на запуск бота');
+              ? this.showMessage('Request to stop bot sent')
+              : this.showMessage('Request to start bot sent')
           },
           err => this.showMessage(err)
         ))
@@ -47,8 +47,8 @@ export class TableBotsComponent implements OnInit {
   }
 
   delete(bot: TradingBot) {
-    this.tradingBotsService.deleteRobotData(bot).subscribe();
-    this.getRobots();
+    this.tradingBotsService.deleteBotData(bot).subscribe();
+    this.getBots();
   }
 
   openDialog(row: TradingBot) {
@@ -60,7 +60,7 @@ export class TableBotsComponent implements OnInit {
       disableClose: true,
     });
     dialogRef.backdropClick().subscribe(result => {
-      if (confirm('Закрыть окно?')) {
+      if (confirm('Close window?')) {
         dialogRef.close();
       }
     });

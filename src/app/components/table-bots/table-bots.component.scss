@@ -1,3 +1,13 @@
 .dashboard-card {
   width: 95%;
 }
+
+.tooltip {
+  color: white
+}
+
+::ng-deep .mat-tooltip {
+  /* your own custom styles here */
+  /* e.g. */
+  color: white !important;
+}

@@ -3,10 +3,10 @@ import { Injectable } from "@angular/core";
 import { of } from "rxjs";
 import { Observable } from "rxjs/internal/Observable";
 import { delay } from "rxjs/operators";
-import { InvestorTypeCharacter } from "../../models/enums";
-import { StatsView } from "../../models/statistics.model";
-import { HttpUtils } from "../../services/http-utils.service";
-import { TradingBotsService } from "../../services/trading-bots.service";
+import { InvestorTypeCharacter } from "../../../models/enums";
+import { StatsView } from "../../../models/statistics.model";
+import { HttpUtils } from "../../../services/http-utils.service";
+import { TradingBotsService } from "../../../services/trading-bots.service";
 
 /**
  * GET /users/stat

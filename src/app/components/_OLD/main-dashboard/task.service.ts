@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, tap, switchMap } from 'rxjs/operators';
-import { InvestorTypeCharacter } from '../models/enums';
-import { User } from '../models/user.model';
-import { Question } from '../models/statistics.model';
+import { InvestorTypeCharacter } from '../../../models/enums';
+import { User } from '../../../models/user.model';
+import { Question } from '../../../models/statistics.model';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +60,6 @@ export class TaskService {
       case InvestorTypeCharacter.MaximumGrowth:
         return 'Продам родную мать';
     }
-    return 'Консерватор';
   }
 
   private handleError(error: HttpErrorResponse) {

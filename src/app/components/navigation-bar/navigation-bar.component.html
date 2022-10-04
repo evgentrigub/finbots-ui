@@ -2,7 +2,7 @@
   <mat-sidenav *ngIf="isShow" #drawer class="sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Меню</mat-toolbar>
+    <mat-toolbar color="primary">Navbar</mat-toolbar>
     <mat-nav-list>
       <a *ngFor="let el of menuItems" mat-list-item [routerLink]="el.url">{{el.name}}</a>
     </mat-nav-list>
@@ -18,20 +18,20 @@
 
       <span style="flex:1 1 auto;"></span>
 
-      <mat-slide-toggle [(ngModel)]="isDemoToggle" (change)="onDemoToggle()" class="toggle">Демо режим
+      <mat-slide-toggle [(ngModel)]="isDemoToggle" (change)="onDemoToggle()" class="toggle">Demo Mode
       </mat-slide-toggle>
       <mat-icon style="margin-left:2rem" matBadge="10" matBadgeColor="warn">notifications</mat-icon>
       <button mat-button style="margin-left:1rem" [matMenuTriggerFor]="menu">{{ currentUser.email }}</button>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
-        <button mat-menu-item routerLink="/settings">Настройки</button>
-        <button mat-menu-item (click)="onLogout()">Выход</button>
+        <button mat-menu-item routerLink="/settings">Settings</button>
+        <button mat-menu-item (click)="onLogout()">Logout</button>
       </mat-menu>
     </mat-toolbar>
     <mat-toolbar *ngIf="!isShow">
       <span>FinBots MVP</span>
-      <button mat-button style="margin-left:1rem" routerLink="/about">О проекте</button>
-      <button mat-button style="margin-left:1rem" routerLink="/login">Вход</button>
-      <button mat-button style="margin-left:1rem" routerLink="/register">Регистрация</button>
+      <button mat-button style="margin-left:1rem" routerLink="/about">About</button>
+      <button mat-button style="margin-left:1rem" routerLink="/login">Login</button>
+      <button mat-button style="margin-left:1rem" routerLink="/register">Signup</button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { TradingBot } from '../models/trading-bot.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { catchError, tap, switchMap } from 'rxjs/operators';
-import { FinancialInstrument } from '../models/enums';
+import { catchError, tap } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 import { Ticker } from '../models/tickers.model';
 
@@ -41,43 +40,38 @@ export class TradingBotsService {
     }
   ]
 
-  /**
-   * запрашивает список ботов
-   * (если список уже загружен, то вернет его
-   * если не загружен, то делает запрос на сервер)
-   */
-  getUserRobots(): Observable<TradingBot[]> {
+  getUserBots(): Observable<TradingBot[]> {
     return this.http.get<TradingBot[]>(`${environment.apiUrl}/bots`,).pipe(
       catchError(this.handleError),
     );
   }
 
-  updateRobotData(bot: TradingBot): Observable<null> {
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/UpdateBot`, bot).pipe(
+  updateBotData(bot: TradingBot): Observable<null> {
+    return this.http.post<any>(`${environment.apiUrl}/api/bots/UpdateBot`, bot).pipe(
       catchError(this.handleError),
       tap(_ => { })
     );
   }
 
-  deleteRobotData(bot: TradingBot): Observable<null> {
-    return this.http.post<any>(`${environment.apiUrl}/api/robots/DeleteBot`, bot).pipe(
+  deleteBotData(bot: TradingBot): Observable<null> {
+    return this.http.post<any>(`${environment.apiUrl}/api/bots/DeleteBot`, bot).pipe(
       catchError(this.handleError),
       tap(_ => { })
     );
   }
 
   public getDescription(bot_id: string): Observable<Ticker> {
-    return this.http.get<Ticker>(`${environment.apiUrl}/api/robots/GetDescription?bot_id=` + bot_id);
+    return this.http.get<Ticker>(`${environment.apiUrl}/api/bots/GetDescription?bot_id=` + bot_id);
   }
 
-  public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {
-    switch (financialInstrument) {
-      case FinancialInstrument.Forex:
-        return 'Форекс';
-      case FinancialInstrument.Stock:
-        return 'Рынок акций';
-    }
-  }
+  // public convertingFinancialInstrumentToString(financialInstrument: FinancialInstrument): string {
+  //   switch (financialInstrument) {
+  //     case FinancialInstrument.Forex:
+  //       return 'Форекс';
+  //     case FinancialInstrument.Stock:
+  //       return 'Рынок акций';
+  //   }
+  // }
 
   // public convertingIndustryToString(industry: Industry): string {
   //   switch (industry) {
