@@ -14,7 +14,7 @@ const appRoutes: Routes = [
   { path: 'create', component: CreateBotComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'signup', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
   { path: '**', redirectTo: 'about' },
 ];
