@@ -26,14 +26,14 @@ export class TableBotsInterceptor implements HttpInterceptor {
       return of(response).pipe(delay(1000));
     }
 
-    if (req.method === 'POST' && req.url.includes('api/robots/UpdateBot')) {
+    if (req.method === 'POST' && req.url.includes('api/bots/UpdateBot')) {
       const response = new HttpResponse({
         body: this.getBody(),
       });
       return of(response).pipe(delay(1000));
     }
 
-    if (req.method === 'POST' && req.url.includes('api/robots/DeleteBot')) {
+    if (req.method === 'POST' && req.url.includes('api/bots/DeleteBot')) {
       this.service.mockBotsArray = this.service.mockBotsArray.filter(b => b.id !== req.body.id)
 
       const response = new HttpResponse({

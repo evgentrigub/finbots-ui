@@ -1,27 +1,27 @@
 <div class="signup">
   <div class="signup__container">
     <mat-card class="signup__container__card">
-      <h1>Создать аккаунт</h1>
+      <h1>Create your account</h1>
       <form [formGroup]="signupform" (ngSubmit)="onSubmit()" class="signup__container__card__form">
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" />
             <mat-error *ngIf="signupform.hasError('required', ['email'])">
-              Не указан email
+              Email is required
             </mat-error>
             <mat-error *ngIf="signupform.hasError('email', ['email'])">
-              Укажите email
+              Fill in your email
             </mat-error>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline">
-            <mat-label>Пароль</mat-label>
+            <mat-label>Password</mat-label>
             <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
             <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
             <mat-error *ngIf="signupform.hasError('required', ['password'])">
-              Не указан пароль
+              Password required
             </mat-error>
           </mat-form-field>
         </div>
@@ -29,15 +29,15 @@
           <div *ngIf="loading" class="signup__container__card__form__signup__container__spinner">
             <mat-spinner diameter="24"></mat-spinner>
           </div>
-          <div matTooltip="Регистрация доступна пока только по приглашению" matTooltipPosition="after"
+          <div matTooltip="Signup is only by invitations now" matTooltipPosition="after"
             matTooltipHideDelay="100" matTooltipClass="my-tooltip">
             <button mat-raised-button color="accent" [disabled]="loading || !canSignup"
-              type="submit">Регистрация</button>
+              type="submit">Signup</button>
           </div>
         </div>
         <button mat-button color="primary" class="signup__container__card__form__button-action"
           [routerLink]="['/login']" routerLinkActive="router-link-active">
-          Уже создан аккаунт?
+          Have an account?
         </button>
       </form>
     </mat-card>

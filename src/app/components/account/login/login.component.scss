@@ -1,6 +1,6 @@
 .login {
   height: 93%;
-  background-image: url('../../../../assets/img/background_1.jpg'); 
+  background-image: url('../../../../assets/img/background_1.jpg');
 
   &__container {
     display: flex;
@@ -14,8 +14,9 @@
       padding: 1.5rem;
 
       &__form {
-        display: flex; 
+        display: flex;
         flex-direction: column;
+        margin-top: 1rem;
 
         &__login {
 
@@ -60,4 +61,39 @@
 
 ::ng-deep .my-tooltip {
   color: white !important;
+}
+
+.divider {
+  &__container {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 280px;
+  }
+
+  &__container::before {
+    margin-left: 0px;
+    content: "";
+    flex: 0 1 100%;
+    border-bottom: 1px solid rgb(193, 199, 198);
+    margin: 0px 10px;
+    transform: translateY(-50%);
+  }
+
+  &__container::after {
+    margin-right: 0px;
+    content: "";
+    flex: 0 1 100%;
+    border-bottom: 1px solid rgb(193, 199, 198);
+    margin: 0px 10px;
+    transform: translateY(-50%);
+  }
+
+  &__word {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: normal;
+    color: rgb(92, 108, 117);
+    text-align: center;
+  }
 }

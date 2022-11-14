@@ -3,36 +3,36 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title style="font-size:24px;">
-          Операции
+          Operations
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="font-size:16px; margin: 16px 0px 0px 16px">
         <div style="color:black">
           <div>
-            В таблице находятся завершенные и текущие операции <a [routerLink]="['/bots']"
-              routerLinkActive="router-link-active">Ваших ботов</a>. <br />
-            Добавить нового бота можно в пункте "Создать бота" в левой вкладке навигации. <br />
+            In this page you see current and completed operations of <a [routerLink]="['/bots']"
+              routerLinkActive="router-link-active">your trading bots</a>. <br />
+            To create a new bot click on tab "Create Bot" in left navigation bar. <br />
             <br />
-            В таблице указаны:
+            In the table you find:
           </div>
           <ul>
             <li>
               <div style="display: inline-flex; margin-top: 1rem;">
-                время начала операции, цена актива, тип операции и итоговый статус
+                time when operation started, ticket price, operation type and status
               </div>
             </li>
             <li>
               <div style="display: inline-flex; margin-top: 1rem; margin-right: 1rem;">
-                <div style="display: inline-flex;">статусы бывают:
-                  в процессе,
+                <div style="display: inline-flex;">statuses are:
+                  in progress,
                   <mat-progress-spinner style="margin: 0rem 0.5rem 0rem 0.5rem;" diameter="25" strokeWidth="3"
                     mode="determinate" value="60">
                   </mat-progress-spinner>
-                  успешный
+                  completed
                   <mat-icon class="btn-usual" style="margin: 0rem 0.5rem 0rem 0.5rem; color: green;">
                     check_circle
                   </mat-icon>
-                  или отклонено
+                  or rejected
                   <mat-icon class="btn-usual" style="margin-left: 0.5rem; color: red">
                     cancel
                   </mat-icon>
@@ -41,7 +41,7 @@
             </li>
             <li>
               <div style="display: inline-flex; margin-top: 1rem">
-                <div>удалить бота</div>
+                <div>remove bot</div>
                 <mat-icon class="btn-warn" style="margin-left: 1rem">delete</mat-icon>
               </div>
             </li>
@@ -53,18 +53,18 @@
     <mat-card style="margin-left: 20px;">
       <mat-card-header>
         <mat-card-title style="font-size:24px;">
-          Статистика
+          Statistics
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="font-size:16px; margin: 16px 0px 0px 16px">
         <div>
-          <b>Количество ботов:</b> 2
+          <b>Bots quantity:</b> 2
         </div>
         <div>
-          <b>Общая доходность:</b>
+          <b>Profit:</b>
           <ul>
-            <li>за месяц: 6%</li>
-            <li>за год: 14%</li>
+            <li>per month: 6%</li>
+            <li>per year: 14%</li>
           </ul>
         </div>
       </mat-card-content>
@@ -84,33 +84,33 @@
         </ng-container>
 
         <ng-container matColumnDef="ticker">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Тикер</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ticker</th>
           <td mat-cell *matCellDef="let row"><b>{{ row.ticker }}</b></td>
         </ng-container>
 
         <ng-container matColumnDef="createdDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Время</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
           <td mat-cell *matCellDef="let row">{{ row.createdDate | date: 'medium' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Цена</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
           <td mat-cell *matCellDef="let row">{{ row.price }}</td>
         </ng-container>
 
         <ng-container matColumnDef="operationType">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Тип операции</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Sell/Buy</th>
           <td mat-cell *matCellDef="let row">{{ row.operationType }}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Статус</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
           <td mat-cell *matCellDef="let row">
             <div style="display: flex; align-items: center;">
               <mat-progress-spinner *ngIf="row.status === 'progress'" mode="indeterminate" diameter="25"
                 strokeWidth="3"></mat-progress-spinner>
               <mat-icon *ngIf="row.status !== 'progress'" [ngStyle]="{color: row.status === 'done' ? 'green' : 'red'}"
-                [matTooltip]="row.status === 'done' ? 'Успешно' : 'Отклонено'" matTooltipPosition="right">
+                [matTooltip]="row.status === 'done' ? 'Completed' : 'Reject'" matTooltipPosition="right">
                 {{ row.status === 'done' ? 'check_circle' : 'cancel'}}
               </mat-icon>
             </div>

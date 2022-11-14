@@ -1,5 +1,4 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
-import { MainDashboardComponent } from './components/main-dashboard/main-dashboard.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { AboutComponent } from './components/account/about/about.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
@@ -10,15 +9,14 @@ import { TableBotsComponent } from './components/table-bots/table-bots.component
 import { OperationsComponent } from './components/operations/operations.component';
 
 const appRoutes: Routes = [
-  { path: 'dashboard', component: MainDashboardComponent, canActivate: [AuthGuard] },
   { path: 'bots', component: TableBotsComponent, canActivate: [AuthGuard] },
-  { path: 'operations', component: OperationsComponent },
+  { path: 'operations', component: OperationsComponent, canActivate: [AuthGuard] },
   { path: 'create', component: CreateBotComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'signup', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: '**', redirectTo: 'about' },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

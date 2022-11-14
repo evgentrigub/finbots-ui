@@ -51,7 +51,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public broker: BrokerPayload = {
     controlName: 'isTinkoffToken',
-    text: 'Тинькофф Инвестиции',
+    text: 'Tinkoff',
     isBrokerToken: false,
   }
 

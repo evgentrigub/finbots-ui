@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { User } from '../../models/user.model';
+import { User } from '../../../models/user.model';
 import * as Chartist from 'node_modules/chartist';
-import { UserStatsService } from '../../services/user-stats.service';
-import { TaskService } from '../../services/task.service';
-import { InvestorTypeCharacter } from '../../models/enums';
-import { AuthenticationService } from '../../services/authentication.service';
-import { StatsView } from '../../models/statistics.model';
-import { TradingBotsService } from '../../services/trading-bots.service';
+import { UserStatsService } from '../../../services/user-stats.service';
+import { TaskService } from './task.service';
+import { InvestorTypeCharacter } from '../../../models/enums';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { StatsView } from '../../../models/statistics.model';
+import { TradingBotsService } from '../../../services/trading-bots.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -46,7 +46,7 @@ export class MainDashboardComponent implements OnInit {
   }
 
   public setStats(): void {
-    // todo 
+    // todo
     // this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
     this.userStatService.getStatsById(0).pipe(take(1)).subscribe(stats => {
       this.stats = stats;

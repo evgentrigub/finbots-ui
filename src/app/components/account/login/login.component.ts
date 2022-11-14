@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     private snackbar: MatSnackBar
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/operations']);
     }
     this.loginForm = this.getLoginForm();
   }
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'operations';
   }
 
   public onSubmit(isDemo: boolean): void {

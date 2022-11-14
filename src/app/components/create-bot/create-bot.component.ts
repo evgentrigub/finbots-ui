@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
-import { FinancialInstrument } from '../../models/enums';
 import { AuthenticationService } from '../../services/authentication.service';
 import { BotDto, TradingBot } from '../../models/trading-bot.model';
 import { StrategyViewModel } from '../../models/strategy.model';
@@ -26,7 +25,7 @@ export class CreateBotComponent implements OnInit {
   public instrumentControl: FormControl = new FormControl();
 
   public currentUser: User;
-  public financialInstruments: string[] = [];
+  // public financialInstruments: string[] = [];
   public tickers: SelectData<string>[] = [];
   public strategies: StrategyViewModel[] = [];
 
@@ -40,11 +39,9 @@ export class CreateBotComponent implements OnInit {
     private tradingService: TradingBotsService,
   ) {
     this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
-    this.financialInstruments = this.botService.getFinancialInstruments();
-    this.tickers = this.botService.getAssets(FinancialInstrument.Stock);
+    this.tickers = this.botService.getAssets();
     this.strategies = this.botService.getStrategies()
 
-    this.instrumentControl = this.formBuilder.control(FinancialInstrument.Stock, [Validators.required]);
     this.strategyControl = this.formBuilder.control(null, [Validators.required])
     this.firstForm = this.getFirstFormGroup();
     this.secondForm = this.getSecondFormGroup();
@@ -77,8 +74,8 @@ export class CreateBotComponent implements OnInit {
     this.loading = true;
     this.botService.createBot(newbot)
       .subscribe(() => {
-        this.router.navigate(['/table']);
-        this.showMessage(`Заявка на создание бота ${newbot.ticker} успешна отправлена`);
+        this.router.navigate(['/bots']);
+        this.showMessage(`Request to create bot ${newbot.ticker} sent`);
       },
         err => this.showMessage(err),
         () => this.loading = false
@@ -87,7 +84,6 @@ export class CreateBotComponent implements OnInit {
 
   private getFirstFormGroup(): FormGroup {
     return this.formBuilder.group({
-      instrument: this.instrumentControl,
       ticker: [null, [Validators.required]],
     });
   }
