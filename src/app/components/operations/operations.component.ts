@@ -14,23 +14,21 @@ export class OperationsComponent implements OnInit {
   isLoading = false;
 
 
-  constructor(
-  ) {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.dataSource.data = this.getOperationById(0);
+    this.dataSource.data = this.getOperations();
   }
 
-  getOperationById(id: number) {
+  private getOperations(): Operation[] {
     return this.mockOperations;
   }
 
-  public mockOperations: Operation[] = [
+  private mockOperations: Operation[] = [
     {
       botId: 1,
       ticker: 'F',
-      createdDate: new Date("2020-05-13T12:33:37.000Z"),
+      createdDate: new Date("2022-05-13T12:33:37.000Z"),
       price: 15.4,
       operationType: "buy",
       status: OperationStatus.progress,
@@ -39,7 +37,7 @@ export class OperationsComponent implements OnInit {
     {
       botId: 2,
       ticker: 'PFE',
-      createdDate: new Date("2020-05-13T12:33:37.000Z"),
+      createdDate: new Date("2022-06-13T12:33:37.000Z"),
       price: 16.11,
       operationType: "sell",
       status: OperationStatus.done,
@@ -48,7 +46,7 @@ export class OperationsComponent implements OnInit {
     {
       botId: 1,
       ticker: 'F',
-      createdDate: new Date("2020-05-13T12:33:37.000Z"),
+      createdDate: new Date("2022-07-13T12:33:37.000Z"),
       price: 12.11,
       operationType: "sell",
       status: OperationStatus.decline,
@@ -57,7 +55,7 @@ export class OperationsComponent implements OnInit {
     {
       botId: 2,
       ticker: 'PFE',
-      createdDate: new Date("2020-05-13T12:33:37.000Z"),
+      createdDate: new Date("2022-08-13T12:33:37.000Z"),
       price: 0.35,
       operationType: "comission",
       status: OperationStatus.done,

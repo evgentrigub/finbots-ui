@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
-import { BotDto, TradingBot } from '../../models/trading-bot.model';
+import { BotDto, CronStatus, TradingBot } from '../../models/trading-bot.model';
 import { StrategyViewModel } from '../../models/strategy.model';
 import { SelectData } from '../../models/statistics.model';
 import { CreateBotService } from '../../services/create-bot.service';
@@ -68,6 +68,7 @@ export class CreateBotComponent implements OnInit {
       strategy: secondStep.strategy,
       workedTime: "",
       profit: "10",
+      status: CronStatus.Scheduled
     }
     this.tradingService.mockBotsArray.push(mockBot);
 
