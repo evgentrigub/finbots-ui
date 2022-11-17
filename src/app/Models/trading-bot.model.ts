@@ -27,11 +27,13 @@ export interface TradingBot {
   isActive: boolean;
   broker: string;
   brokerFee: number;
-  operations?: IOperation[];
 
   strategy: string;
-  workedTime: string
   profit: string;
+  status: CronStatus;
+
+  operations?: IOperation[];
+  workedTime?: string
 }
 
 export interface IOperation {
@@ -42,4 +44,9 @@ export interface IOperation {
   isLong: Boolean;
   fee: number;
   bot: TradingBot
+}
+
+export enum CronStatus {
+  Scheduled = 'Scheduled',
+  Stopped = 'Stopped',
 }

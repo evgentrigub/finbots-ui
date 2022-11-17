@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BotStatsDialogComponent } from './bot-stats-dialog/bot-stats-dialog.component';
 import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,24 +12,19 @@ import { TradingBotsService } from '../../services/trading-bots.service';
   styleUrls: ['./table-bots.component.scss'],
 })
 export class TableBotsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'ticker', 'strategy', 'timeframe', 'profit', 'actions'];
+  displayedColumns: string[] = ['id', 'ticker', 'strategy', 'timeframe', 'profit', 'status', 'actions'];
   dataSource: MatTableDataSource<TradingBot> = new MatTableDataSource();
   isLoading = true;
+
+  readonly ONE_DAY=1000*60*60;
 
   constructor(private readonly tradingBotsService: TradingBotsService, private readonly snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getBots();
+    this.fetchBots();
   }
 
-  getBots() {
-    this.tradingBotsService.getUserBots().subscribe(bots => {
-      this.dataSource.data = bots;
-      this.isLoading = false;
-    });
-  }
-
-  stopBot(bot: TradingBot) {
+  public stopBot(bot: TradingBot): void {
     bot.isActive = !bot.isActive;
     this.tradingBotsService
       .updateBotData(bot)
@@ -46,27 +40,49 @@ export class TableBotsComponent implements OnInit {
       .subscribe();
   }
 
-  delete(bot: TradingBot) {
+  public delete(bot: TradingBot): void {
     this.tradingBotsService.deleteBotData(bot).subscribe();
-    this.getBots();
+    this.fetchBots();
   }
 
-  openDialog(row: TradingBot) {
-    const dialogRef = this.dialog.open(BotStatsDialogComponent, {
-      panelClass: 'dialog',
-      width: '500px',
-      height: '500px',
-      data: row,
-      disableClose: true,
-    });
-    dialogRef.backdropClick().subscribe(result => {
-      if (confirm('Close window?')) {
-        dialogRef.close();
-      }
+  private fetchBots(): void {
+    this.tradingBotsService.getUserBots().subscribe(bots => {
+      this.dataSource.data = bots;
+
+      bots.forEach(bot => {
+        bot.workedTime = msToTime(Date.now() - bot.createdDate)
+      })
+
+      this.isLoading = false;
     });
   }
 
   private showMessage(msg: any) {
     this.snackBar.open(msg, undefined, { duration: 2000 });
   }
+
+  // public openDialog(row: TradingBot): void {
+  //   const dialogRef = this.dialog.open(BotStatsDialogComponent, {
+  //     panelClass: 'dialog',
+  //     width: '500px',
+  //     height: '500px',
+  //     data: row,
+  //     disableClose: true,
+  //   });
+  //   dialogRef.backdropClick().subscribe(result => {
+  //     if (confirm('Close window?')) {
+  //       dialogRef.close();
+  //     }
+  //   });
+  // }
+}
+
+const msToTime = (duration: number) => {
+  let minutes = Math.floor((duration / (1000 * 60)) % 60)
+  let hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
+
+  const hoursStr = (hours < 10) ? "0" + hours : hours.toString();
+  const minutesStr = (minutes < 10) ? "0" + minutes : minutes.toString();
+
+  return hoursStr + "h " + minutesStr + "m "
 }

@@ -46,7 +46,6 @@ import { MainDashboardComponent } from './components/_OLD/main-dashboard/main-da
 import { DemoModeDialog, NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
-import { TableBotsInterceptor } from './components/table-bots/table-bots.interceptor';
 import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
 import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
 import { DashboardInterceptor } from './components/_OLD/main-dashboard/main-dashboard.interceptor';
@@ -114,7 +113,6 @@ import { LoginInterceptor } from './components/account/login/login.interceptor';
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: TableBotsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },

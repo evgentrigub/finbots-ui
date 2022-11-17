@@ -2,7 +2,7 @@
   <mat-sidenav *ngIf="isShow" #drawer class="sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Navbar</mat-toolbar>
+    <mat-toolbar color="primary">FinBots MVP</mat-toolbar>
     <mat-nav-list>
       <a *ngFor="let el of menuItems" mat-list-item [routerLink]="el.url">{{el.name}}</a>
     </mat-nav-list>
@@ -14,7 +14,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <span>FinBots MVP</span>
+      <span>Welcome back!</span>
 
       <span style="flex:1 1 auto;"></span>
 
