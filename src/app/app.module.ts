@@ -5,7 +5,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -77,7 +76,7 @@ import { LoginInterceptor } from './components/account/login/login.interceptor';
         RouterModule,
         FormsModule,
         routing,
-        MDBBootstrapModule.forRoot(),
+
         // MATERIAL
         MatToolbarModule,
         MatButtonModule,
