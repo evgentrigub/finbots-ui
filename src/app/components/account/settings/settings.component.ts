@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -26,12 +26,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public hide = true;
   public loading = true;
 
-  public profileForm: FormGroup;
-  public tinkoffTokenControl: FormControl;
-  public isTinkoffTokenControl: FormControl;
+  public profileForm: UntypedFormGroup;
+  public tinkoffTokenControl: UntypedFormControl;
+  public isTinkoffTokenControl: UntypedFormControl;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private userService: UserService,
     private authenticationService: AuthenticationService,
@@ -115,7 +115,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     )
   }
 
-  private getProfileForm(): FormGroup {
+  private getProfileForm(): UntypedFormGroup {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       name: [null],

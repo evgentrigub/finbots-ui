@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
@@ -19,10 +19,10 @@ export class CreateBotComponent implements OnInit {
 
   public loading = false;
 
-  public firstForm: FormGroup;
-  public secondForm: FormGroup;
-  public strategyControl: FormControl = new FormControl();
-  public instrumentControl: FormControl = new FormControl();
+  public firstForm: UntypedFormGroup;
+  public secondForm: UntypedFormGroup;
+  public strategyControl: UntypedFormControl = new UntypedFormControl();
+  public instrumentControl: UntypedFormControl = new UntypedFormControl();
 
   public currentUser: User;
   // public financialInstruments: string[] = [];
@@ -32,7 +32,7 @@ export class CreateBotComponent implements OnInit {
 
   constructor(
     private readonly snackBar: MatSnackBar,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private botService: CreateBotService,
     private authenticationService: AuthenticationService,
@@ -83,13 +83,13 @@ export class CreateBotComponent implements OnInit {
       );
   }
 
-  private getFirstFormGroup(): FormGroup {
+  private getFirstFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       ticker: [null, [Validators.required]],
     });
   }
 
-  private getSecondFormGroup(): FormGroup {
+  private getSecondFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       strategy: this.strategyControl,
     });
