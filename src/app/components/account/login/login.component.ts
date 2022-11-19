@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,10 +15,10 @@ export class LoginComponent implements OnInit {
 
   public hide = true;
   public loading = false;
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -66,10 +66,7 @@ export class LoginComponent implements OnInit {
     this.showMessage('Функция пока не доступна');
   }
 
-  /**
-   * todo: add password length validators
-   */
-  private getLoginForm(): FormGroup {
+  private getLoginForm(): UntypedFormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

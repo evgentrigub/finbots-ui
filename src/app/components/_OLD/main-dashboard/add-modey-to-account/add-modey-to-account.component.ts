@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../../../../services/user.service';
 import { User } from '../../../../models/user.model';
@@ -10,7 +10,7 @@ import { User } from '../../../../models/user.model';
   styleUrls: ['./add-modey-to-account.component.scss'],
 })
 export class AddModeyToAccountComponent implements OnInit {
-  dataForm: FormGroup;
+  dataForm: UntypedFormGroup;
   editedStats: User;
 
   constructor(
@@ -18,8 +18,8 @@ export class AddModeyToAccountComponent implements OnInit {
     public dialogRef: MatDialogRef<AddModeyToAccountComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User
   ) {
-    this.dataForm = new FormGroup({
-      summa: new FormControl('', Validators.required),
+    this.dataForm = new UntypedFormGroup({
+      summa: new UntypedFormControl('', Validators.required),
     });
   }
 

@@ -22,7 +22,7 @@ export class AboutComponent implements OnInit {
     Trading bot is a program that makes operations automatically.
     Other words, a bot does exactly what you do manually.
     For that process you put in some parameters, like share ticker, number of lots and strategy.
-    By strategy I mean the source with signals.
+    By strategy I mean the source of signals.
     The only left for you is monitoring your bot deals in the dashboard.`,
 
     question3: "Does it replace trading broker service?",
@@ -43,7 +43,7 @@ export class AboutComponent implements OnInit {
     Study algo trading for more than 4 years.
     Last employer is Ozon Fintech.
 
-    Татьяна Ильина, ilyitatjana@yandex.ru
+    Tatiana Ilina, ilyitatjana@yandex.ru
     Bachelor in Applied Mathematics and Computer Science.
     Studied math applied to finance.
     Develop web applications for more than 5 years.
