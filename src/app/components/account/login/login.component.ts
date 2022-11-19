@@ -66,9 +66,6 @@ export class LoginComponent implements OnInit {
     this.showMessage('Функция пока не доступна');
   }
 
-  /**
-   * todo: add password length validators
-   */
   private getLoginForm(): UntypedFormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

@@ -4,7 +4,7 @@ import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { take, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { UserProfileDto } from '../../../models/user.model';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserService } from '../../../services/user.service';
@@ -83,7 +83,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(_ => {
         this.loading = false;
-        this.showMessage("Успешно сохранено");
+        this.showMessage("Changes saved");
         this.profileForm.enable();
         this.profileForm.markAsUntouched();
 
@@ -118,11 +118,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private getProfileForm(): UntypedFormGroup {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      name: [null],
-      lastName: [null],
-      bitrhDate: [null],
-      location: [null],
-      gender: [null],
+      // name: [null],
+      // lastName: [null],
+      // bitrhDate: [null],
+      // location: [null],
+      // gender: [null],
 
       tinkoffToken: this.tinkoffTokenControl,
       isTinkoffToken: this.isTinkoffTokenControl,

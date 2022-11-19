@@ -46,8 +46,6 @@ export class MainDashboardComponent implements OnInit {
   }
 
   public setStats(): void {
-    // todo
-    // this.userStatService.getStatsById(this.currentUser.id).subscribe(stats => {
     this.userStatService.getStatsById(0).pipe(take(1)).subscribe(stats => {
       this.stats = stats;
       this.riskType = this.taskService.convertRiskToString(this.stats.riskType);

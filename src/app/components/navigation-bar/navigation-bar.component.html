@@ -20,7 +20,7 @@
 
       <mat-slide-toggle [(ngModel)]="isDemoToggle" (change)="onDemoToggle()" class="toggle">Demo Mode
       </mat-slide-toggle>
-      <mat-icon style="margin-left:2rem" matBadge="10" matBadgeColor="warn">notifications</mat-icon>
+      <mat-icon style="margin-left:2rem" matBadge="1" matBadgeColor="warn">notifications</mat-icon>
       <button mat-button style="margin-left:1rem" [matMenuTriggerFor]="menu">{{ currentUser.email }}</button>
       <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <button mat-menu-item routerLink="/settings">Settings</button>
@@ -31,7 +31,9 @@
       <span>FinBots MVP</span>
       <button mat-button style="margin-left:1rem" routerLink="/about">About</button>
       <button mat-button style="margin-left:1rem" routerLink="/login">Login</button>
-      <button mat-button style="margin-left:1rem" routerLink="/signup">Signup</button>
+      <div matTooltip="Signup is only by invitations now" matTooltipPosition="after" matTooltipHideDelay="100">
+        <button mat-button style="margin-left:1rem" routerLink="/signup" disabled >Signup</button>
+      </div>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
