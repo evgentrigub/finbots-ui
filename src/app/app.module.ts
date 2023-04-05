@@ -38,7 +38,7 @@ import { BotStatsDialogComponent } from './components/table-bots/bot-stats-dialo
 import { TableBotsComponent } from './components/table-bots/table-bots.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { AboutComponent } from './components/account/about/about.component';
+import { AboutComponent } from './components/navigation-bar/about/about.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
 import { MainDashboardComponent } from './components/_OLD/main-dashboard/main-dashboard.component';

@@ -1,6 +1,6 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './components/account/settings/settings.component';
-import { AboutComponent } from './components/account/about/about.component';
+import { AboutComponent } from './components/navigation-bar/about/about.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
