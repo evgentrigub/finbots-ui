@@ -15,7 +15,7 @@ export class LoginInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.method === 'POST' && req.url.includes('users/login')) {
+    if (req.method === 'POST' && req.url.includes('user/login')) {
       this.httpUtils.log(req);
 
       if (req.body.email === 'demo@finbots.success') {

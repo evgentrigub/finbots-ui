@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
@@ -56,14 +55,14 @@ export class LoginComponent implements OnInit {
       .subscribe(_ => {
         this.router.navigate([this.returnUrl]);
         this.loading = false;
-      }, (error: HttpErrorResponse) => {
+      }, (errorMessage: string) => {
         this.loading = false;
-        this.showErrorMessage(error);
+        this.showMessage(errorMessage, false);
       });
   }
 
   public onForgetPassword(): void {
-    this.showMessage('Функция пока не доступна');
+    this.showMessage('Функция пока не доступна', true);
   }
 
   private getLoginForm(): UntypedFormGroup {
@@ -73,18 +72,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private showErrorMessage(httpError: HttpErrorResponse): void {
-    if (httpError.error.array && httpError.error.array.length) {
-      const arr = httpError.error.array as Array<any>;
-      arr.forEach(el => {
-        this.snackbar.open(el.msg, 'OK', { duration: 6000 });
-      })
-    } else {
-      this.snackbar.open(httpError.error.msg, 'OK', { duration: 6000 });
-    }
-  }
-
-  private showMessage(message: string): void {
-    this.snackbar.open(message, 'OK', { duration: 3000 });
+  private showMessage(message: string, duration: boolean): void {
+    duration
+    ? this.snackbar.open(message, 'OK', { duration: 5000 })
+    : this.snackbar.open(message, 'OK')
   }
 }

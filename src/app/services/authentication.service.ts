@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserDto } from '../models/user.model';
+import { User, UserDto, UserTokenDto } from '../models/user.model';
+import { HttpErrorBody } from '../models/errors';
 
 @Injectable({
   providedIn: 'root',
@@ -28,17 +29,18 @@ export class AuthenticationService {
   }
 
   public login(user: UserDto): Observable<UserDto> {
-    return this.http.post<string>(`${environment.apiUrl}/users/login`, { email: user.email, password: user.password })
-      .pipe(map(token => {
-        const currentUser = { email: user.email, token };
+    return this.http.post<UserTokenDto>(`${environment.apiUrl}/user/login`, { email: user.email, password: user.password })
+      .pipe(map((tokenDto: UserTokenDto) => {
+        const currentUser = { email: user.email, token: tokenDto.token };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         this.currentUserSubject.next(currentUser);
         return user;
-      }));
+      }),
+      catchError(this.handleError));
   }
 
   public register(user: UserDto): Observable<UserDto> {
-    return this.http.post<string>(`${environment.apiUrl}/users/signup`, user).pipe(map(token => {
+    return this.http.post<string>(`${environment.apiUrl}/user/signup`, user).pipe(map(token => {
       const currentUser = { email: user.email, token };
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
       this.currentUserSubject.next(currentUser);
@@ -49,5 +51,12 @@ export class AuthenticationService {
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  private handleError(error: HttpErrorBody) {
+    const msg = error.message
+      ? `Erorr while authorising: ${error.message}. Status code ${error.statusCode}`
+      : `Error happend. Erorr: ${error}`
+    return throwError(msg);
   }
 }

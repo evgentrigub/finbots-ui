@@ -41,21 +41,18 @@ import { routing } from './app.routing';
 import { AboutComponent } from './components/navigation-bar/about/about.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
-import { MainDashboardComponent } from './components/_OLD/main-dashboard/main-dashboard.component';
 import { DemoModeDialog, NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
-import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
 import { DashboardInterceptor } from './components/_OLD/main-dashboard/main-dashboard.interceptor';
 import { OperationsComponent } from './components/operations/operations.component';
-import { LoginInterceptor } from './components/account/login/login.interceptor';
+import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavigationBarComponent,
-        MainDashboardComponent,
         SettingsComponent,
         LoginComponent,
         RegisterComponent,
@@ -114,7 +111,7 @@ import { LoginInterceptor } from './components/account/login/login.interceptor';
         { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })

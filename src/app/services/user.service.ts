@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserProfile, UserProfileDto } from '../models/user.model';
+import { UserProfileDto } from '../models/user.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,12 +11,6 @@ export class UserService {
 
   public mockUserProfile: UserProfileDto = {
     email: 'demo@finbots.success',
-    name: 'Илон',
-    lastName: 'Маск',
-    bitrhDate: new Date('1971-06-28T00:00:00.000Z'),
-    gender: '1',
-    location: 'Калифорния',
-
     tinkoffToken: '',
     isTinkoffToken: true,
   }
@@ -26,14 +20,14 @@ export class UserService {
   ) { }
 
   get(): Observable<UserProfileDto> {
-    return this.http.get<UserProfileDto>(`${environment.apiUrl}/users/profile`);
+    return this.http.get<UserProfileDto>(`${environment.apiUrl}/user/`);
   }
 
-  update(profile: UserProfile) {
-    return this.http.put(`${environment.apiUrl}/users/profile`, profile);
+  update(profile: UserProfileDto) {
+    return this.http.put(`${environment.apiUrl}/user/`, profile);
   }
 
   delete(id: number) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`);
+    return this.http.delete(`${environment.apiUrl}/user/${id}`);
   }
 }
