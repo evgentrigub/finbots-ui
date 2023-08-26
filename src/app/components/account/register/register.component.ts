@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -14,10 +14,10 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class RegisterComponent {
   public hide = true;
   public loading = false;
-  public signupform: FormGroup;
+  public signupform: UntypedFormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private snackbar: MatSnackBar
@@ -26,7 +26,6 @@ export class RegisterComponent {
       this.router.navigate(['/']);
     }
     this.signupform = this.getSignupForm();
-    // todo: remove after public signup
     this.signupform.disable();
   }
 
@@ -53,7 +52,7 @@ export class RegisterComponent {
       });
   }
 
-  private getSignupForm(): FormGroup {
+  private getSignupForm(): UntypedFormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

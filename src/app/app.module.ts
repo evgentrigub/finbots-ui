@@ -5,7 +5,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -39,7 +38,7 @@ import { BotStatsDialogComponent } from './components/table-bots/bot-stats-dialo
 import { TableBotsComponent } from './components/table-bots/table-bots.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { AboutComponent } from './components/account/about/about.component';
+import { AboutComponent } from './components/navigation-bar/about/about.component';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { CreateBotComponent } from './components/create-bot/create-bot.component';
 import { MainDashboardComponent } from './components/_OLD/main-dashboard/main-dashboard.component';
@@ -77,7 +76,7 @@ import { LoginInterceptor } from './components/account/login/login.interceptor';
         RouterModule,
         FormsModule,
         routing,
-        MDBBootstrapModule.forRoot(),
+
         // MATERIAL
         MatToolbarModule,
         MatButtonModule,

@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { take, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { UserProfileDto } from '../../../models/user.model';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserService } from '../../../services/user.service';
@@ -26,12 +26,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public hide = true;
   public loading = true;
 
-  public profileForm: FormGroup;
-  public tinkoffTokenControl: FormControl;
-  public isTinkoffTokenControl: FormControl;
+  public profileForm: UntypedFormGroup;
+  public tinkoffTokenControl: UntypedFormControl;
+  public isTinkoffTokenControl: UntypedFormControl;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private userService: UserService,
     private authenticationService: AuthenticationService,
@@ -83,7 +83,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(_ => {
         this.loading = false;
-        this.showMessage("Успешно сохранено");
+        this.showMessage("Changes saved");
         this.profileForm.enable();
         this.profileForm.markAsUntouched();
 
@@ -115,14 +115,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
     )
   }
 
-  private getProfileForm(): FormGroup {
+  private getProfileForm(): UntypedFormGroup {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      name: [null],
-      lastName: [null],
-      bitrhDate: [null],
-      location: [null],
-      gender: [null],
+      // name: [null],
+      // lastName: [null],
+      // bitrhDate: [null],
+      // location: [null],
+      // gender: [null],
 
       tinkoffToken: this.tinkoffTokenControl,
       isTinkoffToken: this.isTinkoffTokenControl,
