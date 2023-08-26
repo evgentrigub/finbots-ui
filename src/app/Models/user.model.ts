@@ -16,9 +16,14 @@ export interface UserDto {
 export interface UserProfileDto {
   email: string;
   tinkoffToken?: string;
-  isTinkoffToken: boolean;
 };
 
 export class UserTokenDto {
   token: string
 }
+
+export class UserLocalStorage {
+  email: string;
+  token: string
+}
+

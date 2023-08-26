@@ -3,8 +3,9 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserDto, UserTokenDto } from '../models/user.model';
+import { User, UserDto, UserLocalStorage, UserTokenDto } from '../models/user.model';
 import { HttpErrorBody } from '../models/errors';
+import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -31,9 +32,7 @@ export class AuthenticationService {
   public login(user: UserDto): Observable<UserDto> {
     return this.http.post<UserTokenDto>(`${environment.apiUrl}/user/login`, { email: user.email, password: user.password })
       .pipe(map((tokenDto: UserTokenDto) => {
-        const currentUser = { email: user.email, token: tokenDto.token };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        this.currentUserSubject.next(currentUser);
+        this.setCurrentUser(user.email, tokenDto);
         return user;
       }),
       catchError(this.handleError));
@@ -41,11 +40,17 @@ export class AuthenticationService {
 
   public register(user: UserDto): Observable<UserDto> {
     return this.http.post<string>(`${environment.apiUrl}/user/signup`, user).pipe(map(token => {
-      const currentUser = { email: user.email, token };
+      const currentUser: UserLocalStorage = { email: user.email, token };
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
       this.currentUserSubject.next(currentUser);
       return user;
     }));
+  }
+
+  public setCurrentUser(email: string, tokenDto: UserTokenDto){
+    const currentUser = { email, token: tokenDto.token };
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    this.currentUserSubject.next(currentUser);
   }
 
   public logout() {
@@ -55,8 +60,8 @@ export class AuthenticationService {
 
   private handleError(error: HttpErrorBody) {
     const msg = error.message
-      ? `Erorr while authorising: ${error.message}. Status code ${error.statusCode}`
-      : `Error happend. Erorr: ${error}`
+      ? `Error happend: ${error.message}. Status code ${error.statusCode}`
+      : `Unexpected server happend. Error: ${error}`
     return throwError(msg);
   }
 }
