@@ -30,21 +30,19 @@ export class AuthenticationService {
   }
 
   public login(user: UserDto): Observable<UserDto> {
-    return this.http.post<UserTokenDto>(`${environment.apiUrl}/user/login`, { email: user.email, password: user.password })
-      .pipe(map((tokenDto: UserTokenDto) => {
+    return this.http.post<UserTokenDto>(`${environment.apiUrl}/user/login`, { email: user.email, password: user.password }).pipe(
+      map((tokenDto: UserTokenDto) => {
         this.setCurrentUser(user.email, tokenDto);
         return user;
       }),
-      catchError(this.handleError));
+      catchError(this.handleError)
+    );
   }
 
-  public register(user: UserDto): Observable<UserDto> {
-    return this.http.post<string>(`${environment.apiUrl}/user/signup`, user).pipe(map(token => {
-      const currentUser: UserLocalStorage = { email: user.email, token };
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      this.currentUserSubject.next(currentUser);
-      return user;
-    }));
+  public register(user: UserDto): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}/user/signup`, user).pipe(
+      catchError(this.handleError)
+    );
   }
 
   public setCurrentUser(email: string, tokenDto: UserTokenDto){
