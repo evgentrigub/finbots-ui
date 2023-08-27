@@ -26,7 +26,6 @@ export class RegisterComponent {
       this.router.navigate(['/']);
     }
     this.signupform = this.getSignupForm();
-    this.signupform.disable();
   }
 
   public get canSignup(): boolean {
