@@ -1,12 +1,13 @@
 /**
- * Стратегии торговли
- * Список всех возможный страгтегий
- * (теханализ их источников, собственный теханализ, арбитраж и т.д.)
+ * Стратегии торговли из теханализа TradingView по интервалам
  */
-export enum StrategyList {
-  simpleTV = 'simpleTV',
-  simpleRaddar = 'simpleRaddar',
-  arbitration = 'arbitration'
+export enum StrategyName {
+  tv1 = 'tv1',
+  tv5 = 'tv5',
+  tv15 = 'tv15',
+  tv30 = 'tv30',
+  tv60 = 'tv60',
+  simpleTV = 'simpleTV' // TODO если убрать значение, то база не поднимается
 }
 
 /**
@@ -14,7 +15,7 @@ export enum StrategyList {
  * @param payload - информация о стратегии
  */
 export interface StrategyViewModel {
-  value: StrategyList;
+  value: StrategyName;
   name: string;
   description: string;
   disabled: boolean;

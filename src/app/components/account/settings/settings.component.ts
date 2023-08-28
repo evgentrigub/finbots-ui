@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -110,7 +110,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     )
   }
 
-  private getProfileForm(): UntypedFormGroup {
+  private getProfileForm(): FormGroup {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       tinkoffToken: this.tinkoffTokenControl,

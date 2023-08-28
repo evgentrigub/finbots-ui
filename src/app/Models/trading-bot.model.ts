@@ -1,11 +1,16 @@
-import { StrategyList } from "./strategy.model";
+import { StrategyName } from "./strategy.model";
 
 /**
  * Модель для создания бота
  */
 export interface BotDto {
   ticker: string;
-  strategy: StrategyList;
+  isCustomStrategy: boolean,
+  strategy: {
+    botInterval: number,
+    techAnalysisPeriod: number
+  },
+  strategyName: StrategyName
 }
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -14,10 +14,10 @@ export class LoginComponent implements OnInit {
 
   public hide = true;
   public loading = false;
-  public loginForm: UntypedFormGroup;
+  public loginForm: FormGroup;
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     this.showMessage('Функция пока не доступна', true);
   }
 
-  private getLoginForm(): UntypedFormGroup {
+  private getLoginForm(): FormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

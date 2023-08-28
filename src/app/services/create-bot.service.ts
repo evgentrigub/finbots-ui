@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SelectData } from '../models/statistics.model';
-import { StrategyViewModel, StrategyList } from '../models/strategy.model';
+import { StrategyViewModel, StrategyName } from '../models/strategy.model';
 import { BotDto } from '../models/trading-bot.model';
 import { environment } from '../../environments/environment';
-import { AuthenticationService } from './authentication.service';
+import { HttpErrorBody } from '../models/errors';
 
 @Injectable({
   providedIn: 'root',
@@ -14,35 +14,33 @@ import { AuthenticationService } from './authentication.service';
 export class CreateBotService {
   constructor(
     private http: HttpClient,
-    private authenticationService: AuthenticationService
   ) { }
 
   public createBot(bot: BotDto): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/bot/create`, bot)
-      .pipe(catchError(this.handleError));
+    return this.http.post<string>(`${environment.apiUrl}/bot`, bot).pipe(
+      catchError(this.handleError));
   }
-
-  // public getFinancialInstruments(): string[] {
-  //   return Object.values(FinancialInstrument).filter(val => typeof val === 'string');
-  // }
 
   public getAssets(): SelectData<string>[] {
     return [
+      {
+        name: 'GOOG',
+        value: 'GOOG'
+      },{
+        name: 'MSFT',
+        value: 'MSFT'
+      },
       {
         name: 'FORD',
         value: 'F'
       },
       {
-        name: 'AMD',
-        value: 'AMD'
+        name: 'SBER',
+        value: 'SBER'
       },
       {
-        name: 'Activision',
-        value: 'ATVI'
-      },
-      {
-        name: 'VEON',
-        value: 'VEON'
+        name: 'YNDX',
+        value: 'YNDX'
       },
     ]
   }
@@ -50,31 +48,42 @@ export class CreateBotService {
   public getStrategies(): StrategyViewModel[] {
     return [
       {
-        value: StrategyList.simpleTV,
-        name: 'TradingView Signals',
-        description: 'Get date from TradingView tech analysis ',
+        value: StrategyName.tv1,
+        name: 'TradingView 1 minute',
+        description: 'Get tech analysis date from TradingView for last 1 minute',
         disabled: false
       },
       {
-        value: StrategyList.simpleRaddar,
-        name: 'Raddar.io Signals',
-        description: 'Get date from Raddar.io tech analysis',
-        disabled: true
-      }
+        value: StrategyName.tv5,
+        name: 'TradingView 5 minutes',
+        description: 'Get tech analysis date from TradingView for last 5 minutes',
+        disabled: false
+      },
+      {
+        value: StrategyName.tv15,
+        name: 'TradingView 15 minutes',
+        description: 'Get tech analysis date from TradingView for last 15 minutes',
+        disabled: false
+      },
+      {
+        value: StrategyName.tv30,
+        name: 'TradingView 30 minutes',
+        description: 'Get tech analysis date from TradingView for last 30 minutes',
+        disabled: false
+      },
+      {
+        value: StrategyName.tv60,
+        name: 'TradingView 60 minutes',
+        description: 'Get tech analysis date from TradingView for last 60 minutes',
+        disabled: false
+      },
     ]
   }
 
-  private handleError(error: HttpErrorResponse): Observable<any> {
-    let msg: string;
-
-    if (error.error) {
-      msg = 'Error:' + error.error.message;
-    } else {
-      msg = `Error: ${error.error}. Status: ${error.status}`;
-    }
-
-    console.error('CreateBotService::handleError() ' + msg);
-
+  private handleError(error: HttpErrorBody) {
+    const msg = error.message
+      ? `Error happend: ${error.message}. Status code ${error.statusCode}`
+      : `Unexpected server happend. Error: ${error}`
     return throwError(msg);
   }
 }
