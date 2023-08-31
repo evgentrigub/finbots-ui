@@ -18,7 +18,7 @@ export class SettingsInterceptor implements HttpInterceptor {
 
   // TODO add global flag isDemo
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('/profile')) {
+    if (req.url.includes('/user')) {
       this.httpUtils.log(req);
       switch (req.method) {
         case 'GET':

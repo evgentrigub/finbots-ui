@@ -27,3 +27,6 @@ export class UserLocalStorage {
   token: string
 }
 
+export class ValidateTokenDto {
+  isValid: boolean
+}

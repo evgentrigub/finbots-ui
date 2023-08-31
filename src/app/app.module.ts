@@ -31,6 +31,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { WidgetsComponent } from './components/_OLD/main-dashboard/widgets/widgets.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
@@ -47,7 +48,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
 import { DashboardInterceptor } from './components/_OLD/main-dashboard/main-dashboard.interceptor';
 import { OperationsComponent } from './components/operations/operations.component';
-import { SettingsInterceptor } from './components/account/settings/settings.interceptor';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
     declarations: [
@@ -62,7 +63,8 @@ import { SettingsInterceptor } from './components/account/settings/settings.inte
         WidgetsComponent,
         BotStatsDialogComponent,
         OperationsComponent,
-        DemoModeDialog
+        DemoModeDialog,
+        ConfirmDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -101,7 +103,8 @@ import { SettingsInterceptor } from './components/account/settings/settings.inte
         MatDatepickerModule,
         MatNativeDateModule,
         MatExpansionModule,
-        MatDividerModule
+        MatDividerModule,
+        MatCheckboxModule,
     ],
     providers: [
         MatDatepickerModule,
@@ -109,7 +112,7 @@ import { SettingsInterceptor } from './components/account/settings/settings.inte
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
         // { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     ],

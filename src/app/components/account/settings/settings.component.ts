@@ -1,15 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { UserProfileDto } from '../../../models/user.model';
+import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserService } from '../../../services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 
 interface BrokerPayload {
-  text: string;
+  brokerName: string;
   isBrokerToken: boolean;
 }
 
@@ -20,15 +21,22 @@ interface BrokerPayload {
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<void>();
+  private VALIDATION_SUCCESS = "Token is valid. Click on tab 'Create Bot'."
+  private VALIDATION_FAILED = "Token is not valid. Check the value and try again. "
+
+  private successSnackBarConfig: MatSnackBarConfig = { duration: 5000, verticalPosition: 'top', horizontalPosition: 'right', panelClass: 'style-success' }
+  private failedSnackBarConfig: MatSnackBarConfig = { verticalPosition: 'top', horizontalPosition: 'right', panelClass: 'error-snackbar' }
 
   public hide = true;
   public loading = false;
+  public isDemoValue = false;
+  public checkboxTooltipText = "To use the demo token, check the box"
 
   public profileForm: FormGroup;
   public tinkoffTokenControl: FormControl;
 
   public broker: BrokerPayload = {
-    text: 'Tinkoff',
+    brokerName: 'Tinkoff',
     isBrokerToken: false,
   }
 
@@ -37,7 +45,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private router: Router,
     private userService: UserService,
     private authenticationService: AuthenticationService,
+    private detector: ChangeDetectorRef,
+    private zone: NgZone,
     private snackbar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
@@ -51,8 +62,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getUserProfile().subscribe()
-    this.getTinkoffControlChanges().subscribe();
+    this.fetchUserProfile()
+    this.setTinkoffControlChanges()
   }
 
   ngOnDestroy(): void {
@@ -60,10 +71,38 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
+  public onIsDemoCheckboxChanged(){
+    this.detector.markForCheck()
+    this.detector.detectChanges()
+  }
+
+  public onTokenValidation(): void {
+    this.userService.getValidateToken(this.isDemoValue).subscribe(
+      res => {
+        console.log("🚀 ~ file: settings.component.ts:70 ~ SettingsComponent ~ onTokenValidation ~ res:", res)
+        const message = res.isValid
+          ? this.VALIDATION_SUCCESS
+          : this.VALIDATION_FAILED
+        this.showMessage(message, res.isValid ? true : false)
+      },
+      (errorMessage: string) => {
+        this.showMessage(errorMessage, false);
+    });
+  }
+
+  /**
+   * NgZone reired for synchronize loading
+   */
   public onRemoveToken(item: BrokerPayload): void {
-    item.isBrokerToken = false;
-    this.tinkoffTokenControl.reset();
-    this.profileForm.markAsTouched();
+    this.zone.run(() => {
+      this.confirmDialog().subscribe(res => {
+        if (res) {
+          item.isBrokerToken = false;
+          this.tinkoffTokenControl.reset();
+          this.profileForm.markAsTouched();
+        }
+      });
+    })
   }
 
   public onSubmit(): void {
@@ -72,9 +111,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
     this.loading = true;
 
-    const profileDto: UserProfileDto = this.profileForm.value;
+    const profileDto = this.profileForm.value;
     this.profileForm.disable();
-    this.userService.update(profileDto)
+    this.userService.update(profileDto.email, profileDto.tinkoffToken)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(tokenDto => {
         this.showMessage("Changes saved", true);
@@ -92,34 +131,45 @@ export class SettingsComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getUserProfile(): Observable<UserProfileDto> {
+  private fetchUserProfile(): void {
     this.loading = true;
-    return this.userService.get().pipe(
-      takeUntil(this.destroyed$),
-      tap(profile => {
+    this.userService.get()
+      .subscribe(profile => {
         this.loading = false;
         this.profileForm.patchValue(profile)
         this.broker.isBrokerToken = !!profile.tinkoffToken
+
+        this.detector.markForCheck()
+        this.detector.detectChanges()
       })
-    )
   }
 
-  private getTinkoffControlChanges(): Observable<any> {
-    return this.tinkoffTokenControl.valueChanges.pipe(
-      takeUntil(this.destroyed$)
-    )
+  private setTinkoffControlChanges(): void {
+    this.tinkoffTokenControl.valueChanges
+      .pipe(takeUntil(this.destroyed$)).subscribe()
   }
 
   private getProfileForm(): FormGroup {
-    return this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      tinkoffToken: this.tinkoffTokenControl,
+    return new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      tinkoffToken: this.tinkoffTokenControl
     });
   }
 
+  private confirmDialog(): Observable<any> {
+    const dialogData = new ConfirmDialogModel("Token remove", "Are you sure you want to remove broker?");
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    return dialogRef.afterClosed();
+  }
+
   private showMessage(message: string, duration: boolean): void {
-    duration
-    ? this.snackbar.open(message, 'OK', { duration: 5000 })
-    : this.snackbar.open(message, 'OK')
+    this.zone.run(() => { setTimeout(() => {
+      this.snackbar.open(message, 'OK',  duration ? this.successSnackBarConfig : this.failedSnackBarConfig)}, 0)
+    });
   }
 }
