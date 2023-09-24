@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,6 +9,8 @@ import { StrategyName, StrategyViewModel } from '../../models/strategy.model';
 import { SelectData } from '../../models/statistics.model';
 import { CreateBotService } from '../../services/create-bot.service';
 import { TradingBotsService } from '../../services/trading-bots.service';
+import { successSnackBarConfig, failedSnackBarConfig } from 'src/app/models/snackbars';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-bot',
@@ -16,6 +18,8 @@ import { TradingBotsService } from '../../services/trading-bots.service';
   styleUrls: ['./create-bot.component.scss'],
 })
 export class CreateBotComponent implements OnInit {
+
+  @ViewChild('stepper') private stepper: MatStepper;
 
   public loading = false;
 
@@ -29,14 +33,14 @@ export class CreateBotComponent implements OnInit {
   public tickers: SelectData<string>[] = [];
   public strategies: StrategyViewModel[] = [];
 
-
   constructor(
-    private readonly snackBar: MatSnackBar,
+    private readonly snackbar: MatSnackBar,
     private formBuilder: FormBuilder,
     private router: Router,
     private botService: CreateBotService,
     private authenticationService: AuthenticationService,
     private tradingService: TradingBotsService,
+    private zone: NgZone,
   ) {
     this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
     this.tickers = this.botService.getAssets();
@@ -73,9 +77,10 @@ export class CreateBotComponent implements OnInit {
     this.loading = true;
     this.botService.createBot(botDto)
       .subscribe(() => {
-        this.loading = true;
-        this.router.navigate(['/bots']);
-        this.showMessage(`Request to create bot ${botDto.ticker} sent`, true);
+        this.loading = false
+        this.showMessage(`Request to create bot "${botDto.ticker}" was sent`, true)
+        this.stepper.reset()
+        this.router.navigate(['/bots'])
       },
       err => {
         this.loading = false;
@@ -96,25 +101,26 @@ export class CreateBotComponent implements OnInit {
   }
 
   private showMessage(message: string, duration: boolean): void {
-    duration
-    ? this.snackBar.open(message, 'OK', { duration: 5000 })
-    : this.snackBar.open(message, 'OK')
+    this.zone.run(() => { setTimeout(() => {
+        this.snackbar.open(message, 'OK',  duration ? successSnackBarConfig : failedSnackBarConfig)
+      }, 0)
+    });
   }
 
   // TODO
-  private setMockBot(newbot: BotDto) {
-    const mockBot: TradingBot = {
-      id: (this.tradingService.mockBotsArray.length + 1).toString(),
-      ticker: newbot.ticker,
-      createdDate: 1,
-      isActive: true,
-      broker: "Tinkoff",
-      brokerFee: 0.03,
-      strategy: newbot.strategyName,
-      workedTime: "",
-      profit: "10",
-      status: CronStatus.Scheduled
-    };
-    this.tradingService.mockBotsArray.push(mockBot);
-  }
+  // private setMockBot(newbot: BotDto) {
+  //   const mockBot: TradingBot = {
+  //     id: (this.tradingService.mockBotsArray.length + 1).toString(),
+  //     ticker: newbot.ticker,
+  //     createdDate: 1,
+  //     isActive: true,
+  //     broker: "Tinkoff",
+  //     brokerFee: 0.03,
+  //     strategy: newbot.strategyName,
+  //     workedTime: "",
+  //     profit: "10",
+  //     status: CronStatus.Scheduled
+  //   };
+  //   this.tradingService.mockBotsArray.push(mockBot);
+  // }
 }

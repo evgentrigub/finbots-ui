@@ -24,9 +24,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private VALIDATION_SUCCESS = "Token is valid. Click on tab 'Create Bot'."
   private VALIDATION_FAILED = "Token is not valid. Check the value and try again. "
 
-  private successSnackBarConfig: MatSnackBarConfig = { duration: 5000, verticalPosition: 'top', horizontalPosition: 'right', panelClass: 'style-success' }
-  private failedSnackBarConfig: MatSnackBarConfig = { verticalPosition: 'top', horizontalPosition: 'right', panelClass: 'error-snackbar' }
-
   public hide = true;
   public loading = false;
   public isDemoValue = false;
@@ -39,6 +36,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     brokerName: 'Tinkoff',
     isBrokerToken: false,
   }
+  successSnackBarConfig: MatSnackBarConfig<any>;
+  failedSnackBarConfig: MatSnackBarConfig<any>;
 
   constructor(
     private formBuilder: FormBuilder,
