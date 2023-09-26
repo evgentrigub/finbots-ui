@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+import { first, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { UserDto } from '../../../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -14,10 +14,10 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class RegisterComponent {
   public hide = true;
   public loading = false;
-  public signupform: UntypedFormGroup;
+  public signupform: FormGroup;
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private snackbar: MatSnackBar
@@ -26,7 +26,6 @@ export class RegisterComponent {
       this.router.navigate(['/']);
     }
     this.signupform = this.getSignupForm();
-    this.signupform.disable();
   }
 
   public get canSignup(): boolean {
@@ -38,31 +37,37 @@ export class RegisterComponent {
       return;
     }
 
+    const form: UserDto = this.signupform.value;
     this.loading = true;
     this.authenticationService
       .register(this.signupform.value)
-      .pipe(first())
+      .pipe(
+        first(),
+        switchMap(_ => this.authenticationService.login({
+          email: form.email,
+          password: form.password
+        })),
+      )
       .subscribe(_ => {
         this.router.navigate(['dashboard']);
-        this.showMessage('Регистрация успешна');
+        this.showMessage('Регистрация успешна', true);
         this.loading = false;
-      }, (error: HttpErrorResponse) => {
+      }, (errorMessage: string) => {
         this.loading = false;
-        this.showErrorMessage(error);
+        this.showMessage(errorMessage, false);
       });
   }
 
-  private getSignupForm(): UntypedFormGroup {
+  private getSignupForm(): FormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
-  private showErrorMessage(message: HttpErrorResponse): void {
-    this.snackbar.open(message.error.message, 'OK', { duration: 6000 });
-  }
-  private showMessage(message: string): void {
-    this.snackbar.open(message, 'OK', { duration: 3000 });
+  private showMessage(message: string, duration: boolean): void {
+    duration
+    ? this.snackbar.open(message, 'OK', { duration: 5000 })
+    : this.snackbar.open(message, 'OK')
   }
 }

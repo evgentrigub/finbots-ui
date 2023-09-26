@@ -1,11 +1,16 @@
-import { StrategyList } from "./strategy.model";
+import { StrategyName } from "./strategy.model";
 
 /**
  * Модель для создания бота
  */
 export interface BotDto {
   ticker: string;
-  strategy: StrategyList;
+  isCustomStrategy: boolean,
+  strategy: {
+    botInterval: number,
+    techAnalysisPeriod: number
+  },
+  strategyName: StrategyName
 }
 
 
@@ -24,16 +29,15 @@ export interface TradingBot {
   id: string;
   ticker: string;
   createdDate: number;
-  isActive: boolean;
-  broker: string;
-  brokerFee: number;
+  // broker: string;
+  // brokerFee: number;
 
-  strategy: string;
-  profit: string;
+  // strategy: string;
+  // profit: string;
   status: CronStatus;
 
   operations?: IOperation[];
-  workedTime?: string
+  // workedTime?: string
 }
 
 export interface IOperation {
@@ -49,4 +53,8 @@ export interface IOperation {
 export enum CronStatus {
   Scheduled = 'Scheduled',
   Stopped = 'Stopped',
+}
+
+export class BotStatusDto {
+  status: CronStatus
 }

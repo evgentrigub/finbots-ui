@@ -11,6 +11,10 @@
     flex-direction: column;
     justify-content: center;
 
+    &__broker-name {
+      font-weight: bold;
+    }
+
     &__field {
       margin-bottom: 1rem;
 

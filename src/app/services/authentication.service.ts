@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserDto } from '../models/user.model';
+import { User, UserDto, UserLocalStorage, UserTokenDto } from '../models/user.model';
+import { HttpErrorBody } from '../models/errors';
+import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -28,26 +30,36 @@ export class AuthenticationService {
   }
 
   public login(user: UserDto): Observable<UserDto> {
-    return this.http.post<string>(`${environment.apiUrl}/users/login`, { email: user.email, password: user.password })
-      .pipe(map(token => {
-        const currentUser = { email: user.email, token };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        this.currentUserSubject.next(currentUser);
+    return this.http.post<UserTokenDto>(`${environment.apiUrl}/user/login`, { email: user.email, password: user.password }).pipe(
+      map((tokenDto: UserTokenDto) => {
+        this.setCurrentUser(user.email, tokenDto);
         return user;
-      }));
+      }),
+      catchError(this.handleError)
+    );
   }
 
-  public register(user: UserDto): Observable<UserDto> {
-    return this.http.post<string>(`${environment.apiUrl}/users/signup`, user).pipe(map(token => {
-      const currentUser = { email: user.email, token };
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      this.currentUserSubject.next(currentUser);
-      return user;
-    }));
+  public register(user: UserDto): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}/user/signup`, user).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public setCurrentUser(email: string, tokenDto: UserTokenDto){
+    const currentUser = { email, token: tokenDto.token };
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    this.currentUserSubject.next(currentUser);
   }
 
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  private handleError(error: HttpErrorBody) {
+    const msg = error.message
+      ? `Error happend: ${error.message}. Status code ${error.statusCode}`
+      : `Unexpected server happend. Error: ${error}`
+    return throwError(msg);
   }
 }

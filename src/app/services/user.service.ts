@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserProfile, UserProfileDto } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { UserProfileDto, UserTokenDto, ValidateTokenDto } from '../models/user.model';
+import { Observable, throwError } from 'rxjs';
+import { HttpErrorBody } from '../models/errors';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +13,7 @@ export class UserService {
 
   public mockUserProfile: UserProfileDto = {
     email: 'demo@finbots.success',
-    name: 'Илон',
-    lastName: 'Маск',
-    bitrhDate: new Date('1971-06-28T00:00:00.000Z'),
-    gender: '1',
-    location: 'Калифорния',
-
     tinkoffToken: '',
-    isTinkoffToken: true,
   }
 
   constructor(
@@ -26,14 +21,29 @@ export class UserService {
   ) { }
 
   get(): Observable<UserProfileDto> {
-    return this.http.get<UserProfileDto>(`${environment.apiUrl}/users/profile`);
+    return this.http.get<UserProfileDto>(`${environment.apiUrl}/user/`);
   }
 
-  update(profile: UserProfile) {
-    return this.http.put(`${environment.apiUrl}/users/profile`, profile);
+  getValidateToken(isDemo: boolean): Observable<ValidateTokenDto> {
+    const prod = false // TODO
+    return this.http.get<ValidateTokenDto>(`${environment.apiUrl}/user/token/validate?prod=${prod}&demo=${isDemo}`)
+      .pipe(catchError(this.handleError));
   }
 
-  delete(id: number) {
-    return this.http.delete(`${environment.apiUrl}/users/${id}`);
+  update(email: string, tinkoffToken?: string): Observable<UserTokenDto> {
+    const profile: UserProfileDto = {email, tinkoffToken}
+    return this.http.put<UserTokenDto>(`${environment.apiUrl}/user/`, profile)
+      .pipe(catchError(this.handleError));
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/user/${id}`);
+  }
+
+  private handleError(error: HttpErrorBody) {
+    const msg = error.message
+      ? `Error happend: ${error.message}. Status code ${error.statusCode}`
+      : `Unexpected server happend. Error: ${error}`
+    return throwError(msg);
   }
 }

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://finbots-back.herokuapp.com/api',
+  apiUrl: 'http://localhost:5001/api',
 };
