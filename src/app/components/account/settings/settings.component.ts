@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBar, } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { failedSnackBarConfig, successSnackBarConfig } from 'src/app/models/snackbars';
 
 interface BrokerPayload {
   brokerName: string;
@@ -36,8 +37,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     brokerName: 'Tinkoff',
     isBrokerToken: false,
   }
-  successSnackBarConfig: MatSnackBarConfig<any>;
-  failedSnackBarConfig: MatSnackBarConfig<any>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -168,7 +167,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private showMessage(message: string, duration: boolean): void {
     this.zone.run(() => { setTimeout(() => {
-      this.snackbar.open(message, 'OK',  duration ? this.successSnackBarConfig : this.failedSnackBarConfig)}, 0)
+      this.snackbar.open(message, 'OK',  duration ? successSnackBarConfig : failedSnackBarConfig)}, 0)
     });
   }
 }
