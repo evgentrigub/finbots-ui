@@ -29,16 +29,15 @@ export interface TradingBot {
   id: string;
   ticker: string;
   createdDate: number;
-  isActive: boolean;
-  broker: string;
-  brokerFee: number;
+  // broker: string;
+  // brokerFee: number;
 
-  strategy: string;
-  profit: string;
+  // strategy: string;
+  // profit: string;
   status: CronStatus;
 
   operations?: IOperation[];
-  workedTime?: string
+  // workedTime?: string
 }
 
 export interface IOperation {
@@ -54,4 +53,8 @@ export interface IOperation {
 export enum CronStatus {
   Scheduled = 'Scheduled',
   Stopped = 'Stopped',
+}
+
+export class BotStatusDto {
+  status: CronStatus
 }

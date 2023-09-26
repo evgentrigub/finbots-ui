@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { CronStatus, TradingBot } from '../models/trading-bot.model';
+import { Observable, of, throwError } from 'rxjs';
+import { BotStatusDto, CronStatus, TradingBot } from '../models/trading-bot.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { delay } from 'rxjs/operators';
-import { Ticker } from '../models/tickers.model';
+import { catchError, delay } from 'rxjs/operators';
+import { HttpErrorBody } from '../models/errors';
 
 @Injectable({ providedIn: 'root' })
 export class TradingBotsService {
@@ -12,74 +12,61 @@ export class TradingBotsService {
     private http: HttpClient
   ) {}
 
-  public mockBotsArray: TradingBot[] = [
-    {
-      id: "1",
-      ticker: "AAPL",
-      createdDate: Date.now() - 5000000,
-      isActive: true,
-      broker: "Tinkoff",
-      brokerFee: 0.03,
-      strategy: "simpleTV",
-      profit: "1.2",
-      status: CronStatus.Scheduled,
-    },
-    {
-      id: "2",
-      ticker: "AMD",
-      createdDate: Date.now() - 700000,
-      isActive: true,
-      broker: "Tinkoff",
-      brokerFee: 0.03,
-      strategy: "simpleTV",
-      profit: "1.2",
-      status: CronStatus.Stopped
-    }
-  ]
-
   getUserBots(): Observable<TradingBot[]> {
-    // return this.http.get<TradingBot[]>(`${environment.apiUrl}/bots`,).pipe(
-    //   catchError(this.handleError),
-    // );
+    return this.http.get<TradingBot[]>(`${environment.apiUrl}/bots/status`,).pipe(
+      catchError(this.handleError),
+    );
 
-    return of(this.mockBotsArray).pipe(delay(500));
-
+    // return of(this.mockBotsArray).pipe(delay(500));
   }
 
-  updateBotData(bot: TradingBot): Observable<null> {
-    // return this.http.put<any>(`${environment.apiUrl}/api/bots/UpdateBot`, bot).pipe(
-    //   catchError(this.handleError),
-    //   tap(_ => { })
-    // );
+  updateBotData(bot: TradingBot): Observable<BotStatusDto> {
+    const dto: BotStatusDto = { status: bot.status };
+    return this.http.put<any>(`${environment.apiUrl}/bots/${bot.ticker}/status`, dto).pipe(
+      catchError(this.handleError),
+    );
 
-    return of(null).pipe(delay(500));
+    // return of(null).pipe(delay(500));
   }
 
   deleteBotData(bot: TradingBot): Observable<null> {
-    // return this.http.delete<any>(`${environment.apiUrl}/api/bots/delete/${bot.id}`).pipe(
-    //   catchError(this.handleError),
-    //   tap(_ => { })
-    // );
+    return this.http.delete<any>(`${environment.apiUrl}/bots/${bot.ticker}`).pipe(
+      catchError(this.handleError),
+    );
 
-    this.mockBotsArray = this.mockBotsArray.filter(b => b.id !== bot.id)
-    return of(null).pipe(delay(500));
+    // this.mockBotsArray = this.mockBotsArray.filter(b => b.id !== bot.id)
+    // return of(null).pipe(delay(500));
   }
 
-  public getDescription(bot_id: string): Observable<Ticker> {
-    return this.http.get<Ticker>(`${environment.apiUrl}/api/bots/GetDescription?bot_id=` + bot_id);
+  private handleError(error: HttpErrorBody) {
+    const msg = error.message
+      ? `Error happend: ${error.message}. Status code ${error.statusCode}`
+      : `Unexpected server happend. Error: ${error}`
+    return throwError(msg);
   }
 
-  // private handleError(error: HttpErrorResponse) {
-  //   let msg: string;
-
-  //   if (error.error instanceof ErrorEvent) {
-  //     msg = 'Произошла ошибка:' + error.error.message;
-  //   } else {
-  //     msg = `Произошла ошибка: ${error.error}. Код ошибки ${error.status}`;
+    // public mockBotsArray: TradingBot[] = [
+  //   {
+  //     id: "1",
+  //     ticker: "AAPL",
+  //     createdDate: Date.now() - 5000000,
+  //     isActive: true,
+  //     broker: "Tinkoff",
+  //     brokerFee: 0.03,
+  //     strategy: "simpleTV",
+  //     profit: "1.2",
+  //     status: CronStatus.Scheduled,
+  //   },
+  //   {
+  //     id: "2",
+  //     ticker: "AMD",
+  //     createdDate: Date.now() - 700000,
+  //     isActive: true,
+  //     broker: "Tinkoff",
+  //     brokerFee: 0.03,
+  //     strategy: "simpleTV",
+  //     profit: "1.2",
+  //     status: CronStatus.Stopped
   //   }
-
-  //   console.error('TradingBotsService::handleError() ' + msg);
-
-  //   return throwError(msg);
-  // }
+  // ]
 }

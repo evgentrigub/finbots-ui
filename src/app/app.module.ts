@@ -35,7 +35,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { WidgetsComponent } from './components/_OLD/main-dashboard/widgets/widgets.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
-import { BotStatsDialogComponent } from './components/table-bots/bot-stats-dialog/bot-stats-dialog.component';
 import { TableBotsComponent } from './components/table-bots/table-bots.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -45,8 +44,6 @@ import { CreateBotComponent } from './components/create-bot/create-bot.component
 import { DemoModeDialog, NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
-import { CreateBotInterceptor } from './components/create-bot/create.bot.interceptor';
-import { DashboardInterceptor } from './components/_OLD/main-dashboard/main-dashboard.interceptor';
 import { OperationsComponent } from './components/operations/operations.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
@@ -61,7 +58,6 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         CreateBotComponent,
         TableBotsComponent,
         WidgetsComponent,
-        BotStatsDialogComponent,
         OperationsComponent,
         DemoModeDialog,
         ConfirmDialogComponent
@@ -111,9 +107,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         MatNativeDateModule,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: CreateBotInterceptor, multi: true },
         // { provide: HTTP_INTERCEPTORS, useClass: SettingsInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: DashboardInterceptor, multi: true },
         // { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
