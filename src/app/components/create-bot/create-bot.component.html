@@ -10,7 +10,7 @@
             You can choose only <b>shares</b> for now.
           </li>
           <li style="margin-top: 1rem">
-            First step - choose an asset.
+            First step - pick a ticker.
             Second step - choose a trading strategy.
           </li>
         </ul>
@@ -21,21 +21,12 @@
         <!-- step 1 -->
         <mat-step [stepControl]="firstForm">
           <form [formGroup]="firstForm">
-            <ng-template matStepLabel>Financial asset</ng-template>
-            <div style="display:flex; flex-wrap: wrap">
-              <!-- <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Финансовый инструмент" formControlName="instrument">
-                  <mat-option *ngFor="let financialInstrument of financialInstruments"
-                    [disabled]="financialInstrument === 'Forex'" [value]="financialInstrument">
-                    {{ financialInstrument }}</mat-option>
-                </mat-select>
-              </mat-form-field> -->
-              <mat-form-field style="min-width: 30em; margin-right: 3em; margin-bottom: 2em">
-                <mat-select placeholder="Asset" formControlName="ticker">
-                  <mat-option *ngFor="let ticker of tickers" [value]="ticker.value">{{ ticker.name }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+            <ng-template matStepLabel>Pick the ticker</ng-template>
+            <mat-form-field style="min-width: 30em; margin-right: 3em; margin: 1rem 0rem 1rem 0rem;">
+              <mat-select placeholder="Asset" formControlName="ticker">
+                <mat-option *ngFor="let ticker of tickers" [value]="ticker.value">{{ ticker.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
             <div>
               <button mat-stroked-button color="accent" matStepperNext>Next</button>
             </div>
@@ -44,8 +35,8 @@
         <!-- step 2 -->
         <mat-step [stepControl]="secondForm">
           <form [formGroup]="secondForm">
-            <ng-template matStepLabel>Trading strategy</ng-template>
-            <mat-form-field style="width: 30em;">
+            <ng-template matStepLabel>Choose trading strategy</ng-template>
+            <mat-form-field style="width: 30em; margin-top: 1rem">
               <mat-select placeholder="Strategy" formControlName="strategy">
                 <mat-option *ngFor="let strategy of strategies" [disabled]="strategy.disabled" [value]="strategy.value">
                   {{ strategy.name }}
@@ -53,7 +44,7 @@
               </mat-select>
               <mat-hint></mat-hint>
             </mat-form-field>
-            <div style="margin-bottom: 2em">
+            <div style="margin-bottom: 1rem">
               <div class="loading__container">
                 <div *ngIf="loading" class="loading__container__spinner">
                   <mat-spinner diameter="24"></mat-spinner>
