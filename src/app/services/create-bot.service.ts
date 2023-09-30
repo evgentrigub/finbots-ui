@@ -18,7 +18,8 @@ export class CreateBotService {
 
   public createBot(bot: BotDto): Observable<string> {
     return this.http.post<string>(`${environment.apiUrl}/bots`, bot).pipe(
-      catchError(this.handleError));
+      catchError(this.handleError)
+    );
   }
 
   public getAssets(): SelectData<string>[] {

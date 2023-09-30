@@ -49,7 +49,7 @@
                 <div *ngIf="loading" class="loading__container__spinner">
                   <mat-spinner diameter="24"></mat-spinner>
                 </div>
-                <button mat-raised-button color="accent" (click)="submitBot()"
+                <button mat-raised-button color="accent" (click)="onCreateBot()"
                   [disabled]="loading || secondForm.invalid">
                   Create bot
                 </button>

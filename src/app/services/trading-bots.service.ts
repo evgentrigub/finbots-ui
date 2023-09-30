@@ -8,6 +8,7 @@ import { HttpErrorBody } from '../models/errors';
 
 @Injectable({ providedIn: 'root' })
 export class TradingBotsService {
+
   constructor(
     private http: HttpClient
   ) {}

@@ -1,10 +1,11 @@
 export enum OperationStatus {
-  done = 'done',
-  decline = 'decline',
-  progress = 'progress'
+  Done = 'Done',
+  Decline = 'Decline',
+  Progress = 'Progress'
 }
 
-export interface Operation {
+export interface OperationDto {
+  id: number,
   botId: number;
   ticker: string;
   createdDate: Date;

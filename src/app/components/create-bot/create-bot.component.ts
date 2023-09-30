@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
-import { BotDto, CronStatus, TradingBot } from '../../models/trading-bot.model';
-import { StrategyName, StrategyViewModel } from '../../models/strategy.model';
+import { BotDto } from '../../models/trading-bot.model';
+import { StrategyViewModel } from '../../models/strategy.model';
 import { SelectData } from '../../models/statistics.model';
 import { CreateBotService } from '../../services/create-bot.service';
-import { TradingBotsService } from '../../services/trading-bots.service';
 import { successSnackBarConfig, failedSnackBarConfig } from 'src/app/models/snackbars';
 import { MatStepper } from '@angular/material/stepper';
 
@@ -39,7 +38,6 @@ export class CreateBotComponent implements OnInit {
     private router: Router,
     private botService: CreateBotService,
     private authenticationService: AuthenticationService,
-    private tradingService: TradingBotsService,
     private zone: NgZone,
   ) {
     this.authenticationService.$currentUser.subscribe(user => this.currentUser = user);
@@ -54,15 +52,13 @@ export class CreateBotComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitBot() {
-    const ticketValue = this.firstForm.value.ticker;
-    console.log("🚀 ~ file: create-bot.component.ts:55 ~ CreateBotComponent ~ submitBot ~ ticketValue:", ticketValue)
+  onCreateBot() {
+    const tickerValue = this.firstForm.value.ticker;
     const strategyValue = this.secondForm.value.strategy;
-    console.log("🚀 ~ file: create-bot.component.ts:56 ~ CreateBotComponent ~ submitBot ~ strategyValue:", strategyValue)
 
     // TODO property isCustomStrategy
     const botDto = <BotDto>{
-      ticker: ticketValue,
+      ticker: tickerValue,
       isCustomStrategy: false,
       strategy: {
         botInterval: 0,
