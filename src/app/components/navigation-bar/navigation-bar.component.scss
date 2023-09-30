@@ -16,6 +16,6 @@
   z-index: 2;
 }
 
-::ng-deep .mat-slide-toggle-content {
-  color: white;
+.demo-toggle ::ng-deep .mdc-form-field {
+  color: #fff !important;
 }

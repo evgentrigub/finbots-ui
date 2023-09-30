@@ -26,7 +26,7 @@ export interface TradingBotViewModel {
 }
 
 export interface TradingBot {
-  id: string;
+  id: number;
   ticker: string;
   createdDate: number;
   // broker: string;

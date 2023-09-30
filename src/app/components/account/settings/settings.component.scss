@@ -28,6 +28,13 @@
       margin-top: 3rem;
     }
   }
+
+  &__list {
+    &__item {
+      margin-bottom: 1rem;
+      height: unset;
+    }
+  }
 }
 
 .loading {

@@ -24,11 +24,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<void>();
   private VALIDATION_SUCCESS = "Token is valid. Click on tab 'Create Bot'."
   private VALIDATION_FAILED = "Token is not valid. Check the value and try again. "
+  public CHECK_BOX_TOOLTIP_TEXT = "You can choose it to see how service works."
 
   public hide = true;
   public loading = false;
   public isDemoValue = false;
-  public checkboxTooltipText = "To use the demo token, check the box"
 
   public profileForm: FormGroup;
   public tinkoffTokenControl: FormControl;

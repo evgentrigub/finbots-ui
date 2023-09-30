@@ -7,34 +7,44 @@
       <input matInput formControlName="email"/>
     </mat-form-field>
 
+    <div style="margin-bottom: 2rem;">
+      <mat-slide-toggle
+        [(ngModel)]="isDemoValue"
+        (ngModelChange)="onIsDemoCheckboxChanged()"
+        [ngModelOptions]="{standalone: true}"
+        [matTooltip]="CHECK_BOX_TOOLTIP_TEXT"
+        matTooltipPosition="above">
+        Set demo token to broker (only Tinkoff)
+      </mat-slide-toggle>
+    </div>
+
     <h1>Broker access tokens</h1>
     <mat-list>
-      <mat-list-item *ngIf="broker.isBrokerToken">
-        <p mat-line>Broker name:
+      <mat-list-item *ngIf="broker.isBrokerToken" class="settings-container__list__item">
+        <!-- <p mat-line>Broker name:
           <span class="settings-container__form__broker-name">
             {{broker.brokerName}}
           </span>
-        </p>
-        <mat-checkbox [(ngModel)]="isDemoValue"
-          (ngModelChange)="onIsDemoCheckboxChanged($event)"
-          [ngModelOptions]="{standalone: true}"
-          [matTooltip]="checkboxTooltipText"
-          matTooltipPosition="above"
-          style="margin-right: 2rem;">
-          Demo Token
-        </mat-checkbox>
-        <button mat-raised-button color="primary" (click)="onTokenValidation(broker)" type="button" style="margin-right: 2rem;">
-          Validate token
-        </button>
-        <button mat-raised-button color="warn" (click)="onRemoveToken(broker)" type="button">
-          Remove
-        </button>
+        </p> -->
+        <div matListItemTitle> Broker name:
+          <span class="settings-container__form__broker-name">
+            {{broker.brokerName}}
+          </span>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onTokenValidation(broker)" type="button" style="margin-right: 2rem;">
+            Validate token
+          </button>
+          <button mat-raised-button color="warn" (click)="onRemoveToken(broker)" type="button">
+            Remove
+          </button>
+        </div>
+        <mat-form-field *ngIf="!broker.isBrokerToken" appearance="outline">
+          <mat-label>Token for Tinkoff</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="tinkoffToken" />
+          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </mat-form-field>
       </mat-list-item>
-      <mat-form-field *ngIf="!broker.isBrokerToken" appearance="outline">
-        <mat-label>Token for Tinkoff</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="tinkoffToken" />
-        <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-      </mat-form-field>
       <mat-divider></mat-divider>
     </mat-list>
 

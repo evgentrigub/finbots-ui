@@ -9,16 +9,16 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar *ngIf="isShow" color="primary" class="fixed-toolbar">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+      <button type="button" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
 
       <span>Welcome back!</span>
 
       <span style="flex:1 1 auto;"></span>
 
-      <mat-slide-toggle [(ngModel)]="isDemoToggle" (change)="onDemoToggle()" class="toggle">Demo Mode
+      <mat-slide-toggle [(ngModel)]="isDemoToggle" (change)="onDemoToggle()" class="demo-toggle">Demo Mode
       </mat-slide-toggle>
       <mat-icon style="margin-left:2rem" matBadge="1" matBadgeColor="warn">notifications</mat-icon>
       <button mat-button style="margin-left:1rem" [matMenuTriggerFor]="menu">{{ currentUser.email }}</button>
