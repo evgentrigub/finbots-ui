@@ -33,6 +33,10 @@
     &__item {
       margin-bottom: 1rem;
       height: unset;
+
+      &__broker-input {
+        margin-top: 1rem;
+      }
     }
   }
 }
