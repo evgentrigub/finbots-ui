@@ -20,26 +20,23 @@
 
     <h1>Broker access tokens</h1>
     <mat-list>
-      <mat-list-item *ngIf="broker.isBrokerToken" class="settings-container__list__item">
-        <!-- <p mat-line>Broker name:
-          <span class="settings-container__form__broker-name">
-            {{broker.brokerName}}
-          </span>
-        </p> -->
+      <mat-list-item  class="settings-container__list__item">
         <div matListItemTitle> Broker name:
           <span class="settings-container__form__broker-name">
             {{broker.brokerName}}
           </span>
         </div>
-        <div>
-          <button mat-raised-button color="primary" (click)="onTokenValidation(broker)" type="button" style="margin-right: 2rem;">
-            Validate token
-          </button>
-          <button mat-raised-button color="warn" (click)="onRemoveToken(broker)" type="button">
-            Remove
-          </button>
+        <div *ngIf="broker.isBrokerToken">
+          <div>
+            <button mat-raised-button color="primary" (click)="onTokenValidation()" type="button" style="margin-right: 2rem;">
+              Validate token
+            </button>
+            <button mat-raised-button color="warn" (click)="onRemoveToken(broker)" type="button">
+              Remove
+            </button>
+          </div>
         </div>
-        <mat-form-field *ngIf="!broker.isBrokerToken" appearance="outline">
+        <mat-form-field *ngIf="!broker.isBrokerToken" appearance="outline" class="settings-container__list__item__broker-input">
           <mat-label>Token for Tinkoff</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="tinkoffToken" />
           <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
